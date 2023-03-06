@@ -1,3 +1,5 @@
+package seedu.duke;
+
 public class Budget {
     protected String budgetName;
     protected double budgetLimit;
@@ -12,6 +14,17 @@ public class Budget {
 
     public Budget(String name, double budgetLimit) {
         setBudgetName(name);
+        setBudgetLimit(budgetLimit);
+    }
+
+    /**
+     * Sets the name of the budget
+     *
+     * @param budgetLimit limit of the budget
+     */
+
+    public void setBudgetLimit(Double budgetLimit) {
+        this.budgetLimit = budgetLimit;
     }
 
     /**
@@ -28,10 +41,9 @@ public class Budget {
     /**
      * Returns the type of budget
      *
-     * @param budget budget to find the type for
      * @return type of the budget
      */
-    public String getBudgetName(Budget budget) {
+    public String getBudgetName() {
         return this.budgetName;
     }
 
@@ -40,8 +52,8 @@ public class Budget {
      *
      * @return name of the budget
      */
-    public String getBudgetName() {
-        return budgetName;
+    public double getBudgetLimit() {
+        return this.budgetLimit;
     }
 
 
@@ -51,7 +63,7 @@ public class Budget {
 
     public void printBudget() {
 
-        System.out.println("Budget name: " + this.budgetName + "with limit of $" + this.budgetLimit);
+        System.out.println("Name: " + this.getBudgetName() + " Limit: $" + this.getBudgetLimit());
     }
 
 
