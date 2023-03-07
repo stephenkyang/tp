@@ -1,12 +1,14 @@
 package seedu.duke;
 
-import java.util.Scanner;
+import seedu.duke.command.Command;
+import seedu.duke.command.CommandParser;
 
 public class Duke {
     /**
      * Main entry-point for the java.duke.Duke application.
+     * @throws Exception
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         Ui ui = new Ui();
         boolean isRunning = true;
 
@@ -14,8 +16,8 @@ public class Duke {
 
         while (isRunning) {
             String input = ui.readInput();
+            Command command = CommandParser.parse(input);
+            command.execute();
         }
-
-        System.exit(0);
     }
 }
