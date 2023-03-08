@@ -14,8 +14,22 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
         System.out.println("What is your name?");
+        Duke.run();
+    }
 
+    public static void run() {
         Scanner in = new Scanner(System.in);
-        System.out.println("Hello " + in.nextLine());
+        while (true) {
+            String command = DepositParser.parseDepositCommand(in.nextLine());
+            if (command == null) {
+                continue;
+            }
+            if (command.equals("bye")) {
+                System.out.println("Goodbye see you soon :)");
+                return;
+            }
+        }
+
+
     }
 }
