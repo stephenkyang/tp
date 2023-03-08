@@ -37,6 +37,7 @@ public class DepositParser {
                     return command;
                 }
                 DepositList.add(depositName, amount);
+                System.out.println("Added " + depositName + "!");
                 return command;
             case "del":
                 if (stringArray.length != 3) {
