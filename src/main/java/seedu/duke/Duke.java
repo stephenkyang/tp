@@ -1,40 +1,29 @@
 package seedu.duke;
 
-import java.util.Scanner;
-
-
+import seedu.duke.command.Command;
+import seedu.duke.command.CommandParser;
 
 public class Duke {
     /**
      * Main entry-point for the java.duke.Duke application.
+     * @throws Exception
      */
-    public static void main(String[] args) {
-        new BudgetParser();
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        System.out.println("What is your name?");
+    public static void main(String[] args) throws Exception {
+        Data data = new Data();
+        Ui ui = new Ui();
 
-        int i = 0;
-        String command = "hi";
-        while (!command.equals("bye")) {
-            command = readTask();
-            BudgetParser.respondToBudgetInput(command);
-            i++;
+        Ui.greetUser();
+
+        boolean isRunning = true;
+        while (isRunning) {
+            try {
+                String input = ui.readInput();
+                Command command = CommandParser.parse(input);
+                command.execute(data);
+            } catch (Exception e) {
+                // handle exception here
+            }
         }
-
-    }
-
-
-    public static String readTask() {
-        String line;
-        Scanner in = new Scanner(System.in);
-        line = in.nextLine();
-        return line;
-
     }
 }
 
