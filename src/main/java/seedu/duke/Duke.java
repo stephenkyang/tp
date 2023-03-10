@@ -2,6 +2,7 @@ package seedu.duke;
 
 import seedu.duke.command.Command;
 import seedu.duke.command.CommandParser;
+import seedu.duke.exception.BBException;
 
 public class Duke {
     /**
@@ -12,7 +13,7 @@ public class Duke {
         Data data = new Data();
         Ui ui = new Ui();
 
-        Ui.greetUser();
+        ui.greetUser();
 
         boolean isRunning = true;
         while (isRunning) {
@@ -20,8 +21,8 @@ public class Duke {
                 String input = ui.readInput();
                 Command command = CommandParser.parse(input);
                 command.execute(data);
-            } catch (Exception e) {
-                // handle exception here
+            } catch (BBException err) {
+                ui.printErrorMessage(err.getMessage());
             }
         }
     }

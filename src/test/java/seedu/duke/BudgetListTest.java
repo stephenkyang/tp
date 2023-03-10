@@ -1,6 +1,7 @@
 package seedu.duke;
 
 class BudgetListTest {
+
 }
 
 // package seedu.duke;
