@@ -1,5 +1,7 @@
 package seedu.duke;
 
+import seedu.duke.model.Budget;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -32,8 +34,8 @@ public class BudgetList {
 
         int budgetIndex = -1;
         for (Budget a : budgets) {
-            if (Objects.equals(a.budgetName, budgetName)) {
-                System.out.println(a.budgetName + "is found");
+            if (Objects.equals(a.getName(), budgetName)) {
+                System.out.println(a.getName() + "is found");
                 budgetIndex = budgets.indexOf(a);
             }
         }

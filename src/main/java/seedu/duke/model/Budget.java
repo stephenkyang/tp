@@ -1,6 +1,7 @@
 package seedu.duke.model;
 
 public class Budget {
+
     private String name;
     private double limit;
 

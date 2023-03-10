@@ -31,8 +31,7 @@ public class BudgetParser {
                 BudgetList.printTaskList();
             }
             else {
-                //String information = command.substring(10);
-                //String[] budgetName = information.split("/l" );
+
                 switch (keyword) {
 
                 case "del":
