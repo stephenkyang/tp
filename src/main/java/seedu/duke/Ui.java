@@ -20,13 +20,19 @@ public class Ui {
         return input;
     }
 
-    public void printMessage(String... message) {
+    public void printMessage(String... messages) {
         System.out.println(Messages.LINE_DIVIDER);
-        System.out.println(message);
+        for (String message : messages) {
+            System.out.println(message);
+        }
         System.out.println(Messages.LINE_DIVIDER);
     }
 
-    public static void greetUser() {
+    public void printErrorMessage(String message) {
+        printMessage(message);
+    }
+
+    public void greetUser() {
         System.out.println(Messages.INFO_WELCOME);
     }
 }

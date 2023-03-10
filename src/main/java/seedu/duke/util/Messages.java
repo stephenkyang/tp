@@ -2,7 +2,7 @@ package seedu.duke.util;
 
 public enum Messages {
     LINE_DIVIDER("_______________"),
-    INFO_WELCOME("Welcome to BudgetBuddy!");
+    INFO_WELCOME("Welcome to BudgetBuddy! What can I do for you?");
 
     private final String message;
 

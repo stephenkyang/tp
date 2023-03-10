@@ -21,6 +21,14 @@ public abstract class Command {
         this.optionalParamsList = optionalParamsList;
     }
 
+    public CommandEnum getCommandName() {
+        return this.name;
+    }
+
+    public String getAction() {
+        return this.action;
+    }
+
     public int getActionNo(String action) {
         for (int i = 0; i < actions.length; i++) {
             if (action.equals(actions[i])) {
@@ -38,7 +46,7 @@ public abstract class Command {
         return optionalParamsList[no];
     }
 
-    public void setAction(String action, String[] requiredParams, String[] optionalParams) {
+    public void set(String action, String[] requiredParams, String[] optionalParams) {
         this.action = action;
         this.requiredParams = requiredParams;
         this.optionalParams = optionalParams;

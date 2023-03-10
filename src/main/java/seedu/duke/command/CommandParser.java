@@ -1,5 +1,9 @@
 package seedu.duke.command;
 
+import seedu.duke.exception.CommandActionInvalidException;
+import seedu.duke.exception.CommandInvalidException;
+import seedu.duke.exception.CommandParamInvalidException;
+import seedu.duke.exception.CommandParamTypeInvalidException;
 import seedu.duke.util.Pair;
 
 public class CommandParser {
@@ -12,7 +16,7 @@ public class CommandParser {
             command = new BudgetCommand();
             break;
         default:
-            throw new Exception();
+            throw new CommandInvalidException();
         }
 
         // Check if action (given in input) exists
@@ -21,21 +25,21 @@ public class CommandParser {
         // Check if all parameters are valid based on action
         String[] requiredParams = getRequiredParams(command, action, input);
 
-        command.setAction(action, requiredParams, null);
+        command.set(action, requiredParams, null);
         return command;
     }
 
-    private static CommandEnum getCommandName(String input) throws Exception {
+    private static CommandEnum getCommandName(String input) throws CommandInvalidException {
         try {
             String[] splitInput = input.split(" ", 2);
             CommandEnum commandName = CommandEnum.valueOf(splitInput[0].toUpperCase());
             return commandName;
         } catch (IllegalArgumentException err) {
-            throw new Exception();
+            throw new CommandInvalidException();
         }
     }
 
-    private static String getAction(Command command, String input) throws Exception {
+    private static String getAction(Command command, String input) throws CommandActionInvalidException {
         String[] splitInput = input.split(" ", 3);
         try {
             String actionName = splitInput[1];
@@ -43,10 +47,9 @@ public class CommandParser {
             if (actionNo != -1) {
                 return actionName;
             }
-            throw new Exception();
-        // need to handle ArrayIndexOutOfBoundsException here too
-        } catch (Exception err) {
-            throw new Exception();
+            throw new CommandActionInvalidException(command);
+        } catch (ArrayIndexOutOfBoundsException err) {
+            throw new CommandActionInvalidException(command);
         }
     }
 
@@ -55,20 +58,23 @@ public class CommandParser {
         Pair[] requiredParams =  command.requiredParamsList[actionNo];
         String[] params = new String[requiredParams.length];
 
-        int paramCount = 0;
-        for (Pair param : requiredParams) {
-            String paramName = param.getKey();
-            Class<?> paramType = param.getValue();
+        try {
+            int paramCount = 0;
+            for (Pair param : requiredParams) {
+                String paramName = param.getKey();
+                Class<?> paramType = param.getValue();
 
-            // Gets parameter value from the parameter syntax
-            String paramValue = input.split(" " + paramName + " ")[1].split(" /")[0];
-            // exception not handled here!
+                // Gets parameter value from the parameter syntax
+                String paramValue = input.split(" " + paramName + " ")[1].split(" /")[0];
 
-            // Check if the parameter value suits for the class type (e.g. int, string)
-            validateParamType(paramValue, paramType);
+                // Check if the parameter value suits for the class type (e.g. int, string)
+                validateParamType(paramValue, paramType);
 
-            params[paramCount] = paramValue;
-            paramCount++;
+                params[paramCount] = paramValue;
+                paramCount++;
+            }
+        } catch (ArrayIndexOutOfBoundsException | CommandParamTypeInvalidException err) {
+            throw new CommandParamInvalidException(command);
         }
 
         return params;
@@ -81,8 +87,8 @@ public class CommandParser {
             } else if (paramType.isAssignableFrom(double.class)) {
                 Double.parseDouble(paramValue);
             }
-        } catch (Exception e) {
-            // throw wrong param error
+        } catch (NumberFormatException err) {
+            throw new CommandParamTypeInvalidException();
         }
     }
 }
