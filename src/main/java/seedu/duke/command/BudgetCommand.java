@@ -11,8 +11,8 @@ public class BudgetCommand extends Command {
     // Format
     private static final String[] ACTIONS = {"add", "set", "del", "list"};
     private static final Pair[][] ACTIONS_REQUIRED_PARAMS = {
-        { new Pair("/c", String.class), new Pair("/l", Double.class) },
-        { new Pair("/c", String.class), new Pair("/l", Double.class) },
+        { new Pair("/c", String.class), new Pair("/l", double.class) },
+        { new Pair("/c", String.class), new Pair("/l", double.class) },
         { new Pair("/c", String.class) },
         {}
     };
@@ -22,6 +22,7 @@ public class BudgetCommand extends Command {
         super(CommandEnum.BUDGET, ACTIONS, ACTIONS_REQUIRED_PARAMS, ACTIONS_OPTIONAL_PARAMS);
     }
 
+    @Override
     public void execute(Data data) {
         ArrayList<Budget> budgetList = data.budgetList;
         BudgetAction budgetAction = new BudgetAction(budgetList);
@@ -63,5 +64,10 @@ public class BudgetCommand extends Command {
 
     private void executeListBudget(BudgetAction budgetAction) {
         budgetAction.printBudgets();
+    }
+
+    @Override
+    public boolean isExit() {
+        return false;
     }
 }

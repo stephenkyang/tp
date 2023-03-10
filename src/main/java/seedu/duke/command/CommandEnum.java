@@ -1,5 +1,6 @@
 package seedu.duke.command;
 
 public enum CommandEnum {
-    BUDGET
+    BUDGET,
+    EXIT
 }

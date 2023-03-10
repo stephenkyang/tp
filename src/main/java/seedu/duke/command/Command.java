@@ -25,6 +25,10 @@ public abstract class Command {
         return this.name;
     }
 
+    public String[] getActions() {
+        return this.actions;
+    }
+
     public String getAction() {
         return this.action;
     }
@@ -53,4 +57,5 @@ public abstract class Command {
     }
 
     public abstract void execute(Data data);
+    public abstract boolean isExit();
 }

@@ -21,6 +21,10 @@ public class Duke {
                 String input = ui.readInput();
                 Command command = CommandParser.parse(input);
                 command.execute(data);
+                if (command.isExit()) {
+                    ui.byeUser();
+                    System.exit(0);
+                }
             } catch (BBException err) {
                 ui.printErrorMessage(err.getMessage());
             }

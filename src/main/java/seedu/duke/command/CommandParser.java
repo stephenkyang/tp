@@ -1,5 +1,6 @@
 package seedu.duke.command;
 
+import seedu.duke.exception.BBException;
 import seedu.duke.exception.CommandActionInvalidException;
 import seedu.duke.exception.CommandInvalidException;
 import seedu.duke.exception.CommandParamInvalidException;
@@ -7,7 +8,7 @@ import seedu.duke.exception.CommandParamTypeInvalidException;
 import seedu.duke.util.Pair;
 
 public class CommandParser {
-    public static Command parse(String input) throws Exception {
+    public static Command parse(String input) throws BBException {
         CommandEnum commandName = getCommandName(input);
 
         Command command;
@@ -15,8 +16,16 @@ public class CommandParser {
         case BUDGET:
             command = new BudgetCommand();
             break;
+        case EXIT:
+            command = new ExitCommand();
+            break;
         default:
             throw new CommandInvalidException();
+        }
+
+        // For commands that do not have any action
+        if (command.getActions().length == 0) {
+            return command;
         }
 
         // Check if action (given in input) exists
@@ -53,7 +62,7 @@ public class CommandParser {
         }
     }
 
-    private static String[] getRequiredParams(Command command, String actionName, String input) throws Exception {
+    private static String[] getRequiredParams(Command command, String actionName, String input) throws BBException {
         int actionNo = command.getActionNo(actionName);
         Pair[] requiredParams =  command.requiredParamsList[actionNo];
         String[] params = new String[requiredParams.length];
@@ -80,11 +89,13 @@ public class CommandParser {
         return params;
     }
 
-    private static void validateParamType(String paramValue, Class<?> paramType) throws Exception {
+    private static void validateParamType(String paramValue, Class<?> paramType) throws BBException {
         try {
             if (paramType.isAssignableFrom(int.class)) {
+                System.out.println("lol wtf");
                 Integer.parseInt(paramValue);
             } else if (paramType.isAssignableFrom(double.class)) {
+                System.out.println("lol wtf2");
                 Double.parseDouble(paramValue);
             }
         } catch (NumberFormatException err) {

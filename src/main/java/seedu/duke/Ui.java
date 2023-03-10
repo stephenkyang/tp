@@ -33,6 +33,10 @@ public class Ui {
     }
 
     public void greetUser() {
-        System.out.println(Messages.INFO_WELCOME);
+        printMessage(Messages.INFO_WELCOME.toString());
+    }
+
+    public void byeUser() {
+        printMessage(Messages.INFO_EXIT.toString());
     }
 }
