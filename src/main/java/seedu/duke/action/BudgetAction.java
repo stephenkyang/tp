@@ -28,7 +28,7 @@ public class BudgetAction {
     public void addBudget(String budgetName, double budgetLimit) {
         // Check if there are any duplicate budgets
         if (checkDuplicateBudget(budgetName)) {
-            BudgetUIResponse.budgetDoesNotExist();
+            BudgetUIResponse.budgetNameUsed();
             return;
         }
 
@@ -74,6 +74,36 @@ public class BudgetAction {
     }
 
     /**
+     * Finds if a budget contains the keywords input by user
+     *
+     * @param keyword the word the user wants to check for
+     */
+    public void findBudget(String keyword) {
+        ArrayList<Budget> foundBudgets = new ArrayList<>();
+        for (Budget budget : budgets) {
+
+            if (budget.getName().contains(keyword)) {
+                foundBudgets.add(budget);
+            }
+        }
+        if (foundBudgets.isEmpty()) {
+            BudgetUIResponse.budgetDoesNotExist();
+        } else {
+            int i = 1;
+            for (Budget a : foundBudgets) {
+                if (a != null) {
+                    System.out.print(i + ". ");
+                    a.printBudget();
+                    i++;
+                }
+            }
+            BudgetUIResponse.numberOfBudgets(foundBudgets);
+        }
+        foundBudgets.clear();
+    }
+
+
+    /**
      * Checks if a certain budget exists
      *
      * @param budgetName budget name to check for if it has been used
@@ -117,4 +147,5 @@ public class BudgetAction {
         }
         BudgetUIResponse.numberOfBudgets(budgets);
     }
+
 }

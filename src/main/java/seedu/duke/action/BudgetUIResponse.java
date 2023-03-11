@@ -11,8 +11,13 @@ import java.util.ArrayList;
 public class BudgetUIResponse {
 
     public static void budgetDoesNotExist() {
-        System.out.println("A budget with the same name exists!");
+        System.out.println("This budget does not exist!");
     }
+
+    public static void budgetNameUsed() {
+        System.out.println("This budget name is already in use!");
+    }
+
 
 
     public static void successfulBudgetDelete(String budgetName) {
@@ -20,7 +25,7 @@ public class BudgetUIResponse {
     }
 
     public static void numberOfBudgets(ArrayList<Budget> budgets) {
-        System.out.println("There are now " + budgets.size() + " budget(s) left");
+        System.out.println("There are " + budgets.size() + " budget(s)");
     }
 
 

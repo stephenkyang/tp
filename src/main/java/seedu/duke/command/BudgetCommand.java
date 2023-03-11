@@ -9,12 +9,13 @@ import seedu.duke.util.Pair;
 
 public class BudgetCommand extends Command {
     // Format
-    private static final String[] ACTIONS = {"add", "set", "del", "list"};
+    private static final String[] ACTIONS = {"add", "set", "del", "list", "find"};
     private static final Pair[][] ACTIONS_REQUIRED_PARAMS = {
         { new Pair("/c", String.class), new Pair("/l", double.class) },
         { new Pair("/c", String.class), new Pair("/l", double.class) },
         { new Pair("/c", String.class) },
-        {}
+        {},
+        { new Pair("/c", String.class) }
     };
     private static final Pair[][] ACTIONS_OPTIONAL_PARAMS = {};
 
@@ -40,9 +41,17 @@ public class BudgetCommand extends Command {
         case "list":
             executeListBudget(budgetAction);
             break;
+        case "find":
+            executeFindBudget(budgetAction,requiredParams);
+            break;
         default:
             // HANDLE DEFAULT HERE
         }
+    }
+
+    private void executeFindBudget(BudgetAction budgetAction, String[] requiredParams) {
+        String budgetName = requiredParams[0];
+        budgetAction.findBudget(budgetName);
     }
 
     private void executeAddBudget(BudgetAction budgetAction, String[] requiredParams) {
