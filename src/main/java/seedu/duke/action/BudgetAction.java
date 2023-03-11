@@ -4,6 +4,10 @@ import seedu.duke.model.Budget;
 
 import java.util.ArrayList;
 
+/**
+ * Contains methods related to budget function
+ */
+
 public class BudgetAction {
     private ArrayList<Budget> budgets;
 
@@ -18,55 +22,62 @@ public class BudgetAction {
     /**
      * Creates a budget of name and limit determined by user input
      *
-     * @param budgetName the name of the budget that the user wants to create
+     * @param budgetName  the name of the budget that the user wants to create
      * @param budgetLimit the monetary limit of the budget
      */
     public void addBudget(String budgetName, double budgetLimit) {
         // Check if there are any duplicate budgets
         if (checkDuplicateBudget(budgetName)) {
-            System.out.println("A budget with the same name exists!");
+            BudgetUIResponse.budgetDoesNotExist();
             return;
         }
 
         Budget budget = new Budget(budgetName, budgetLimit);
         budgets.add(budget);
+        BudgetUIResponse.successfulBudgetAdd(budgetName, budgetLimit);
+        BudgetUIResponse.numberOfBudgets(budgets);
     }
 
+    /**
+     * Deletes a budget from the budget list
+     *
+     * @param budgetName the name of the budget to delete
+     */
     public void deleteBudget(String budgetName) {
-        // int i = 0;
-        // boolean budgetExists = false;
-        // int budgetIndex = -1;
-        // for (Budget a : budgets) {
-        //     if (Objects.equals(a.budgetName, budgetName)) {
-        //         budgetExists = true;
-        //         budgetIndex = budgets.indexOf(a);
-        //     }
-        // }
-
-        // if (budgetExists) {
-        //     budgets.remove(budgetIndex);
-        // } else {
-        //     System.out.println("This budget does not exist!");
-        // }
 
         Budget budget = getBudget(budgetName);
         if (budget == null) {
-            System.out.println("This budget does not exist!");
+            BudgetUIResponse.budgetDoesNotExist();
             return;
         }
 
         budgets.remove(budget);
+        BudgetUIResponse.successfulBudgetDelete(budgetName);
+        BudgetUIResponse.numberOfBudgets(budgets);
     }
+
+    /**
+     * Modifies the budget limit of a chose budget
+     *
+     * @param budgetName  the budget to modify the budget limit for
+     * @param budgetLimit the new budget limit
+     */
 
     public void setBudget(String budgetName, double budgetLimit) {
         Budget budget = getBudget(budgetName);
         if (budget == null) {
-            System.out.println("This budget does not exist!");
+            BudgetUIResponse.budgetDoesNotExist();
             return;
         }
 
         budget.setLimit(budgetLimit);
     }
+
+    /**
+     * Checks if a certain budget exists
+     *
+     * @param budgetName budget name to check for if it has been used
+     */
 
     private Budget getBudget(String budgetName) {
         for (Budget budget : budgets) {
@@ -94,8 +105,6 @@ public class BudgetAction {
 
     /**
      * Prints all the details of all budgets in the list
-     *
-     * @return
      */
     public void printBudgets() {
         int i = 1;
@@ -106,6 +115,6 @@ public class BudgetAction {
                 i++;
             }
         }
-        System.out.println("Total of " + budgets.size() + " budgets.");
+        BudgetUIResponse.numberOfBudgets(budgets);
     }
 }
