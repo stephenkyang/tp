@@ -4,7 +4,8 @@ public enum Messages {
     LINE_DIVIDER("_______________"),
     INFO_WELCOME("Welcome to BudgetBuddy! What can I do for you?"),
     INFO_EXIT("Bye! Hope to see you soon!"),
-
+    DEPOSIT_PRINT("Here are your additional deposits: "),
+    DEPOSIT_PRINT_LINE("%d. %s (%.2f)"),
     BUDGET_DOES_NOT_EXIST("This budget does not exist!"),
     BUDGET_NAME_USED("This budget name is already in use!"),
     BUDGET_ADD_SUCCESSFUL("Successfully added %s with limit of $%.2f"),
