@@ -17,23 +17,25 @@ public class ExpenseParser {
             System.out.println(ERROR1);
         }
         String command = arr[1];
-        switch (command) {
-        case "add" -> {
+        switch(command) {
+        case "add":
             //add expense
             CommandExpenses addCommand = new CommandAddExpense();
             addCommand.doCommand(list, input);
-        }
-        case "list" -> {
+            break;
+        case "list":
             //list expenses
             CommandExpenses listCommand = new CommandListExpense();
             listCommand.doCommand(list, input);
-        }
-        case "delete" -> {
+            break;
+        case "delete":
             //delete expense
             CommandExpenses deleteCommand = new CommandDeleteExpense();
             deleteCommand.doCommand(list, input);
-        }
-        default -> System.out.println(INVALID);
+            break;
+        default:
+            System.out.println(INVALID);
+            break;
         }
     }
 }
