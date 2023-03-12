@@ -28,7 +28,7 @@ public class HelpCommand extends Command{
      * Prints out the different commands and features of the app
      */
     public static void showCommands(){
-        System.out.println("Budget Buddy helps you to mange your finances better.");
+        System.out.println("Budget Buddy helps you to manage your finances better.");
         System.out.println("Budget Buddy has 3 main categories:");
         System.out.println("1. Budget");
         System.out.println("   - Choose how much money you want to allocate to a budget of your specified name");
