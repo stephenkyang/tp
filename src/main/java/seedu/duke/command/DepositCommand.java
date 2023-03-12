@@ -27,7 +27,6 @@ public class DepositCommand extends Command {
     public void execute(Data data, Ui ui) throws BBException {
         ArrayList<Deposit> depositList = data.depositList;
         DepositAction depositAction = new DepositAction(depositList, ui);
-
         switch (action) {
             case "add":
                 executeAddDeposit(depositAction, requiredParams);
