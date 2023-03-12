@@ -1,6 +1,7 @@
 package seedu.duke.command;
 
 import seedu.duke.Data;
+import seedu.duke.Ui;
 import seedu.duke.util.Pair;
 
 public abstract class Command {
@@ -56,6 +57,6 @@ public abstract class Command {
         this.optionalParams = optionalParams;
     }
 
-    public abstract void execute(Data data);
+    public abstract void execute(Data data, Ui ui);
     public abstract boolean isExit();
 }

@@ -20,7 +20,7 @@ public class Duke {
             try {
                 String input = ui.readInput();
                 Command command = CommandParser.parse(input);
-                command.execute(data);
+                command.execute(data, ui);
                 if (command.isExit()) {
                     ui.byeUser();
                     System.exit(0);

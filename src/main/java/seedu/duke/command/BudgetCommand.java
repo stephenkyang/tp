@@ -3,6 +3,7 @@ package seedu.duke.command;
 import java.util.ArrayList;
 
 import seedu.duke.Data;
+import seedu.duke.Ui;
 import seedu.duke.action.BudgetAction;
 import seedu.duke.model.Budget;
 import seedu.duke.util.Pair;
@@ -24,9 +25,9 @@ public class BudgetCommand extends Command {
     }
 
     @Override
-    public void execute(Data data) {
+    public void execute(Data data, Ui ui) {
         ArrayList<Budget> budgetList = data.budgetList;
-        BudgetAction budgetAction = new BudgetAction(budgetList);
+        BudgetAction budgetAction = new BudgetAction(budgetList, ui);
 
         switch (action) {
         case "add":
