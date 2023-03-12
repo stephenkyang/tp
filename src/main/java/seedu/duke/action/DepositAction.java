@@ -5,15 +5,14 @@ import java.util.ArrayList;
 import seedu.duke.Ui;
 import seedu.duke.exception.GlobalInvalidNumberException;
 import seedu.duke.model.Deposit;
-import seedu.duke.util.Messages;
 
 public class DepositAction {
     private ArrayList<Deposit> deposits;
-    private Ui ui;
+    private DepositUIResponse depositUi;
 
     public DepositAction(ArrayList<Deposit> deposits, Ui ui) {
         this.deposits = deposits;
-        this.ui = ui;
+        depositUi = new DepositUIResponse(ui);
     }
 
     public ArrayList<Deposit> getDeposits() {
@@ -31,18 +30,7 @@ public class DepositAction {
     }
 
     public void printDeposits() {
-        ArrayList<String> messageLines = new ArrayList<String>();
-        messageLines.add(Messages.DEPOSIT_PRINT.toString());
-
-        int counter = 0;
-        for (Deposit deposit : deposits) {
-            String name = deposit.getDepositeName();
-            Double amount = deposit.getDepositAmount();
-            messageLines.add(String.format(Messages.DEPOSIT_PRINT_LINE.toString(), counter + 1, name, amount));
-            counter++;
-        }
-
-        ui.printMessage(messageLines.toArray(new String[0]));
+        depositUi.printListDeposits(deposits);
     }
 
     private int validateDeposit(int depositNo) throws GlobalInvalidNumberException {
