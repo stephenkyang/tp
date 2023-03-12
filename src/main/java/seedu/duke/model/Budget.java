@@ -9,7 +9,7 @@ public class Budget {
      * Creates a template for each budget, which includes the name, its completion status and budget type
      *
      * @param name name of budget
-     * @param budgetLimit the monetary value limit of the budget
+     * @param limit the monetary value limit of the budget
      */
     public Budget(String name, double limit) {
         this.name = name;
@@ -50,13 +50,4 @@ public class Budget {
     public double getLimit() {
         return this.limit;
     }
-
-    /**
-     * prints all information about the budget
-     */
-    public void printBudget() {
-        System.out.println("Name: " + name + " Limit: $" + limit);
-    }
-
-
 }

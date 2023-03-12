@@ -1,35 +1,60 @@
 package seedu.duke.action;
 
+import seedu.duke.Ui;
 import seedu.duke.model.Budget;
+import seedu.duke.util.Messages;
 
 import java.util.ArrayList;
-
 
 /**
  * Contains User Interface text responses when a budget method is run
  */
 public class BudgetUIResponse {
+    private Ui ui;
 
-    public static void budgetDoesNotExist() {
-        System.out.println("This budget does not exist!");
+    public BudgetUIResponse(Ui ui) {
+        this.ui = ui;
     }
 
-    public static void budgetNameUsed() {
-        System.out.println("This budget name is already in use!");
+    public void printBudgetDoesNotExist() {
+        ui.printMessage(Messages.BUDGET_DOES_NOT_EXIST.toString());
     }
 
-
-
-    public static void successfulBudgetDelete(String budgetName) {
-        System.out.println("Successfully deleted " + budgetName);
+    public void printBudgetNameUsed() {
+        ui.printMessage(Messages.BUDGET_NAME_USED.toString());
     }
 
-    public static void numberOfBudgets(ArrayList<Budget> budgets) {
-        System.out.println("There are " + budgets.size() + " budget(s)");
+    public void printBudgetDelSuccessful(Budget budget, int count) {
+        String msg = String.format(Messages.BUDGET_DELETE_SUCCESSFUL.toString(), budget.getName());
+        String countMsg = String.format(Messages.BUDGET_NUMBER_OF.toString(), count);
+        ui.printMessage(msg, countMsg);
     }
 
+    public void printBudgetAddSuccessful(Budget budget, int count) {
+        String msg = String.format(Messages.BUDGET_ADD_SUCCESSFUL.toString(), budget.getName(), budget.getLimit());
+        String countMsg = String.format(Messages.BUDGET_NUMBER_OF.toString(), count);
+        ui.printMessage(msg, countMsg);
+    }
 
-    public static void successfulBudgetAdd(String budgetName, double budgetLimit) {
-        System.out.println("Successfully added " + budgetName + " with limit of $" + budgetLimit);
+    public void printListBudgets(ArrayList<Budget> budgets) {
+        ArrayList<String> msgs = new ArrayList<String>();
+        int i = 1;
+        for (Budget b : budgets) {
+            if (b != null) {
+                String msg = String.format(Messages.BUDGET_PRINT_BUDGET.toString(), i, b.getName(), b.getLimit());
+                msgs.add(msg);
+                i++;
+            }
+        }
+
+        String budgetCount = String.format(Messages.BUDGET_NUMBER_OF.toString(), budgets.size());
+        msgs.add(budgetCount);
+
+        ui.printMessage(msgs.toArray(new String[0]));
+    }
+
+    public void printBudgetCommands() {
+        String msg = String.format(Messages.BUDGET_COMMANDS.toString());
+        ui.printMessage(msg);
     }
 }
