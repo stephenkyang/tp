@@ -27,14 +27,12 @@ public class BudgetUIResponse {
     public void printBudgetDelSuccessful(Budget budget, int count) {
         String msg = String.format(Messages.BUDGET_DELETE_SUCCESSFUL.toString(), budget.getName());
         String countMsg = String.format(Messages.BUDGET_NUMBER_OF.toString(), count);
-				
         ui.printMessage(msg, countMsg);
     }
 
     public void printBudgetAddSuccessful(Budget budget, int count) {
         String msg = String.format(Messages.BUDGET_ADD_SUCCESSFUL.toString(), budget.getName(), budget.getLimit());
         String countMsg = String.format(Messages.BUDGET_NUMBER_OF.toString(), count);
-				
         ui.printMessage(msg, countMsg);
     }
 
@@ -55,7 +53,7 @@ public class BudgetUIResponse {
         ui.printMessage(msgs.toArray(new String[0]));
     }
 
-    public void printBudgetCommands(){
+    public void printBudgetCommands() {
         String msg = String.format(Messages.BUDGET_COMMANDS.toString());
         ui.printMessage(msg);
     }
