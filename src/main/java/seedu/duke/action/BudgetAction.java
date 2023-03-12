@@ -11,11 +11,11 @@ import java.util.ArrayList;
 
 public class BudgetAction {
     private ArrayList<Budget> budgets;
-    private Ui ui;
+    private BudgetUIResponse budgetUi;
 
     public BudgetAction(ArrayList<Budget> budgets, Ui ui) {
         this.budgets = budgets;
-        this.ui = ui;
+        budgetUi = new BudgetUIResponse(ui);
     }
 
     public ArrayList<Budget> getBudgets() {
@@ -31,14 +31,15 @@ public class BudgetAction {
     public void addBudget(String budgetName, double budgetLimit) {
         // Check if there are any duplicate budgets
         if (checkDuplicateBudget(budgetName)) {
-            BudgetUIResponse.budgetNameUsed();
+            budgetUi.printBudgetNameUsed();
             return;
         }
 
         Budget budget = new Budget(budgetName, budgetLimit);
         budgets.add(budget);
-        BudgetUIResponse.successfulBudgetAdd(budgetName, budgetLimit);
-        BudgetUIResponse.numberOfBudgets(budgets);
+
+        budgetUi.printBudgetAddSuccessful(budget, budgets.size());
+        
     }
 
     /**
@@ -50,13 +51,12 @@ public class BudgetAction {
 
         Budget budget = getBudget(budgetName);
         if (budget == null) {
-            BudgetUIResponse.budgetDoesNotExist();
+            budgetUi.printBudgetDoesNotExist();
             return;
         }
 
         budgets.remove(budget);
-        BudgetUIResponse.successfulBudgetDelete(budgetName);
-        BudgetUIResponse.numberOfBudgets(budgets);
+        budgetUi.printBudgetDelSuccessful(budget, budgets.size());
     }
 
     /**
@@ -69,7 +69,7 @@ public class BudgetAction {
     public void setBudget(String budgetName, double budgetLimit) {
         Budget budget = getBudget(budgetName);
         if (budget == null) {
-            BudgetUIResponse.budgetDoesNotExist();
+            budgetUi.printBudgetDoesNotExist();
             return;
         }
 
@@ -89,18 +89,11 @@ public class BudgetAction {
                 foundBudgets.add(budget);
             }
         }
+        
         if (foundBudgets.isEmpty()) {
-            BudgetUIResponse.budgetDoesNotExist();
+            budgetUi.printBudgetDoesNotExist();
         } else {
-            int i = 1;
-            for (Budget a : foundBudgets) {
-                if (a != null) {
-                    System.out.print(i + ". ");
-                    a.printBudget();
-                    i++;
-                }
-            }
-            BudgetUIResponse.numberOfBudgets(foundBudgets);
+            budgetUi.printListBudgets(foundBudgets);
         }
         foundBudgets.clear();
     }
@@ -140,15 +133,15 @@ public class BudgetAction {
      * Prints all the details of all budgets in the list
      */
     public void printBudgets() {
-        int i = 1;
-        for (Budget a : budgets) {
-            if (a != null) {
-                System.out.print(i + ". ");
-                a.printBudget();
-                i++;
-            }
-        }
-        BudgetUIResponse.numberOfBudgets(budgets);
+        budgetUi.printListBudgets(budgets);
+    }
+
+
+    /**
+     * Prints user instructions on how to use budget commands
+     */
+    public void budgetHelp(){
+        budgetUi.printBudgetCommands();
     }
 
 }

@@ -92,10 +92,10 @@ public class CommandParser {
     private static void validateParamType(String paramValue, Class<?> paramType) throws BBException {
         try {
             if (paramType.isAssignableFrom(int.class)) {
-                System.out.println("lol wtf");
+                //System.out.println("lol wtf");
                 Integer.parseInt(paramValue);
             } else if (paramType.isAssignableFrom(double.class)) {
-                System.out.println("lol wtf2");
+                //System.out.println("lol wtf2");
                 Double.parseDouble(paramValue);
             }
         } catch (NumberFormatException err) {
