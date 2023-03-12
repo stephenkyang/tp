@@ -1,6 +1,7 @@
 package seedu.duke.command;
 
 import seedu.duke.Data;
+import seedu.duke.Ui;
 import seedu.duke.util.Pair;
 
 public class ExitCommand extends Command {
@@ -14,7 +15,7 @@ public class ExitCommand extends Command {
     }
 
     @Override
-    public void execute(Data data) {
+    public void execute(Data data, Ui ui) {
     }
 
     @Override

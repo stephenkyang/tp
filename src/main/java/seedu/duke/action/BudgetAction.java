@@ -1,5 +1,6 @@
 package seedu.duke.action;
 
+import seedu.duke.Ui;
 import seedu.duke.model.Budget;
 
 import java.util.ArrayList;
@@ -10,9 +11,11 @@ import java.util.ArrayList;
 
 public class BudgetAction {
     private ArrayList<Budget> budgets;
+    private Ui ui;
 
-    public BudgetAction(ArrayList<Budget> budgets) {
+    public BudgetAction(ArrayList<Budget> budgets, Ui ui) {
         this.budgets = budgets;
+        this.ui = ui;
     }
 
     public ArrayList<Budget> getBudgets() {

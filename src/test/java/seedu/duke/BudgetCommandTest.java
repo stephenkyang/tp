@@ -11,7 +11,8 @@ import seedu.duke.model.Budget;
 
 class BudgetCommandTest {
     ArrayList<Budget> budgetList = new ArrayList<Budget>();
-    BudgetAction budgetAction = new BudgetAction(budgetList);
+    Ui ui = new Ui();
+    BudgetAction budgetAction = new BudgetAction(budgetList, ui);
 
     @Test
     void createBudget_newBudget_success() {
