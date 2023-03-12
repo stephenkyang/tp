@@ -1,7 +1,5 @@
 package seedu.duke.expenses;
 
-import seedu.duke.expenses.Expenses;
-
 import java.util.ArrayList;
 
 public class ExpenseList {
