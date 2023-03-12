@@ -22,6 +22,8 @@ public abstract class Command {
         this.optionalParamsList = optionalParamsList;
     }
 
+
+
     public CommandEnum getCommandName() {
         return this.name;
     }

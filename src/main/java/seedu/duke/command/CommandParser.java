@@ -19,6 +19,10 @@ public class CommandParser {
         case EXIT:
             command = new ExitCommand();
             break;
+        case HELP:
+            command = new HelpCommand();
+            HelpCommand.showCommands();
+            break;
         default:
             throw new CommandInvalidException();
         }
