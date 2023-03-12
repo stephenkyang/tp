@@ -28,17 +28,17 @@ public class DepositCommand extends Command {
         ArrayList<Deposit> depositList = data.depositList;
         DepositAction depositAction = new DepositAction(depositList, ui);
         switch (action) {
-            case "add":
-                executeAddDeposit(depositAction, requiredParams);
-                break;
-            case "del":
-                executeDelDeposit(depositAction, requiredParams);
-                break;
-            case "list":
-                executeListDeposit(depositAction);
-                break;
-            default:
-                // HANDLE DEFAULT HERE
+        case "add":
+            executeAddDeposit(depositAction, requiredParams);
+            break;
+        case "del":
+            executeDelDeposit(depositAction, requiredParams);
+            break;
+        case "list":
+            executeListDeposit(depositAction);
+            break;
+        default:
+            // HANDLE DEFAULT HERE
         }
     }
 
