@@ -1,34 +1,34 @@
 package seedu.duke;
 
-import java.util.Scanner;
+import seedu.duke.command.Command;
+import seedu.duke.command.CommandParser;
+import seedu.duke.exception.BBException;
 
 public class Duke {
     /**
      * Main entry-point for the java.duke.Duke application.
+     * @throws Exception
      */
-    public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        Duke.run();
-    }
+    public static void main(String[] args) throws Exception {
+        Data data = new Data();
+        Ui ui = new Ui();
 
-    public static void run() {
-        Scanner in = new Scanner(System.in);
-        while (true) {
-            String command = DepositParser.parseDepositCommand(in.nextLine());
-            if (command == null) {
-                continue;
-            }
-            if (command.equals("bye")) {
-                System.out.println("Goodbye see you soon :)");
-                return;
+        ui.greetUser();
+
+        boolean isRunning = true;
+        while (isRunning) {
+            try {
+                String input = ui.readInput();
+                Command command = CommandParser.parse(input);
+                command.execute(data, ui);
+                if (command.isExit()) {
+                    ui.byeUser();
+                    System.exit(0);
+                }
+            } catch (BBException err) {
+                ui.printErrorMessage(err.getMessage());
             }
         }
-
-
     }
 }
+
