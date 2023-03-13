@@ -10,7 +10,7 @@ public class Data {
     public ArrayList<Budget> budgetList;
     public ArrayList<Deposit> depositList;
     public ArrayList<Expense> expenseList;
-
+    
     // create load and save methods here
     public Data() {
         budgetList = new ArrayList<Budget>();
