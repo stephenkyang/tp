@@ -23,8 +23,12 @@ public enum Messages {
         "   budget find /c (keyword)"),
 
     DEPOSIT_PRINT("Here are your additional deposits: "),
-    DEPOSIT_PRINT_DEPOSIT("%d. Name: \"%s\" Amount: $%.2f");
+    DEPOSIT_PRINT_DEPOSIT("%d. Name: \"%s\" Amount: $%.2f"),
 
+    EXPENSE_ADD_SUCCESSFUL("Got it, I have added %s into your expenses!"),
+    EXPENSE_DEL_SUCCESSFUL("Okay, %s has been deleted!"),
+    EXPENSE_NUMBER_OF("Now there are %d expenses in your list!"),
+    EXPENSE_PRINT_EXPENSE("%d. %s [%s] %s ($%.2f)");
 
     private final String message;
 

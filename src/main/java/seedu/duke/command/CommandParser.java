@@ -16,6 +16,9 @@ public class CommandParser {
         case BUDGET:
             command = new BudgetCommand();
             break;
+        case EXPENSE:
+            command = new ExpenseCommand();
+            break;
         case EXIT:
             command = new ExitCommand();
             break;
