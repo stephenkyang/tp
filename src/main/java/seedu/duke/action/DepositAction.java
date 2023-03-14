@@ -22,6 +22,8 @@ public class DepositAction {
     public void addDeposit(String depositName, double depositAmount) {
         Deposit deposit = new Deposit(depositName, depositAmount);
         deposits.add(deposit);
+
+        depositUi.printDepositAddSuccessful(deposit, deposits.size());
     }
 
     public void deleteDeposit(int depositNo) throws GlobalInvalidNumberException {

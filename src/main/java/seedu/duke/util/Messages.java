@@ -23,6 +23,8 @@ public enum Messages {
         "   budget find /c (keyword)"),
 
     DEPOSIT_PRINT("Here are your additional deposits: "),
+    DEPOSIT_ADD_SUCCESSFUL("Successfully added %s with amount of $%.2f"),
+    DEPOSIT_NUMBER_OF("There are %d budget categories."),
     DEPOSIT_PRINT_DEPOSIT("%d. Name: \"%s\" Amount: $%.2f"),
 
     EXPENSE_ADD_SUCCESSFUL("Got it, I have added %s into your expenses!"),
