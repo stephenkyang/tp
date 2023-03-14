@@ -53,8 +53,8 @@ public class DepositCommand extends Command {
         depositAction.deleteDeposit(depositNo);
     }
 
-    private void executeListDeposit(DepositAction budgetAction) {
-        budgetAction.printDeposits();
+    private void executeListDeposit(DepositAction depositAction) {
+        depositAction.printDeposits();
     }
 
     @Override

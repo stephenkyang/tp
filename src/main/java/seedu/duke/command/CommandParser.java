@@ -6,6 +6,7 @@ import seedu.duke.exception.CommandInvalidException;
 import seedu.duke.exception.CommandParamInvalidException;
 import seedu.duke.exception.CommandParamTypeInvalidException;
 import seedu.duke.util.Pair;
+import seedu.duke.Data;
 
 public class CommandParser {
     public static Command parse(String input) throws BBException {
@@ -18,6 +19,10 @@ public class CommandParser {
             break;
         case EXPENSE:
             command = new ExpenseCommand();
+            break;
+        case STATS:
+            command = new StatsCommand();
+            StatsCommand.printStats(expenseList, budgetList, depositList);
             break;
         case EXIT:
             command = new ExitCommand();
