@@ -6,7 +6,6 @@ import seedu.duke.exception.CommandInvalidException;
 import seedu.duke.exception.CommandParamInvalidException;
 import seedu.duke.exception.CommandParamTypeInvalidException;
 import seedu.duke.util.Pair;
-import seedu.duke.Data;
 
 public class CommandParser {
     public static Command parse(String input) throws BBException {
@@ -17,12 +16,14 @@ public class CommandParser {
         case BUDGET:
             command = new BudgetCommand();
             break;
+        case DEPOSIT:
+            command = new DepositCommand();
+            break;
         case EXPENSE:
             command = new ExpenseCommand();
             break;
         case STATS:
             command = new StatsCommand();
-            StatsCommand.printStats(expenseList, budgetList, depositList);
             break;
         case EXIT:
             command = new ExitCommand();
@@ -104,10 +105,8 @@ public class CommandParser {
     private static void validateParamType(String paramValue, Class<?> paramType) throws BBException {
         try {
             if (paramType.isAssignableFrom(int.class)) {
-                //System.out.println("lol wtf");
                 Integer.parseInt(paramValue);
             } else if (paramType.isAssignableFrom(double.class)) {
-                //System.out.println("lol wtf2");
                 Double.parseDouble(paramValue);
             }
         } catch (NumberFormatException err) {

@@ -43,6 +43,8 @@ public class ExpenseCommand extends Command {
         default:
             // HANDLE DEFAULT HERE
         }
+
+        data.exportData();
     }
 
     private void executeAddExpense(ExpenseAction expenseAction, String[] requiredParams) {

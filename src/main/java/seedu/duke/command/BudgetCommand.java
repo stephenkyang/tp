@@ -52,6 +52,8 @@ public class BudgetCommand extends Command {
         default:
             // HANDLE DEFAULT HERE
         }
+
+        data.exportData();
     }
 
     private void executeFindBudget(BudgetAction budgetAction, String[] requiredParams) {
