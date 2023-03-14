@@ -16,6 +16,9 @@ public class CommandParser {
         case BUDGET:
             command = new BudgetCommand();
             break;
+        case DEPOSIT:
+            command = new DepositCommand();
+            break;
         case EXPENSE:
             command = new ExpenseCommand();
             break;
@@ -99,10 +102,8 @@ public class CommandParser {
     private static void validateParamType(String paramValue, Class<?> paramType) throws BBException {
         try {
             if (paramType.isAssignableFrom(int.class)) {
-                //System.out.println("lol wtf");
                 Integer.parseInt(paramValue);
             } else if (paramType.isAssignableFrom(double.class)) {
-                //System.out.println("lol wtf2");
                 Double.parseDouble(paramValue);
             }
         } catch (NumberFormatException err) {

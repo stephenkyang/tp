@@ -10,7 +10,7 @@ public class Duke {
      * @throws Exception
      */
     public static void main(String[] args) throws Exception {
-        Data data = new Data();
+        Data data = Data.importData();
         Ui ui = new Ui();
 
         ui.greetUser();

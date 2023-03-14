@@ -40,6 +40,8 @@ public class DepositCommand extends Command {
         default:
             // HANDLE DEFAULT HERE
         }
+
+        data.exportData();
     }
 
     private void executeAddDeposit(DepositAction depositAction, String[] requiredParams) {
