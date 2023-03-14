@@ -36,7 +36,9 @@ public class HelpCommand extends Command{
         System.out.println("   - track how much money you have spent, and link it to a certain budget of yours");
         System.out.println("3. Deposit ");
         System.out.println("   - track how much money you have earned or received");
-        System.out.println("To learn the specific commands for each category, input \"(catergory) help\"");
+        System.out.println("4. Stats ");
+        System.out.println("   - shows the progress on spending so far as well as the total number of deposits");
+        System.out.println("To learn the specific commands for each category, input \"(category) help\"");
 
     }
 

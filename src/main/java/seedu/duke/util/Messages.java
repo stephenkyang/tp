@@ -7,7 +7,7 @@ public enum Messages {
     BUDGET_DOES_NOT_EXIST("This budget does not exist!"),
     BUDGET_NAME_USED("This budget name is already in use!"),
     BUDGET_ADD_SUCCESSFUL("Successfully added %s with limit of $%.2f"),
-    BUDGET_DELETE_SUCCESSFUL("Sucessfully deleted %s."),
+    BUDGET_DELETE_SUCCESSFUL("Successfully deleted %s."),
     BUDGET_PRINT_BUDGET("%d. Name: \"%s\" Limit: $%.2f"),
     BUDGET_NUMBER_OF("There are %d budget categories."),
 
@@ -28,7 +28,18 @@ public enum Messages {
     EXPENSE_ADD_SUCCESSFUL("Got it, I have added %s into your expenses!"),
     EXPENSE_DEL_SUCCESSFUL("Okay, %s has been deleted!"),
     EXPENSE_NUMBER_OF("Now there are %d expenses in your list!"),
-    EXPENSE_PRINT_EXPENSE("%d. %s [%s] %s ($%.2f)");
+    EXPENSE_PRINT_EXPENSE("%d. %s [%s] %s ($%.2f)"),
+
+    STATS_PRINT_INTRO("Your current progress for this month: /n"),
+    STATS_PRINT_DEPOSITS("Extra deposits: "),
+    STATS_PRINT_BUDGET_PROGRESS("Total budget progress: "),
+    STATS_PRINT_RIGHT_TRACK("Good job! You are on the right track!"),
+    STATS_PRINT_OVERSPEND("Oh no! You seem to be spending too much!"),
+    STATS_PRINT_NO_STATS("There are no stats currently! Please try another command!")
+
+    ;
+
+
 
     private final String message;
 
