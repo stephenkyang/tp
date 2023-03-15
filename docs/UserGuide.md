@@ -31,129 +31,68 @@ _______________
 ## Features
 
 BudgetBuddy accepts a range of valid commands as shown below.
-Use the ```help``` command to get instructions on how to use BudgetBuddy.
+Use the `help` command to get instructions on how to use BudgetBuddy.
 <br/><br/>
 
-#### 1. Add Todo
+#### 1. Budgets
 
-Use the command `todo [task name]` to add a new task to your list
+Use the command `budget help` to learn the specific budget related commands
 
-example: `todo buy food`
+1. You can add a monthly budget:
 
-```
-added:  buy food
-```
+   `budget add /c (category name) /l (spending limit)`
+   <br/><br/>
+2. You can modify an existing budget:
 
-<br/><br/>
+   `budget set /c (category) /l (spending limit)`
+   <br/><br/>
 
-#### 2. Add Deadline
+3. You can remove a monthly budget:
 
-Use the command `Deadline [task name] /[due_date]` to add a new task to your list
+   `budget del /c (category)`
+   <br/><br/>
+4. You can list all budgets:
 
-example: `deadline buy milk /tuesday10pm`
+   `budget list`
+   <br/><br/>
+5. You can search for budgets that include a certain keyword:
 
-```
-Got it. I've added " buy milk "
-with a deadline of: tuesday10pm
-```
-
-<br/><br/>
-
-#### 3. Add Event
-
-Use the command `event [task name] /start_time /end_time` to add a new task to your list
-
-example: `event foodie cooking show /wed3pm /wed5pm`
-
-```
-Got it. I've added " foodie cooking show "
-with a start time of: wed3pm 
-and an ending time of: wed5pm
-```
+   `budget find /c (keyword)`
 
 <br/><br/>
 
-#### 4. List tasks
+#### 2. Expenses
 
-Use the command `list` to list out all the tasks
+Use the command `Expenses help` to learn the specific budget related commands
 
-Expected result:
+1. You can add a monthly budget:
 
-```
-1.[T][ ]buy food
-2.[D][ ] buy milk  (by: tuesday10pm)
-3.[E][ ] foodie cooking show (from: wed3pm  to: wed5pm)
-There are currently 3 task(s) in the list
-```
+   `budget add /c (category name) /l (spending limit)`
+   <br/><br/>
+2. You can modify an existing budget:
 
-The letters "T" , "D" and "E" represent Todos, Deadlines and Events respectively.
-The due dates, start and end times will also be shown next to the task name.
-<br/><br/>
+   `budget set /c (category) /l (spending limit)`
+   <br/><br/>
 
-#### 5. Mark tasks
+3. You can remove a monthly budget:
 
-You can mark tasks as completed by using the `mark [task_number]` command.
-The task number is the corresponding number of the task in the `list` output.
+   `budget del /c (category)`
+   <br/><br/>
+4. You can list all budgets:
 
-For example: `mark 2`
+   `budget list`
+   <br/><br/>
+5. You can search for budgets that include a certain keyword:
 
-```
-Nice! I've marked this task as done:
-[X]   buy milk
-```
+   `budget find /c (keyword)`
 
 <br/><br/>
 
-#### 6. Unmark tasks
+#### 3. Exiting BudgetBuddy
 
-You can unmark tasks as completed by using the `unmark [task_number]` command.
-The task number is the corresponding number of the task in the `list` output.
+You can exit the application using the `exit` command.
 
-For example: `unmark 2`
-
-```
-OK, I've marked this task as not done yet:
-[ ]    buy milk 
-```
-
-<br/><br/>
-
-#### 7. Delete tasks
-
-You can delete tasks as completed by using the `delete [task_number]` command.
-The task number is the corresponding number of the task in the `list` output.
-
-For example: `delete 2`
-
-```
-Noted. I've removed this task:
-2.[D][ ] buy milk  (by: tuesday10pm)
-```
-
-<br/><br/>
-
-#### 8. Search tasks
-
-You can search for tasks that have a name that includes a keyword determined by the user.
-This is done by using the `find` keyword.
-For example:
-
-For example: `find food`
-
-```
-There are 2 matching tasks in your list
-1.[T][ ]buy food
-2.[E][ ] foodie cooking show (from: wed3pm  to: wed5pm)
-```
-
-Tasks with names that include the keyword will be listed out, even if the keyword is a substring of a word in the name.
-<br/><br/>
-
-#### 9. Exiting Duke
-
-You can exit the application using the `bye` command.
-
-Upon exiting Duke, Duke will save the current tasks in the list to a local text file in your device.
+Upon exiting BudgetBuddy, BudgetBuddy will save the current tasks in the list to a local text file in your device.
 These saved tasks will be imported into Duke when it is subsequently launched in the future,
 ensuring that you do not lose track of you tasks.
 <br/><br/>
