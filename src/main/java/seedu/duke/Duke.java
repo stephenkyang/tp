@@ -4,16 +4,16 @@ import seedu.duke.command.Command;
 import seedu.duke.command.CommandParser;
 import seedu.duke.exception.BBException;
 
+//@@author pinyoko573
 public class Duke {
+    private static Ui ui;
+    private static Data data;
+    
     /**
-     * Main entry-point for the java.duke.Duke application.
-     * @throws Exception
+     * Main entry-point for BudgetBuddy application.
      */
-    public static void main(String[] args) throws Exception {
-        Data data = Data.importData();
-        Ui ui = new Ui();
-
-        ui.greetUser();
+    public static void main(String[] args) {
+        startApplication();
 
         boolean isRunning = true;
         while (isRunning) {
@@ -22,13 +22,37 @@ public class Duke {
                 Command command = CommandParser.parse(input);
                 command.execute(data, ui);
                 if (command.isExit()) {
-                    ui.byeUser();
-                    System.exit(0);
+                    exitApplication();
                 }
             } catch (BBException err) {
                 ui.printErrorMessage(err.getMessage());
             }
         }
+    }
+
+    /**
+     * Initialises the ui and attempts to import the data file (.json).
+     * When file could not be opened, application will terminate.
+     */
+    private static void startApplication() {
+        ui = new Ui();
+
+        try {
+            data = Data.importData();
+        } catch (BBException err) {
+            ui.printErrorMessage(err.getMessage());
+            System.exit(1);
+        } finally {
+            ui.greetUser();
+        }
+    }
+
+    /**
+     * Exits the application.
+     */
+    private static void exitApplication() {
+        ui.byeUser();
+        System.exit(0);
     }
 }
 

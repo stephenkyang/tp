@@ -4,6 +4,12 @@ import seedu.duke.Data;
 import seedu.duke.Ui;
 import seedu.duke.util.Pair;
 
+//@@author pinyoko573
+/**
+ * When exit command is inputted by the user, it will
+ * return true to the main function, which will exit
+ * the application.
+ */
 public class ExitCommand extends Command {
     // Format
     private static final String[] ACTIONS = {};

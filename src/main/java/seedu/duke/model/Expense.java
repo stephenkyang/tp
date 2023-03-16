@@ -1,15 +1,21 @@
 package seedu.duke.model;
 
-public class Expense {
-    private String category;
-    private String name;
-    private double amount;
-    private String date;
+import java.time.LocalDate;
 
-    public Expense(String category, String name, double amount, String date){
+//@@author tzixi
+public class Expense extends Item {
+    private String category;
+    private LocalDate date;
+
+    public Expense(String category, String name, double amount) {
+        super(name, amount);
         this.category = category;
-        this.name = name;
-        this.amount = amount;
+        this.date = LocalDate.now();
+    }
+
+    public Expense(String category, String name, double amount, LocalDate date){
+        super(name, amount);
+        this.category = category;
         this.date = date;
     }
 
@@ -17,21 +23,7 @@ public class Expense {
         return this.category;
     }
 
-    public String getName() {
-        return this.name;
-    }
-
-    public double getAmount() {
-        return this.amount;
-    }
-
-    public String getDate() {
+    public LocalDate getDate() {
         return this.date;
-    }
-
-    @Override
-    public String toString() {
-        //format is name, amount, /category
-        return " " + name + " " + amount + " /" + category;
     }
 }

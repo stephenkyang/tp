@@ -4,8 +4,8 @@ import seedu.duke.Data;
 import seedu.duke.Ui;
 import seedu.duke.util.Pair;
 
+//@@author chongyongrui
 public class HelpCommand extends Command{
-
 
     private static final String[] ACTIONS = {};
     private static final Pair[][] ACTIONS_REQUIRED_PARAMS = {};

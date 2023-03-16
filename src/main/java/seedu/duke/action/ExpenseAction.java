@@ -1,11 +1,13 @@
 package seedu.duke.action;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import seedu.duke.Ui;
 import seedu.duke.exception.GlobalInvalidNumberException;
 import seedu.duke.model.Expense;
 
+//@@author tzixi
 public class ExpenseAction {
     private ArrayList<Expense> expenses;
     private ExpenseUIResponse expenseUi;
@@ -15,7 +17,7 @@ public class ExpenseAction {
         expenseUi = new ExpenseUIResponse(ui);
     }
 
-    public void addExpense(String expenseCategory, String expenseName, Double expenseAmount, String expenseDate) {
+    public void addExpense(String expenseCategory, String expenseName, Double expenseAmount, LocalDate expenseDate) {
         Expense expense = new Expense(expenseCategory, expenseName, expenseAmount, expenseDate);
         expenses.add(expense);
 
