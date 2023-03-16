@@ -24,7 +24,7 @@ public enum Messages {
 
     DEPOSIT_PRINT("Here are your additional deposits: "),
     DEPOSIT_ADD_SUCCESSFUL("Successfully added %s with amount of $%.2f"),
-    DEPOSIT_NUMBER_OF("There are %d budget categories."),
+    DEPOSIT_NUMBER_OF("You have a total of %d deposits."),
     DEPOSIT_PRINT_DEPOSIT("%d. Name: \"%s\" Amount: $%.2f"),
 
     EXPENSE_ADD_SUCCESSFUL("Got it, I have added %s into your expenses!"),

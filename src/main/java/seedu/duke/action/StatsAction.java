@@ -8,6 +8,7 @@ import seedu.duke.model.Budget;
 import seedu.duke.model.Deposit;
 import seedu.duke.model.Expense;
 
+//@@author SaiChaitanya13
 public class StatsAction {
     private Data data;
     private StatsUIResponse statsUi;
@@ -18,8 +19,8 @@ public class StatsAction {
     }
 
     public void viewStats() {
-        ArrayList<Budget> budgets = data.budgetList;
-        ArrayList<Deposit> deposits = data.depositList;
+        ArrayList<Budget> budgets = data.getBudgets();
+        ArrayList<Deposit> deposits = data.getDeposits();
 
         double totalDeposits = 0.00;
 
@@ -71,7 +72,7 @@ public class StatsAction {
     private double getExpenses(String categoryName) {
         double totalExpenses = 0;
 
-        for (Expense e : data.expenseList) {
+        for (Expense e : data.getExpenses()) {
             if (e.getCategory().equals(categoryName)) {
                 totalExpenses += e.getAmount();
             }

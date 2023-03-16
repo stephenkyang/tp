@@ -6,6 +6,7 @@ import seedu.duke.Ui;
 import seedu.duke.model.Expense;
 import seedu.duke.util.Messages;
 
+//@@author tzixi
 public class ExpenseUIResponse {
     private Ui ui;
 

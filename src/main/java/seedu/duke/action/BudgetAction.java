@@ -5,10 +5,10 @@ import seedu.duke.model.Budget;
 
 import java.util.ArrayList;
 
+//@@author chongyongrui
 /**
  * Contains methods related to budget function
  */
-
 public class BudgetAction {
     private ArrayList<Budget> budgets;
     private BudgetUIResponse budgetUi;

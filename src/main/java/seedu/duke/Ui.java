@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import seedu.duke.util.Messages;
 
+//@@author pinyoko573
 /**
  * Handles the user interface of the application, including user inputs and message outputs
  */
@@ -15,11 +16,21 @@ public class Ui {
         in = new Scanner(System.in);
     }
 
+    /**
+     * Reads the input from IO.
+     * 
+     * @return the string of the input
+     */
     public String readInput() {
         input = in.nextLine();
         return input;
     }
 
+    /**
+     * Print messages that are enclosed in a line divider. 
+     * 
+     * @param messages messages that to be printed.
+     */
     public void printMessage(String... messages) {
         System.out.println(Messages.LINE_DIVIDER);
         for (String message : messages) {
@@ -28,14 +39,25 @@ public class Ui {
         System.out.println(Messages.LINE_DIVIDER);
     }
 
+    /**
+     * Print error messages.
+     * 
+     * @param message the error message.
+     */
     public void printErrorMessage(String message) {
         printMessage(message);
     }
 
+    /**
+     * Greets the user.
+     */
     public void greetUser() {
         printMessage(Messages.INFO_WELCOME.toString());
     }
 
+    /**
+     * Say bye to the user.
+     */
     public void byeUser() {
         printMessage(Messages.INFO_EXIT.toString());
     }

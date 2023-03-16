@@ -1,5 +1,6 @@
 package seedu.duke.model;
 
+//@@author pinyoko573
 public abstract class Item {
     private String name;
     private double amount;

@@ -4,6 +4,7 @@ import seedu.duke.command.Command;
 import seedu.duke.command.CommandEnum;
 import seedu.duke.util.ErrorMessages;
 
+//@@author pinyoko573
 public class CommandParamInvalidException extends BBException {
     private CommandEnum commandName;
     private String action;
@@ -11,7 +12,7 @@ public class CommandParamInvalidException extends BBException {
     public CommandParamInvalidException(Command command) {
         this.commandName = command.getCommandName();
 
-        // https://stackoverflow.com/questions/2601978/how-to-check-if-my-string-is-equal-to-null
+        //Solution below adapted from https://stackoverflow.com/questions/2601978/
         if (command.getAction() == null) {
             this.action = "";
         } else {
@@ -26,6 +27,12 @@ public class CommandParamInvalidException extends BBException {
         switch(commandName) {
         case BUDGET:
             message = getBudgetMessage(action);
+            break;
+        case DEPOSIT:
+            message = getDepositMessage(action);
+            break;
+        case EXPENSE:
+            message = getExpenseMessage(action);
             break;
         default:
             message = ErrorMessages.ERROR_UNKNOWN_INVALID_ACTION.toString();
@@ -42,6 +49,28 @@ public class CommandParamInvalidException extends BBException {
             return ErrorMessages.ERROR_BUDGET_SET_INVALID_PARAM.toString();
         case "del":
             return ErrorMessages.ERROR_BUDGET_DEL_INVALID_PARAM.toString();
+        default:
+            return ErrorMessages.ERROR_UNKNOWN_INVALID_ACTION.toString();
+        }
+    }
+
+    private String getDepositMessage(String action) {
+        switch(action) {
+        case "add":
+            return ErrorMessages.ERROR_DEPOSIT_ADD_INVALID_PARAM.toString();
+        case "del":
+            return ErrorMessages.ERROR_DEPOSIT_DEL_INVALID_PARAM.toString();
+        default:
+            return ErrorMessages.ERROR_UNKNOWN_INVALID_ACTION.toString();
+        }
+    }
+
+    private String getExpenseMessage(String action) {
+        switch(action) {
+        case "add":
+            return ErrorMessages.ERROR_EXPENSE_ADD_INVALID_PARAM.toString();
+        case "del":
+            return ErrorMessages.ERROR_EXPENSE_DEL_INVALID_PARAM.toString();
         default:
             return ErrorMessages.ERROR_UNKNOWN_INVALID_ACTION.toString();
         }

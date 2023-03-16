@@ -5,9 +5,12 @@ import java.util.ArrayList;
 import seedu.duke.Data;
 import seedu.duke.Ui;
 import seedu.duke.action.BudgetAction;
+import seedu.duke.exception.BBException;
+import seedu.duke.exception.CommandActionExecuteInvalidException;
 import seedu.duke.model.Budget;
 import seedu.duke.util.Pair;
 
+//@@author chongyongrui
 public class BudgetCommand extends Command {
     // Format
     private static final String[] ACTIONS = {"add", "set", "del", "list", "find", "help"};
@@ -19,15 +22,17 @@ public class BudgetCommand extends Command {
         { new Pair("/c", String.class) },
         {}
     };
-    private static final Pair[][] ACTIONS_OPTIONAL_PARAMS = {};
+    private static final Pair[][] ACTIONS_OPTIONAL_PARAMS = {
+        {}, {}, {}, {}, {}, {}
+    };
 
     public BudgetCommand() {
         super(CommandEnum.BUDGET, ACTIONS, ACTIONS_REQUIRED_PARAMS, ACTIONS_OPTIONAL_PARAMS);
     }
 
     @Override
-    public void execute(Data data, Ui ui) {
-        ArrayList<Budget> budgetList = data.budgetList;
+    public void execute(Data data, Ui ui) throws BBException {
+        ArrayList<Budget> budgetList = data.getBudgets();
         BudgetAction budgetAction = new BudgetAction(budgetList, ui);
 
         switch (action) {
@@ -50,7 +55,7 @@ public class BudgetCommand extends Command {
             executeBudgetHelp(budgetAction);
             break;
         default:
-            // HANDLE DEFAULT HERE
+            throw new CommandActionExecuteInvalidException();
         }
 
         data.exportData();
