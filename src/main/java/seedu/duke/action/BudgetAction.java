@@ -73,7 +73,7 @@ public class BudgetAction {
             return;
         }
 
-        budget.setLimit(budgetLimit);
+        budget.setAmount(budgetLimit);
     }
 
     /**

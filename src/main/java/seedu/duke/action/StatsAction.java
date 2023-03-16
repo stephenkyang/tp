@@ -38,9 +38,9 @@ public class StatsAction {
 
             Double expenseForCategory = getExpenses(b.getName());
 
-            totalBudgets += b.getLimit();
+            totalBudgets += b.getAmount();
             totalExpenses += expenseForCategory;
-            int numberOfCrosses = (int) Math.round((expenseForCategory/b.getLimit()) * 10);
+            int numberOfCrosses = (int) Math.round((expenseForCategory/b.getAmount()) * 10);
             int numberOfDashes = 0;
             if (numberOfCrosses < 10){
                 numberOfDashes = 10 - numberOfCrosses;

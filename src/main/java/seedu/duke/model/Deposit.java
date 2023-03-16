@@ -1,19 +1,12 @@
 package seedu.duke.model;
 
-public class Deposit {
-    private String name;
-    private double amount;
+import java.time.LocalDate;
 
-    public Deposit(String name, double amount) {
-        this.name = name;
-        this.amount = amount;
-    }
-
-    public String getName() {
-        return this.name;
-    }
-
-    public double getAmount() {
-        return this.amount;
+public class Deposit extends Item {
+    private LocalDate date;
+    
+    public Deposit(String name, double amount, LocalDate date) {
+        super(name, amount);
+        this.date = date;
     }
 }

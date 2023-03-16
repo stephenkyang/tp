@@ -31,7 +31,7 @@ public class BudgetUIResponse {
     }
 
     public void printBudgetAddSuccessful(Budget budget, int count) {
-        String msg = String.format(Messages.BUDGET_ADD_SUCCESSFUL.toString(), budget.getName(), budget.getLimit());
+        String msg = String.format(Messages.BUDGET_ADD_SUCCESSFUL.toString(), budget.getName(), budget.getAmount());
         String countMsg = String.format(Messages.BUDGET_NUMBER_OF.toString(), count);
         ui.printMessage(msg, countMsg);
     }
@@ -41,7 +41,7 @@ public class BudgetUIResponse {
         int i = 1;
         for (Budget b : budgets) {
             if (b != null) {
-                String msg = String.format(Messages.BUDGET_PRINT_BUDGET.toString(), i, b.getName(), b.getLimit());
+                String msg = String.format(Messages.BUDGET_PRINT_BUDGET.toString(), i, b.getName(), b.getAmount());
                 msgs.add(msg);
                 i++;
             }

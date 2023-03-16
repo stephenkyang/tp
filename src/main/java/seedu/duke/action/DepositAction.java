@@ -20,7 +20,7 @@ public class DepositAction {
     }
 
     public void addDeposit(String depositName, double depositAmount) {
-        Deposit deposit = new Deposit(depositName, depositAmount);
+        Deposit deposit = new Deposit(depositName, depositAmount, null);
         deposits.add(deposit);
 
         depositUi.printDepositAddSuccessful(deposit, deposits.size());

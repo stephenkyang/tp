@@ -49,7 +49,7 @@ public class DataAdapter extends TypeAdapter<Data> {
         for (Budget budget : budgets) {
             out.beginObject();
             out.name("name").value(budget.getName());
-            out.name("limit").value(budget.getLimit());
+            out.name("amount").value(budget.getAmount());
             out.endObject();
         }
         out.endArray();
@@ -77,7 +77,7 @@ public class DataAdapter extends TypeAdapter<Data> {
             out.name("category").value(expense.getCategory());
             out.name("name").value(expense.getName());
             out.name("amount").value(expense.getAmount());
-            out.name("date").value(expense.getDate());
+            out.name("date").value(expense.getDate().toString());
             out.endObject();
         }
         out.endArray();
@@ -126,7 +126,7 @@ public class DataAdapter extends TypeAdapter<Data> {
             amount = in.nextDouble();
 
             in.endObject();
-            deposits.add(new Deposit(name, amount));
+            deposits.add(new Deposit(name, amount, null));
         }
         in.endArray();
         
@@ -157,7 +157,7 @@ public class DataAdapter extends TypeAdapter<Data> {
             date = in.nextString();
 
             in.endObject();
-            expenses.add(new Expense(category, name, amount, date));
+            expenses.add(new Expense(category, name, amount, null));
         }
         in.endArray();
         

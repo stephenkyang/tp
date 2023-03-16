@@ -51,9 +51,9 @@ public class ExpenseCommand extends Command {
         String expenseCategory = requiredParams[0];
         String expenseName = requiredParams[1];
         Double expenseAmount = Double.parseDouble(requiredParams[2]);
-        String expenseDate = requiredParams[3];
+        // Local expenseDate = requiredParams[3];
 
-        expenseAction.addExpense(expenseCategory, expenseName, expenseAmount, expenseDate);
+        expenseAction.addExpense(expenseCategory, expenseName, expenseAmount, null);
     }
 
     private void executeDelExpense(ExpenseAction expenseAction, String[] requiredParams) throws BBException {
