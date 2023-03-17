@@ -39,6 +39,7 @@ public class Duke {
 
         try {
             data = Data.importData();
+            assert data != null : "Data is either empty initialized or loaded with data";
         } catch (BBException err) {
             ui.printErrorMessage(err.getMessage());
             System.exit(1);
