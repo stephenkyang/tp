@@ -59,6 +59,8 @@ public class CommandParser {
             command = new HelpCommand();
             HelpCommand.showCommands();
             break;
+
+
         default:
             throw new CommandInvalidException();
         }
@@ -138,6 +140,7 @@ public class CommandParser {
         int actionNo = command.getActionNo(actionName);
         Pair[] requiredParams =  command.requiredParamsList[actionNo];
         assert requiredParams != null : "List of required params retrieved must not be null (can be 0 elements)";
+
         String[] params = new String[requiredParams.length];
 
         try {

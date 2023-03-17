@@ -3,5 +3,22 @@ _______________
 Welcome to BudgetBuddy! What can I do for you?
 _______________
 _______________
+Successfully added school work with limit of $1000.00
+There are 1 budget categories.
+_______________
+_______________
+Successfully added school transport with limit of $99.00
+There are 2 budget categories.
+_______________
+_______________
+1. Name: "school work" Limit: $1000.00
+There are 1 budget categories.
+_______________
+_______________
+1. Name: "school work" Limit: $1000.00
+2. Name: "school transport" Limit: $99.00
+There are 2 budget categories.
+_______________
+_______________
 Bye! Hope to see you soon!
 _______________

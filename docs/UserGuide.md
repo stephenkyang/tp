@@ -2,41 +2,97 @@
 
 ## Introduction
 
-{Give a product intro}
+BudgetBuddy is a one stop Command Line Interface application that helps you to keep track of anything finance related!
+You can keep track of your expenses better by creating and editing custom budgets, and also taking note of what deposits
+you have
+to have a better understanding of your overall spending and saving.
 
-## Quick Start
+## System requirements
 
-{Give steps to get started quickly}
+BudgetBuddy is built using Java version 11. Ensure that you are running Java version 11 on your device.
 
-1. Ensure that you have Java 11 or above installed.
-1. Down the latest version of `Duke` from [here](http://link.to/duke).
+## Installation guide
 
-## Features 
+1. Download the budgetbuddy.jar file under [Releases](https://github.com/AY2223S2-CS2113-W15-3/tp/releases)
+2. Copy the file into a folder of your choice. The task list will be saved into this folder. The file name will be
+   tasklist.txt
+3. Open terminal application and change directory to the selected folder
+4. Run the Duke by entering `java -jar duke.jar`
 
-{Give detailed description of each feature}
+You will be then greeted by Duke as shown below:
 
-### Adding a todo: `todo`
-Adds a new item to the list of todo items.
+```
+_______________
+Welcome to BudgetBuddy! What can I do for you?
+_______________
 
-Format: `todo n/TODO_NAME d/DEADLINE`
+```
 
-* The `DEADLINE` can be in a natural language format.
-* The `TODO_NAME` cannot contain punctuation.  
+## Features
 
-Example of usage: 
+BudgetBuddy accepts a range of valid commands as shown below.
+Use the `help` command to get instructions on how to use BudgetBuddy.
+<br/><br/>
 
-`todo n/Write the rest of the User Guide d/next week`
+#### 1. Budgets
 
-`todo n/Refactor the User Guide to remove passive voice d/13/04/2020`
+Use the command `budget help` to learn the specific budget related commands
 
-## FAQ
+1. You can add a monthly budget:
 
-**Q**: How do I transfer my data to another computer? 
+   `budget add /c (category name) /l (spending limit)`
+   <br/><br/>
+2. You can modify an existing budget:
 
-**A**: {your answer here}
+   `budget set /c (category) /l (spending limit)`
+   <br/><br/>
 
-## Command Summary
+3. You can remove a monthly budget:
 
-{Give a 'cheat sheet' of commands here}
+   `budget del /c (category)`
+   <br/><br/>
+4. You can list all budgets:
 
-* Add todo `todo n/TODO_NAME d/DEADLINE`
+   `budget list`
+   <br/><br/>
+5. You can search for budgets that include a certain keyword:
+
+   `budget find /c (keyword)`
+
+<br/><br/>
+
+#### 2. Expenses
+
+Use the command `Expenses help` to learn the specific budget related commands
+
+1. You can add a monthly budget:
+
+   `budget add /c (category name) /l (spending limit)`
+   <br/><br/>
+2. You can modify an existing budget:
+
+   `budget set /c (category) /l (spending limit)`
+   <br/><br/>
+
+3. You can remove a monthly budget:
+
+   `budget del /c (category)`
+   <br/><br/>
+4. You can list all budgets:
+
+   `budget list`
+   <br/><br/>
+5. You can search for budgets that include a certain keyword:
+
+   `budget find /c (keyword)`
+
+<br/><br/>
+
+#### 3. Exiting BudgetBuddy
+
+You can exit the application using the `exit` command.
+
+Upon exiting BudgetBuddy, BudgetBuddy will save the current tasks in the list to a local text file in your device.
+These saved tasks will be imported into Duke when it is subsequently launched in the future,
+ensuring that you do not lose track of you tasks.
+<br/><br/>
