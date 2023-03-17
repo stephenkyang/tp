@@ -6,7 +6,6 @@ import seedu.duke.Data;
 import seedu.duke.Ui;
 import seedu.duke.action.BudgetAction;
 
-import seedu.duke.action.ExpenseUIResponse;
 
 import seedu.duke.exception.BBException;
 import seedu.duke.exception.CommandActionExecuteInvalidException;
