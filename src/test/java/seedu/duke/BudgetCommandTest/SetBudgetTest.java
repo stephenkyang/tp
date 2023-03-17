@@ -31,8 +31,8 @@ public class SetBudgetTest {
         assert budgetList.size() == 1 : "first budget creation error";
         Double newBudgetLimit = 123.0;
         budgetAction.setBudget(budgetName, newBudgetLimit);
-        assertEquals(budgetList.get(0).getLimit(), 123.0);
-        assert (budgetList.get(0).getLimit() == 123.0) : "set new budget limit error";
+        assertEquals(budgetList.get(0).getAmount(), 123.0);
+        assert (budgetList.get(0).getAmount() == 123.0) : "set new budget limit error";
     }
 
     @Test
@@ -46,8 +46,8 @@ public class SetBudgetTest {
         String invalidBudgetName = "food";
         Double newBudgetLimit = 123.0;
         budgetAction.setBudget(invalidBudgetName, newBudgetLimit);
-        assertEquals(budgetList.get(0).getLimit(), 10.0);
-        assert (budgetList.get(0).getLimit() == 10.0) : "set new budget limit error";
+        assertEquals(budgetList.get(0).getAmount(), 10.0);
+        assert (budgetList.get(0).getAmount() == 10.0) : "set new budget limit error";
 
     }
 }

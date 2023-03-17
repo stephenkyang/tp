@@ -1,11 +1,13 @@
 package seedu.duke.action;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import seedu.duke.Ui;
 import seedu.duke.exception.GlobalInvalidNumberException;
 import seedu.duke.model.Deposit;
 
+//@@author stephenkyang
 public class DepositAction {
     private ArrayList<Deposit> deposits;
     private DepositUIResponse depositUi;
@@ -19,8 +21,8 @@ public class DepositAction {
         return this.deposits;
     }
 
-    public void addDeposit(String depositName, double depositAmount) {
-        Deposit deposit = new Deposit(depositName, depositAmount);
+    public void addDeposit(String depositName, double depositAmount, LocalDate depositDate) {
+        Deposit deposit = new Deposit(depositName, depositAmount, depositDate);
         deposits.add(deposit);
 
         depositUi.printDepositAddSuccessful(deposit, deposits.size());

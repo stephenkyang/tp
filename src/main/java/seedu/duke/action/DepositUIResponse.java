@@ -6,6 +6,7 @@ import seedu.duke.Ui;
 import seedu.duke.model.Deposit;
 import seedu.duke.util.Messages;
 
+//@@author stephenkyang
 /**
  * Contains User Interface text responses when a deposit method is run
  */

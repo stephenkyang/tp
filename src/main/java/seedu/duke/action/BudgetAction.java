@@ -1,5 +1,6 @@
 package seedu.duke.action;
 
+import seedu.duke.Data;
 import seedu.duke.Ui;
 import seedu.duke.model.Budget;
 import seedu.duke.model.Expense;
@@ -9,10 +10,11 @@ import java.util.Objects;
 
 import static seedu.duke.action.ExpenseAction.expenses;
 
+//@@author chongyongrui
+
 /**
  * Contains methods related to budget function
  */
-
 public class BudgetAction {
     private static ArrayList<Budget> budgets;
     private static BudgetUIResponse budgetUi;
@@ -77,7 +79,7 @@ public class BudgetAction {
             return;
         }
 
-        budget.setLimit(budgetLimit);
+        budget.setAmount(budgetLimit);
     }
 
     /**
@@ -148,16 +150,15 @@ public class BudgetAction {
         budgetUi.printBudgetCommands();
     }
 
-    public static void detailedBudget(String budgetName) {
+    public static void detailedBudget(String budgetName, ArrayList<Expense> expenses) {
         Budget budget = getBudget(budgetName);
         if (budget == null) {
             budgetUi.printBudgetDoesNotExist();
         } else {
-            ArrayList<Expense> expenses = ExpenseAction.expenses;
             double amountSpent = ExpenseUIResponse.printRelatedExpenses(expenses, budgetName);
-            double ratio = amountSpent / budget.getLimit() * 20;
+            double ratio = amountSpent / budget.getAmount() * 20;
             Ui.printProgressBar(ratio);
-            System.out.println("$ " + amountSpent + " out of $" + budget.getLimit() + " spent!");
+            System.out.println("$" + amountSpent + " out of $" + budget.getAmount() + " spent!");
         }
     }
 }

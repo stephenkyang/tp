@@ -3,9 +3,9 @@ package seedu.duke.exception;
 import seedu.duke.util.ErrorMessages;
 
 //@@author pinyoko573
-public class GlobalInvalidNumberException extends BBException {
+public class FileExportException extends BBException {
     @Override
     public String getMessage() {
-        return ErrorMessages.ERROR_GLOBAL_INVALID_NUMBER.toString();
+        return ErrorMessages.ERROR_FILE_EXPORT.toString();
     }
 }
