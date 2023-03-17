@@ -1,6 +1,7 @@
 package seedu.duke.action;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 import seedu.duke.Ui;
 import seedu.duke.model.Expense;
@@ -31,12 +32,27 @@ public class ExpenseUIResponse {
         for (Expense e : expenses) {
             if (e != null) {
                 String msg = String.format(Messages.EXPENSE_PRINT_EXPENSE.toString(), i,
-                    e.getDate(), e.getCategory(), e.getName(), e.getAmount());
+                        e.getDate(), e.getCategory(), e.getName(), e.getAmount());
                 msgs.add(msg);
                 i++;
             }
         }
 
         ui.printMessage(msgs.toArray(new String[0]));
+    }
+
+    public static double printRelatedExpenses(ArrayList<Expense> expenses, String budgetName) {
+        int i = 1;
+        double totalExpenseValue = 0;
+        for (Expense expense : expenses) {
+            if (expense != null) {
+                if (Objects.equals(expense.getCategory(), budgetName)) {
+                    System.out.println(i + ". " + expense.getName() + " with amount of $" + expense.getAmount());
+                    totalExpenseValue += expense.getAmount();
+                }
+            }
+
+        }
+        return totalExpenseValue;
     }
 }

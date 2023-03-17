@@ -5,19 +5,21 @@ import java.util.ArrayList;
 import seedu.duke.Data;
 import seedu.duke.Ui;
 import seedu.duke.action.BudgetAction;
+import seedu.duke.action.ExpenseUIResponse;
 import seedu.duke.model.Budget;
 import seedu.duke.util.Pair;
 
 public class BudgetCommand extends Command {
     // Format
-    private static final String[] ACTIONS = {"add", "set", "del", "list", "find", "help"};
+    private static final String[] ACTIONS = {"add", "set", "del", "list", "find", "help", "detail"};
     private static final Pair[][] ACTIONS_REQUIRED_PARAMS = {
-        { new Pair("/c", String.class), new Pair("/l", double.class) },
-        { new Pair("/c", String.class), new Pair("/l", double.class) },
-        { new Pair("/c", String.class) },
-        {},
-        { new Pair("/c", String.class) },
-        {}
+            {new Pair("/c", String.class), new Pair("/l", double.class)},
+            {new Pair("/c", String.class), new Pair("/l", double.class)},
+            {new Pair("/c", String.class)},
+            {},
+            {new Pair("/c", String.class)},
+            {},
+            {new Pair("/c", String.class)}
     };
     private static final Pair[][] ACTIONS_OPTIONAL_PARAMS = {};
 
@@ -44,16 +46,24 @@ public class BudgetCommand extends Command {
             executeListBudget(budgetAction);
             break;
         case "find":
-            executeFindBudget(budgetAction,requiredParams);
+            executeFindBudget(budgetAction, requiredParams);
             break;
         case "help":
             executeBudgetHelp(budgetAction);
             break;
+        case "detail":
+            executeBudgetDetail(budgetAction, requiredParams);
         default:
             // HANDLE DEFAULT HERE
         }
 
         data.exportData();
+    }
+
+    private void executeBudgetDetail(BudgetAction budgetAction, String[] requiredParams) {
+        String budgetName = requiredParams[0];
+        BudgetAction.detailedBudget(budgetName);
+
     }
 
     private void executeFindBudget(BudgetAction budgetAction, String[] requiredParams) {

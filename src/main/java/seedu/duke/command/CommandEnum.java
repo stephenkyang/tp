@@ -6,5 +6,6 @@ public enum CommandEnum {
     EXPENSE,
     STATS,
     EXIT,
-    HELP
+    HELP,
+    DETAIL
 }

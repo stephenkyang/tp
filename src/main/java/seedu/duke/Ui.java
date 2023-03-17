@@ -15,6 +15,22 @@ public class Ui {
         in = new Scanner(System.in);
     }
 
+    public static void printProgressBar(double ratio) {
+        int numberOfBlocks = (int) ratio;
+        int i = 0;
+        int numberOfBlanks = 20 - numberOfBlocks;
+        while (i < numberOfBlocks) {
+            System.out.print("█");
+            i++;
+        }
+        i = 0;
+        while (i < numberOfBlanks) {
+            System.out.print("░");
+            i++;
+        }
+
+    }
+
     public String readInput() {
         input = in.nextLine();
         return input;

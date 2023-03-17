@@ -32,6 +32,8 @@ public class CommandParser {
             command = new HelpCommand();
             HelpCommand.showCommands();
             break;
+
+
         default:
             throw new CommandInvalidException();
         }
@@ -77,7 +79,7 @@ public class CommandParser {
 
     private static String[] getRequiredParams(Command command, String actionName, String input) throws BBException {
         int actionNo = command.getActionNo(actionName);
-        Pair[] requiredParams =  command.requiredParamsList[actionNo];
+        Pair[] requiredParams = command.requiredParamsList[actionNo];
         String[] params = new String[requiredParams.length];
 
         try {

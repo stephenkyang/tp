@@ -2,16 +2,20 @@ package seedu.duke.action;
 
 import seedu.duke.Ui;
 import seedu.duke.model.Budget;
+import seedu.duke.model.Expense;
 
 import java.util.ArrayList;
+import java.util.Objects;
+
+import static seedu.duke.action.ExpenseAction.expenses;
 
 /**
  * Contains methods related to budget function
  */
 
 public class BudgetAction {
-    private ArrayList<Budget> budgets;
-    private BudgetUIResponse budgetUi;
+    private static ArrayList<Budget> budgets;
+    private static BudgetUIResponse budgetUi;
 
     public BudgetAction(ArrayList<Budget> budgets, Ui ui) {
         this.budgets = budgets;
@@ -39,7 +43,7 @@ public class BudgetAction {
         budgets.add(budget);
 
         budgetUi.printBudgetAddSuccessful(budget, budgets.size());
-        
+
     }
 
     /**
@@ -89,7 +93,7 @@ public class BudgetAction {
                 foundBudgets.add(budget);
             }
         }
-        
+
         if (foundBudgets.isEmpty()) {
             budgetUi.printBudgetDoesNotExist();
         } else {
@@ -105,7 +109,7 @@ public class BudgetAction {
      * @param budgetName budget name to check for if it has been used
      */
 
-    private Budget getBudget(String budgetName) {
+    private static Budget getBudget(String budgetName) {
         for (Budget budget : budgets) {
             if (budget.getName().equals(budgetName)) {
                 return budget;
@@ -140,8 +144,20 @@ public class BudgetAction {
     /**
      * Prints user instructions on how to use budget commands
      */
-    public void budgetHelp(){
+    public void budgetHelp() {
         budgetUi.printBudgetCommands();
     }
 
+    public static void detailedBudget(String budgetName) {
+        Budget budget = getBudget(budgetName);
+        if (budget == null) {
+            budgetUi.printBudgetDoesNotExist();
+        } else {
+            ArrayList<Expense> expenses = ExpenseAction.expenses;
+            double amountSpent = ExpenseUIResponse.printRelatedExpenses(expenses, budgetName);
+            double ratio = amountSpent / budget.getLimit() * 20;
+            Ui.printProgressBar(ratio);
+            System.out.println("$ " + amountSpent + " out of $" + budget.getLimit() + " spent!");
+        }
+    }
 }
