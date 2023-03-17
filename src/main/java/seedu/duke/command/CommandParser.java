@@ -113,11 +113,10 @@ public class CommandParser {
             String actionName = splitInput[1];
             int actionNo = command.getActionNo(actionName);
 
-            assert actionNo >= 1 : "Command must have one or more actions";
-
             if (actionNo != -1) {
                 return actionName;
             }
+
             throw new CommandActionInvalidException(command);
         } catch (ArrayIndexOutOfBoundsException err) {
             throw new CommandActionInvalidException(command);
