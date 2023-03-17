@@ -8,9 +8,9 @@ import seedu.duke.model.Budget;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+//@@author chongyongrui
 
 /**
- * @author chongyongrui
  * class to test the set budget method
  */
 

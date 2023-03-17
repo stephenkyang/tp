@@ -10,9 +10,9 @@ import seedu.duke.Ui;
 import seedu.duke.action.BudgetAction;
 import seedu.duke.model.Budget;
 
+//@@author chongyongrui
 
 /**
- * @author chongyongrui
  * Class to test delete budget commands using Junit tests
  */
 

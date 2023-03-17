@@ -9,8 +9,9 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+//@@author chongyongrui
+
 /**
- * @author chongyongrui
  * Class to test delete budget commands using Junit tests
  */
 
