@@ -5,8 +5,6 @@ import seedu.duke.Ui;
 import seedu.duke.action.BudgetAction;
 import seedu.duke.model.Budget;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

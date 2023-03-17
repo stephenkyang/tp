@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * @author chongyongrui
- * Class to test set budget commands using Junit tests
+ * class to test the set budget method
  */
 
 public class SetBudgetTest {
