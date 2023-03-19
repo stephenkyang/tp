@@ -1,5 +1,6 @@
 package seedu.duke.command;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -228,7 +229,13 @@ public class CommandParser {
             if (paramType.isAssignableFrom(int.class)) {
                 Integer.parseInt(paramValue);
             } else if (paramType.isAssignableFrom(double.class)) {
-                Double.parseDouble(paramValue);
+                double value = Double.parseDouble(paramValue);
+
+                //Solution below adapted from https://stackoverflow.com/questions/32531910/
+                // Check if input only contains at most 2 dec points
+                if (BigDecimal.valueOf(value).scale() > 2) {
+                    throw new NumberFormatException();
+                }
             } else if (paramType.isAssignableFrom(LocalDate.class)) {
                 LocalDate.parse(paramValue, formatter);
             }
