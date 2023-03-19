@@ -8,7 +8,7 @@ import seedu.duke.exception.BBException;
 public class Duke {
     private static Ui ui;
     private static Data data;
-    
+
     /**
      * Main entry-point for BudgetBuddy application.
      */
@@ -43,6 +43,7 @@ public class Duke {
             ui.printErrorMessage(err.getMessage());
             System.exit(1);
         } finally {
+            ui.printLogo();
             ui.greetUser();
         }
     }
