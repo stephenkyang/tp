@@ -2,7 +2,6 @@ package seedu.duke;
 
 import java.util.Scanner;
 
-import seedu.duke.util.Constants;
 import seedu.duke.util.Messages;
 
 //@@author pinyoko573
