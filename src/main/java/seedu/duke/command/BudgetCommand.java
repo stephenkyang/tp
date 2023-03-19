@@ -6,7 +6,6 @@ import seedu.duke.Data;
 import seedu.duke.Ui;
 import seedu.duke.action.BudgetAction;
 
-
 import seedu.duke.exception.BBException;
 import seedu.duke.exception.CommandActionExecuteInvalidException;
 import seedu.duke.model.Budget;
@@ -47,7 +46,8 @@ public class BudgetCommand extends Command {
             executeSetBudget(budgetAction, requiredParams);
             break;
         case "del":
-            executeDelBudget(budgetAction, requiredParams);
+            ArrayList<Expense> expenses = data.getExpenses();
+            executeDelBudget(budgetAction, requiredParams, expenses);
             break;
         case "list":
             executeListBudget(budgetAction);
@@ -95,9 +95,9 @@ public class BudgetCommand extends Command {
         budgetAction.setBudget(budgetName, budgetLimit);
     }
 
-    private void executeDelBudget(BudgetAction budgetAction, String[] requiredParams) {
+    private void executeDelBudget(BudgetAction budgetAction, String[] requiredParams, ArrayList<Expense> expenses) {
         String budgetName = requiredParams[0];
-        budgetAction.deleteBudget(budgetName);
+        budgetAction.deleteBudget(budgetName, expenses);
     }
 
     private void executeListBudget(BudgetAction budgetAction) {
