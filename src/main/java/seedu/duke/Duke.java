@@ -1,5 +1,7 @@
 package seedu.duke;
 
+import java.util.logging.LogManager;
+
 import seedu.duke.command.Command;
 import seedu.duke.command.CommandParser;
 import seedu.duke.exception.BBException;
@@ -35,6 +37,10 @@ public class Duke {
      * When file could not be opened, application will terminate.
      */
     private static void startApplication() {
+        // Do not comment this in production stage
+        LogManager logManager = LogManager.getLogManager();
+        logManager.reset();
+
         ui = new Ui();
 
         try {
@@ -44,7 +50,6 @@ public class Duke {
             ui.printErrorMessage(err.getMessage());
             System.exit(1);
         } finally {
-            ui.printLogo();
             ui.greetUser();
         }
     }

@@ -52,10 +52,10 @@ public class Ui {
     }
 
     /**
-     * Greets the user.
+     * Greets the user and shows the app logo.
      */
     public void greetUser() {
-        printMessage(Messages.INFO_WELCOME.toString());
+        printMessage(Messages.APP_LOGO.toString(), Messages.INFO_WELCOME.toString());
     }
 
     /**
@@ -63,12 +63,5 @@ public class Ui {
      */
     public void byeUser() {
         printMessage(Messages.INFO_EXIT.toString());
-    }
-
-    /**
-     * Shows the app logo
-     */
-    public void printLogo() {
-        printMessage(Messages.APP_LOGO.toString());
     }
 }

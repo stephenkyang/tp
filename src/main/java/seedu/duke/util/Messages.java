@@ -2,16 +2,20 @@ package seedu.duke.util;
 
 public enum Messages {
     LINE_DIVIDER("_______________"),
+    APP_LOGO("\n" +
+            " █▀▀█ █   █ █▀▀▄ █▀▀▀ █▀▀ ▀▀█▀▀ 　  █▀▀█ █  █ █▀▀▄ █▀▀▄ █  █ \n" +
+            " █▀▀▄ █   █ █  █ █ ▀█ █▀▀   █   　  █▀▀▄ █  █ █  █ █  █ █▄▄█ \n" +
+            " █▄▄█  ▀▀▀  ▀▀▀  ▀▀▀▀ ▀▀▀   ▀   　  █▄▄█  ▀▀▀ ▀▀▀  ▀▀▀  ▄▄▄█"),
     INFO_WELCOME("Welcome to BudgetBuddy! What can I do for you?"),
     INFO_EXIT("Bye! Hope to see you soon!"),
+
     BUDGET_DOES_NOT_EXIST("This budget does not exist!"),
     BUDGET_NAME_USED("This budget name is already in use!"),
     BUDGET_ADD_SUCCESSFUL("Successfully added %s with limit of $%.2f"),
     BUDGET_DELETE_SUCCESSFUL("Successfully deleted %s."),
     BUDGET_PRINT_BUDGET("%d. Name: \"%s\" Limit: $%.2f"),
     BUDGET_NUMBER_OF("There are %d budget categories."),
-
-    BUDGET_COMMANDS("\n1. You can add a monthly budget: \n" +
+    BUDGET_HELP_COMMANDS("\n1. You can add a monthly budget: \n" +
             "   budget add /c (category name) /l (spending limit) \n" +
             "2. You can modify an existing budget: \n" +
             "   budget set /c (category) /l (spending limit)\n" +
@@ -37,12 +41,7 @@ public enum Messages {
     STATS_PRINT_BUDGET_PROGRESS("Total budget progress: "),
     STATS_PRINT_RIGHT_TRACK("Good job! You are on the right track!"),
     STATS_PRINT_OVERSPEND("Oh no! You seem to be spending too much!"),
-    STATS_PRINT_NO_STATS("There are no stats currently! Please try another command!"),
-    APP_LOGO("\n" +
-            " █▀▀█ █   █ █▀▀▄ █▀▀▀ █▀▀ ▀▀█▀▀ 　  █▀▀█ █  █ █▀▀▄ █▀▀▄ █  █ \n" +
-            " █▀▀▄ █   █ █  █ █ ▀█ █▀▀   █   　  █▀▀▄ █  █ █  █ █  █ █▄▄█ \n" +
-            " █▄▄█  ▀▀▀  ▀▀▀  ▀▀▀▀ ▀▀▀   ▀   　  █▄▄█  ▀▀▀ ▀▀▀  ▀▀▀  ▄▄▄█");
-
+    STATS_PRINT_NO_STATS("There are no stats currently! Please try another command!");
 
     private final String message;
 
