@@ -232,8 +232,8 @@ public class CommandParser {
                 double value = Double.parseDouble(paramValue);
 
                 //Solution below adapted from https://stackoverflow.com/questions/32531910/
-                // Check if input only contains at most 2 dec points
-                if (BigDecimal.valueOf(value).scale() > 2) {
+                // Check if input only contains at most 2 dec points and is positive
+                if (BigDecimal.valueOf(value).scale() > 2 && value > 0) {
                     throw new NumberFormatException();
                 }
             } else if (paramType.isAssignableFrom(LocalDate.class)) {
