@@ -3,11 +3,10 @@ package seedu.duke.action;
 import seedu.duke.Ui;
 import seedu.duke.model.Budget;
 import seedu.duke.model.Expense;
+import seedu.duke.util.Constants;
 
 import java.util.ArrayList;
 
-
-import static seedu.duke.action.ExpenseAction.expenses;
 
 //@@author chongyongrui
 
@@ -156,8 +155,44 @@ public class BudgetAction {
         } else {
             double amountSpent = ExpenseUIResponse.printRelatedExpenses(expenses, budgetName);
             double ratio = amountSpent / budget.getAmount() * 20;
-            Ui.printProgressBar(ratio);
+            printBudgetDetailBar(ratio);
             System.out.println("$" + amountSpent + " out of $" + budget.getAmount() + " spent!");
         }
+    }
+
+    /**
+     * Prints the budget progress bar
+     *
+     * @param ratio the percentage of what is spent compared to the budget limit
+     */
+    public static void printBudgetDetailBar(double ratio) {
+        int numberOfBlocks = 0;
+        if ((int) ratio >= 1) {
+            numberOfBlocks = 20;
+        } else {
+            numberOfBlocks = (int) ratio;
+        }
+        int excess = (int) ratio / 20;
+        int i = 0;
+        int numberOfBlanks = 20 - numberOfBlocks;
+        while (i < numberOfBlocks) {
+            if (excess > 0) {
+                System.out.print("█");
+            } else {
+                System.out.print(Constants.ANSI_RED + "█" + Constants.ANSI_RESET);
+            }
+            i++;
+        }
+        i = 0;
+        while (i < numberOfBlanks) {
+            System.out.print("░");
+            i++;
+        }
+        System.out.println(" ");
+        if (ratio >= 1) {
+            System.out.println("You have exceeded the budget!");
+        }
+
+
     }
 }
