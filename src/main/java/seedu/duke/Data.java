@@ -7,6 +7,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -32,6 +34,7 @@ public class Data {
         .registerTypeAdapter(LocalDate.class, new LocalDateAdapter())
         .setPrettyPrinting()
         .create();
+    private static Logger logger = Logger.getLogger("File");
 
     private ArrayList<Budget> budgets;
     private ArrayList<Deposit> deposits;
@@ -56,12 +59,14 @@ public class Data {
             File file = new File(Constants.FILE_NAME.toString());
             if (!file.exists()) {
                 System.out.println(WarningMessages.WARNING_FILE_NOT_FOUND);
+                logger.log(Level.WARNING, "File not found, using empty list.");
                 return new Data();
             }
 
             FileReader fileReader = new FileReader(file);
             Data data = gson.fromJson(fileReader, Data.class);
 
+            logger.log(Level.INFO, "File successfully loaded");
             return data;
         } catch (FileNotFoundException err) {
             throw new FileImportException();
@@ -83,6 +88,8 @@ public class Data {
             fw.write(jsonString);
             fw.flush();
             fw.close();
+            
+            logger.log(Level.INFO, "File successfully saved");
         } catch (IOException err) {
             throw new FileExportException();
         }

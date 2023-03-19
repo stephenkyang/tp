@@ -114,9 +114,11 @@ public class CommandParser {
         try {
             String actionName = splitInput[1];
             int actionNo = command.getActionNo(actionName);
+
             if (actionNo != -1) {
                 return actionName;
             }
+
             throw new CommandActionInvalidException(command);
         } catch (ArrayIndexOutOfBoundsException err) {
             throw new CommandActionInvalidException(command);
@@ -136,7 +138,9 @@ public class CommandParser {
      */
     private static String[] getRequiredParams(Command command, String actionName, String input) throws BBException {
         int actionNo = command.getActionNo(actionName);
-        Pair[] requiredParams = command.requiredParamsList[actionNo];
+        Pair[] requiredParams =  command.requiredParamsList[actionNo];
+        assert requiredParams != null : "List of required params retrieved must not be null (can be 0 elements)";
+
         String[] params = new String[requiredParams.length];
 
         try {
@@ -150,6 +154,8 @@ public class CommandParser {
 
                 // Check if the parameter value suits for the class type (e.g. int, string)
                 validateParamType(paramValue, paramType);
+
+                assert !paramValue.isEmpty() : "Value of a parameter must contain something";
 
                 params[paramCount] = paramValue;
                 paramCount++;
@@ -175,6 +181,7 @@ public class CommandParser {
     private static String[] getOptionalParams(Command command, String actionName, String input) throws BBException {
         int actionNo = command.getActionNo(actionName);
         Pair[] optionalParams =  command.optionalParamsList[actionNo];
+        assert optionalParams != null : "List of optional params retrieved must not be null (can be 0 elements)";
         String[] params = new String[optionalParams.length];
 
         try {
@@ -195,6 +202,8 @@ public class CommandParser {
 
                 // Check if the parameter value suits for the class type (e.g. int, string)
                 validateParamType(paramValue, paramType);
+
+                assert !paramValue.isEmpty() : "Value of a parameter must contain something";
 
                 params[paramCount] = paramValue;
                 paramCount++;
