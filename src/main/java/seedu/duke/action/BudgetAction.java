@@ -14,8 +14,8 @@ import java.util.ArrayList;
  * Contains methods related to budget function
  */
 public class BudgetAction {
-    private static ArrayList<Budget> budgets;
     private static BudgetUIResponse budgetUi;
+    private ArrayList<Budget> budgets;
 
     public BudgetAction(ArrayList<Budget> budgets, Ui ui) {
         this.budgets = budgets;
@@ -34,7 +34,7 @@ public class BudgetAction {
      */
     public void addBudget(String budgetName, double budgetLimit) {
         // Check if there are any duplicate budgets
-        if (checkDuplicateBudget(budgetName)) {
+        if (validateBudget(budgetName, budgets)) {
             budgetUi.printBudgetNameUsed();
             return;
         }
@@ -51,8 +51,7 @@ public class BudgetAction {
      *
      * @param budgetName the name of the budget to delete
      */
-    public void deleteBudget(String budgetName) {
-
+    public void deleteBudget(String budgetName, ArrayList<Expense> expenses) {
         Budget budget = getBudget(budgetName);
         if (budget == null) {
             budgetUi.printBudgetDoesNotExist();
@@ -109,7 +108,7 @@ public class BudgetAction {
      * @param budgetName budget name to check for if it has been used
      */
 
-    private static Budget getBudget(String budgetName) {
+    private Budget getBudget(String budgetName) {
         for (Budget budget : budgets) {
             if (budget.getName().equals(budgetName)) {
                 return budget;
@@ -120,26 +119,11 @@ public class BudgetAction {
     }
 
     /**
-     * Checks if a certain budget name has already been used
-     *
-     * @param budgetName budget name to check for if it has been used
-     */
-    private boolean checkDuplicateBudget(String budgetName) {
-        for (Budget budget : budgets) {
-            if (budget.getName().equals(budgetName)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /**
      * Prints all the details of all budgets in the list
      */
     public void printBudgets() {
         budgetUi.printListBudgets(budgets);
     }
-
 
     /**
      * Prints user instructions on how to use budget commands
@@ -148,7 +132,7 @@ public class BudgetAction {
         budgetUi.printBudgetCommands();
     }
 
-    public static void detailedBudget(String budgetName, ArrayList<Expense> expenses) {
+    public void detailedBudget(String budgetName, ArrayList<Expense> expenses) {
         Budget budget = getBudget(budgetName);
         if (budget == null) {
             budgetUi.printBudgetDoesNotExist();
@@ -158,6 +142,20 @@ public class BudgetAction {
             printBudgetDetailBar(ratio);
             System.out.println("$" + amountSpent + " out of $" + budget.getAmount() + " spent!");
         }
+    }
+
+    /**
+     * Checks if a certain budget name already exists
+     *
+     * @param budgetName budget name to check for if it has been used
+     */
+    protected static boolean validateBudget(String budgetName, ArrayList<Budget> budgetList) {
+        for (Budget budget : budgetList) {
+            if (budget.getName().equals(budgetName)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**

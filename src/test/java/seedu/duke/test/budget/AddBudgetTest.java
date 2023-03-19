@@ -1,4 +1,4 @@
-package seedu.duke.BudgetCommandTest;
+package seedu.duke.test.budget;
 
 import org.junit.jupiter.api.Test;
 

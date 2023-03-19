@@ -9,6 +9,8 @@ import seedu.duke.Ui;
 import seedu.duke.action.ExpenseAction;
 import seedu.duke.exception.BBException;
 import seedu.duke.exception.CommandActionExecuteInvalidException;
+import seedu.duke.exception.ExpenseBudgetNotFoundException;
+import seedu.duke.model.Budget;
 import seedu.duke.model.Expense;
 import seedu.duke.util.Constants;
 import seedu.duke.util.Pair;
@@ -25,7 +27,7 @@ public class ExpenseCommand extends Command {
         { new Pair("/n", int.class) },
         { },
     };
-    // will use this later for tP 1.1
+    
     private static final Pair[][] ACTIONS_OPTIONAL_PARAMS = {
         { new Pair("/d", LocalDate.class) },
         {},
@@ -38,12 +40,13 @@ public class ExpenseCommand extends Command {
 
     @Override
     public void execute(Data data, Ui ui) throws BBException {
-        ArrayList<Expense> expenseList = data.getExpenses();
-        ExpenseAction expenseAction = new ExpenseAction(expenseList, ui);
+        ArrayList<Expense> expenses = data.getExpenses();
+        ExpenseAction expenseAction = new ExpenseAction(expenses, ui);
 
         switch (action) {
         case "add":
-            executeAddExpense(expenseAction, requiredParams, optionalParams);
+            ArrayList<Budget> budgets = data.getBudgets();
+            executeAddExpense(expenseAction, requiredParams, optionalParams, budgets);
             break;
         case "del":
             executeDelExpense(expenseAction, requiredParams);
@@ -58,12 +61,12 @@ public class ExpenseCommand extends Command {
         data.exportData();
     }
 
-    private void executeAddExpense(ExpenseAction expenseAction, String[] requiredParams, String[] optionalParams) {
+    private void executeAddExpense(ExpenseAction expenseAction, String[] requiredParams,
+        String[] optionalParams, ArrayList<Budget> budgets) throws ExpenseBudgetNotFoundException {
         String expenseCategory = requiredParams[0];
         String expenseName = requiredParams[1];
         Double expenseAmount = Double.parseDouble(requiredParams[2]);
 
-        // LocalDate expenseDate = LocalDate.parse(requiredParams[3], formatter);
         LocalDate expenseDate;
         if (optionalParams[0] == null) {
             expenseDate = LocalDate.now();
@@ -71,7 +74,7 @@ public class ExpenseCommand extends Command {
             expenseDate = LocalDate.parse(optionalParams[0], formatter);
         }
 
-        expenseAction.addExpense(expenseCategory, expenseName, expenseAmount, expenseDate);
+        expenseAction.addExpense(expenseCategory, expenseName, expenseAmount, expenseDate, budgets);
     }
 
     private void executeDelExpense(ExpenseAction expenseAction, String[] requiredParams) throws BBException {

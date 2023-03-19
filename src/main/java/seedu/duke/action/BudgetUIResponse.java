@@ -56,7 +56,7 @@ public class BudgetUIResponse {
     }
 
     public void printBudgetCommands() {
-        String msg = String.format(Messages.BUDGET_COMMANDS.toString());
+        String msg = String.format(Messages.BUDGET_HELP_COMMANDS.toString());
         ui.printMessage(msg);
     }
 

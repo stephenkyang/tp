@@ -5,12 +5,14 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 import seedu.duke.Ui;
+import seedu.duke.exception.ExpenseBudgetNotFoundException;
 import seedu.duke.exception.GlobalInvalidNumberException;
+import seedu.duke.model.Budget;
 import seedu.duke.model.Expense;
 
 //@@author tzixi
 public class ExpenseAction {
-    public static ArrayList<Expense> expenses = new ArrayList<Expense>();
+    public ArrayList<Expense> expenses;
     private ExpenseUIResponse expenseUi;
 
     public ExpenseAction(ArrayList<Expense> expenses, Ui ui) {
@@ -18,8 +20,7 @@ public class ExpenseAction {
         expenseUi = new ExpenseUIResponse(ui);
     }
 
-
-    public static double findRelatedExpenses(String budgetName) {
+    public double findRelatedExpenses(String budgetName) {
         int i = 1;
         double totalExpenseValue = 0;
         for (Expense expense : expenses) {
@@ -34,8 +35,13 @@ public class ExpenseAction {
         return totalExpenseValue;
     }
 
-
-    public void addExpense(String expenseCategory, String expenseName, Double expenseAmount, LocalDate expenseDate) {
+    public void addExpense(String expenseCategory, String expenseName, Double expenseAmount,
+        LocalDate expenseDate, ArrayList<Budget> budgets) throws ExpenseBudgetNotFoundException {
+        // Check if the expense category exists
+        boolean isExist = BudgetAction.validateBudget(expenseName, budgets);
+        if (!isExist) {
+            throw new ExpenseBudgetNotFoundException();
+        }
 
         Expense expense = new Expense(expenseCategory, expenseName, expenseAmount, expenseDate);
         expenses.add(expense);
@@ -59,6 +65,15 @@ public class ExpenseAction {
             return expenseNo;
         } else {
             throw new GlobalInvalidNumberException();
+        }
+    }
+
+    //@@author pinyoko573
+    protected static void clearExpenses(String budgetName, ArrayList<Expense> expenseList) {
+        for (Expense expense : expenseList) {
+            if (expense.getCategory().equals(budgetName)) {
+                expenseList.remove(expense);
+            }
         }
     }
 }
