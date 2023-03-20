@@ -26,11 +26,18 @@ public enum Messages {
             "5. You can search for budgets that include a certain keyword:\n" +
             "   budget find /c (keyword)"),
 
-    DEPOSIT_PRINT("Here are your additional deposits: "),
-    DEPOSIT_ADD_SUCCESSFUL("Successfully added %s with amount of $%.2f"),
-    DEPOSIT_DELETE_SUCCESSFUL("Successfully deleted %s with amount of $%.2f"),
-    DEPOSIT_NUMBER_OF("You have a total of %d deposits."),
-    DEPOSIT_PRINT_DEPOSIT("%d. Name: \"%s\" Amount: $%.2f"),
+    DEPOSIT_DEPOSIT("%d. %s ($%.2f) on %s"),
+    DEPOSIT_ADD_SUCCESSFUL("The following deposit has been added:"),
+    DEPOSIT_DELETE_SUCCESSFUL("The following deposit has been removed:"),
+    DEPOSIT_LIST_PREVIOUS("Here are your previous deposits:"),
+    DEPOSIT_LIST_CURRENT("Here are your deposits for this month:"),
+    DEPOSIT_LIST_RANGE("Here are your deposits from %s to %s:"),
+    DEPOSIT_LIST_NOTHING("You have no deposits."),
+    // DEPOSIT_PRINT("Here are your additional deposits: "),
+    // DEPOSIT_ADD_SUCCESSFUL("Successfully added %s with amount of $%.2f"),
+    // DEPOSIT_DELETE_SUCCESSFUL("Successfully deleted %s with amount of $%.2f"),
+    // DEPOSIT_NUMBER_OF("You have a total of %d deposits."),
+    // DEPOSIT_PRINT_DEPOSIT("%d. Name: \"%s\" Amount: $%.2f"),
 
     EXPENSE_ADD_SUCCESSFUL("Got it, I have added %s into your expenses!"),
     EXPENSE_DEL_SUCCESSFUL("Okay, %s has been deleted!"),

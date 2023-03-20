@@ -28,7 +28,7 @@ public class DepositCommand extends Command {
     private static final Pair[][] ACTIONS_OPTIONAL_PARAMS = {
         { new Pair("/d", LocalDate.class) },
         {},
-        {}
+        { new Pair("/f", LocalDate.class), new Pair("/t", LocalDate.class) }
     };
 
     public DepositCommand() {
@@ -47,7 +47,7 @@ public class DepositCommand extends Command {
             executeDelDeposit(depositAction, requiredParams);
             break;
         case "list":
-            executeListDeposit(depositAction);
+            executeListDeposit(depositAction, optionalParams);
             break;
         default:
             throw new CommandActionExecuteInvalidException();
@@ -60,12 +60,12 @@ public class DepositCommand extends Command {
         String depositName = requiredParams[0];
         Double depositAmount = Double.parseDouble(requiredParams[1]);
 
-        // LocalDate depositDate = LocalDate.parse(optionalParams[0], formatter);
         LocalDate depositDate;
-        if (optionalParams[0] == null) {
+        String depositDateString = optionalParams[0];
+        if (depositDateString == null) {
             depositDate = LocalDate.now();
         } else {
-            depositDate = LocalDate.parse(optionalParams[0], formatter);
+            depositDate = LocalDate.parse(depositDateString, formatter);
         }
 
         depositAction.addDeposit(depositName, depositAmount, depositDate);
@@ -76,8 +76,27 @@ public class DepositCommand extends Command {
         depositAction.deleteDeposit(depositNo);
     }
 
-    private void executeListDeposit(DepositAction depositAction) {
-        depositAction.printDeposits();
+    private void executeListDeposit(DepositAction depositAction, String[] optionalParams) {
+        String depositFromString = optionalParams[0];
+        String depositToString = optionalParams[1];
+
+        if (depositFromString == null && depositToString == null) {
+            depositAction.listDeposits();
+            return;
+        }
+
+        LocalDate depositFrom = null;
+        LocalDate depositTo = null;
+
+        if (depositFromString != null) {
+            depositFrom = LocalDate.parse(depositFromString, formatter);
+        }
+
+        if (depositToString != null) {
+            depositTo = LocalDate.parse(depositToString, formatter);
+        }
+
+        depositAction.printDepositsRange(depositFrom, depositTo);
     }
 
     @Override
