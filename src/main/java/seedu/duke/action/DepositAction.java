@@ -50,6 +50,14 @@ public class DepositAction {
         depositUi.printDepositDelSuccessful(deletedDeposit);
     }
 
+    public void clearDeposits(LocalDate startDate, LocalDate endDate) {
+        int previousSize = this.deposits.size();
+        this.deposits.removeIf(deposit -> startDate.isBefore(deposit.getDate()) && endDate.isAfter(deposit.getDate()));
+        this.deposits.removeIf(deposit -> startDate.isEqual(deposit.getDate()) || endDate.isEqual(deposit.getDate()));
+        int currentSize = this.deposits.size();
+        depositUi.printDepositClearSuccessful(previousSize - currentSize);
+    }
+
     public void listDeposits() {
         // Sort the dates first
         ArrayList<Deposit> sortedDeposits = getSortedDeposits(deposits);

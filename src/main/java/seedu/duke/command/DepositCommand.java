@@ -19,16 +19,18 @@ public class DepositCommand extends Command {
         .ofPattern(Constants.ACCEPTABLE_DATE_FORMAT.toString());
     
     // Format
-    private static final String[] ACTIONS = {"add", "del", "list"};
+    private static final String[] ACTIONS = {"add", "del", "list", "clear"};
     private static final Pair[][] ACTIONS_REQUIRED_PARAMS = {
         { new Pair("/n", String.class), new Pair("/a", double.class) },
         { new Pair("/n", int.class) },
-        {}
+        {},
+        { new Pair("/s", LocalDate.class), new Pair("/e", LocalDate.class)}
     };
     private static final Pair[][] ACTIONS_OPTIONAL_PARAMS = {
         { new Pair("/d", LocalDate.class) },
         {},
-        { new Pair("/f", LocalDate.class), new Pair("/t", LocalDate.class) }
+        { new Pair("/f", LocalDate.class), new Pair("/t", LocalDate.class) },
+        {}
     };
 
     public DepositCommand() {
@@ -48,6 +50,9 @@ public class DepositCommand extends Command {
             break;
         case "list":
             executeListDeposit(depositAction, optionalParams);
+            break;
+        case "clear":
+            executeClearDeposit(depositAction, requiredParams);
             break;
         default:
             throw new CommandActionExecuteInvalidException();
@@ -74,6 +79,12 @@ public class DepositCommand extends Command {
     private void executeDelDeposit(DepositAction depositAction, String[] requiredParams) throws BBException {
         int depositNo = Integer.parseInt(requiredParams[0]);
         depositAction.deleteDeposit(depositNo);
+    }
+
+    private void executeClearDeposit(DepositAction depositAction, String[] requiredParams) throws BBException {
+        LocalDate start = LocalDate.parse(requiredParams[0], formatter);
+        LocalDate end = LocalDate.parse(requiredParams[1], formatter);
+        depositAction.clearDeposits(start, end);
     }
 
     private void executeListDeposit(DepositAction depositAction, String[] optionalParams) {

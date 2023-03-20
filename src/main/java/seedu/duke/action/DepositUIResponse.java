@@ -33,6 +33,13 @@ public class DepositUIResponse {
         ui.printMessage(Messages.DEPOSIT_DELETE_SUCCESSFUL.toString(), msg);
     }
 
+    public void printDepositClearSuccessful(int size) {
+        if (size == 0) {
+            ui.printMessage(Messages.DEPOSIT_CLEAR_ZERO.toString());
+        }
+        ui.printMessage(Messages.DEPOSIT_CLEAR_SUCCESSFUL.toString() + Integer.toString(size));
+    }
+
     public void printListDeposits(ArrayList<Deposit> previousDeposits, ArrayList<Deposit> currentDeposits) {
         if (previousDeposits.size() == 0 && currentDeposits.size() == 0) {
             ui.printMessage(Messages.DEPOSIT_LIST_NOTHING.toString());

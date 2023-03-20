@@ -60,6 +60,8 @@ public class CommandParamInvalidException extends BBException {
             return ErrorMessages.ERROR_DEPOSIT_ADD_INVALID_PARAM.toString();
         case "del":
             return ErrorMessages.ERROR_DEPOSIT_DEL_INVALID_PARAM.toString();
+        case "clear":
+            return ErrorMessages.ERROR_DEPOSIT_CLEAR_INVALID_PARAM.toString();
         default:
             return ErrorMessages.ERROR_UNKNOWN_INVALID_ACTION.toString();
         }

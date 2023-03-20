@@ -29,6 +29,8 @@ public enum Messages {
     DEPOSIT_DEPOSIT("%d. %s ($%.2f) on %s"),
     DEPOSIT_ADD_SUCCESSFUL("The following deposit has been added:"),
     DEPOSIT_DELETE_SUCCESSFUL("The following deposit has been removed:"),
+    DEPOSIT_CLEAR_SUCCESSFUL("Number of items cleared: "),
+    DEPOSIT_CLEAR_ZERO("No items in that range."),
     DEPOSIT_LIST_PREVIOUS("Here are your previous deposits:"),
     DEPOSIT_LIST_CURRENT("Here are your deposits for this month:"),
     DEPOSIT_LIST_RANGE("Here are your deposits from %s to %s:"),
