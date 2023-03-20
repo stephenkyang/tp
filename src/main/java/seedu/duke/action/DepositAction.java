@@ -29,8 +29,10 @@ public class DepositAction {
     }
 
     public void deleteDeposit(int depositNo) throws GlobalInvalidNumberException {
+        assert deposits.size() > 0 : "No deposits to delete!";
         int num = validateDeposit(depositNo - 1);
         Deposit deletedDeposit = deposits.remove(num);
+        depositUi.printDepositDeleteSuccessful(deletedDeposit, deposits.size());
     }
 
     public void printDeposits() {
