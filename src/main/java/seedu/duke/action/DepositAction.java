@@ -10,11 +10,11 @@ import seedu.duke.exception.GlobalInvalidNumberException;
 import seedu.duke.model.Deposit;
 
 public class DepositAction {
-    private ArrayList<Deposit> deposits;
-    private DepositUIResponse depositUi;
-
     private static Comparator<Deposit> comparator = (deposit1, deposit2) -> deposit1.getDate()
             .compareTo(deposit2.getDate());
+            
+    private ArrayList<Deposit> deposits;
+    private DepositUIResponse depositUi;
 
     public DepositAction(ArrayList<Deposit> deposits, Ui ui) {
         this.deposits = deposits;
@@ -38,8 +38,14 @@ public class DepositAction {
     }
 
     public void deleteDeposit(int depositId) throws GlobalInvalidNumberException {
+        assert deposits.size() > 0 : "No deposits to delete!";
         int elementNo = validateDeposit(depositId);
         Deposit deletedDeposit = deposits.remove(elementNo);
+
+        // assert deposits.size() > 0 : "No deposits to delete!";
+        // int num = validateDeposit(depositNo - 1);
+        // Deposit deletedDeposit = deposits.remove(num);
+        // depositUi.printDepositDeleteSuccessful(deletedDeposit, deposits.size());
 
         depositUi.printDepositDelSuccessful(deletedDeposit);
     }

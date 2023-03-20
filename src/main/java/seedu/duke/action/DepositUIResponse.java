@@ -57,6 +57,13 @@ public class DepositUIResponse {
     }
 
     public static ArrayList<String> printDeposits(ArrayList<Deposit> deposits) {
+        // public void printDepositDeleteSuccessful(Deposit deposit, int count) {
+        //     String msg = String.format(Messages.DEPOSIT_DELETE_SUCCESSFUL.toString(), 
+        //              deposit.getName(), deposit.getAmount());
+        //     String countMsg = String.format(Messages.DEPOSIT_NUMBER_OF.toString(), count);
+        //     ui.printMessage(msg, countMsg);
+        // }
+        // public void printListDeposits(ArrayList<Deposit> deposits) {
         ArrayList<String> msgs = new ArrayList<String>();
         for (Deposit d : deposits) {
             String msg = String.format(Messages.DEPOSIT_DEPOSIT.toString(), d.getId(), d.getName(), d.getAmount(),
