@@ -11,7 +11,7 @@ public enum ErrorMessages {
     ERROR_BUDGET_DEL_INVALID_PARAM("Invalid parameters. Example: budget del /c transport"),
     ERROR_BUDGET_FIND_INVALID_PARAM("Invalid parameters. Example: budget find /c transport"),
 
-    ERROR_DEPOSIT_INVALID_ACTION("Invalid action for deposit. Use these actions: add, del, list"),
+    ERROR_DEPOSIT_INVALID_ACTION("Invalid action for deposit. Use these actions: add, del, list, clear, help"),
     ERROR_DEPOSIT_ADD_INVALID_PARAM("Invalid parameters. Example: deposit add /n lottery /a 3000.00 [/d] today"),
     ERROR_DEPOSIT_DEL_INVALID_PARAM("Invalid parameters. Example: deposit del /n 1" + 
         "\n Delete with the corresponding list number from `deposit list`."),

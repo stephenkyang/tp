@@ -35,6 +35,14 @@ public enum Messages {
     DEPOSIT_LIST_CURRENT("Here are your deposits for this month:"),
     DEPOSIT_LIST_RANGE("Here are your deposits from %s to %s:"),
     DEPOSIT_LIST_NOTHING("You have no deposits."),
+    DEPOSIT_HELP_COMMANDS("1. You can add an deposit by: \n" +
+            "   deposit add /n (category name) /a (amount) [optional] /d DD-MM-YYY \n" +
+            "2. You can delete a deposit:    \n" +
+            "   deposit del /n (deposit number) \n" +
+            "3. You can list all deposits:  \n" +
+            "   deposit list \n" +
+            "4. You can search for deposits that include a certain keyword:\n" +
+            "   deposit find /c (keyword)"),
     // DEPOSIT_PRINT("Here are your additional deposits: "),
     // DEPOSIT_ADD_SUCCESSFUL("Successfully added %s with amount of $%.2f"),
     // DEPOSIT_DELETE_SUCCESSFUL("Successfully deleted %s with amount of $%.2f"),

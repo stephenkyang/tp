@@ -57,6 +57,9 @@ public class DepositAction {
         int currentSize = this.deposits.size();
         depositUi.printDepositClearSuccessful(previousSize - currentSize);
     }
+    public void depositHelp() {
+        depositUi.printDepositCommands();
+    }
 
     public void listDeposits() {
         // Sort the dates first

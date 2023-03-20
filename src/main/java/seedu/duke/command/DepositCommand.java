@@ -19,17 +19,19 @@ public class DepositCommand extends Command {
         .ofPattern(Constants.ACCEPTABLE_DATE_FORMAT.toString());
     
     // Format
-    private static final String[] ACTIONS = {"add", "del", "list", "clear"};
+    private static final String[] ACTIONS = {"add", "del", "list", "clear", "help"};
     private static final Pair[][] ACTIONS_REQUIRED_PARAMS = {
         { new Pair("/n", String.class), new Pair("/a", double.class) },
         { new Pair("/n", int.class) },
         {},
-        { new Pair("/s", LocalDate.class), new Pair("/e", LocalDate.class)}
+        { new Pair("/s", LocalDate.class), new Pair("/e", LocalDate.class)},
+        {}
     };
     private static final Pair[][] ACTIONS_OPTIONAL_PARAMS = {
         { new Pair("/d", LocalDate.class) },
         {},
         { new Pair("/f", LocalDate.class), new Pair("/t", LocalDate.class) },
+        {},
         {}
     };
 
@@ -53,6 +55,9 @@ public class DepositCommand extends Command {
             break;
         case "clear":
             executeClearDeposit(depositAction, requiredParams);
+            break;
+        case "help":
+            executeHelpDeposit(depositAction);
             break;
         default:
             throw new CommandActionExecuteInvalidException();
@@ -109,7 +114,9 @@ public class DepositCommand extends Command {
 
         depositAction.printDepositsRange(depositFrom, depositTo);
     }
-
+    private void executeHelpDeposit(DepositAction depositAction) {
+        depositAction.depositHelp();
+    }
     @Override
     public boolean isExit() {
         return false;
