@@ -1,7 +1,7 @@
 package seedu.duke.util;
 
 public enum ErrorMessages {
-    ERROR_INVALID_COMMAND("Invalid command."),
+    ERROR_INVALID_COMMAND("Invalid command. Use help for the list of commands."),
     ERROR_UNKNOWN_INVALID_ACTION("Invalid action for unknown command."),
     ERROR_UNKNOWN_INVALID_ACTION_EXECUTE("Invalid execution for unknown action."),
 
@@ -33,6 +33,6 @@ public enum ErrorMessages {
 
     @Override
     public String toString() {
-        return errorMessage;
+        return Constants.ANSI_RED + errorMessage + Constants.ANSI_RESET;
     }
 }

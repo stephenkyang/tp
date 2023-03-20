@@ -1,4 +1,4 @@
-Could not locate data.json file! Creating a new file...
+[33mCould not locate data.json file! Creating a new file...[0m
 _______________
 
  █▀▀█ █   █ █▀▀▄ █▀▀▀ █▀▀ ▀▀█▀▀ 　  █▀▀█ █  █ █▀▀▄ █▀▀▄ █  █ 
