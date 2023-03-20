@@ -6,17 +6,13 @@ import java.time.LocalDate;
 public class Expense extends Item {
     private String category;
     private LocalDate date;
+    private int id;
 
-    public Expense(String category, String name, double amount) {
-        super(name, amount);
-        this.category = category;
-        this.date = LocalDate.now();
-    }
-
-    public Expense(String category, String name, double amount, LocalDate date){
+    public Expense(String category, String name, double amount, LocalDate date, int id){
         super(name, amount);
         this.category = category;
         this.date = date;
+        this.id = id;
     }
 
     public String getCategory() {
@@ -25,5 +21,9 @@ public class Expense extends Item {
 
     public LocalDate getDate() {
         return this.date;
+    }
+
+    public int getId() {
+        return this.id;
     }
 }

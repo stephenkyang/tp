@@ -43,29 +43,43 @@ public class ExpenseAction {
             throw new ExpenseBudgetNotFoundException();
         }
 
-        Expense expense = new Expense(expenseCategory, expenseName, expenseAmount, expenseDate);
+        // Get the id of last expense and increment it
+        int expenseId;
+        if (expenses.size() != 0) {
+            Expense lastExpense = expenses.get(expenses.size() - 1);
+            expenseId = lastExpense.getId() + 1;
+        } else {
+            expenseId = 1;
+        }
+
+        Expense expense = new Expense(expenseCategory, expenseName, expenseAmount, expenseDate, expenseId);
         expenses.add(expense);
 
         expenseUi.printExpenseAddSuccessful(expense, expenses.size());
     }
 
-    public void deleteExpense(int expenseNo) throws GlobalInvalidNumberException {
-        int num = validateExpense(expenseNo - 1);
-        Expense deletedExpense = expenses.remove(num);
+    public void deleteExpense(int expenseId) throws GlobalInvalidNumberException {
+        int elementNo = validateExpense(expenseId);
+        Expense deletedExpense = expenses.remove(elementNo);
 
-        expenseUi.printExpenseDelSuccessful(deletedExpense, num);
+        expenseUi.printExpenseDelSuccessful(deletedExpense, expenseId);
     }
 
     public void printExpenses() {
         expenseUi.printListExpenses(expenses);
     }
 
-    private int validateExpense(int expenseNo) throws GlobalInvalidNumberException {
-        if (expenseNo >= 0 && expenseNo < expenses.size()) {
-            return expenseNo;
-        } else {
-            throw new GlobalInvalidNumberException();
+    //@@author pinyoko573
+    private int validateExpense(int expenseId) throws GlobalInvalidNumberException {
+        int elementNo = 0;
+        for (Expense expense : expenses) {
+            if (expense.getId() == expenseId) {
+                return elementNo;
+            }
+            elementNo++;
         }
+
+        throw new GlobalInvalidNumberException();
     }
 
     //@@author pinyoko573
