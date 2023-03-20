@@ -9,7 +9,10 @@ public enum Constants {
 
     // OUTPUT DATE FORMAT FOR DISPLAYING DATE. default: dd MMM yyyy
     OUTPUT_DATE_FORMAT("dd MMM yyyy"),
+
+    // COLOUR CODES
     ANSI_RED("\u001B[31m"),
+    ANSI_YELLOW("\u001B[33m"),
     ANSI_RESET("\u001B[0m");
 
 
