@@ -28,6 +28,7 @@ public enum Messages {
 
     DEPOSIT_PRINT("Here are your additional deposits: "),
     DEPOSIT_ADD_SUCCESSFUL("Successfully added %s with amount of $%.2f"),
+    DEPOSIT_DELETE_SUCCESSFUL("Successfully deleted %s with amount of $%.2f"),
     DEPOSIT_NUMBER_OF("You have a total of %d deposits."),
     DEPOSIT_PRINT_DEPOSIT("%d. Name: \"%s\" Amount: $%.2f"),
 
