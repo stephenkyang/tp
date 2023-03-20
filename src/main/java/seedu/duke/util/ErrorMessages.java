@@ -18,6 +18,7 @@ public enum ErrorMessages {
     ERROR_EXPENSE_INVALID_ACTION("Invalid action for expense. Use these actions: add, del, list"),
     ERROR_EXPENSE_ADD_INVALID_PARAM("Invalid parameters. Example: expense add /c transport /n mrt /a 1.00 [/d] today"),
     ERROR_EXPENSE_DEL_INVALID_PARAM("Invalid parameters. Example: expense del /n mrt"),
+    ERROR_EXPENSE_BUDGET_NOT_FOUND("Could not find a budget with the same category name."),
 
     ERROR_GLOBAL_INVALID_NUMBER("Please input a valid number."),
 
