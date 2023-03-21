@@ -1,6 +1,7 @@
 package seedu.duke.action;
 
 import seedu.duke.Ui;
+import seedu.duke.comparator.CustomBudgetLimitComparator;
 import seedu.duke.model.Budget;
 import seedu.duke.model.Expense;
 import seedu.duke.util.Constants;
@@ -130,6 +131,7 @@ public class BudgetAction {
      * Prints all the details of all budgets in the list
      */
     public void printBudgets() {
+        budgets.sort(new CustomBudgetLimitComparator());
         budgetUi.printListBudgets(budgets);
     }
 
@@ -162,6 +164,7 @@ public class BudgetAction {
 
     public static void summaryBudget(ArrayList<Expense> expenses, ArrayList<Budget> budgets) {
         int count = 0;
+
         for (Budget budget : budgets) {
             double amountSpent = ExpenseUIResponse.findTotalRelatedExpenses(expenses, budget.getName());
             double ratio = amountSpent / budget.getAmount();
