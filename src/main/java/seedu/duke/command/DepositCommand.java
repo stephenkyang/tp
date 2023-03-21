@@ -19,18 +19,20 @@ public class DepositCommand extends Command {
         .ofPattern(Constants.ACCEPTABLE_DATE_FORMAT.toString());
     
     // Format
-    private static final String[] ACTIONS = {"add", "del", "list", "clear", "help"};
+    private static final String[] ACTIONS = {"add", "del", "list", "clear", "help", "find"};
     private static final Pair[][] ACTIONS_REQUIRED_PARAMS = {
         { new Pair("/n", String.class), new Pair("/a", double.class) },
         { new Pair("/n", int.class) },
         {},
-        { new Pair("/s", LocalDate.class), new Pair("/e", LocalDate.class)},
-        {}
+        {new Pair("/s", LocalDate.class), new Pair("/e", LocalDate.class)},
+        {},
+        {new Pair("/k", String.class)}
     };
     private static final Pair[][] ACTIONS_OPTIONAL_PARAMS = {
         { new Pair("/d", LocalDate.class) },
         {},
         { new Pair("/f", LocalDate.class), new Pair("/t", LocalDate.class) },
+        {},
         {},
         {}
     };
@@ -44,21 +46,24 @@ public class DepositCommand extends Command {
         ArrayList<Deposit> depositList = data.getDeposits();
         DepositAction depositAction = new DepositAction(depositList, ui);
         switch (action) {
-        case "add":
-            executeAddDeposit(depositAction, requiredParams, optionalParams);
-            break;
-        case "del":
-            executeDelDeposit(depositAction, requiredParams);
-            break;
-        case "list":
-            executeListDeposit(depositAction, optionalParams);
-            break;
-        case "clear":
-            executeClearDeposit(depositAction, requiredParams);
-            break;
-        case "help":
-            executeHelpDeposit(depositAction);
-            break;
+            case "add":
+                executeAddDeposit(depositAction, requiredParams, optionalParams);
+                break;
+            case "del":
+                executeDelDeposit(depositAction, requiredParams);
+                break;
+            case "list":
+                executeListDeposit(depositAction, optionalParams);
+                break;
+            case "clear":
+                executeClearDeposit(depositAction, requiredParams);
+                break;
+            case "help":
+                executeHelpDeposit(depositAction);
+                break;
+            case "find":
+                executeFind(depositAction, requiredParams);
+                break;
         default:
             throw new CommandActionExecuteInvalidException();
         }
@@ -118,6 +123,11 @@ public class DepositCommand extends Command {
     }
     private void executeHelpDeposit(DepositAction depositAction) {
         depositAction.depositHelp();
+    }
+
+    private void executeFindDeposit(DepositAction depositAction, String[] requiredParams) {
+        String keyword = requiredParams[0];
+        depositAction.depositFind(keyword);
     }
     @Override
     public boolean isExit() {

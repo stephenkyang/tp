@@ -61,6 +61,7 @@ public class DepositAction {
         int currentSize = this.deposits.size();
         depositUi.printDepositClearSuccessful(previousSize - currentSize);
     }
+
     public void depositHelp() {
         depositUi.printDepositCommands();
     }
@@ -86,6 +87,16 @@ public class DepositAction {
         }
         
         depositUi.printListDeposits(previousDeposits, currentDeposits);
+    }
+
+    public void findDeposits(String keyword) {
+        ArrayList<Deposit> depositsWithKeyword = new ArrayList<>();
+        for (Deposit deposit : this.deposits) {
+            if (deposit.getName().contains(keyword)) {
+                depositsWithKeyword.add(deposit);
+            }
+        }
+        depositUi.printFindDeposits(depositsWithKeyword);
     }
 
     //@@author pinyoko573

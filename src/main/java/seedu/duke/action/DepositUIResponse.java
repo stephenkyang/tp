@@ -66,6 +66,10 @@ public class DepositUIResponse {
         ui.printMessage(msgs.toArray(new String[msgs.size()]));
     }
 
+    public void printFindDeposits(ArrayList<Deposit> deposits) {
+        printDeposits(deposits);
+    }
+
     // @@author pinyoko573
     public void printListDepositsRange(ArrayList<Deposit> deposits, LocalDate from, LocalDate to) {
         if (deposits.size() == 0) {
