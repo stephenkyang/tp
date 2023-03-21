@@ -10,6 +10,7 @@ public enum Messages {
     INFO_EXIT("Bye! Hope to see you soon!"),
 
     BUDGET_DOES_NOT_EXIST("This budget does not exist!"),
+    BUDGET_LIMIT_NEGATIVE("This limit cannot be negative!"),
     BUDGET_NAME_USED("This budget name is already in use!"),
     BUDGET_ADD_SUCCESSFUL("Successfully added %s with limit of $%.2f"),
     BUDGET_DELETE_SUCCESSFUL("Successfully deleted %s."),

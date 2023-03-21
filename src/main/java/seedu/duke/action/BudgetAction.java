@@ -37,6 +37,9 @@ public class BudgetAction {
         if (validateBudget(budgetName, budgets)) {
             budgetUi.printBudgetNameUsed();
             return;
+        } else if (budgetLimit < 0) {
+            budgetUi.printBudgetLimitNegative();
+            return;
         }
 
         Budget budget = new Budget(budgetName, budgetLimit);
@@ -73,6 +76,9 @@ public class BudgetAction {
         Budget budget = getBudget(budgetName);
         if (budget == null) {
             budgetUi.printBudgetDoesNotExist();
+            return;
+        } else if (budgetLimit < 0) {
+            budgetUi.printBudgetLimitNegative();
             return;
         }
 
