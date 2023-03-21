@@ -9,7 +9,6 @@ import seedu.duke.Ui;
 import seedu.duke.action.ExpenseAction;
 import seedu.duke.exception.BBException;
 import seedu.duke.exception.CommandActionExecuteInvalidException;
-import seedu.duke.exception.ExpenseBudgetNotFoundException;
 import seedu.duke.model.Budget;
 import seedu.duke.model.Expense;
 import seedu.duke.util.Constants;
@@ -31,7 +30,7 @@ public class ExpenseCommand extends Command {
     private static final Pair[][] ACTIONS_OPTIONAL_PARAMS = {
         { new Pair("/d", LocalDate.class) },
         {},
-        {}
+        { new Pair("/c", String.class), new Pair("/f", LocalDate.class), new Pair("/t", LocalDate.class) }
     };
 
     public ExpenseCommand() {
@@ -52,7 +51,7 @@ public class ExpenseCommand extends Command {
             executeDelExpense(expenseAction, requiredParams);
             break;
         case "list":
-            executeListExpense(expenseAction);
+            executeListExpense(expenseAction, optionalParams);
             break;
         default:
             throw new CommandActionExecuteInvalidException();
@@ -62,7 +61,7 @@ public class ExpenseCommand extends Command {
     }
 
     private void executeAddExpense(ExpenseAction expenseAction, String[] requiredParams,
-        String[] optionalParams, ArrayList<Budget> budgets) throws ExpenseBudgetNotFoundException {
+        String[] optionalParams, ArrayList<Budget> budgets) throws BBException {
         String expenseCategory = requiredParams[0];
         String expenseName = requiredParams[1];
         Double expenseAmount = Double.parseDouble(requiredParams[2]);
@@ -82,8 +81,28 @@ public class ExpenseCommand extends Command {
         expenseAction.deleteExpense(expenseNo);
     }
 
-    private void executeListExpense(ExpenseAction expenseAction) {
-        expenseAction.printExpenses();
+    private void executeListExpense(ExpenseAction expenseAction, String[] requiredParams) throws BBException {
+        String expenseCategory = optionalParams[0];
+        String expenseFromString = optionalParams[1];
+        String expenseToString = optionalParams[2];
+
+        if (expenseFromString == null && expenseToString == null) {
+            expenseAction.listExpenses(expenseCategory);
+            return;
+        }
+
+        LocalDate expenseFrom = null;
+        LocalDate expenseTo = null;
+
+        if (expenseFromString != null) {
+            expenseFrom = LocalDate.parse(expenseFromString, formatter);
+        }
+
+        if (expenseToString != null) {
+            expenseTo = LocalDate.parse(expenseToString, formatter);
+        }
+
+        expenseAction.listExpensesRange(expenseFrom, expenseTo, expenseCategory);
     }
 
     @Override

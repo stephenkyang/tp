@@ -6,13 +6,15 @@ import java.util.ArrayList;
 import java.util.Comparator;
 
 import seedu.duke.Ui;
+import seedu.duke.exception.GlobalDateAfterToException;
+import seedu.duke.exception.GlobalDateAfterTodayException;
 import seedu.duke.exception.GlobalInvalidNumberException;
 import seedu.duke.model.Deposit;
 
 public class DepositAction {
     private static Comparator<Deposit> comparator = (deposit1, deposit2) -> deposit1.getDate()
             .compareTo(deposit2.getDate());
-            
+    
     private ArrayList<Deposit> deposits;
     private DepositUIResponse depositUi;
 
@@ -21,7 +23,14 @@ public class DepositAction {
         depositUi = new DepositUIResponse(ui);
     }
 
-    public void addDeposit(String depositName, double depositAmount, LocalDate depositDate) {
+    public void addDeposit(String depositName, double depositAmount,
+        LocalDate depositDate) throws GlobalDateAfterTodayException {
+        
+        // Checks if date is before today
+        if (depositDate.isAfter(LocalDate.now())) {
+            throw new GlobalDateAfterTodayException();
+        }
+
         // Get the id of last deposit and increment it
         int depositId;
         if (deposits.size() != 0) {
@@ -42,11 +51,6 @@ public class DepositAction {
         int elementNo = validateDeposit(depositId);
         Deposit deletedDeposit = deposits.remove(elementNo);
 
-        // assert deposits.size() > 0 : "No deposits to delete!";
-        // int num = validateDeposit(depositNo - 1);
-        // Deposit deletedDeposit = deposits.remove(num);
-        // depositUi.printDepositDeleteSuccessful(deletedDeposit, deposits.size());
-
         depositUi.printDepositDelSuccessful(deletedDeposit);
     }
 
@@ -63,12 +67,16 @@ public class DepositAction {
 
     public void listDeposits() {
         // Sort the dates first
-        ArrayList<Deposit> sortedDeposits = getSortedDeposits(deposits);
+        ArrayList<Deposit> sortedDeposits = sortDepositsByDate(deposits);
 
         // Get previous months deposits
-        ArrayList<Deposit> previousDeposits = getPreviousDeposits(sortedDeposits);
+        // Gets the previous month of today, then shift the day to last day of month
+        LocalDate previousMonthDate = LocalDate.now().minusMonths(1);
+        previousMonthDate = previousMonthDate.with(TemporalAdjusters.lastDayOfMonth());
 
-        // Get this month's deposit by slicing previousDeposits size
+        ArrayList<Deposit> previousDeposits = filterDepositsByDate(sortedDeposits, LocalDate.MIN, previousMonthDate);
+
+        // Get this month's deposit by slicing at size of previousDeposits
         ArrayList<Deposit> currentDeposits;
         if (previousDeposits.size() > 0) {
             currentDeposits = new ArrayList<Deposit>(sortedDeposits
@@ -80,8 +88,23 @@ public class DepositAction {
         depositUi.printListDeposits(previousDeposits, currentDeposits);
     }
 
-    public void printDepositsRange(LocalDate from, LocalDate to) {
-        
+    //@@author pinyoko573
+    public void listDepositsRange(LocalDate from, LocalDate to) throws GlobalDateAfterToException {
+        if (from == null) {
+            from = LocalDate.MIN;
+        } else if (to == null) {
+            to = LocalDate.MAX;
+        }
+
+        // Check if from < to
+        if (from.isAfter(to)) {
+            throw new GlobalDateAfterToException();
+        }
+
+        ArrayList<Deposit> filteredDeposits = filterDepositsByDate(deposits, from, to);
+        ArrayList<Deposit> sortedDeposits = sortDepositsByDate(filteredDeposits);
+
+        depositUi.printListDepositsRange(sortedDeposits, from, to);
     }
 
     //@@author pinyoko573
@@ -97,29 +120,25 @@ public class DepositAction {
         throw new GlobalInvalidNumberException();
     }
 
+    // @@author pinyoko573
     @SuppressWarnings("unchecked")
-    private static ArrayList<Deposit> getSortedDeposits(ArrayList<Deposit> deposits) {
+    private static ArrayList<Deposit> sortDepositsByDate(ArrayList<Deposit> deposits) {
         ArrayList<Deposit> sortedDeposits = (ArrayList<Deposit>) deposits.clone();
         sortedDeposits.sort(comparator);
         return sortedDeposits;
     }
 
-    //@@author pinyoko573
-    private ArrayList<Deposit> getPreviousDeposits(ArrayList<Deposit> sortedDeposits) {
-        ArrayList<Deposit> previousDeposits = new ArrayList<Deposit>();
-
-        // Gets the previous month of today, then shift the day to last day of month
-        LocalDate previousMonthDate = LocalDate.now().minusMonths(1);
-        previousMonthDate = previousMonthDate.with(TemporalAdjusters.lastDayOfMonth());
-
-        for (int i = 0; i < sortedDeposits.size(); i++) {
-            Deposit d = sortedDeposits.get(i);
-            if (d.getDate().isAfter(previousMonthDate)) {
-                previousDeposits = new ArrayList<Deposit>(sortedDeposits.subList(0, i));
-                break;
+    // @@author pinyoko573
+    private static ArrayList<Deposit> filterDepositsByDate(ArrayList<Deposit> deposits, LocalDate from, LocalDate to) {
+        ArrayList<Deposit> filteredDeposits = new ArrayList<Deposit>();
+        
+        for (Deposit d : deposits) {
+            LocalDate date = d.getDate();
+            if ((date.isBefore(to) || date.isEqual(to)) && date.isAfter(from) || date.isEqual(from)) {
+                filteredDeposits.add(d);
             }
         }
 
-        return previousDeposits;
+        return filteredDeposits;
     }
 }

@@ -1,5 +1,6 @@
 package seedu.duke.action;
 
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
@@ -57,13 +58,34 @@ public class DepositUIResponse {
             msgs.addAll(printDeposits(previousDeposits));
         }
 
-        msgs.add("");
-
         if (currentDeposits.size() != 0) {
             msgs.add(Messages.DEPOSIT_LIST_CURRENT.toString());
             msgs.addAll(printDeposits(currentDeposits));
         }
 
+        ui.printMessage(msgs.toArray(new String[msgs.size()]));
+    }
+
+    // @@author pinyoko573
+    public void printListDepositsRange(ArrayList<Deposit> deposits, LocalDate from, LocalDate to) {
+        if (deposits.size() == 0) {
+            ui.printMessage(Messages.DEPOSIT_LIST_NOTHING.toString());
+            return;
+        }
+
+        ArrayList<String> msgs = new ArrayList<String>();
+
+        String msg;
+        if (from.equals(LocalDate.MIN)) {
+            msg = String.format(Messages.DEPOSIT_LIST_RANGE_TO.toString(), to.format(fmt));
+        } else if (to.equals(LocalDate.MAX)) {
+            msg = String.format(Messages.DEPOSIT_LIST_RANGE_FROM.toString(), from.format(fmt));
+        } else {
+            msg = String.format(Messages.DEPOSIT_LIST_RANGE.toString(), from.format(fmt), to.format(fmt));
+        }
+        msgs.add(msg);
+
+        msgs.addAll(printDeposits(deposits));
         ui.printMessage(msgs.toArray(new String[msgs.size()]));
     }
 

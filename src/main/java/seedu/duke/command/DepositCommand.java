@@ -66,7 +66,9 @@ public class DepositCommand extends Command {
         data.exportData();
     }
 
-    private void executeAddDeposit(DepositAction depositAction, String[] requiredParams, String[] optionalParams) {
+    private void executeAddDeposit(DepositAction depositAction, String[] requiredParams,
+        String[] optionalParams) throws BBException {
+            
         String depositName = requiredParams[0];
         Double depositAmount = Double.parseDouble(requiredParams[1]);
 
@@ -92,7 +94,7 @@ public class DepositCommand extends Command {
         depositAction.clearDeposits(start, end);
     }
 
-    private void executeListDeposit(DepositAction depositAction, String[] optionalParams) {
+    private void executeListDeposit(DepositAction depositAction, String[] optionalParams) throws BBException {
         String depositFromString = optionalParams[0];
         String depositToString = optionalParams[1];
 
@@ -112,7 +114,7 @@ public class DepositCommand extends Command {
             depositTo = LocalDate.parse(depositToString, formatter);
         }
 
-        depositAction.printDepositsRange(depositFrom, depositTo);
+        depositAction.listDepositsRange(depositFrom, depositTo);
     }
     private void executeHelpDeposit(DepositAction depositAction) {
         depositAction.depositHelp();
