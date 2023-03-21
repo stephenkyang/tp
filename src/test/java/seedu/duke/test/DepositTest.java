@@ -20,7 +20,7 @@ public class DepositTest {
     DepositAction depositAction = new DepositAction(depositList, ui);
 
     @Test
-    void addAndDeleteDeposit() {
+    void addAndDelete() {
         String depositName = "haha";
         double depositAmount = 300.00;
         LocalDate depositDate = LocalDate.now();
@@ -34,6 +34,20 @@ public class DepositTest {
             fail();
         }
         assert depositList.size() != 1 : "delete failed";
+        assertEquals(0, depositList.size());
+    }
+    @Test
+    void simpleClear() {
+        String[] depositNames = {"haha", "haha2"};
+        double depositAmount = 300.00;
+        LocalDate depositDate = LocalDate.now();
+        for (String name : depositNames) {
+            depositAction.addDeposit(name, depositAmount, depositDate);
+        }
+        assert depositList.size() != 0 : "add failed";
+        assertEquals(2, depositList.size());
+        depositAction.clearDeposits(depositDate, depositDate);
+        assert depositList.size() != 2 : "clear failed";
         assertEquals(0, depositList.size());
     }
 }

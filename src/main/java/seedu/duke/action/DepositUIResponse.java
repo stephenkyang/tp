@@ -21,6 +21,10 @@ public class DepositUIResponse {
     public DepositUIResponse(Ui ui) {
         this.ui = ui;
     }
+    public void printDepositCommands() {
+        String msg = String.format(Messages.DEPOSIT_HELP_COMMANDS.toString());
+        ui.printMessage(msg);
+    }
 
     public void printDepositAddSuccessful(Deposit deposit) {
         String msg = String.format(Messages.DEPOSIT_DEPOSIT.toString(), deposit.getId(), deposit.getName(),
@@ -32,6 +36,13 @@ public class DepositUIResponse {
         String msg = String.format(Messages.DEPOSIT_DEPOSIT.toString(), deposit.getId(), deposit.getName(),
             deposit.getAmount(), deposit.getDate().format(fmt));
         ui.printMessage(Messages.DEPOSIT_DELETE_SUCCESSFUL.toString(), msg);
+    }
+
+    public void printDepositClearSuccessful(int size) {
+        if (size == 0) {
+            ui.printMessage(Messages.DEPOSIT_CLEAR_ZERO.toString());
+        }
+        ui.printMessage(Messages.DEPOSIT_CLEAR_SUCCESSFUL.toString() + Integer.toString(size));
     }
 
     public void printListDeposits(ArrayList<Deposit> previousDeposits, ArrayList<Deposit> currentDeposits) {

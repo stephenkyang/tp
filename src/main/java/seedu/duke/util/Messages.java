@@ -29,12 +29,22 @@ public enum Messages {
     DEPOSIT_DEPOSIT("%d. %s ($%.2f) on %s"),
     DEPOSIT_ADD_SUCCESSFUL("The following deposit has been added:"),
     DEPOSIT_DELETE_SUCCESSFUL("The following deposit has been removed:"),
+    DEPOSIT_CLEAR_SUCCESSFUL("Number of items cleared: "),
+    DEPOSIT_CLEAR_ZERO("No items in that range."),
     DEPOSIT_LIST_PREVIOUS("Here are your previous deposits:"),
     DEPOSIT_LIST_CURRENT("Here are your deposits for this month:"),
     DEPOSIT_LIST_RANGE_FROM("Here are your deposits from %s:"),
     DEPOSIT_LIST_RANGE_TO("Here are your deposits until %s:"),
     DEPOSIT_LIST_RANGE("Here are your deposits from %s to %s:"),
     DEPOSIT_LIST_NOTHING("You have no deposits."),
+    DEPOSIT_HELP_COMMANDS("1. You can add an deposit by: \n" +
+            "   deposit add /n (category name) /a (amount) [optional] /d DD-MM-YYY \n" +
+            "2. You can delete a deposit:    \n" +
+            "   deposit del /n (deposit number) \n" +
+            "3. You can list all deposits:  \n" +
+            "   deposit list \n" +
+            "4. You can search for deposits that include a certain keyword:\n" +
+            "   deposit find /c (keyword)"),
     // DEPOSIT_PRINT("Here are your additional deposits: "),
     // DEPOSIT_ADD_SUCCESSFUL("Successfully added %s with amount of $%.2f"),
     // DEPOSIT_DELETE_SUCCESSFUL("Successfully deleted %s with amount of $%.2f"),
