@@ -5,18 +5,7 @@ import java.time.LocalDate;
 //@@author stephenkyang
 public class Deposit extends Item {
     private LocalDate date;
-    
-    /**
-     * Creates a template for each deposit, which includes the name, amount and date deposited.
-     * If date is not specified, it will take as today's date
-     * 
-     * @param name name of budget
-     * @param amount the monetary value limit of the budget
-     */
-    public Deposit(String name, double amount) {
-        super(name, amount);
-        this.date = LocalDate.now();
-    }
+    private int id;
     
     /**
      * Creates a template for each deposit, which includes the name, amount and date deposited.
@@ -25,9 +14,10 @@ public class Deposit extends Item {
      * @param amount amount that is deposited
      * @param date the date that is deposited
      */
-    public Deposit(String name, double amount, LocalDate date) {
+    public Deposit(String name, double amount, LocalDate date, int id) {
         super(name, amount);
         this.date = date;
+        this.id = id;
     }
 
     /**
@@ -37,5 +27,14 @@ public class Deposit extends Item {
      */
     public LocalDate getDate() {
         return this.date;
+    }
+
+    /**
+     * Returns the id of deposit.
+     * 
+     * @return date that is deposited
+     */
+    public int getId() {
+        return this.id;
     }
 }
