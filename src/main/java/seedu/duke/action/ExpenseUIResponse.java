@@ -1,47 +1,97 @@
 package seedu.duke.action;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Objects;
 
 import seedu.duke.Ui;
 import seedu.duke.model.Expense;
+import seedu.duke.util.Constants;
 import seedu.duke.util.Messages;
 
 //@@author tzixi
 public class ExpenseUIResponse {
+    private static DateTimeFormatter fmt = DateTimeFormatter.ofPattern(Constants.OUTPUT_DATE_FORMAT.toString());
     private Ui ui;
 
     public ExpenseUIResponse(Ui ui) {
         this.ui = ui;
     }
 
-    public void printExpenseAddSuccessful(Expense expense, int count) {
-        String msg = String.format(Messages.EXPENSE_ADD_SUCCESSFUL.toString(), expense.getName());
-        String countMsg = String.format(Messages.EXPENSE_NUMBER_OF.toString(), count);
-        ui.printMessage(msg, countMsg);
+    public void printExpenseAddSuccessful(Expense expense) {
+        String msg = String.format(Messages.EXPENSE_EXPENSE.toString(), expense.getId(), expense.getCategory(),
+            expense.getName(), expense.getAmount(), expense.getDate().format(fmt));
+        ui.printMessage(Messages.EXPENSE_ADD_SUCCESSFUL.toString(), msg);
     }
 
-    public void printExpenseDelSuccessful(Expense expense, int count) {
-        String msg = String.format(Messages.EXPENSE_DEL_SUCCESSFUL.toString(), expense.getName());
-        String countMsg = String.format(Messages.EXPENSE_NUMBER_OF.toString(), count);
-        ui.printMessage(msg, countMsg);
+    public void printExpenseDelSuccessful(Expense expense) {
+        String msg = String.format(Messages.EXPENSE_EXPENSE.toString(), expense.getId(), expense.getCategory(),
+            expense.getName(), expense.getAmount(), expense.getDate().format(fmt));
+        ui.printMessage(Messages.EXPENSE_DELETE_SUCCESSFUL.toString(), msg);
     }
 
-    public void printListExpenses(ArrayList<Expense> expenses) {
-        ArrayList<String> msgs = new ArrayList<String>();
-        int i = 1;
-        for (Expense e : expenses) {
-            if (e != null) {
-                String msg = String.format(Messages.EXPENSE_PRINT_EXPENSE.toString(), i,
-                        e.getDate(), e.getCategory(), e.getName(), e.getAmount());
-                msgs.add(msg);
-                i++;
-            }
+    public void printListExpenses(ArrayList<Expense> previousExpenses, ArrayList<Expense> currentExpenses,
+        String category) {
+        if (previousExpenses.size() == 0 && currentExpenses.size() == 0) {
+            ui.printMessage(Messages.EXPENSE_LIST_NOTHING.toString());
+            return;
         }
 
-        ui.printMessage(msgs.toArray(new String[0]));
+        String categoryMsg = (category == null) ? Messages.EXPENSE_LIST_ALL.toString() : category;
+
+        ArrayList<String> msgs = new ArrayList<String>();
+
+        if (previousExpenses.size() != 0) {
+            msgs.add(String.format(Messages.EXPENSE_LIST_PREVIOUS.toString(), categoryMsg));
+            msgs.addAll(printExpenses(previousExpenses));
+        }
+
+        if (currentExpenses.size() != 0) {
+            msgs.add(String.format(Messages.EXPENSE_LIST_CURRENT.toString(), categoryMsg));
+            msgs.addAll(printExpenses(currentExpenses));
+        }
+
+        ui.printMessage(msgs.toArray(new String[msgs.size()]));
     }
 
+    // @@author pinyoko573
+    public void printExpensesRange(ArrayList<Expense> expenses, LocalDate from, LocalDate to, String category) {
+        if (expenses.size() == 0) {
+            ui.printMessage(Messages.EXPENSE_LIST_NOTHING.toString());
+            return;
+        }
+
+        String categoryMsg = (category == null) ? Messages.EXPENSE_LIST_ALL.toString() : category;
+
+        ArrayList<String> msgs = new ArrayList<String>();
+
+        String msg;
+        if (from.equals(LocalDate.MIN)) {
+            msg = String.format(Messages.EXPENSE_LIST_RANGE_TO.toString(), to.format(fmt), categoryMsg);
+        } else if (to.equals(LocalDate.MAX)) {
+            msg = String.format(Messages.EXPENSE_LIST_RANGE_FROM.toString(), from.format(fmt), categoryMsg);
+        } else {
+            msg = String.format(Messages.EXPENSE_LIST_RANGE.toString(), from.format(fmt), to.format(fmt), categoryMsg);
+        }
+        msgs.add(msg);
+
+        msgs.addAll(printExpenses(expenses));
+        ui.printMessage(msgs.toArray(new String[msgs.size()]));
+    }
+
+    public static ArrayList<String> printExpenses(ArrayList<Expense> expenses) {
+        ArrayList<String> msgs = new ArrayList<String>();
+        for (Expense e : expenses) {
+            String msg = String.format(Messages.EXPENSE_EXPENSE.toString(), e.getId(), e.getCategory(),
+                e.getName(), e.getAmount(), e.getDate().format(fmt));
+            msgs.add(msg);
+        }
+
+        return msgs;
+    }
+
+    // @@author chongyongrui
     public static double printRelatedExpenses(ArrayList<Expense> expenses, String budgetName) {
         int i = 1;
         double totalExpenseValue = 0;
