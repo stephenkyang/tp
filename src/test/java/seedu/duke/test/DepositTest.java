@@ -36,13 +36,18 @@ public class DepositTest {
         assert depositList.size() != 1 : "delete failed";
         assertEquals(0, depositList.size());
     }
+    
     @Test
     void simpleClear() {
         String[] depositNames = {"haha", "haha2"};
         double depositAmount = 300.00;
         LocalDate depositDate = LocalDate.now();
-        for (String name : depositNames) {
-            depositAction.addDeposit(name, depositAmount, depositDate);
+        try {
+            for (String name : depositNames) {
+                depositAction.addDeposit(name, depositAmount, depositDate);
+            }
+        } catch (GlobalDateAfterTodayException e) {
+            fail();
         }
         assert depositList.size() != 0 : "add failed";
         assertEquals(2, depositList.size());

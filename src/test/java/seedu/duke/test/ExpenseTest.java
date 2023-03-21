@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 import seedu.duke.Ui;
 import seedu.duke.action.BudgetAction;
 import seedu.duke.action.ExpenseAction;
-import seedu.duke.exception.ExpenseBudgetNotFoundException;
+import seedu.duke.exception.BBException;
 import seedu.duke.exception.GlobalInvalidNumberException;
 import seedu.duke.model.Budget;
 import seedu.duke.model.Expense;
@@ -23,15 +23,22 @@ public class ExpenseTest {
     BudgetAction budgetAction = new BudgetAction(budgetList, ui);
 
     @Test
-    void addAndDeleteExpense() throws ExpenseBudgetNotFoundException {
+    void addAndDeleteExpense() {
         String budgetName = "food";
         Double budgetLimit = 10.0;
         budgetAction.addBudget(budgetName, budgetLimit);
+
         String expenseName = "quesadilla";
         String expenseCategory = "food";
         double expenseAmount = 6.00;
         LocalDate depositDate = LocalDate.now();
-        expenseAction.addExpense(expenseName, expenseCategory, expenseAmount, depositDate, budgetList);
+
+        try {
+            expenseAction.addExpense(expenseCategory, expenseName, expenseAmount, depositDate, budgetList);
+        } catch (BBException e) {
+            fail();
+        }
+        
         assert expenseList.size() != 0 : "add failed";
         assertEquals(1, expenseList.size());
         try {
