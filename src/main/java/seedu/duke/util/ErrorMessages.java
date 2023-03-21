@@ -22,6 +22,8 @@ public enum ErrorMessages {
     ERROR_EXPENSE_BUDGET_NOT_FOUND("Could not find a budget with the same category name."),
 
     ERROR_GLOBAL_INVALID_NUMBER("Please input a valid number."),
+    ERROR_GLOBAL_DATE_AFTER_TO("The from date cannot be after the to date."),
+    ERROR_GLOBAL_DATE_AFTER_TODAY("You cannot input a date that is after today."),
 
     ERROR_FILE_NOT_FOUND("Could not read the file! BudgetBuddy will terminate unexpectedly..."),
     ERROR_FILE_EXPORT("Could not export the file! Please restart the application.");
