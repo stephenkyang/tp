@@ -2,6 +2,7 @@ package seedu.duke;
 
 import java.util.Scanner;
 
+import seedu.duke.action.BudgetAction;
 import seedu.duke.util.Messages;
 
 //@@author pinyoko573
@@ -64,4 +65,5 @@ public class Ui {
     public void byeUser() {
         printMessage(Messages.INFO_EXIT.toString());
     }
+
 }

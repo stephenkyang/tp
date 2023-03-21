@@ -13,6 +13,7 @@ public enum Messages {
     BUDGET_LIMIT_NEGATIVE("This limit cannot be negative!"),
     BUDGET_NAME_USED("This budget name is already in use!"),
     BUDGET_ADD_SUCCESSFUL("Successfully added %s with limit of $%.2f"),
+    BUDGET_SET_SUCCESSFUL("Successfully modified %s to have a limit of $%.2f"),
     BUDGET_DELETE_SUCCESSFUL("Successfully deleted %s."),
     BUDGET_PRINT_BUDGET("%d. Name: \"%s\" Limit: $%.2f"),
     BUDGET_NUMBER_OF("There are %d budget categories."),
