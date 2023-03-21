@@ -26,6 +26,10 @@ public class BudgetUIResponse {
         ui.printMessage(Messages.BUDGET_NAME_USED.toString());
     }
 
+    public void printBudgetLimitNegative() {
+        ui.printMessage(Messages.BUDGET_LIMIT_NEGATIVE.toString());
+    }
+
     public void printBudgetDelSuccessful(Budget budget, int count) {
         String msg = String.format(Messages.BUDGET_DELETE_SUCCESSFUL.toString(), budget.getName());
         String countMsg = String.format(Messages.BUDGET_NUMBER_OF.toString(), count);
