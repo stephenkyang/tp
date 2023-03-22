@@ -13,14 +13,22 @@ public enum ErrorMessages {
     ERROR_BUDGET_LIST_INVALID_MONTHYEAR("Please input a valid month or month & date that is before today."),
 
     ERROR_DEPOSIT_INVALID_ACTION("Invalid action for deposit. Use these actions: add, del, list, clear, help"),
-    ERROR_DEPOSIT_ADD_INVALID_PARAM("Invalid parameters. Example: deposit add /n lottery /a 3000.00 [/d] today"),
+    ERROR_DEPOSIT_ADD_INVALID_PARAM("Invalid parameters. Example: deposit add /n lottery /a 3000.00 [/d] 23-03-"),
     ERROR_DEPOSIT_DEL_INVALID_PARAM("Invalid parameters. Example: deposit del /n 1" + 
         "\n Delete with the corresponding list number from `deposit list`."),
+    ERROR_DEPOSIT_FIND_INVALID_PARAM("Invalid parameters. Example: deposit find /n lottery"),
+    ERROR_DEPOSIT_LIST_INVALID_PARAM("Invalid parameters. Example: deposit list [/f] 01-01-2023 [/t] 01-03-2023"),
     ERROR_DEPOSIT_CLEAR_INVALID_PARAM("Invalid parameters. Example: deposit " +
-            "clear /s 23-01-2000 /e 05-23-2023"),
+            "clear /f 23-01-2000 /t 23-03-2023"),
+    
     ERROR_EXPENSE_INVALID_ACTION("Invalid action for expense. Use these actions: add, del, list"),
     ERROR_EXPENSE_ADD_INVALID_PARAM("Invalid parameters. Example: expense add /c transport /n mrt /a 1.00 [/d] today"),
     ERROR_EXPENSE_DEL_INVALID_PARAM("Invalid parameters. Example: expense del /n mrt"),
+    ERROR_EXPENSE_FIND_INVALID_PARAM("Invalid parameters. Example: expense find /n mrt"),
+    ERROR_EXPENSE_LIST_INVALID_PARAM("Invalid parameters. Example: expense list [/c] transport"
+        + "[/f] 01-01-2023 [/t] 01-03-2023"),
+    ERROR_EXPENSE_CLEAR_INVALID_PARAM("Invalid parameters. Example: expense " +
+            "clear /c transport /f 23-01-2000 /t 05-23-2023"),
     ERROR_EXPENSE_BUDGET_NOT_FOUND("Could not find a budget with the same category name."),
 
     ERROR_STATS_INVALID_ACTION("Invalid action for stats. Use these actions: show"),

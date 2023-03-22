@@ -32,14 +32,20 @@ public class BudgetUIResponse {
         ui.printMessage(Messages.BUDGET_LIMIT_NEGATIVE.toString());
     }
 
+    public void printBudgetAddSuccessful(Budget budget, int count) {
+        String msg = String.format(Messages.BUDGET_ADD_SUCCESSFUL.toString(), budget.getName(), budget.getAmount());
+        String countMsg = String.format(Messages.BUDGET_NUMBER_OF.toString(), count);
+        ui.printMessage(msg, countMsg);
+    }
+
     public void printBudgetDelSuccessful(Budget budget, int count) {
         String msg = String.format(Messages.BUDGET_DELETE_SUCCESSFUL.toString(), budget.getName());
         String countMsg = String.format(Messages.BUDGET_NUMBER_OF.toString(), count);
         ui.printMessage(msg, countMsg);
     }
 
-    public void printBudgetAddSuccessful(Budget budget, int count) {
-        String msg = String.format(Messages.BUDGET_ADD_SUCCESSFUL.toString(), budget.getName(), budget.getAmount());
+    public void printBudgetSetSuccessful(Budget budget, int count) {
+        String msg = String.format(Messages.BUDGET_SET_SUCCESSFUL.toString(), budget.getName(), budget.getAmount());
         String countMsg = String.format(Messages.BUDGET_NUMBER_OF.toString(), count);
         ui.printMessage(msg, countMsg);
     }
@@ -79,12 +85,6 @@ public class BudgetUIResponse {
         
         ui.printMessage(msgs.toArray(new String[msgs.size()]));
     }
-    
-
-    // public void printFindBudgets(ArrayList<Budget> budgets) {
-    //     ArrayList<String> msgs = new ArrayList<String>();
-    //     msgs.AddAll()
-    // }
 
     public static ArrayList<String> printBudgets(ArrayList<Budget> budgets, double[] budgetExpensesTotal,
         int longestBudgetName) {
@@ -107,10 +107,8 @@ public class BudgetUIResponse {
         return msgs;
     }
 
-    public void printBudgetSetSuccessful(Budget budget, int count) {
-        String msg = String.format(Messages.BUDGET_SET_SUCCESSFUL.toString(), budget.getName(), budget.getAmount());
-        String countMsg = String.format(Messages.BUDGET_NUMBER_OF.toString(), count);
-        ui.printMessage(msg, countMsg);
-    }
-
+    // public void printFindBudgets(ArrayList<Budget> budgets) {
+    //     ArrayList<String> msgs = new ArrayList<String>();
+    //     msgs.AddAll()
+    // }
 }

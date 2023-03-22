@@ -9,25 +9,28 @@ import seedu.duke.action.DepositAction;
 import seedu.duke.exception.BBException;
 import seedu.duke.exception.CommandActionExecuteInvalidException;
 import seedu.duke.model.Deposit;
+import seedu.duke.util.Commons;
 import seedu.duke.util.Constants;
 import seedu.duke.util.Pair;
 
 //@@author stephenkyang
 public class DepositCommand extends Command {    
     // Format
-    private static final String[] ACTIONS = {"add", "del", "list", "clear", "help"};
+    private static final String[] ACTIONS = {"add", "del", "find", "list", "clear", "help"};
     private static final Pair[][] ACTIONS_REQUIRED_PARAMS = {
         { new Pair("/n", String.class), new Pair("/a", double.class) },
         { new Pair("/n", int.class) },
+        { new Pair("/n", String.class) },
         {},
-        { new Pair("/s", LocalDate.class), new Pair("/e", LocalDate.class)},
+        {},
         {}
     };
     private static final Pair[][] ACTIONS_OPTIONAL_PARAMS = {
         { new Pair("/d", LocalDate.class) },
         {},
-        { new Pair("/f", LocalDate.class), new Pair("/t", LocalDate.class) },
         {},
+        { new Pair("/f", LocalDate.class), new Pair("/t", LocalDate.class) },
+        { new Pair("/f", LocalDate.class), new Pair("/t", LocalDate.class) },
         {}
     };
 
@@ -46,11 +49,14 @@ public class DepositCommand extends Command {
         case "del":
             executeDelDeposit(depositAction, requiredParams);
             break;
+        case "find":
+            executeFindDeposit(depositAction, requiredParams);
+            break;
         case "list":
             executeListDeposit(depositAction, optionalParams);
             break;
         case "clear":
-            executeClearDeposit(depositAction, requiredParams);
+            executeClearDeposit(depositAction, optionalParams);
             break;
         case "help":
             executeHelpDeposit(depositAction);
@@ -84,10 +90,20 @@ public class DepositCommand extends Command {
         depositAction.deleteDeposit(depositNo);
     }
 
-    private void executeClearDeposit(DepositAction depositAction, String[] requiredParams) throws BBException {
-        LocalDate start = LocalDate.parse(requiredParams[0], Constants.ACCEPTABLE_DATE_FORMAT);
-        LocalDate end = LocalDate.parse(requiredParams[1], Constants.ACCEPTABLE_DATE_FORMAT);
-        depositAction.clearDeposits(start, end);
+    private void executeClearDeposit(DepositAction depositAction, String[] optionalParams) throws BBException {
+        String depositFromString = optionalParams[0];
+        String depositToString = optionalParams[1];
+
+        LocalDate[] dates = Commons.parseDateRange(depositFromString, depositToString);
+        LocalDate depositFrom = dates[0];
+        LocalDate depositTo = dates[1];
+
+        depositAction.clearDeposits(depositFrom, depositTo);
+    }
+
+    private void executeFindDeposit(DepositAction depositAction, String[] requiredParams) throws BBException {
+        String depositName = requiredParams[0];
+        depositAction.findDeposits(depositName);
     }
 
     private void executeListDeposit(DepositAction depositAction, String[] optionalParams) throws BBException {
@@ -99,16 +115,9 @@ public class DepositCommand extends Command {
             return;
         }
 
-        LocalDate depositFrom = null;
-        LocalDate depositTo = null;
-
-        if (depositFromString != null) {
-            depositFrom = LocalDate.parse(depositFromString, Constants.ACCEPTABLE_DATE_FORMAT);
-        }
-
-        if (depositToString != null) {
-            depositTo = LocalDate.parse(depositToString, Constants.ACCEPTABLE_DATE_FORMAT);
-        }
+        LocalDate[] dates = Commons.parseDateRange(depositFromString, depositToString);
+        LocalDate depositFrom = dates[0];
+        LocalDate depositTo = dates[1];
 
         depositAction.listDepositsRange(depositFrom, depositTo);
     }

@@ -36,13 +36,6 @@ public class DepositUIResponse {
         ui.printMessage(Messages.DEPOSIT_DELETE_SUCCESSFUL.toString(), msg);
     }
 
-    public void printDepositClearSuccessful(int size) {
-        if (size == 0) {
-            ui.printMessage(Messages.DEPOSIT_CLEAR_ZERO.toString());
-        }
-        ui.printMessage(Messages.DEPOSIT_CLEAR_SUCCESSFUL.toString() + Integer.toString(size));
-    }
-
     public void printListDeposits(ArrayList<Deposit> previousDeposits, ArrayList<Deposit> currentDeposits) {
         if (previousDeposits.size() == 0 && currentDeposits.size() == 0) {
             ui.printMessage(Messages.DEPOSIT_LIST_NOTHING.toString());
@@ -60,6 +53,19 @@ public class DepositUIResponse {
             msgs.add(Messages.DEPOSIT_LIST_CURRENT.toString());
             msgs.addAll(printDeposits(currentDeposits));
         }
+
+        ui.printMessage(msgs.toArray(new String[msgs.size()]));
+    }
+
+    public void printFindDeposits(ArrayList<Deposit> deposits) {
+        if (deposits.size() == 0) {
+            ui.printMessage(Messages.DEPOSIT_FIND_NOTHING.toString());
+            return;
+        }
+
+        ArrayList<String> msgs = new ArrayList<String>();
+        msgs.add(Messages.DEPOSIT_FIND.toString());
+        msgs.addAll(printDeposits(deposits));
 
         ui.printMessage(msgs.toArray(new String[msgs.size()]));
     }
@@ -84,6 +90,21 @@ public class DepositUIResponse {
         }
         msgs.add(msg);
 
+        msgs.addAll(printDeposits(deposits));
+        ui.printMessage(msgs.toArray(new String[msgs.size()]));
+    }
+
+    // @@author stephenkyang
+    public void printClearDeposits(ArrayList<Deposit> deposits) {
+        if (deposits.size() == 0) {
+            ui.printMessage(Messages.DEPOSIT_CLEAR_NOTHING.toString());   
+            return; 
+        }
+
+        ArrayList<String> msgs = new ArrayList<String>();
+
+        msgs.add(Messages.DEPOSIT_CLEAR_SUCCESSFUL.toString());
+        
         msgs.addAll(printDeposits(deposits));
         ui.printMessage(msgs.toArray(new String[msgs.size()]));
     }

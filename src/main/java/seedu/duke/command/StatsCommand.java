@@ -13,10 +13,11 @@ import seedu.duke.util.Pair;
 //@@author SaiChaitanya13
 public class StatsCommand extends Command {
     // Format
-    private static final String[] ACTIONS = {"show"};
-    private static final Pair[][] ACTIONS_REQUIRED_PARAMS = {{}};
+    private static final String[] ACTIONS = {"show", "help"};
+    private static final Pair[][] ACTIONS_REQUIRED_PARAMS = {{},{}};
     private static final Pair[][] ACTIONS_OPTIONAL_PARAMS = {
-        {new Pair("/m", int.class), new Pair("/y", int.class), new Pair ("/v", String.class)}
+        {new Pair("/m", int.class), new Pair("/y", int.class), new Pair ("/v", String.class)},
+        {}
     };
 
     public StatsCommand() {
@@ -30,6 +31,9 @@ public class StatsCommand extends Command {
         switch (action) {
         case "show":
             executeShowStats(statsAction, optionalParams);
+            break;
+        case "help":
+            executeHelpStats(statsAction);
             break;
         default:
             throw new CommandActionExecuteInvalidException();
@@ -63,6 +67,10 @@ public class StatsCommand extends Command {
         }
 
         statsAction.showStats(month, year, showDeposit, showExpense);
+    }
+
+    private void executeHelpStats(StatsAction statsAction) {
+        statsAction.statsHelp();
     }
 
     @Override

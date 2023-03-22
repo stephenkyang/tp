@@ -16,6 +16,11 @@ public class ExpenseUIResponse {
         this.ui = ui;
     }
 
+    public void printExpenseCommands() {
+        String msg = String.format(Messages.EXPENSE_HELP_COMMANDS.toString());
+        ui.printMessage(msg);
+    }
+
     public void printExpenseAddSuccessful(Expense expense) {
         String msg = String.format(Messages.EXPENSE_EXPENSE.toString(), expense.getId(), expense.getCategory(),
             expense.getName(), expense.getAmount(), expense.getDate().format(Constants.OUTPUT_DATE_FORMAT));
@@ -29,7 +34,8 @@ public class ExpenseUIResponse {
     }
 
     public void printListExpenses(ArrayList<Expense> previousExpenses, ArrayList<Expense> currentExpenses,
-                                  String category) {
+        String category) {
+
         if (previousExpenses.size() == 0 && currentExpenses.size() == 0) {
             ui.printMessage(Messages.EXPENSE_LIST_NOTHING.toString());
             return;
@@ -53,7 +59,21 @@ public class ExpenseUIResponse {
     }
 
     // @@author pinyoko573
-    public void printExpensesRange(ArrayList<Expense> expenses, LocalDate from, LocalDate to, String category) {
+    public void printFindExpenses(ArrayList<Expense> expenses) {
+        if (expenses.size() == 0) {
+            ui.printMessage(Messages.EXPENSE_FIND_NOTHING.toString());
+            return;
+        }
+
+        ArrayList<String> msgs = new ArrayList<String>();
+        msgs.add(Messages.EXPENSE_FIND.toString());
+        msgs.addAll(printExpenses(expenses));
+
+        ui.printMessage(msgs.toArray(new String[msgs.size()]));
+    }
+
+    // @@author pinyoko573
+    public void printListExpensesRange(ArrayList<Expense> expenses, LocalDate from, LocalDate to, String category) {
         if (expenses.size() == 0) {
             ui.printMessage(Messages.EXPENSE_LIST_NOTHING.toString());
             return;
@@ -76,6 +96,16 @@ public class ExpenseUIResponse {
         }
         msgs.add(msg);
 
+        msgs.addAll(printExpenses(expenses));
+        ui.printMessage(msgs.toArray(new String[msgs.size()]));
+    }
+
+    // @@author pinyoko573
+    public void printClearExpenses(ArrayList<Expense> expenses) {
+        ArrayList<String> msgs = new ArrayList<String>();
+
+        msgs.add(Messages.EXPENSE_CLEAR_SUCCESSFUL.toString());
+        
         msgs.addAll(printExpenses(expenses));
         ui.printMessage(msgs.toArray(new String[msgs.size()]));
     }

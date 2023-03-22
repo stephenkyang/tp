@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import seedu.duke.Ui;
 import seedu.duke.action.DepositAction;
 import seedu.duke.exception.GlobalDateAfterTodayException;
+import seedu.duke.exception.GlobalDateFromAfterToException;
 import seedu.duke.exception.GlobalInvalidNumberException;
 import seedu.duke.model.Deposit;
 
@@ -49,9 +50,14 @@ public class DepositTest {
         } catch (GlobalDateAfterTodayException e) {
             fail();
         }
+
         assert depositList.size() != 0 : "add failed";
         assertEquals(2, depositList.size());
-        depositAction.clearDeposits(depositDate, depositDate);
+        try {
+            depositAction.clearDeposits(depositDate, depositDate);
+        } catch (GlobalDateFromAfterToException e) {
+            fail();
+        }
         assert depositList.size() != 2 : "clear failed";
         assertEquals(0, depositList.size());
     }

@@ -14,6 +14,11 @@ public class StatsUIResponse {
         this.ui = ui;
     }
 
+    public void printStatsCommands() {
+        String msg = String.format(Messages.STATS_HELP_COMMANDS.toString());
+        ui.printMessage(msg);
+    }
+
     public void printStats(int month, int year, double totalBudgets, double totalDeposits, double totalExpenses,
         ArrayList<String> budgetMsg, ArrayList<String> depositMsg, ArrayList<String> expenseMsg) {
 

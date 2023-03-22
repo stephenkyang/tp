@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 //@@author chongyongrui
 /**
- * Contains methods related to budget function
+ * Contains methods related to budget function.
  */
 public class BudgetAction {
     private static BudgetUIResponse budgetUi;
@@ -28,7 +28,7 @@ public class BudgetAction {
     }
 
     /**
-     * Creates a budget of name and limit determined by user input
+     * Creates a budget of name and limit determined by user input.
      *
      * @param budgetName  the name of the budget that the user wants to create
      * @param budgetLimit the monetary limit of the budget
@@ -51,9 +51,10 @@ public class BudgetAction {
     }
 
     /**
-     * Deletes a budget from the budget list
+     * Deletes a budget from the budget list.
      *
      * @param budgetName the name of the budget to delete
+     * @param expenses list of expense that will be used to delete expense containing budgetName
      */
     public void deleteBudget(String budgetName, ArrayList<Expense> expenses) {
         Budget budget = getBudget(budgetName);
@@ -61,13 +62,16 @@ public class BudgetAction {
             budgetUi.printBudgetDoesNotExist();
             return;
         }
+        
+        // Clears the expenses if budget delete too
+        ExpenseAction.clearExpensesByCategory(budgetName, expenses);
 
         budgets.remove(budget);
         budgetUi.printBudgetDelSuccessful(budget, budgets.size());
     }
 
     /**
-     * Modifies the budget limit of a chose budget
+     * Modifies the budget limit of a chose budget.
      *
      * @param budgetName  the budget to modify the budget limit for
      * @param budgetLimit the new budget limit
@@ -87,31 +91,8 @@ public class BudgetAction {
         budgetUi.printBudgetSetSuccessful(budget, budgets.size());
     }
 
-    // /**
-    //  * Finds if a budget contains the keywords input by user
-    //  *
-    //  * @param keyword the word the user wants to check for
-    //  */
-    // public void findBudget(String keyword) {
-    //     ArrayList<Budget> foundBudgets = new ArrayList<>();
-    //     for (Budget budget : budgets) {
-
-    //         if (budget.getName().contains(keyword)) {
-    //             foundBudgets.add(budget);
-    //         }
-    //     }
-
-    //     if (foundBudgets.isEmpty()) {
-    //         budgetUi.printBudgetDoesNotExist();
-    //     } else {
-    //         budgetUi.printFindBudgets(foundBudgets);
-    //     }
-    //     foundBudgets.clear();
-    // }
-
-
     /**
-     * Checks if a certain budget exists
+     * Checks if a certain budget exists.
      *
      * @param budgetName budget name to check for if it has been used
      */
@@ -126,7 +107,8 @@ public class BudgetAction {
     }
 
     /**
-     * Prints all the details of all budgets in the list
+     * Prints all the details of all budgets in the list.
+     * 
      * @throws GlobalInvalidMonthYearException
      */
     public void printBudgets(int month, int year, ArrayList<Expense> expenses) throws GlobalInvalidMonthYearException {
@@ -143,6 +125,12 @@ public class BudgetAction {
         budgetUi.printListBudgets(budgets, budgetsExpenseTotal, month, year, longestBudgetName);
     }
 
+    /**
+     * Gets the longest budget name for Ui space formatting.
+     * 
+     * @param budgets containing the list of budgets
+     * @return size of the longest budget name
+     */
     public static int getLongestBudgetName(ArrayList<Budget> budgets) {
         int longestBudgetName = 0;
 
@@ -157,6 +145,15 @@ public class BudgetAction {
         return longestBudgetName;
     }
 
+    /**
+     * Gets the total expense of each budget.
+     * 
+     * @param budgets containing the list of budgets
+     * @param expenses use to calculate total expense based on category 
+     * @param startDate start date range for expense
+     * @param endDate end date range for expense
+     * @return array of double that contains total expense of each budget
+     */
     public static double[] getBudgetsExpenseTotal(ArrayList<Budget> budgets, ArrayList<Expense> expenses,
         LocalDate startDate, LocalDate endDate) {
 
@@ -183,6 +180,58 @@ public class BudgetAction {
         budgetUi.printBudgetCommands();
     }
 
+    /**
+     * Checks if a certain budget name already exists
+     *
+     * @param budgetName budget name to check for if it has been used
+     * @param budgets containing the list of budgets
+     */
+    protected static boolean validateBudget(String budgetName, ArrayList<Budget> budgets) {
+        for (Budget b : budgets) {
+            if (b.getName().equals(budgetName)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Gets the total amount of all budgets.
+     * 
+     * @param budgets containing the list of budgets
+     * @return total amount of all budgets
+     */
+    public static double getTotalBudgets(ArrayList<Budget> budgets) {
+        double total = 0;
+        for (Budget b : budgets) {
+            total += b.getAmount();
+        }
+
+        return total;
+    }
+
+    // /**
+    //  * Finds if a budget contains the keywords input by user
+    //  *
+    //  * @param keyword the word the user wants to check for
+    //  */
+    // public void findBudget(String keyword) {
+    //     ArrayList<Budget> foundBudgets = new ArrayList<>();
+    //     for (Budget budget : budgets) {
+
+    //         if (budget.getName().contains(keyword)) {
+    //             foundBudgets.add(budget);
+    //         }
+    //     }
+
+    //     if (foundBudgets.isEmpty()) {
+    //         budgetUi.printBudgetDoesNotExist();
+    //     } else {
+    //         budgetUi.printFindBudgets(foundBudgets);
+    //     }
+    //     foundBudgets.clear();
+    // }
+
     // /**
     //  * Prints a message about budgets that are close to the limit upon the initialisation of Duke
     //  */
@@ -202,29 +251,6 @@ public class BudgetAction {
     //         System.out.println("Good Job! There are no budgets that are close to its limit!");
     //     }
     // }
-
-    /**
-     * Checks if a certain budget name already exists
-     *
-     * @param budgetName budget name to check for if it has been used
-     */
-    protected static boolean validateBudget(String budgetName, ArrayList<Budget> budgets) {
-        for (Budget b : budgets) {
-            if (b.getName().equals(budgetName)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public static double getTotalBudgets(ArrayList<Budget> budgets) {
-        double total = 0;
-        for (Budget b : budgets) {
-            total += b.getAmount();
-        }
-
-        return total;
-    }
 
     // /**
     //  * Prints the budget progress bar

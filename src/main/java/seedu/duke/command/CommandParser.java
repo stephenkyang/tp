@@ -55,10 +55,7 @@ public class CommandParser {
             break;
         case HELP:
             command = new HelpCommand();
-            HelpCommand.showCommands();
             break;
-
-
         default:
             throw new CommandInvalidException();
         }
