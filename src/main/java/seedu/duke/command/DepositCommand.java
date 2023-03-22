@@ -1,7 +1,6 @@
 package seedu.duke.command;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import seedu.duke.Data;
@@ -14,10 +13,7 @@ import seedu.duke.util.Constants;
 import seedu.duke.util.Pair;
 
 //@@author stephenkyang
-public class DepositCommand extends Command {
-    private static final DateTimeFormatter formatter = DateTimeFormatter
-        .ofPattern(Constants.ACCEPTABLE_DATE_FORMAT.toString());
-    
+public class DepositCommand extends Command {    
     // Format
     private static final String[] ACTIONS = {"add", "del", "list", "clear", "help"};
     private static final Pair[][] ACTIONS_REQUIRED_PARAMS = {
@@ -77,7 +73,7 @@ public class DepositCommand extends Command {
         if (depositDateString == null) {
             depositDate = LocalDate.now();
         } else {
-            depositDate = LocalDate.parse(depositDateString, formatter);
+            depositDate = LocalDate.parse(depositDateString, Constants.ACCEPTABLE_DATE_FORMAT);
         }
 
         depositAction.addDeposit(depositName, depositAmount, depositDate);
@@ -89,8 +85,8 @@ public class DepositCommand extends Command {
     }
 
     private void executeClearDeposit(DepositAction depositAction, String[] requiredParams) throws BBException {
-        LocalDate start = LocalDate.parse(requiredParams[0], formatter);
-        LocalDate end = LocalDate.parse(requiredParams[1], formatter);
+        LocalDate start = LocalDate.parse(requiredParams[0], Constants.ACCEPTABLE_DATE_FORMAT);
+        LocalDate end = LocalDate.parse(requiredParams[1], Constants.ACCEPTABLE_DATE_FORMAT);
         depositAction.clearDeposits(start, end);
     }
 
@@ -107,11 +103,11 @@ public class DepositCommand extends Command {
         LocalDate depositTo = null;
 
         if (depositFromString != null) {
-            depositFrom = LocalDate.parse(depositFromString, formatter);
+            depositFrom = LocalDate.parse(depositFromString, Constants.ACCEPTABLE_DATE_FORMAT);
         }
 
         if (depositToString != null) {
-            depositTo = LocalDate.parse(depositToString, formatter);
+            depositTo = LocalDate.parse(depositToString, Constants.ACCEPTABLE_DATE_FORMAT);
         }
 
         depositAction.listDepositsRange(depositFrom, depositTo);

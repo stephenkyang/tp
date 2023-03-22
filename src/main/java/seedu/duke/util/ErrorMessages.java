@@ -10,6 +10,7 @@ public enum ErrorMessages {
     ERROR_BUDGET_SET_INVALID_PARAM("Invalid parameters. Example: budget set /c transport /l 5000.00"),
     ERROR_BUDGET_DEL_INVALID_PARAM("Invalid parameters. Example: budget del /c transport"),
     ERROR_BUDGET_FIND_INVALID_PARAM("Invalid parameters. Example: budget find /c transport"),
+    ERROR_BUDGET_LIST_INVALID_MONTHYEAR("Please input a valid month or month & date that is before today."),
 
     ERROR_DEPOSIT_INVALID_ACTION("Invalid action for deposit. Use these actions: add, del, list, clear, help"),
     ERROR_DEPOSIT_ADD_INVALID_PARAM("Invalid parameters. Example: deposit add /n lottery /a 3000.00 [/d] today"),

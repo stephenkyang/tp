@@ -1,9 +1,7 @@
 package seedu.duke.action;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Objects;
 
 import seedu.duke.Ui;
 import seedu.duke.model.Expense;
@@ -12,7 +10,6 @@ import seedu.duke.util.Messages;
 
 //@@author tzixi
 public class ExpenseUIResponse {
-    private static DateTimeFormatter fmt = DateTimeFormatter.ofPattern(Constants.OUTPUT_DATE_FORMAT.toString());
     private Ui ui;
 
     public ExpenseUIResponse(Ui ui) {
@@ -21,13 +18,13 @@ public class ExpenseUIResponse {
 
     public void printExpenseAddSuccessful(Expense expense) {
         String msg = String.format(Messages.EXPENSE_EXPENSE.toString(), expense.getId(), expense.getCategory(),
-                expense.getName(), expense.getAmount(), expense.getDate().format(fmt));
+            expense.getName(), expense.getAmount(), expense.getDate().format(Constants.OUTPUT_DATE_FORMAT));
         ui.printMessage(Messages.EXPENSE_ADD_SUCCESSFUL.toString(), msg);
     }
 
     public void printExpenseDelSuccessful(Expense expense) {
         String msg = String.format(Messages.EXPENSE_EXPENSE.toString(), expense.getId(), expense.getCategory(),
-                expense.getName(), expense.getAmount(), expense.getDate().format(fmt));
+            expense.getName(), expense.getAmount(), expense.getDate().format(Constants.OUTPUT_DATE_FORMAT));
         ui.printMessage(Messages.EXPENSE_DELETE_SUCCESSFUL.toString(), msg);
     }
 
@@ -68,11 +65,14 @@ public class ExpenseUIResponse {
 
         String msg;
         if (from.equals(LocalDate.MIN)) {
-            msg = String.format(Messages.EXPENSE_LIST_RANGE_TO.toString(), to.format(fmt), categoryMsg);
+            msg = String.format(Messages.EXPENSE_LIST_RANGE_TO.toString(), to.format(Constants.OUTPUT_DATE_FORMAT),
+                categoryMsg);
         } else if (to.equals(LocalDate.MAX)) {
-            msg = String.format(Messages.EXPENSE_LIST_RANGE_FROM.toString(), from.format(fmt), categoryMsg);
+            msg = String.format(Messages.EXPENSE_LIST_RANGE_FROM.toString(), from.format(Constants.OUTPUT_DATE_FORMAT),
+                categoryMsg);
         } else {
-            msg = String.format(Messages.EXPENSE_LIST_RANGE.toString(), from.format(fmt), to.format(fmt), categoryMsg);
+            msg = String.format(Messages.EXPENSE_LIST_RANGE.toString(), from.format(Constants.OUTPUT_DATE_FORMAT),
+                to.format(Constants.OUTPUT_DATE_FORMAT), categoryMsg);
         }
         msgs.add(msg);
 
@@ -84,7 +84,7 @@ public class ExpenseUIResponse {
         ArrayList<String> msgs = new ArrayList<String>();
         for (Expense e : expenses) {
             String msg = String.format(Messages.EXPENSE_EXPENSE.toString(), e.getId(), e.getCategory(),
-                    e.getName(), e.getAmount(), e.getDate().format(fmt));
+                e.getName(), e.getAmount(), e.getDate().format(Constants.OUTPUT_DATE_FORMAT));
             msgs.add(msg);
         }
 
@@ -92,36 +92,19 @@ public class ExpenseUIResponse {
     }
 
     // @@author chongyongrui
-    public static double printRelatedExpenses(ArrayList<Expense> expenses, String budgetName) {
-        int i = 1;
-        double totalExpenseValue = 0;
-        System.out.println("These are the expenses that are under the " + budgetName + " budget:");
-        for (Expense expense : expenses) {
-            if (expense != null) {
-                if (Objects.equals(expense.getCategory(), budgetName)) {
-                    System.out.println(i + ". " + expense.getName() + " with amount of $" + expense.getAmount());
-                    totalExpenseValue += expense.getAmount();
-                    i++;
-                }
-            }
-
-        }
-        return totalExpenseValue;
-    }
-
-    // @@author chongyongrui
-    public static double findTotalRelatedExpenses(ArrayList<Expense> expenses, String budgetName) {
-        int i = 1;
-        double totalExpenseValue = 0;
-        for (Expense expense : expenses) {
-            if (expense != null) {
-                if (Objects.equals(expense.getCategory(), budgetName)) {
-                    totalExpenseValue += expense.getAmount();
-                    i++;
-                }
-            }
-
-        }
-        return totalExpenseValue;
-    }
+    // public static double printRelatedExpenses(ArrayList<Expense> expenses, String budgetName) {
+    //     int i = 1;
+    //     double totalExpenseValue = 0;
+    //     System.out.println("These are the expenses that are under the " + budgetName + " budget:");
+    //     for (Expense expense : expenses) {
+    //         if (expense != null) {
+    //             if (Objects.equals(expense.getCategory(), budgetName)) {
+    //                 System.out.println(i + ". " + expense.getName() + " with amount of $" + expense.getAmount());
+    //                 totalExpenseValue += expense.getAmount();
+    //                 i++;
+    //             }
+    //         }
+    //     }
+    //     return totalExpenseValue;
+    // }
 }

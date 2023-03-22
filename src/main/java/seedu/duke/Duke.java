@@ -2,11 +2,9 @@ package seedu.duke;
 
 import java.util.logging.LogManager;
 
-import seedu.duke.action.BudgetAction;
 import seedu.duke.command.Command;
 import seedu.duke.command.CommandParser;
 import seedu.duke.exception.BBException;
-import seedu.duke.util.Messages;
 
 //@@author pinyoko573
 public class Duke {
@@ -53,8 +51,8 @@ public class Duke {
             System.exit(1);
         } finally {
             ui.greetUser();
-            BudgetAction.summaryBudget(data.getExpenses(), data.getBudgets());
-            System.out.println(Messages.LINE_DIVIDER);
+            // BudgetAction.summaryBudget(data.getExpenses(), data.getBudgets());
+            // System.out.println(Messages.LINE_DIVIDER);
         }
     }
 

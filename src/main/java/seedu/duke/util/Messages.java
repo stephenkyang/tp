@@ -9,13 +9,14 @@ public enum Messages {
     INFO_WELCOME("Welcome to BudgetBuddy! What can I do for you?"),
     INFO_EXIT("Bye! Hope to see you soon!"),
 
+    BUDGET_BUDGET("%d. %s ($%.2f/%.2f)"),
     BUDGET_DOES_NOT_EXIST("This budget does not exist!"),
     BUDGET_LIMIT_NEGATIVE("This limit cannot be negative!"),
     BUDGET_NAME_USED("This budget name is already in use!"),
     BUDGET_ADD_SUCCESSFUL("Successfully added %s with limit of $%.2f"),
     BUDGET_SET_SUCCESSFUL("Successfully modified %s to have a limit of $%.2f"),
     BUDGET_DELETE_SUCCESSFUL("Successfully deleted %s."),
-    BUDGET_PRINT_BUDGET("%d. Name: \"%s\" Limit: $%.2f"),
+    BUDGET_LIST("Your budget list for %s %d:"),
     BUDGET_NUMBER_OF("There are %d budget categories."),
     BUDGET_HELP_COMMANDS("\n1. You can add a monthly budget: \n" +
             "   budget add /c (category name) /l (spending limit) \n" +

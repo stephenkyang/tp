@@ -2,8 +2,10 @@ package seedu.duke.action;
 
 import seedu.duke.Ui;
 import seedu.duke.model.Budget;
+import seedu.duke.util.CommonsUi;
 import seedu.duke.util.Messages;
 
+import java.text.DateFormatSymbols;
 import java.util.ArrayList;
 
 //@@author chongyongrui
@@ -42,34 +44,56 @@ public class BudgetUIResponse {
         ui.printMessage(msg, countMsg);
     }
 
-    public void printBudgetSetSuccessful(Budget budget, int count) {
-        String msg = String.format(Messages.BUDGET_SET_SUCCESSFUL.toString(), budget.getName(), budget.getAmount());
-        String countMsg = String.format(Messages.BUDGET_NUMBER_OF.toString(), count);
-        ui.printMessage(msg, countMsg);
-    }
-
-
-    public void printListBudgets(ArrayList<Budget> budgets) {
-        ArrayList<String> msgs = new ArrayList<String>();
-        int i = 1;
-        for (Budget b : budgets) {
-            if (b != null) {
-                String msg = String.format(Messages.BUDGET_PRINT_BUDGET.toString(), i, b.getName(), b.getAmount());
-                msgs.add(msg);
-                i++;
-            }
-        }
-
-        String budgetCount = String.format(Messages.BUDGET_NUMBER_OF.toString(), budgets.size());
-        msgs.add(budgetCount);
-
-        ui.printMessage(msgs.toArray(new String[0]));
-    }
-
     public void printBudgetCommands() {
         String msg = String.format(Messages.BUDGET_HELP_COMMANDS.toString());
         ui.printMessage(msg);
     }
 
+    public void printListBudgets(ArrayList<Budget> budgets, double[] budgetExpensesTotal, int month,
+        int year, int longestBudgetName) {
+
+        // Convert month to string
+        String monthString = new DateFormatSymbols().getShortMonths()[month - 1];
+
+        ArrayList<String> msgs = new ArrayList<String>();
+
+        String msg = String.format(Messages.BUDGET_LIST.toString(), monthString, year);
+        msgs.add(msg);
+
+        msgs.addAll(printBudgets(budgets, budgetExpensesTotal, longestBudgetName));
+        ui.printMessage(msgs.toArray(new String[msgs.size()]));
+    }
+
+    // public void printFindBudgets(ArrayList<Budget> budgets) {
+    //     ArrayList<String> msgs = new ArrayList<String>();
+    //     msgs.AddAll()
+    // }
+
+    public static ArrayList<String> printBudgets(ArrayList<Budget> budgets, double[] budgetExpensesTotal,
+        int longestBudgetName) {
+        
+        ArrayList<String> msgs = new ArrayList<String>();
+
+        int i = 1;
+        for (Budget b : budgets) {
+            String barNameFormat = "%-" + longestBudgetName + "s " +
+                CommonsUi.formatBar(budgetExpensesTotal[i-1], b.getAmount());
+            String barName = String.format(barNameFormat, b.getName());
+
+            String msg = String.format(Messages.BUDGET_BUDGET.toString(), i, barName,
+                budgetExpensesTotal[i-1], b.getAmount());
+
+            msgs.add(msg);
+            i++;
+        }
+
+        return msgs;
+    }
+
+    public void printBudgetSetSuccessful(Budget budget, int count) {
+        String msg = String.format(Messages.BUDGET_SET_SUCCESSFUL.toString(), budget.getName(), budget.getAmount());
+        String countMsg = String.format(Messages.BUDGET_NUMBER_OF.toString(), count);
+        ui.printMessage(msg, countMsg);
+    }
 
 }

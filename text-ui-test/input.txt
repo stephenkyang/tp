@@ -1,5 +1,3 @@
 budget add /c school work /l 1000
 budget add /c school transport /l 99
-budget find /c work
-budget find /c school
 exit

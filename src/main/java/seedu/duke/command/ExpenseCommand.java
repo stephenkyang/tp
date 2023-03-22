@@ -1,7 +1,6 @@
 package seedu.duke.command;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import seedu.duke.Data;
@@ -16,9 +15,6 @@ import seedu.duke.util.Pair;
 
 //@@author tzixi
 public class ExpenseCommand extends Command {
-    private static final DateTimeFormatter formatter = DateTimeFormatter
-        .ofPattern(Constants.ACCEPTABLE_DATE_FORMAT.toString());
-
     // Format
     private static final String[] ACTIONS = {"add", "del", "list"};
     private static final Pair[][] ACTIONS_REQUIRED_PARAMS = {
@@ -70,7 +66,7 @@ public class ExpenseCommand extends Command {
         if (optionalParams[0] == null) {
             expenseDate = LocalDate.now();
         } else {
-            expenseDate = LocalDate.parse(optionalParams[0], formatter);
+            expenseDate = LocalDate.parse(optionalParams[0], Constants.ACCEPTABLE_DATE_FORMAT);
         }
 
         expenseAction.addExpense(expenseCategory, expenseName, expenseAmount, expenseDate, budgets);
@@ -95,11 +91,11 @@ public class ExpenseCommand extends Command {
         LocalDate expenseTo = null;
 
         if (expenseFromString != null) {
-            expenseFrom = LocalDate.parse(expenseFromString, formatter);
+            expenseFrom = LocalDate.parse(expenseFromString, Constants.ACCEPTABLE_DATE_FORMAT);
         }
 
         if (expenseToString != null) {
-            expenseTo = LocalDate.parse(expenseToString, formatter);
+            expenseTo = LocalDate.parse(expenseToString, Constants.ACCEPTABLE_DATE_FORMAT);
         }
 
         expenseAction.listExpensesRange(expenseFrom, expenseTo, expenseCategory);
