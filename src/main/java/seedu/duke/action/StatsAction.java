@@ -58,6 +58,13 @@ public class StatsAction {
         statsUi.printStats(month, year, totalBudgets, totalDeposits, totalExpenses, budgetMsg, depositMsg, expenseMsg);
     }
 
+    /**
+     * Prints user instructions on how to use budget commands
+     */
+    public void statsHelp() {
+        statsUi.printStatsCommands();
+    }
+
     private ArrayList<String> showBudget(LocalDate startDate, LocalDate endDate,
         int month, int year, ArrayList<Expense> filteredExpenses) {
 

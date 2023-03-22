@@ -8,11 +8,12 @@ import java.util.Comparator;
 import seedu.duke.Ui;
 import seedu.duke.exception.BBException;
 import seedu.duke.exception.ExpenseBudgetNotFoundException;
-import seedu.duke.exception.GlobalDateAfterToException;
+import seedu.duke.exception.GlobalDateFromAfterToException;
 import seedu.duke.exception.GlobalDateAfterTodayException;
 import seedu.duke.exception.GlobalInvalidNumberException;
 import seedu.duke.model.Budget;
 import seedu.duke.model.Expense;
+import seedu.duke.util.Commons;
 
 //@@author tzixi
 public class ExpenseAction {
@@ -25,21 +26,6 @@ public class ExpenseAction {
         this.expenses = expenses;
         expenseUi = new ExpenseUIResponse(ui);
     }
-
-    // public double findRelatedExpenses(String budgetName) {
-    //     int i = 1;
-    //     double totalExpenseValue = 0;
-    //     for (Expense expense : expenses) {
-    //         if (expense != null) {
-    //             if (Objects.equals(expense.getCategory(), budgetName)) {
-    //                 System.out.println(i + ". " + expense.getName() + " with amount of $" + expense.getAmount());
-    //                 totalExpenseValue += expense.getAmount();
-    //             }
-    //         }
-
-    //     }
-    //     return totalExpenseValue;
-    // }
 
     public void addExpense(String expenseCategory, String expenseName, Double expenseAmount,
         LocalDate expenseDate, ArrayList<Budget> budgets) throws BBException {
@@ -108,17 +94,14 @@ public class ExpenseAction {
 
     //@@author pinyoko573
     @SuppressWarnings("unchecked")
-    public void listExpensesRange(LocalDate from, LocalDate to, String category) throws GlobalDateAfterToException {
+    public void listExpensesRange(LocalDate from, LocalDate to, String category) throws GlobalDateFromAfterToException {
         if (from == null) {
             from = LocalDate.MIN;
         } else if (to == null) {
             to = LocalDate.MAX;
         }
 
-        // Check if from < to
-        if (from.isAfter(to)) {
-            throw new GlobalDateAfterToException();
-        }
+        Commons.checkFromDateIsAfterTo(from, to);
 
         ArrayList<Expense> expenseList = (ArrayList<Expense>) expenses.clone();
         // Filter the expenses by category, if any
@@ -129,14 +112,56 @@ public class ExpenseAction {
         ArrayList<Expense> filteredExpenses = filterExpensesByDate(expenseList, from, to);
         ArrayList<Expense> sortedExpenses = sortExpensesByDate(filteredExpenses);
 
-        expenseUi.printExpensesRange(sortedExpenses, from, to, category);
+        expenseUi.printListExpensesRange(sortedExpenses, from, to, category);
     }
 
-    //@@author pinyoko573
+    // @@author pinyoko573
+    public void findExpenses(String name) {
+        ArrayList<Expense> filteredExpenses = new ArrayList<Expense>();
+        for (Expense e : expenses) {
+            if (e.getName().contains(name)) {
+                filteredExpenses.add(e);
+            }
+        }
+
+        expenseUi.printFindExpenses(filteredExpenses);
+    }
+
+    // @@author pinyoko573
+    @SuppressWarnings("unchecked")
+    public void clearExpenses(LocalDate from, LocalDate to, String category) throws GlobalDateFromAfterToException {
+        if (from == null) {
+            from = LocalDate.MIN;
+        }
+        
+        if (to == null) {
+            to = LocalDate.MAX;
+        }
+
+        Commons.checkFromDateIsAfterTo(from, to);
+
+        ArrayList<Expense> expenseList = (ArrayList<Expense>) expenses.clone();
+        // Filter the expenses by category, if any
+        if (category != null) {
+            expenseList = filterExpensesByCategory(expenseList, category);
+        }
+
+        expenseList = filterExpensesByDate(expenseList, from, to);
+        deleteExpenses(expenseList);
+
+        expenseUi.printClearExpenses(expenseList);
+    }
+
+    // @@author pinyoko573
+    public void expenseHelp() {
+        expenseUi.printExpenseCommands();
+    }
+
+    // @@author pinyoko573
     private int validateExpense(int expenseId) throws GlobalInvalidNumberException {
         int elementNo = 0;
-        for (Expense expense : expenses) {
-            if (expense.getId() == expenseId) {
+        for (Expense e : expenses) {
+            if (e.getId() == expenseId) {
                 return elementNo;
             }
             elementNo++;
@@ -145,11 +170,18 @@ public class ExpenseAction {
         throw new GlobalInvalidNumberException();
     }
 
-    //@@author pinyoko573
-    protected static void clearExpenses(String budgetName, ArrayList<Expense> expenseList) {
-        for (Expense expense : expenseList) {
-            if (expense.getCategory().equals(budgetName)) {
-                expenseList.remove(expense);
+    // @@author pinyoko573
+    private void deleteExpenses(ArrayList<Expense> removingExpenses) {
+        for (Expense e : removingExpenses) {
+            expenses.remove(e);
+        }
+    }
+
+    // @@author pinyoko573
+    public static void clearExpensesByCategory(String budgetName, ArrayList<Expense> expenses) {
+        for (Expense e : expenses) {
+            if (e.getCategory().equals(budgetName)) {
+                expenses.remove(e);
             }
         }
     }
@@ -198,4 +230,19 @@ public class ExpenseAction {
 
         return total;
     }
+
+    // public double findRelatedExpenses(String budgetName) {
+    //     int i = 1;
+    //     double totalExpenseValue = 0;
+    //     for (Expense expense : expenses) {
+    //         if (expense != null) {
+    //             if (Objects.equals(expense.getCategory(), budgetName)) {
+    //                 System.out.println(i + ". " + expense.getName() + " with amount of $" + expense.getAmount());
+    //                 totalExpenseValue += expense.getAmount();
+    //             }
+    //         }
+
+    //     }
+    //     return totalExpenseValue;
+    // }
 }

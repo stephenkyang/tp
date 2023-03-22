@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.time.temporal.TemporalAdjusters;
 
+import seedu.duke.exception.GlobalDateFromAfterToException;
 import seedu.duke.exception.GlobalDateAfterTodayException;
 import seedu.duke.exception.GlobalInvalidMonthYearException;
 
@@ -32,5 +33,27 @@ public class Commons {
         String monthString = new DateFormatSymbols().getShortMonths()[month - 1];
         
         return monthString;
+    }
+
+    public static LocalDate[] parseDateRange(String stringFrom, String stringTo) {
+        // from, to
+        LocalDate[] dates = { null, null };
+
+        if (stringFrom != null) {
+            dates[0] = LocalDate.parse(stringFrom, Constants.ACCEPTABLE_DATE_FORMAT);
+        }
+
+        if (stringTo != null) {
+            dates[1] = LocalDate.parse(stringTo, Constants.ACCEPTABLE_DATE_FORMAT);
+        }
+
+        return dates;
+    }
+
+    public static void checkFromDateIsAfterTo(LocalDate from, LocalDate to) throws GlobalDateFromAfterToException {
+        // Check if from < to
+        if (from.isAfter(to)) {
+            throw new GlobalDateFromAfterToException();
+        }
     }
 }
