@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.time.temporal.TemporalAdjusters;
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.Objects;
 
 import seedu.duke.Ui;
 import seedu.duke.exception.BBException;
@@ -27,20 +26,20 @@ public class ExpenseAction {
         expenseUi = new ExpenseUIResponse(ui);
     }
 
-    public double findRelatedExpenses(String budgetName) {
-        int i = 1;
-        double totalExpenseValue = 0;
-        for (Expense expense : expenses) {
-            if (expense != null) {
-                if (Objects.equals(expense.getCategory(), budgetName)) {
-                    System.out.println(i + ". " + expense.getName() + " with amount of $" + expense.getAmount());
-                    totalExpenseValue += expense.getAmount();
-                }
-            }
+    // public double findRelatedExpenses(String budgetName) {
+    //     int i = 1;
+    //     double totalExpenseValue = 0;
+    //     for (Expense expense : expenses) {
+    //         if (expense != null) {
+    //             if (Objects.equals(expense.getCategory(), budgetName)) {
+    //                 System.out.println(i + ". " + expense.getName() + " with amount of $" + expense.getAmount());
+    //                 totalExpenseValue += expense.getAmount();
+    //             }
+    //         }
 
-        }
-        return totalExpenseValue;
-    }
+    //     }
+    //     return totalExpenseValue;
+    // }
 
     public void addExpense(String expenseCategory, String expenseName, Double expenseAmount,
         LocalDate expenseDate, ArrayList<Budget> budgets) throws BBException {
@@ -157,14 +156,14 @@ public class ExpenseAction {
 
     // @@author pinyoko573
     @SuppressWarnings("unchecked")
-    private static ArrayList<Expense> sortExpensesByDate(ArrayList<Expense> expenses) {
+    public static ArrayList<Expense> sortExpensesByDate(ArrayList<Expense> expenses) {
         ArrayList<Expense> sortedExpenses = (ArrayList<Expense>) expenses.clone();
         sortedExpenses.sort(comparator);
         return sortedExpenses;
     }
 
     // @@author pinyoko573
-    private static ArrayList<Expense> filterExpensesByDate(ArrayList<Expense> expenses, LocalDate from, LocalDate to) {
+    public static ArrayList<Expense> filterExpensesByDate(ArrayList<Expense> expenses, LocalDate from, LocalDate to) {
         ArrayList<Expense> filteredExpenses = new ArrayList<Expense>();
         
         for (Expense e : expenses) {
@@ -178,7 +177,7 @@ public class ExpenseAction {
     }
 
     // @@author pinyoko573
-    private static ArrayList<Expense> filterExpensesByCategory(ArrayList<Expense> expenses, String category) {
+    public static ArrayList<Expense> filterExpensesByCategory(ArrayList<Expense> expenses, String category) {
         ArrayList<Expense> filteredExpenses = new ArrayList<Expense>();
 
         for (Expense e : expenses) {
@@ -188,5 +187,15 @@ public class ExpenseAction {
         }
 
         return filteredExpenses;
+    }
+
+    // @@author pinyoko573
+    public static double getTotalExpenses(ArrayList<Expense> expenses) {
+        double total = 0;
+        for (Expense e : expenses) {
+            total += e.getAmount();
+        }
+
+        return total;
     }
 }

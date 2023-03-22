@@ -1,10 +1,13 @@
 package seedu.duke.action;
 
 import seedu.duke.Ui;
+import seedu.duke.exception.GlobalInvalidMonthYearException;
 import seedu.duke.model.Budget;
 import seedu.duke.model.Expense;
-import seedu.duke.util.Constants;
+import seedu.duke.util.Commons;
 
+import java.time.LocalDate;
+import java.time.temporal.TemporalAdjusters;
 import java.util.ArrayList;
 
 
@@ -102,7 +105,7 @@ public class BudgetAction {
         if (foundBudgets.isEmpty()) {
             budgetUi.printBudgetDoesNotExist();
         } else {
-            budgetUi.printListBudgets(foundBudgets);
+            // budgetUi.printListBudgets(foundBudgets);
         }
         foundBudgets.clear();
     }
@@ -113,7 +116,6 @@ public class BudgetAction {
      *
      * @param budgetName budget name to check for if it has been used
      */
-
     private Budget getBudget(String budgetName) {
         for (Budget budget : budgets) {
             if (budget.getName().equals(budgetName)) {
@@ -126,9 +128,34 @@ public class BudgetAction {
 
     /**
      * Prints all the details of all budgets in the list
+     * @throws GlobalInvalidMonthYearException
      */
-    public void printBudgets() {
-        budgetUi.printListBudgets(budgets);
+    public void printBudgets(int month, int year, ArrayList<Expense> expenses) throws GlobalInvalidMonthYearException {
+        double[] budgetsExpenseTotal = new double[budgets.size()];
+
+        // Check if month and year is valid
+        LocalDate endDate = Commons.isValidMonthYear(month, year);
+        LocalDate startDate = endDate.with(TemporalAdjusters.firstDayOfMonth());
+
+        // Used to format the printing
+        int longestBudgetName = 0;
+
+        int i = 0;
+        for (Budget b : budgets) {
+            String category = b.getName();
+
+            if (category.length() > longestBudgetName) {
+                longestBudgetName = category.length();
+            }
+
+            ArrayList<Expense> filteredExpenses = ExpenseAction.filterExpensesByCategory(expenses, category);
+            filteredExpenses = ExpenseAction.filterExpensesByDate(filteredExpenses, startDate, endDate);
+
+            budgetsExpenseTotal[i] = ExpenseAction.getTotalExpenses(filteredExpenses);
+            i++;
+        }
+        
+        budgetUi.printListBudgets(budgets, budgetsExpenseTotal, month, year, longestBudgetName);
     }
 
     /**
@@ -136,18 +163,6 @@ public class BudgetAction {
      */
     public void budgetHelp() {
         budgetUi.printBudgetCommands();
-    }
-
-    public void detailedBudget(String budgetName, ArrayList<Expense> expenses) {
-        Budget budget = getBudget(budgetName);
-        if (budget == null) {
-            budgetUi.printBudgetDoesNotExist();
-        } else {
-            double amountSpent = ExpenseUIResponse.printRelatedExpenses(expenses, budgetName);
-            double ratio = amountSpent / budget.getAmount() * 20;
-            printBudgetDetailBar(ratio);
-            System.out.println("$" + amountSpent + " out of $" + budget.getAmount() + " spent!");
-        }
     }
 
     /**
@@ -164,39 +179,49 @@ public class BudgetAction {
         return false;
     }
 
-    /**
-     * Prints the budget progress bar
-     *
-     * @param ratio the percentage of what is spent compared to the budget limit
-     */
-    public static void printBudgetDetailBar(double ratio) {
-        int numberOfBlocks = 0;
-        if ((int) ratio >= 1) {
-            numberOfBlocks = 20;
-        } else {
-            numberOfBlocks = (int) ratio;
-        }
-        int excess = (int) ratio / 20;
-        int i = 0;
-        int numberOfBlanks = 20 - numberOfBlocks;
-        while (i < numberOfBlocks) {
-            if (excess > 0) {
-                System.out.print("█");
-            } else {
-                System.out.print(Constants.ANSI_RED + "█" + Constants.ANSI_RESET);
-            }
-            i++;
-        }
-        i = 0;
-        while (i < numberOfBlanks) {
-            System.out.print("░");
-            i++;
-        }
-        System.out.println(" ");
-        if (ratio >= 1) {
-            System.out.println("You have exceeded the budget!");
-        }
+    // public void detailedBudget(String budgetName, ArrayList<Expense> expenses) {
+    //     Budget budget = getBudget(budgetName);
+    //     if (budget == null) {
+    //         budgetUi.printBudgetDoesNotExist();
+    //     } else {
+    //         double amountSpent = ExpenseUIResponse.printRelatedExpenses(expenses, budgetName);
+    //         double ratio = amountSpent / budget.getAmount() * 20;
+    //         printBudgetDetailBar(ratio);
+    //         System.out.println("$" + amountSpent + " out of $" + budget.getAmount() + " spent!");
+    //     }
+    // }
 
-
-    }
+    // /**
+    //  * Prints the budget progress bar
+    //  *
+    //  * @param ratio the percentage of what is spent compared to the budget limit
+    //  */
+    // public static void printBudgetDetailBar(double ratio) {
+    //     int numberOfBlocks = 0;
+    //     if ((int) ratio >= 1) {
+    //         numberOfBlocks = 20;
+    //     } else {
+    //         numberOfBlocks = (int) ratio;
+    //     }
+    //     int excess = (int) ratio / 20;
+    //     int i = 0;
+    //     int numberOfBlanks = 20 - numberOfBlocks;
+    //     while (i < numberOfBlocks) {
+    //         if (excess > 0) {
+    //             System.out.print("█");
+    //         } else {
+    //             System.out.print(Constants.ANSI_RED + "█" + Constants.ANSI_RESET);
+    //         }
+    //         i++;
+    //     }
+    //     i = 0;
+    //     while (i < numberOfBlanks) {
+    //         System.out.print("░");
+    //         i++;
+    //     }
+    //     System.out.println(" ");
+    //     if (ratio >= 1) {
+    //         System.out.println("You have exceeded the budget!");
+    //     }
+    // }
 }
