@@ -62,7 +62,7 @@ public class DepositCommand extends Command {
                 executeHelpDeposit(depositAction);
                 break;
             case "find":
-                executeFind(depositAction, requiredParams);
+                executeFindDeposit(depositAction, requiredParams);
                 break;
         default:
             throw new CommandActionExecuteInvalidException();
@@ -127,7 +127,7 @@ public class DepositCommand extends Command {
 
     private void executeFindDeposit(DepositAction depositAction, String[] requiredParams) {
         String keyword = requiredParams[0];
-        depositAction.depositFind(keyword);
+        depositAction.findDeposit(keyword);
     }
     @Override
     public boolean isExit() {

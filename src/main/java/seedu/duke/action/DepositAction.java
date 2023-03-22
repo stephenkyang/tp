@@ -89,7 +89,7 @@ public class DepositAction {
         depositUi.printListDeposits(previousDeposits, currentDeposits);
     }
 
-    public void findDeposits(String keyword) {
+    public void findDeposit(String keyword) {
         ArrayList<Deposit> depositsWithKeyword = new ArrayList<>();
         for (Deposit deposit : this.deposits) {
             if (deposit.getName().contains(keyword)) {

@@ -30,6 +30,26 @@ The class diagram below shows how the `BudgetCommand` parent class is implemente
 
 ![img.png](UML Diagrams/BudgetCommand.png)
 
+### DepositCommand Class
+
+The `DepositCommand` class contains methods that relate to the execution of the deposit functionality in BudgetBuddy. Users can 
+create new deposits with a timestamp (if necessary). These deposits are stored in a deposit list and users can delete deposits, find
+deposits using keywords, and list all deposits.
+
+The user's input is split by the parser in the `CommandParser` class and is redirected to the 'DepositCommand' class if the first word
+is "deposit." Based on the second word, a method in `DepositAction` class is called corresponding to the command requested by the user.
+
+###Design & Implementation of the Deposit Feature
+
+Like all other functionalities of BudgetBuddy, the deposit feature is heavily modularized and designed with an OOP lens. Because of this, 
+the parsing of user input, the parsers for each feature, and each feature's actions are all in separate classes. 
+
+On a high level, the deposit feature starts with `CommandParser` taking in the input and choosing which `Command` class to execute from.
+This happens with all user input in BudgetBuddy. Then if the first word is "deposit," the `execute` function of the `DepositCommand` class
+will run, creating a new `DepositAction` class. The `execute` function will run a method corresponding to what the user inputs. The design
+of this three class system is meant to modularize the different aspects of the internal logic so future problems would be encapsulated in
+a specific location.
+
 ## Product scope
 
 ### Target user profile
