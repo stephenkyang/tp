@@ -29,7 +29,7 @@ public class ExpenseUIResponse {
     }
 
     public void printListExpenses(ArrayList<Expense> previousExpenses, ArrayList<Expense> currentExpenses,
-        String category) {
+                                  String category) {
         if (previousExpenses.size() == 0 && currentExpenses.size() == 0) {
             ui.printMessage(Messages.EXPENSE_LIST_NOTHING.toString());
             return;

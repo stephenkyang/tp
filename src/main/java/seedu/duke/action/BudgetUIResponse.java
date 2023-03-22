@@ -85,4 +85,10 @@ public class BudgetUIResponse {
         return msgs;
     }
 
+    public void printBudgetSetSuccessful(Budget budget, int count) {
+        String msg = String.format(Messages.BUDGET_SET_SUCCESSFUL.toString(), budget.getName(), budget.getAmount());
+        String countMsg = String.format(Messages.BUDGET_NUMBER_OF.toString(), count);
+        ui.printMessage(msg, countMsg);
+    }
+
 }
