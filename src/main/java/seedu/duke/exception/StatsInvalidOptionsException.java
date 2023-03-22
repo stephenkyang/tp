@@ -3,9 +3,10 @@ package seedu.duke.exception;
 import seedu.duke.util.ErrorMessages;
 
 //@@author pinyoko573
-public class ExpenseBudgetNotFoundException extends BBException {
+public class StatsInvalidOptionsException extends BBException {
     @Override
     public String getMessage() {
-        return ErrorMessages.ERROR_EXPENSE_BUDGET_NOT_FOUND.toString();
+        return ErrorMessages.ERROR_STATS_INVALID_OPTIONS.toString();
     }
+    
 }

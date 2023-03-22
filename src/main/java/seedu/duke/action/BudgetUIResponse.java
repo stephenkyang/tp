@@ -2,10 +2,10 @@ package seedu.duke.action;
 
 import seedu.duke.Ui;
 import seedu.duke.model.Budget;
+import seedu.duke.util.Commons;
 import seedu.duke.util.CommonsUi;
 import seedu.duke.util.Messages;
 
-import java.text.DateFormatSymbols;
 import java.util.ArrayList;
 
 //@@author chongyongrui
@@ -49,20 +49,37 @@ public class BudgetUIResponse {
         ui.printMessage(msg);
     }
 
-    public void printListBudgets(ArrayList<Budget> budgets, double[] budgetExpensesTotal, int month,
-        int year, int longestBudgetName) {
-
-        // Convert month to string
-        String monthString = new DateFormatSymbols().getShortMonths()[month - 1];
+    public static ArrayList<String> getListBudgetsMsg(ArrayList<Budget> budgets, double[] budgetExpensesTotal,
+        int longestBudgetName) {
 
         ArrayList<String> msgs = new ArrayList<String>();
 
+        msgs.addAll(printBudgets(budgets, budgetExpensesTotal, longestBudgetName));
+        
+        return msgs;
+    }
+
+    public void printListBudgets(ArrayList<Budget> budgets, double[] budgetExpensesTotal, int month,
+        int year, int longestBudgetName) {
+
+        if (budgets.size() == 0) {
+            ui.printMessage(Messages.BUDGET_LIST_NOTHING.toString());
+            return;
+        }
+
+        ArrayList<String> msgs = new ArrayList<String>();
+
+        // Convert month to string
+        String monthString = Commons.convertMonthToString(month);
+
         String msg = String.format(Messages.BUDGET_LIST.toString(), monthString, year);
         msgs.add(msg);
-
-        msgs.addAll(printBudgets(budgets, budgetExpensesTotal, longestBudgetName));
+        
+        msgs.addAll(getListBudgetsMsg(budgets, budgetExpensesTotal, longestBudgetName));
+        
         ui.printMessage(msgs.toArray(new String[msgs.size()]));
     }
+    
 
     // public void printFindBudgets(ArrayList<Budget> budgets) {
     //     ArrayList<String> msgs = new ArrayList<String>();

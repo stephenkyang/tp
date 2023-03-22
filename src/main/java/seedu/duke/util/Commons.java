@@ -1,5 +1,6 @@
 package seedu.duke.util;
 
+import java.text.DateFormatSymbols;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.time.temporal.TemporalAdjusters;
@@ -25,5 +26,11 @@ public class Commons {
         } catch (DateTimeParseException | GlobalDateAfterTodayException err) {
             throw new GlobalInvalidMonthYearException();
         }
+    }
+
+    public static String convertMonthToString(int month) {
+        String monthString = new DateFormatSymbols().getShortMonths()[month - 1];
+        
+        return monthString;
     }
 }

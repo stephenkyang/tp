@@ -112,9 +112,11 @@ public class DepositCommand extends Command {
 
         depositAction.listDepositsRange(depositFrom, depositTo);
     }
+
     private void executeHelpDeposit(DepositAction depositAction) {
         depositAction.depositHelp();
     }
+    
     @Override
     public boolean isExit() {
         return false;

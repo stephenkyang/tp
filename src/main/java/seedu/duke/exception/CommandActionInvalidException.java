@@ -21,6 +21,8 @@ public class CommandActionInvalidException extends BBException {
             return ErrorMessages.ERROR_DEPOSIT_INVALID_ACTION.toString();
         case EXPENSE:
             return ErrorMessages.ERROR_EXPENSE_INVALID_ACTION.toString();
+        case STATS:
+            return ErrorMessages.ERROR_STATS_INVALID_ACTION.toString();
         default:
             return ErrorMessages.ERROR_UNKNOWN_INVALID_ACTION.toString();
         }

@@ -18,6 +18,7 @@ public class DepositUIResponse {
     public DepositUIResponse(Ui ui) {
         this.ui = ui;
     }
+    
     public void printDepositCommands() {
         String msg = String.format(Messages.DEPOSIT_HELP_COMMANDS.toString());
         ui.printMessage(msg);

@@ -17,6 +17,7 @@ public enum Messages {
     BUDGET_SET_SUCCESSFUL("Successfully modified %s to have a limit of $%.2f"),
     BUDGET_DELETE_SUCCESSFUL("Successfully deleted %s."),
     BUDGET_LIST("Your budget list for %s %d:"),
+    BUDGET_LIST_NOTHING("You have no budgets."),
     BUDGET_NUMBER_OF("There are %d budget categories."),
     BUDGET_HELP_COMMANDS("\n1. You can add a monthly budget: \n" +
             "   budget add /c (category name) /l (spending limit) \n" +
@@ -65,12 +66,17 @@ public enum Messages {
     EXPENSE_LIST_RANGE("Here are your expenses from %s to %s for %s:"),
     EXPENSE_LIST_NOTHING("You have no expenses."),
 
-    STATS_PRINT_INTRO("Your current progress for this month: /n"),
-    STATS_PRINT_DEPOSITS("Extra deposits: "),
-    STATS_PRINT_BUDGET_PROGRESS("Total budget progress: "),
+    STATS_PRINT_INTRO("Your current progress for %s %d:"),
+    STATS_PRINT_DEPOSITS(System.lineSeparator() + "Deposits"),
+    STATS_PRINT_EXPENSES(System.lineSeparator() + "Expenses"),
+    STATS_PRINT_DEPOSITS_TOTAL("Total deposits: $%.2f"),
+    STATS_PRINT_EXPENSES_TOTAL("Total expenses: $%.2f"),
+    STATS_PRINT_BUDGET_PROGRESS(System.lineSeparator() + "Total budget progress: $%.2f/%.2f (+%.2f)"),
     STATS_PRINT_RIGHT_TRACK("Good job! You are on the right track!"),
     STATS_PRINT_OVERSPEND("Oh no! You seem to be spending too much!"),
-    STATS_PRINT_NO_STATS("There are no stats currently! Please try another command!");
+    STATS_PRINT_NO_STATS("There are no stats currently! Please try another command!"),
+    STATS_HELP_COMMANDS("1. You can show stats by: \n" +
+            "   stats show [/m <month>] [/y <year>] [/v <d for deposit, e for expense, de for both>] \n");
 
     private final String message;
 
