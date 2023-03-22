@@ -64,6 +64,11 @@ public class BudgetUIResponse {
         ui.printMessage(msgs.toArray(new String[msgs.size()]));
     }
 
+    // public void printFindBudgets(ArrayList<Budget> budgets) {
+    //     ArrayList<String> msgs = new ArrayList<String>();
+    //     msgs.AddAll()
+    // }
+
     public static ArrayList<String> printBudgets(ArrayList<Budget> budgets, double[] budgetExpensesTotal,
         int longestBudgetName) {
         

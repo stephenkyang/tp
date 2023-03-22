@@ -72,7 +72,6 @@ public class BudgetAction {
      * @param budgetName  the budget to modify the budget limit for
      * @param budgetLimit the new budget limit
      */
-
     public void setBudget(String budgetName, double budgetLimit) {
         Budget budget = getBudget(budgetName);
         if (budget == null) {
@@ -88,27 +87,27 @@ public class BudgetAction {
         budgetUi.printBudgetSetSuccessful(budget, budgets.size());
     }
 
-    /**
-     * Finds if a budget contains the keywords input by user
-     *
-     * @param keyword the word the user wants to check for
-     */
-    public void findBudget(String keyword) {
-        ArrayList<Budget> foundBudgets = new ArrayList<>();
-        for (Budget budget : budgets) {
+    // /**
+    //  * Finds if a budget contains the keywords input by user
+    //  *
+    //  * @param keyword the word the user wants to check for
+    //  */
+    // public void findBudget(String keyword) {
+    //     ArrayList<Budget> foundBudgets = new ArrayList<>();
+    //     for (Budget budget : budgets) {
 
-            if (budget.getName().contains(keyword)) {
-                foundBudgets.add(budget);
-            }
-        }
+    //         if (budget.getName().contains(keyword)) {
+    //             foundBudgets.add(budget);
+    //         }
+    //     }
 
-        if (foundBudgets.isEmpty()) {
-            budgetUi.printBudgetDoesNotExist();
-        } else {
-            // budgetUi.printListBudgets(foundBudgets);
-        }
-        foundBudgets.clear();
-    }
+    //     if (foundBudgets.isEmpty()) {
+    //         budgetUi.printBudgetDoesNotExist();
+    //     } else {
+    //         budgetUi.printFindBudgets(foundBudgets);
+    //     }
+    //     foundBudgets.clear();
+    // }
 
 
     /**

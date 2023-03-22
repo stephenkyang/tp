@@ -61,9 +61,9 @@ public class BudgetCommand extends Command {
         case "list":
             executeListBudget(budgetAction, optionalParams, expenses);
             break;
-        case "find":
-            executeFindBudget(budgetAction, requiredParams);
-            break;
+        // case "find":
+        //     executeFindBudget(budgetAction, requiredParams);
+        //     break;
         case "help":
             executeBudgetHelp(budgetAction);
             break;
@@ -82,10 +82,10 @@ public class BudgetCommand extends Command {
     //     budgetAction.detailedBudget(budgetName, expenses);
     // }
 
-    private void executeFindBudget(BudgetAction budgetAction, String[] requiredParams) {
-        String budgetName = requiredParams[0];
-        budgetAction.findBudget(budgetName);
-    }
+    // private void executeFindBudget(BudgetAction budgetAction, String[] requiredParams) {
+    //     String budgetName = requiredParams[0];
+    //     budgetAction.findBudget(budgetName);
+    // }
 
     private void executeBudgetHelp(BudgetAction budgetAction) {
         budgetAction.budgetHelp();
