@@ -39,6 +39,11 @@ deposits using keywords, and list all deposits.
 The user's input is split by the parser in the `CommandParser` class and is redirected to the 'DepositCommand' class if the first word
 is "deposit." Based on the second word, a method in `DepositAction` class is called corresponding to the command requested by the user.
 
+Attached below is the how the `DepositCommand` class is implemented along with its relation with the other `Data` classes and the abstract
+`Command` class.
+
+![img.png](UML Diagrams/DepositCommand.png)
+
 ###Design & Implementation of the Deposit Feature
 
 Like all other functionalities of BudgetBuddy, the deposit feature is heavily modularized and designed with an OOP lens. Because of this, 
@@ -59,7 +64,8 @@ expenses, help them with budgeting and also be help them to visualise what they 
 
 ### Value proposition
 
-{Describe the value proposition: what problem does it solve?}
+Budget Buddy tries to help people create, store, and edit multiple budgets. The ability to keep the budget on a computer allows
+users to keep their budget wherever they'd bring their computer. 
 
 ## User Stories
 
