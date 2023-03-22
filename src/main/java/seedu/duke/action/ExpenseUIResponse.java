@@ -21,18 +21,18 @@ public class ExpenseUIResponse {
 
     public void printExpenseAddSuccessful(Expense expense) {
         String msg = String.format(Messages.EXPENSE_EXPENSE.toString(), expense.getId(), expense.getCategory(),
-            expense.getName(), expense.getAmount(), expense.getDate().format(fmt));
+                expense.getName(), expense.getAmount(), expense.getDate().format(fmt));
         ui.printMessage(Messages.EXPENSE_ADD_SUCCESSFUL.toString(), msg);
     }
 
     public void printExpenseDelSuccessful(Expense expense) {
         String msg = String.format(Messages.EXPENSE_EXPENSE.toString(), expense.getId(), expense.getCategory(),
-            expense.getName(), expense.getAmount(), expense.getDate().format(fmt));
+                expense.getName(), expense.getAmount(), expense.getDate().format(fmt));
         ui.printMessage(Messages.EXPENSE_DELETE_SUCCESSFUL.toString(), msg);
     }
 
     public void printListExpenses(ArrayList<Expense> previousExpenses, ArrayList<Expense> currentExpenses,
-        String category) {
+                                  String category) {
         if (previousExpenses.size() == 0 && currentExpenses.size() == 0) {
             ui.printMessage(Messages.EXPENSE_LIST_NOTHING.toString());
             return;
@@ -84,7 +84,7 @@ public class ExpenseUIResponse {
         ArrayList<String> msgs = new ArrayList<String>();
         for (Expense e : expenses) {
             String msg = String.format(Messages.EXPENSE_EXPENSE.toString(), e.getId(), e.getCategory(),
-                e.getName(), e.getAmount(), e.getDate().format(fmt));
+                    e.getName(), e.getAmount(), e.getDate().format(fmt));
             msgs.add(msg);
         }
 
@@ -100,6 +100,22 @@ public class ExpenseUIResponse {
             if (expense != null) {
                 if (Objects.equals(expense.getCategory(), budgetName)) {
                     System.out.println(i + ". " + expense.getName() + " with amount of $" + expense.getAmount());
+                    totalExpenseValue += expense.getAmount();
+                    i++;
+                }
+            }
+
+        }
+        return totalExpenseValue;
+    }
+
+    // @@author chongyongrui
+    public static double findTotalRelatedExpenses(ArrayList<Expense> expenses, String budgetName) {
+        int i = 1;
+        double totalExpenseValue = 0;
+        for (Expense expense : expenses) {
+            if (expense != null) {
+                if (Objects.equals(expense.getCategory(), budgetName)) {
                     totalExpenseValue += expense.getAmount();
                     i++;
                 }

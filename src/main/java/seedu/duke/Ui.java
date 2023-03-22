@@ -64,4 +64,5 @@ public class Ui {
     public void byeUser() {
         printMessage(Messages.INFO_EXIT.toString());
     }
+
 }

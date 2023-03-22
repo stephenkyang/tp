@@ -12,6 +12,7 @@ import seedu.duke.model.Budget;
 import seedu.duke.model.Expense;
 import seedu.duke.util.Pair;
 
+
 //@@author chongyongrui
 public class BudgetCommand extends Command {
     // Format
@@ -46,8 +47,7 @@ public class BudgetCommand extends Command {
             executeSetBudget(budgetAction, requiredParams);
             break;
         case "del":
-            ArrayList<Expense> expenses = data.getExpenses();
-            executeDelBudget(budgetAction, requiredParams, expenses);
+            executeDelBudget(budgetAction, requiredParams, data.getExpenses());
             break;
         case "list":
             executeListBudget(budgetAction);
@@ -71,8 +71,8 @@ public class BudgetCommand extends Command {
     private void executeBudgetDetail(BudgetAction budgetAction, String[] requiredParams, ArrayList<Expense> expenses) {
         String budgetName = requiredParams[0];
         budgetAction.detailedBudget(budgetName, expenses);
-
     }
+
 
     private void executeFindBudget(BudgetAction budgetAction, String[] requiredParams) {
         String budgetName = requiredParams[0];
@@ -94,6 +94,7 @@ public class BudgetCommand extends Command {
         Double budgetLimit = Double.parseDouble(requiredParams[1]);
         budgetAction.setBudget(budgetName, budgetLimit);
     }
+
 
     private void executeDelBudget(BudgetAction budgetAction, String[] requiredParams, ArrayList<Expense> expenses) {
         String budgetName = requiredParams[0];

@@ -42,6 +42,13 @@ public class BudgetUIResponse {
         ui.printMessage(msg, countMsg);
     }
 
+    public void printBudgetSetSuccessful(Budget budget, int count) {
+        String msg = String.format(Messages.BUDGET_SET_SUCCESSFUL.toString(), budget.getName(), budget.getAmount());
+        String countMsg = String.format(Messages.BUDGET_NUMBER_OF.toString(), count);
+        ui.printMessage(msg, countMsg);
+    }
+
+
     public void printListBudgets(ArrayList<Budget> budgets) {
         ArrayList<String> msgs = new ArrayList<String>();
         int i = 1;
