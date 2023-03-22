@@ -130,22 +130,41 @@ public class BudgetAction {
      * @throws GlobalInvalidMonthYearException
      */
     public void printBudgets(int month, int year, ArrayList<Expense> expenses) throws GlobalInvalidMonthYearException {
-        double[] budgetsExpenseTotal = new double[budgets.size()];
-
         // Check if month and year is valid
         LocalDate endDate = Commons.isValidMonthYear(month, year);
         LocalDate startDate = endDate.with(TemporalAdjusters.firstDayOfMonth());
 
         // Used to format the printing
+        int longestBudgetName = getLongestBudgetName(budgets);
+
+        // Get the total expenses of each budget
+        double[] budgetsExpenseTotal = getBudgetsExpenseTotal(budgets, expenses, startDate, endDate);
+        
+        budgetUi.printListBudgets(budgets, budgetsExpenseTotal, month, year, longestBudgetName);
+    }
+
+    public static int getLongestBudgetName(ArrayList<Budget> budgets) {
         int longestBudgetName = 0;
 
-        int i = 0;
         for (Budget b : budgets) {
             String category = b.getName();
 
             if (category.length() > longestBudgetName) {
                 longestBudgetName = category.length();
             }
+        }
+
+        return longestBudgetName;
+    }
+
+    public static double[] getBudgetsExpenseTotal(ArrayList<Budget> budgets, ArrayList<Expense> expenses,
+        LocalDate startDate, LocalDate endDate) {
+
+        double[] budgetsExpenseTotal = new double[budgets.size()];
+
+        int i = 0;
+        for (Budget b : budgets) {
+            String category = b.getName();
 
             ArrayList<Expense> filteredExpenses = ExpenseAction.filterExpensesByCategory(expenses, category);
             filteredExpenses = ExpenseAction.filterExpensesByDate(filteredExpenses, startDate, endDate);
@@ -153,8 +172,8 @@ public class BudgetAction {
             budgetsExpenseTotal[i] = ExpenseAction.getTotalExpenses(filteredExpenses);
             i++;
         }
-        
-        budgetUi.printListBudgets(budgets, budgetsExpenseTotal, month, year, longestBudgetName);
+
+        return budgetsExpenseTotal;
     }
     
     /**
@@ -189,13 +208,22 @@ public class BudgetAction {
      *
      * @param budgetName budget name to check for if it has been used
      */
-    protected static boolean validateBudget(String budgetName, ArrayList<Budget> budgetList) {
-        for (Budget budget : budgetList) {
-            if (budget.getName().equals(budgetName)) {
+    protected static boolean validateBudget(String budgetName, ArrayList<Budget> budgets) {
+        for (Budget b : budgets) {
+            if (b.getName().equals(budgetName)) {
                 return true;
             }
         }
         return false;
+    }
+
+    public static double getTotalBudgets(ArrayList<Budget> budgets) {
+        double total = 0;
+        for (Budget b : budgets) {
+            total += b.getAmount();
+        }
+
+        return total;
     }
 
     // /**

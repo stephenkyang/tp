@@ -34,6 +34,9 @@ public class CommandParamInvalidException extends BBException {
         case EXPENSE:
             message = getExpenseMessage(action);
             break;
+        case STATS:
+            message = getStatsMessage(action);
+            break;
         default:
             message = ErrorMessages.ERROR_UNKNOWN_INVALID_ACTION.toString();
         }
@@ -73,6 +76,15 @@ public class CommandParamInvalidException extends BBException {
             return ErrorMessages.ERROR_EXPENSE_ADD_INVALID_PARAM.toString();
         case "del":
             return ErrorMessages.ERROR_EXPENSE_DEL_INVALID_PARAM.toString();
+        default:
+            return ErrorMessages.ERROR_UNKNOWN_INVALID_ACTION.toString();
+        }
+    }
+
+    private String getStatsMessage(String action) {
+        switch(action) {
+        case "show":
+            return ErrorMessages.ERROR_STATS_SHOW_INVALID_PARAM.toString();
         default:
             return ErrorMessages.ERROR_UNKNOWN_INVALID_ACTION.toString();
         }

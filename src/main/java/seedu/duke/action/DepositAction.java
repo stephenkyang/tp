@@ -61,6 +61,7 @@ public class DepositAction {
         int currentSize = this.deposits.size();
         depositUi.printDepositClearSuccessful(previousSize - currentSize);
     }
+
     public void depositHelp() {
         depositUi.printDepositCommands();
     }
@@ -122,14 +123,14 @@ public class DepositAction {
 
     // @@author pinyoko573
     @SuppressWarnings("unchecked")
-    private static ArrayList<Deposit> sortDepositsByDate(ArrayList<Deposit> deposits) {
+    public static ArrayList<Deposit> sortDepositsByDate(ArrayList<Deposit> deposits) {
         ArrayList<Deposit> sortedDeposits = (ArrayList<Deposit>) deposits.clone();
         sortedDeposits.sort(comparator);
         return sortedDeposits;
     }
 
     // @@author pinyoko573
-    private static ArrayList<Deposit> filterDepositsByDate(ArrayList<Deposit> deposits, LocalDate from, LocalDate to) {
+    public static ArrayList<Deposit> filterDepositsByDate(ArrayList<Deposit> deposits, LocalDate from, LocalDate to) {
         ArrayList<Deposit> filteredDeposits = new ArrayList<Deposit>();
         
         for (Deposit d : deposits) {
@@ -140,5 +141,16 @@ public class DepositAction {
         }
 
         return filteredDeposits;
+    }
+
+    // @@author pinyoko573
+    public static double getTotalDeposits(ArrayList<Deposit> deposits) {
+        double total = 0;
+        
+        for (Deposit d : deposits) {
+            total += d.getAmount();
+        }
+
+        return total;
     }
 }

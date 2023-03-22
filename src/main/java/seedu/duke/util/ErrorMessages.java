@@ -23,6 +23,10 @@ public enum ErrorMessages {
     ERROR_EXPENSE_DEL_INVALID_PARAM("Invalid parameters. Example: expense del /n mrt"),
     ERROR_EXPENSE_BUDGET_NOT_FOUND("Could not find a budget with the same category name."),
 
+    ERROR_STATS_INVALID_ACTION("Invalid action for stats. Use these actions: show"),
+    ERROR_STATS_SHOW_INVALID_PARAM("Invalid parameters. Example: stats show </m 3> </y 2022> </v de>"),
+    ERROR_STATS_INVALID_OPTIONS("Please indicate the correct verbose options."),
+
     ERROR_GLOBAL_INVALID_NUMBER("Please input a valid number."),
     ERROR_GLOBAL_DATE_AFTER_TO("The from date cannot be after the to date."),
     ERROR_GLOBAL_DATE_AFTER_TODAY("You cannot input a date that is after today."),
