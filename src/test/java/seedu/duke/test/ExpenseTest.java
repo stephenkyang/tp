@@ -31,10 +31,10 @@ public class ExpenseTest {
         String expenseName = "quesadilla";
         String expenseCategory = "food";
         double expenseAmount = 6.00;
-        LocalDate depositDate = LocalDate.now();
+        LocalDate expenseDate = LocalDate.now();
 
         try {
-            expenseAction.addExpense(expenseCategory, expenseName, expenseAmount, depositDate, budgetList);
+            expenseAction.addExpense(expenseCategory, expenseName, expenseAmount, expenseDate, budgetList);
         } catch (BBException e) {
             fail();
         }
