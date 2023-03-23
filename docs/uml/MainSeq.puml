@@ -1,0 +1,77 @@
+@startuml Main
+hide footbox
+participant Duke
+participant Ui
+participant Data
+participant CommandParser
+participant Command
+
+activate Duke
+
+Duke -> Duke: startApplication()
+activate Duke
+
+Duke -> Ui **
+activate Ui
+Ui --> Duke
+deactivate Ui
+
+Duke -> Data: importData()
+activate Data
+Data --> Duke: data
+deactivate Data
+
+Duke -> Ui: greetUser()
+activate Ui
+Ui --> Duke
+deactivate Ui
+
+deactivate Duke
+
+loop true
+
+Duke -> Ui: readInput()
+activate Ui
+Ui --> Duke: input
+deactivate Ui
+
+Duke -> CommandParser: parse(input)
+activate CommandParser
+
+CommandParser -> Command **
+activate Command
+Command --> CommandParser
+deactivate Command
+CommandParser --> Duke: command
+deactivate CommandParser
+
+Duke -> Command: execute(data, ui)
+note right
+In execute method,
+there will be more paths
+shown in the next sections
+end note
+activate Command
+Command --> Duke
+deactivate Command
+
+Duke -> Command: isExit()
+activate Command
+Command --> Duke
+deactivate Command
+
+opt command.isExit()
+
+Duke -> Duke: exitApplication()
+activate Duke
+Duke -> Ui: byeUser()
+activate Ui
+Ui --> Duke !!
+deactivate Ui
+deactivate Duke
+
+end
+end
+deactivate Duke
+
+@enduml

@@ -15,6 +15,8 @@ Overspending and the lack of savings is a significant problem found in most fres
 
 ### Main Component
 
+![](uml/MainSeq.png)
+
 In the main (Duke) class, the main method first calls startApplication() which initalizes the Log Manager for logging (disabled if in production stage) and Ui object for printing output messages. After initialized, it will then attempt to import the user's data from `data.json`. If there is no file, it will initalize a blank data. If importing fails, the application will print an error message and exit with code 1. Once done, it will greet the user with a message.
 
 The application then runs an infinite loop to take in and execute commands, until when the inputs `exit` to exit the application. After which, it will output a bye message and exits the application safely.
@@ -33,7 +35,7 @@ The main 3 classes of Duke are the `budget` , `expense` and `deposit` class. Use
 the date relate to each
 of these classes. Each of these classes are modelled as an `Item`.
 
-![img.png](UML Diagrams/ItemClasses.png)
+![img.png](uml/ItemClasses.png)
 
 ### Budget Component
 
@@ -48,7 +50,7 @@ Command word is "budget", it will be processed into the `BudgetCommand` class. T
 the `BudgetAction` class.
 The class diagram below shows how the `BudgetCommand` parent class is implemented, as well as its extended classes.
 
-![img.png](UML Diagrams/BudgetCommand.png)
+![img.png](uml/BudgetCommand.png)
 
 ## Product scope
 =======
@@ -66,7 +68,7 @@ is "deposit." Based on the second word, a method in `DepositAction` class is cal
 Attached below is the how the `DepositCommand` class is implemented along with its relation with the other `Data` classes and the abstract
 `Command` class.
 
-![img.png](UML Diagrams/DepositCommand.png)
+![img.png](uml/DepositCommand.png)
 
 ###Design & Implementation of the Deposit Feature
 

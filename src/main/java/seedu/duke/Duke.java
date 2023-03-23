@@ -17,8 +17,7 @@ public class Duke {
     public static void main(String[] args) {
         startApplication();
 
-        boolean isRunning = true;
-        while (isRunning) {
+        while (true) {
             try {
                 String input = ui.readInput();
                 Command command = CommandParser.parse(input);
