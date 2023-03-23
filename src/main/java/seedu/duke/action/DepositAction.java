@@ -79,6 +79,16 @@ public class DepositAction {
         depositUi.printListDeposits(previousDeposits, currentDeposits);
     }
 
+    public void findDeposit(String keyword) {
+        ArrayList<Deposit> depositsWithKeyword = new ArrayList<>();
+        for (Deposit deposit : this.deposits) {
+            if (deposit.getName().contains(keyword)) {
+                depositsWithKeyword.add(deposit);
+            }
+        }
+        depositUi.printFindDeposits(depositsWithKeyword);
+    }
+
     //@@author pinyoko573
     public void listDepositsRange(LocalDate from, LocalDate to) throws GlobalDateFromAfterToException {
         if (from == null) {
@@ -110,7 +120,7 @@ public class DepositAction {
         depositUi.printFindDeposits(filteredDeposits);
     }
 
-    // @@author pinyoko573
+    // @@author stephenkyang
     public void clearDeposits(LocalDate from, LocalDate to) throws GlobalDateFromAfterToException {
         if (from == null) {
             from = LocalDate.MIN;
