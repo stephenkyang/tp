@@ -29,6 +29,7 @@ The command consists of three components: Enum CommandEnum, Abstract class Comma
 #### Command
 #### CommandParser
 
+## Product scope
 ### Item Component
 
 The main 3 classes of Duke are the `budget` , `expense` and `deposit` class. Users are able to add, store and visualise
@@ -52,7 +53,7 @@ The class diagram below shows how the `BudgetCommand` parent class is implemente
 
 ![img.png](uml/BudgetCommand.png)
 
-## Product scope
+
 =======
 ### Deposit Component
 
@@ -88,7 +89,11 @@ a specific location.
 ### StatsCommand Class
 The 'StatsCommand' class contains methods that are related to the execution of the stats functionality in BudgetBuddy. Users can 
 use this command to view all the details of their expenses, budgets and deposits in the current month. Through this feature, users will know
-their current progress and if their expenses have exceeded their budget. 
+their current progress and if their expenses have exceeded their budget. <Add diagram>
+
+### Design & Implementation of the Stats Feature
+The stats feature, just like all other features, also is designed and implemented to incorporate good OOP. Therefore, there are 
+separate classes for each part of the Stats Feature, which includes StatsAction, StatsUIResponse and StatsCommand.
 
 ### Others
 #### Exception Component
