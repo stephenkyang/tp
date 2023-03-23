@@ -1,7 +1,6 @@
 package seedu.duke.command;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import seedu.duke.Data;
@@ -11,26 +10,30 @@ import seedu.duke.exception.BBException;
 import seedu.duke.exception.CommandActionExecuteInvalidException;
 import seedu.duke.model.Budget;
 import seedu.duke.model.Expense;
+import seedu.duke.util.Commons;
 import seedu.duke.util.Constants;
 import seedu.duke.util.Pair;
 
 //@@author tzixi
 public class ExpenseCommand extends Command {
-    private static final DateTimeFormatter formatter = DateTimeFormatter
-        .ofPattern(Constants.ACCEPTABLE_DATE_FORMAT.toString());
-
     // Format
-    private static final String[] ACTIONS = {"add", "del", "list"};
+    private static final String[] ACTIONS = {"add", "del", "find", "list", "clear", "help"};
     private static final Pair[][] ACTIONS_REQUIRED_PARAMS = {
         { new Pair("/c", String.class), new Pair("/n", String.class), new Pair("/a", double.class) },
         { new Pair("/n", int.class) },
-        { },
+        { new Pair("/n", String.class) },
+        {},
+        {},
+        {}
     };
     
     private static final Pair[][] ACTIONS_OPTIONAL_PARAMS = {
         { new Pair("/d", LocalDate.class) },
         {},
-        { new Pair("/c", String.class), new Pair("/f", LocalDate.class), new Pair("/t", LocalDate.class) }
+        {},
+        { new Pair("/c", String.class), new Pair("/f", LocalDate.class), new Pair("/t", LocalDate.class) },
+        { new Pair("/c", String.class), new Pair("/f", LocalDate.class), new Pair("/t", LocalDate.class) },
+        {}
     };
 
     public ExpenseCommand() {
@@ -50,8 +53,17 @@ public class ExpenseCommand extends Command {
         case "del":
             executeDelExpense(expenseAction, requiredParams);
             break;
+        case "find":
+            executeFindExpense(expenseAction, requiredParams);
+            break;
         case "list":
             executeListExpense(expenseAction, optionalParams);
+            break;
+        case "clear":
+            executeClearExpense(expenseAction, optionalParams);
+            break;
+        case "help":
+            executeHelpExpense(expenseAction);
             break;
         default:
             throw new CommandActionExecuteInvalidException();
@@ -70,7 +82,7 @@ public class ExpenseCommand extends Command {
         if (optionalParams[0] == null) {
             expenseDate = LocalDate.now();
         } else {
-            expenseDate = LocalDate.parse(optionalParams[0], formatter);
+            expenseDate = LocalDate.parse(optionalParams[0], Constants.ACCEPTABLE_DATE_FORMAT);
         }
 
         expenseAction.addExpense(expenseCategory, expenseName, expenseAmount, expenseDate, budgets);
@@ -81,7 +93,12 @@ public class ExpenseCommand extends Command {
         expenseAction.deleteExpense(expenseNo);
     }
 
-    private void executeListExpense(ExpenseAction expenseAction, String[] requiredParams) throws BBException {
+    private void executeFindExpense(ExpenseAction expenseAction, String[] requiredParams) throws BBException {
+        String expenseName = requiredParams[0];
+        expenseAction.findExpenses(expenseName);
+    }
+
+    private void executeListExpense(ExpenseAction expenseAction, String[] optionalParams) throws BBException {
         String expenseCategory = optionalParams[0];
         String expenseFromString = optionalParams[1];
         String expenseToString = optionalParams[2];
@@ -91,18 +108,27 @@ public class ExpenseCommand extends Command {
             return;
         }
 
-        LocalDate expenseFrom = null;
-        LocalDate expenseTo = null;
-
-        if (expenseFromString != null) {
-            expenseFrom = LocalDate.parse(expenseFromString, formatter);
-        }
-
-        if (expenseToString != null) {
-            expenseTo = LocalDate.parse(expenseToString, formatter);
-        }
+        LocalDate[] dates = Commons.parseDateRange(expenseFromString, expenseToString);
+        LocalDate expenseFrom = dates[0];
+        LocalDate expenseTo = dates[1];
 
         expenseAction.listExpensesRange(expenseFrom, expenseTo, expenseCategory);
+    }
+
+    private void executeClearExpense(ExpenseAction expenseAction, String[] optionalParams) throws BBException {
+        String expenseCategory = optionalParams[0];
+        String expenseFromString = optionalParams[1];
+        String expenseToString = optionalParams[2];
+
+        LocalDate[] dates = Commons.parseDateRange(expenseFromString, expenseToString);
+        LocalDate expenseFrom = dates[0];
+        LocalDate expenseTo = dates[1];
+
+        expenseAction.clearExpenses(expenseFrom, expenseTo, expenseCategory);
+    }
+
+    private void executeHelpExpense(ExpenseAction expenseAction) {
+        expenseAction.expenseHelp();
     }
 
     @Override

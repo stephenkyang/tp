@@ -1,5 +1,6 @@
 package seedu.duke.command;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import seedu.duke.Data;
@@ -16,18 +17,20 @@ import seedu.duke.util.Pair;
 //@@author chongyongrui
 public class BudgetCommand extends Command {
     // Format
-    private static final String[] ACTIONS = {"add", "set", "del", "list", "find", "help", "detail"};
+    private static final String[] ACTIONS = {"add", "set", "del", "list", "help"};
     private static final Pair[][] ACTIONS_REQUIRED_PARAMS = {
             {new Pair("/c", String.class), new Pair("/l", double.class)},
             {new Pair("/c", String.class), new Pair("/l", double.class)},
             {new Pair("/c", String.class)},
             {},
-            {new Pair("/c", String.class)},
             {},
-            {new Pair("/c", String.class)}
     };
     private static final Pair[][] ACTIONS_OPTIONAL_PARAMS = {
-            {}, {}, {}, {}, {}, {}, {}
+            {},
+            {},
+            {},
+            {new Pair("/m", int.class), new Pair("/y", int.class)},
+            {},
     };
 
     public BudgetCommand() {
@@ -39,6 +42,8 @@ public class BudgetCommand extends Command {
         ArrayList<Budget> budgetList = data.getBudgets();
         BudgetAction budgetAction = new BudgetAction(budgetList, ui);
 
+        ArrayList<Expense> expenses = data.getExpenses();
+
         switch (action) {
         case "add":
             executeAddBudget(budgetAction, requiredParams);
@@ -47,36 +52,25 @@ public class BudgetCommand extends Command {
             executeSetBudget(budgetAction, requiredParams);
             break;
         case "del":
-            executeDelBudget(budgetAction, requiredParams, data.getExpenses());
+            executeDelBudget(budgetAction, requiredParams, expenses);
             break;
         case "list":
-            executeListBudget(budgetAction);
-            break;
-        case "find":
-            executeFindBudget(budgetAction, requiredParams);
+            executeListBudget(budgetAction, optionalParams, expenses);
             break;
         case "help":
             executeBudgetHelp(budgetAction);
             break;
-        case "detail":
-            executeBudgetDetail(budgetAction, requiredParams, data.getExpenses());
-            break;
+        // case "find":
+        //     executeFindBudget(budgetAction, requiredParams);
+        //     break;
+        // case "detail":
+        //     executeBudgetDetail(budgetAction, requiredParams, data.getExpenses());
+        //     break;
         default:
             throw new CommandActionExecuteInvalidException();
         }
 
         data.exportData();
-    }
-
-    private void executeBudgetDetail(BudgetAction budgetAction, String[] requiredParams, ArrayList<Expense> expenses) {
-        String budgetName = requiredParams[0];
-        budgetAction.detailedBudget(budgetName, expenses);
-    }
-
-
-    private void executeFindBudget(BudgetAction budgetAction, String[] requiredParams) {
-        String budgetName = requiredParams[0];
-        budgetAction.findBudget(budgetName);
     }
 
     private void executeBudgetHelp(BudgetAction budgetAction) {
@@ -101,9 +95,32 @@ public class BudgetCommand extends Command {
         budgetAction.deleteBudget(budgetName, expenses);
     }
 
-    private void executeListBudget(BudgetAction budgetAction) {
-        budgetAction.printBudgets();
+    private void executeListBudget(BudgetAction budgetAction, String[] optionalParams,
+        ArrayList<Expense> expenses) throws BBException {
+        // int does not have null value, use -1 instead
+        // if year is not provided, use current year
+        int month = LocalDate.now().getMonthValue();
+        int year = LocalDate.now().getYear();
+
+        if (optionalParams[0] != null) {
+            month = Integer.parseInt(optionalParams[0]);
+        }
+        if (optionalParams[1] != null) {
+            year = Integer.parseInt(optionalParams[1]);
+        }
+
+        budgetAction.printBudgets(month, year, expenses);
     }
+
+    // private void executeBudgetDetail(BudgetAction budgetAction, String[] requiredParams,ArrayList<Expense> expenses){
+    //     String budgetName = requiredParams[0];
+    //     budgetAction.detailedBudget(budgetName, expenses);
+    // }
+
+    // private void executeFindBudget(BudgetAction budgetAction, String[] requiredParams) {
+    //     String budgetName = requiredParams[0];
+    //     budgetAction.findBudget(budgetName);
+    // }
 
     @Override
     public boolean isExit() {
