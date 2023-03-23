@@ -11,6 +11,7 @@ import java.time.temporal.TemporalAdjusters;
 import java.util.ArrayList;
 
 //@@author chongyongrui
+
 /**
  * Contains methods related to budget function.
  */
@@ -43,8 +44,10 @@ public class BudgetAction {
             return;
         }
 
+
         Budget budget = new Budget(budgetName, budgetLimit);
         budgets.add(budget);
+        assert budget.getAmount() >= 0 : "Budget limit is negative!";
 
         budgetUi.printBudgetAddSuccessful(budget, budgets.size());
 
@@ -54,7 +57,7 @@ public class BudgetAction {
      * Deletes a budget from the budget list.
      *
      * @param budgetName the name of the budget to delete
-     * @param expenses list of expense that will be used to delete expense containing budgetName
+     * @param expenses   list of expense that will be used to delete expense containing budgetName
      */
     public void deleteBudget(String budgetName, ArrayList<Expense> expenses) {
         Budget budget = getBudget(budgetName);
@@ -62,7 +65,10 @@ public class BudgetAction {
             budgetUi.printBudgetDoesNotExist();
             return;
         }
-        
+
+        assert budgets.indexOf(budget) < budgets.size() : "budget should not exist!";
+
+
         // Clears the expenses if budget delete too
         ExpenseAction.clearExpensesByCategory(budgetName, expenses);
 
@@ -85,13 +91,15 @@ public class BudgetAction {
             budgetUi.printBudgetLimitNegative();
             return;
         }
-
+        assert budgets.contains(budget) : "budget does not exist!";
         budget.setAmount(budgetLimit);
-
         budgetUi.printBudgetSetSuccessful(budget, budgets.size());
     }
 
+
     /**
+     * Checks if a certain budget exists
+     * =======
      * Checks if a certain budget exists.
      *
      * @param budgetName budget name to check for if it has been used
@@ -108,7 +116,7 @@ public class BudgetAction {
 
     /**
      * Prints all the details of all budgets in the list.
-     * 
+     *
      * @throws GlobalInvalidMonthYearException
      */
     public void printBudgets(int month, int year, ArrayList<Expense> expenses) throws GlobalInvalidMonthYearException {
@@ -121,13 +129,13 @@ public class BudgetAction {
 
         // Get the total expenses of each budget
         double[] budgetsExpenseTotal = getBudgetsExpenseTotal(budgets, expenses, startDate, endDate);
-        
+
         budgetUi.printListBudgets(budgets, budgetsExpenseTotal, month, year, longestBudgetName);
     }
 
     /**
      * Gets the longest budget name for Ui space formatting.
-     * 
+     *
      * @param budgets containing the list of budgets
      * @return size of the longest budget name
      */
@@ -147,15 +155,15 @@ public class BudgetAction {
 
     /**
      * Gets the total expense of each budget.
-     * 
-     * @param budgets containing the list of budgets
-     * @param expenses use to calculate total expense based on category 
+     *
+     * @param budgets   containing the list of budgets
+     * @param expenses  use to calculate total expense based on category
      * @param startDate start date range for expense
-     * @param endDate end date range for expense
+     * @param endDate   end date range for expense
      * @return array of double that contains total expense of each budget
      */
     public static double[] getBudgetsExpenseTotal(ArrayList<Budget> budgets, ArrayList<Expense> expenses,
-        LocalDate startDate, LocalDate endDate) {
+                                                  LocalDate startDate, LocalDate endDate) {
 
         double[] budgetsExpenseTotal = new double[budgets.size()];
 
@@ -172,7 +180,7 @@ public class BudgetAction {
 
         return budgetsExpenseTotal;
     }
-    
+
     /**
      * Prints user instructions on how to use budget commands
      */
@@ -184,7 +192,7 @@ public class BudgetAction {
      * Checks if a certain budget name already exists
      *
      * @param budgetName budget name to check for if it has been used
-     * @param budgets containing the list of budgets
+     * @param budgets    containing the list of budgets
      */
     protected static boolean validateBudget(String budgetName, ArrayList<Budget> budgets) {
         for (Budget b : budgets) {
@@ -197,7 +205,7 @@ public class BudgetAction {
 
     /**
      * Gets the total amount of all budgets.
-     * 
+     *
      * @param budgets containing the list of budgets
      * @return total amount of all budgets
      */

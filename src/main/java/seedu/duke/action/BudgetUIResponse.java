@@ -56,17 +56,17 @@ public class BudgetUIResponse {
     }
 
     public static ArrayList<String> getListBudgetsMsg(ArrayList<Budget> budgets, double[] budgetExpensesTotal,
-        int longestBudgetName) {
+                                                      int longestBudgetName) {
 
         ArrayList<String> msgs = new ArrayList<String>();
 
         msgs.addAll(printBudgets(budgets, budgetExpensesTotal, longestBudgetName));
-        
+
         return msgs;
     }
 
     public void printListBudgets(ArrayList<Budget> budgets, double[] budgetExpensesTotal, int month,
-        int year, int longestBudgetName) {
+                                 int year, int longestBudgetName) {
 
         if (budgets.size() == 0) {
             ui.printMessage(Messages.BUDGET_LIST_NOTHING.toString());
@@ -80,25 +80,25 @@ public class BudgetUIResponse {
 
         String msg = String.format(Messages.BUDGET_LIST.toString(), monthString, year);
         msgs.add(msg);
-        
+
         msgs.addAll(getListBudgetsMsg(budgets, budgetExpensesTotal, longestBudgetName));
-        
+
         ui.printMessage(msgs.toArray(new String[msgs.size()]));
     }
 
     public static ArrayList<String> printBudgets(ArrayList<Budget> budgets, double[] budgetExpensesTotal,
-        int longestBudgetName) {
-        
+                                                 int longestBudgetName) {
+
         ArrayList<String> msgs = new ArrayList<String>();
 
         int i = 1;
         for (Budget b : budgets) {
             String barNameFormat = "%-" + longestBudgetName + "s " +
-                CommonsUi.formatBar(budgetExpensesTotal[i-1], b.getAmount());
+                    CommonsUi.formatBar(budgetExpensesTotal[i - 1], b.getAmount());
             String barName = String.format(barNameFormat, b.getName());
 
             String msg = String.format(Messages.BUDGET_BUDGET.toString(), i, barName,
-                budgetExpensesTotal[i-1], b.getAmount());
+                    budgetExpensesTotal[i - 1], b.getAmount());
 
             msgs.add(msg);
             i++;
