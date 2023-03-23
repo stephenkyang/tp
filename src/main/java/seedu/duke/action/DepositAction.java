@@ -6,11 +6,13 @@ import java.util.ArrayList;
 import java.util.Comparator;
 
 import seedu.duke.Ui;
-import seedu.duke.exception.GlobalDateAfterToException;
+import seedu.duke.exception.GlobalDateFromAfterToException;
 import seedu.duke.exception.GlobalDateAfterTodayException;
 import seedu.duke.exception.GlobalInvalidNumberException;
 import seedu.duke.model.Deposit;
+import seedu.duke.util.Commons;
 
+// @@author stephenkyang
 public class DepositAction {
     private static Comparator<Deposit> comparator = (deposit1, deposit2) -> deposit1.getDate()
             .compareTo(deposit2.getDate());
@@ -54,18 +56,6 @@ public class DepositAction {
         depositUi.printDepositDelSuccessful(deletedDeposit);
     }
 
-    public void clearDeposits(LocalDate startDate, LocalDate endDate) {
-        int previousSize = this.deposits.size();
-        this.deposits.removeIf(deposit -> startDate.isBefore(deposit.getDate()) && endDate.isAfter(deposit.getDate()));
-        this.deposits.removeIf(deposit -> startDate.isEqual(deposit.getDate()) || endDate.isEqual(deposit.getDate()));
-        int currentSize = this.deposits.size();
-        depositUi.printDepositClearSuccessful(previousSize - currentSize);
-    }
-
-    public void depositHelp() {
-        depositUi.printDepositCommands();
-    }
-
     public void listDeposits() {
         // Sort the dates first
         ArrayList<Deposit> sortedDeposits = sortDepositsByDate(deposits);
@@ -100,7 +90,7 @@ public class DepositAction {
     }
 
     //@@author pinyoko573
-    public void listDepositsRange(LocalDate from, LocalDate to) throws GlobalDateAfterToException {
+    public void listDepositsRange(LocalDate from, LocalDate to) throws GlobalDateFromAfterToException {
         if (from == null) {
             from = LocalDate.MIN;
         } else if (to == null) {
@@ -109,7 +99,7 @@ public class DepositAction {
 
         // Check if from < to
         if (from.isAfter(to)) {
-            throw new GlobalDateAfterToException();
+            throw new GlobalDateFromAfterToException();
         }
 
         ArrayList<Deposit> filteredDeposits = filterDepositsByDate(deposits, from, to);
@@ -118,11 +108,46 @@ public class DepositAction {
         depositUi.printListDepositsRange(sortedDeposits, from, to);
     }
 
+    // @@author stephenkyang
+    public void findDeposits(String name) {
+        ArrayList<Deposit> filteredDeposits = new ArrayList<Deposit>();
+        for (Deposit d : deposits) {
+            if (d.getName().contains(name)) {
+                filteredDeposits.add(d);
+            }
+        }
+
+        depositUi.printFindDeposits(filteredDeposits);
+    }
+
+    // @@author stephenkyang
+    public void clearDeposits(LocalDate from, LocalDate to) throws GlobalDateFromAfterToException {
+        if (from == null) {
+            from = LocalDate.MIN;
+        }
+
+        if (to == null) {
+            to = LocalDate.MAX;
+        }
+
+        Commons.checkFromDateIsAfterTo(from, to);
+
+        ArrayList<Deposit> depositList = filterDepositsByDate(deposits, from, to);
+        deleteDeposits(depositList);
+
+        depositUi.printClearDeposits(depositList);
+    }
+
+    // @@author stephenkyang
+    public void depositHelp() {
+        depositUi.printDepositCommands();
+    }
+
     //@@author pinyoko573
     private int validateDeposit(int depositId) throws GlobalInvalidNumberException {        
         int elementNo = 0;
-        for (Deposit deposit : deposits) {
-            if (deposit.getId() == depositId) {
+        for (Deposit d : deposits) {
+            if (d.getId() == depositId) {
                 return elementNo;
             }
             elementNo++;
@@ -132,15 +157,22 @@ public class DepositAction {
     }
 
     // @@author pinyoko573
+    private void deleteDeposits(ArrayList<Deposit> removingDeposits) {
+        for (Deposit d : removingDeposits) {
+            deposits.remove(d);
+        }
+    }
+
+    // @@author pinyoko573
     @SuppressWarnings("unchecked")
-    private static ArrayList<Deposit> sortDepositsByDate(ArrayList<Deposit> deposits) {
+    public static ArrayList<Deposit> sortDepositsByDate(ArrayList<Deposit> deposits) {
         ArrayList<Deposit> sortedDeposits = (ArrayList<Deposit>) deposits.clone();
         sortedDeposits.sort(comparator);
         return sortedDeposits;
     }
 
     // @@author pinyoko573
-    private static ArrayList<Deposit> filterDepositsByDate(ArrayList<Deposit> deposits, LocalDate from, LocalDate to) {
+    public static ArrayList<Deposit> filterDepositsByDate(ArrayList<Deposit> deposits, LocalDate from, LocalDate to) {
         ArrayList<Deposit> filteredDeposits = new ArrayList<Deposit>();
         
         for (Deposit d : deposits) {
@@ -151,5 +183,16 @@ public class DepositAction {
         }
 
         return filteredDeposits;
+    }
+
+    // @@author pinyoko573
+    public static double getTotalDeposits(ArrayList<Deposit> deposits) {
+        double total = 0;
+        
+        for (Deposit d : deposits) {
+            total += d.getAmount();
+        }
+
+        return total;
     }
 }

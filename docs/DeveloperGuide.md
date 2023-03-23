@@ -1,15 +1,33 @@
 # Developer Guide
 
-## Acknowledgements
+## Introduction
 
-{list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the
-original source as well}
+Budget Buddy aims to help those who want a Command Line Interface App that is a one-stop solution to keep track of their
+expenses, help them with budgeting and also be help them to visualise what they have spent.
 
-## Design & implementation
+Overspending and the lack of savings is a significant problem found in most fresh graduates. We want to create tools necessary for them so that they can realize their actual spending and achieve financial freedom in the future.
+
+## Setting up the project
+
+## Design
 
 {Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
 
-### Item Classes
+### Main Component
+
+In the main (Duke) class, the main method first calls startApplication() which initalizes the Log Manager for logging (disabled if in production stage) and Ui object for printing output messages. After initialized, it will then attempt to import the user's data from `data.json`. If there is no file, it will initalize a blank data. If importing fails, the application will print an error message and exit with code 1. Once done, it will greet the user with a message.
+
+The application then runs an infinite loop to take in and execute commands, until when the inputs `exit` to exit the application. After which, it will output a bye message and exits the application safely.
+
+### Command Component
+
+The command consists of three components: Enum CommandEnum, Abstract class Command and Class CommandParser. Each of them plays a role in retrieving the commands input by the user and redirecting to the correct components.
+
+#### CommandEnum
+#### Command
+#### CommandParser
+
+### Item Component
 
 The main 3 classes of Duke are the `budget` , `expense` and `deposit` class. Users are able to add, store and visualise
 the date relate to each
@@ -17,7 +35,9 @@ of these classes. Each of these classes are modelled as an `Item`.
 
 ![img.png](UML Diagrams/ItemClasses.png)
 
-### BudgetCommand Class
+### Budget Component
+
+#### BudgetCommand Class
 
 The `BudgetCommand` class contains methods that are related to the `Budget` function of Duke. Users are able to create
 new budgets, which are stored in a budget list. The category word from the user's input is taken from the first word of
@@ -29,6 +49,10 @@ the `BudgetAction` class.
 The class diagram below shows how the `BudgetCommand` parent class is implemented, as well as its extended classes.
 
 ![img.png](UML Diagrams/BudgetCommand.png)
+
+## Product scope
+=======
+### Deposit Component
 
 ### DepositCommand Class
 
@@ -55,33 +79,34 @@ will run, creating a new `DepositAction` class. The `execute` function will run 
 of this three class system is meant to modularize the different aspects of the internal logic so future problems would be encapsulated in
 a specific location.
 
-## Product scope
+### Expense Component
 
-### Target user profile
+### Stats Component
 
-Budget Buddy aims to help those who want a Command Line Interface App that is a one-stop solution to keep track of their
-expenses, help them with budgeting and also be help them to visualise what they have spent.
+### Others
+#### Exception Component
+#### File IO Component
 
-### Value proposition
-
-Budget Buddy tries to help people create, store, and edit multiple budgets. The ability to keep the budget on a computer allows
-users to keep their budget wherever they'd bring their computer. 
-
-## User Stories
+## Appendix A: User Stories
 
 |Version| As a ... | I want to ... | So that I can ...|
 |--------|----------|---------------|------------------|
 |v1.0|new user|see usage instructions|refer to them when I forget how to use the application|
 |v2.0|user|find a to-do item by name|locate a to-do without having to go through the entire list|
 
-## Non-Functional Requirements
+## Appendix B: Non-Functional Requirements
 
 {Give non-functional requirements}
 
-## Glossary
+## Appendix C: Glossary
 
 * *glossary item* - Definition
 
-## Instructions for manual testing
+## Appendix D: Instructions for manual testing
 
 {Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+
+## Appendix E: Acknowledgements
+
+{list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the
+original source as well}

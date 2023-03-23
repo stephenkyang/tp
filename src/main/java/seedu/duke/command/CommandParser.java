@@ -2,7 +2,6 @@ package seedu.duke.command;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 import seedu.duke.exception.BBException;
@@ -21,8 +20,6 @@ import seedu.duke.util.Pair;
  * This command will then be used to execute in Main().
  */
 public class CommandParser {
-    private static final DateTimeFormatter formatter = DateTimeFormatter
-        .ofPattern(Constants.ACCEPTABLE_DATE_FORMAT.toString());
 
     /**
      * Parses the command based on the user's input.
@@ -58,10 +55,7 @@ public class CommandParser {
             break;
         case HELP:
             command = new HelpCommand();
-            HelpCommand.showCommands();
             break;
-
-
         default:
             throw new CommandInvalidException();
         }
@@ -237,7 +231,7 @@ public class CommandParser {
                     throw new NumberFormatException();
                 }
             } else if (paramType.isAssignableFrom(LocalDate.class)) {
-                LocalDate.parse(paramValue, formatter);
+                LocalDate.parse(paramValue, Constants.ACCEPTABLE_DATE_FORMAT);
             }
         } catch (NumberFormatException | DateTimeParseException err) {
             throw new CommandParamTypeInvalidException();

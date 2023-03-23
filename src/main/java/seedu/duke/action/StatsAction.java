@@ -1,83 +1,83 @@
 package seedu.duke.action;
 
+import java.time.LocalDate;
+import java.time.temporal.TemporalAdjusters;
 import java.util.ArrayList;
 
 import seedu.duke.Data;
 import seedu.duke.Ui;
+import seedu.duke.exception.BBException;
 import seedu.duke.model.Budget;
 import seedu.duke.model.Deposit;
 import seedu.duke.model.Expense;
+import seedu.duke.util.Commons;
 
 //@@author SaiChaitanya13
 public class StatsAction {
-    private Data data;
     private StatsUIResponse statsUi;
 
+    private ArrayList<Budget> budgets;
+    private ArrayList<Deposit> deposits;
+    private ArrayList<Expense> expenses;
+
     public StatsAction(Data data, Ui ui) {
-        this.data = data;
+        this.budgets = data.getBudgets();
+        this.deposits = data.getDeposits();
+        this.expenses = data.getExpenses();
+
         statsUi = new StatsUIResponse(ui);
     }
 
-    public void viewStats() {
-        ArrayList<Budget> budgets = data.getBudgets();
-        ArrayList<Deposit> deposits = data.getDeposits();
+    public void showStats(int month, int year, boolean showDeposit, boolean showExpense) throws BBException {
+        // Check if month and year is valid
+        LocalDate endDate = Commons.isValidMonthYear(month, year);
+        LocalDate startDate = endDate.with(TemporalAdjusters.firstDayOfMonth());
 
-        double totalDeposits = 0.00;
+        // Filter deposits by date
+        ArrayList<Deposit> filteredDeposits = DepositAction.filterDepositsByDate(deposits, startDate, endDate);
+        double totalDeposits = DepositAction.getTotalDeposits(filteredDeposits);
 
-        for (Deposit d : deposits){
-            if (d != null){
-                totalDeposits += d.getAmount();
-            }
+        // Filter expenses by date
+        ArrayList<Expense> filteredExpenses = ExpenseAction.filterExpensesByDate(expenses, startDate, endDate);
+        double totalExpenses = ExpenseAction.getTotalExpenses(filteredExpenses);
+
+        ArrayList<String> budgetMsg = showBudget(startDate, endDate, month, year, filteredExpenses);
+        double totalBudgets = BudgetAction.getTotalBudgets(budgets);
+
+        ArrayList<String> depositMsg = null;
+        ArrayList<String> expenseMsg = null;
+
+        if (showDeposit) {
+            depositMsg = DepositUIResponse.printDeposits(filteredDeposits);
         }
 
-        int index = 1;
-        double totalBudgets = 0.00;
-        double totalExpenses = 0.00;
-        for (Budget b : budgets){
-            System.out.print(index + ". ");
-            System.out.print(b.getName());
-
-            Double expenseForCategory = getExpenses(b.getName());
-
-            totalBudgets += b.getAmount();
-            totalExpenses += expenseForCategory;
-            int numberOfCrosses = (int) Math.round((expenseForCategory/b.getAmount()) * 10);
-            int numberOfDashes = 0;
-            if (numberOfCrosses < 10){
-                numberOfDashes = 10 - numberOfCrosses;
-            }
-
-            for (int i = 0; i < numberOfCrosses; i++){
-                System.out.print("X");
-            }
-
-            for (int j = 0; j < numberOfDashes; j++){
-                System.out.print("-");
-            }
-
-            System.out.println(expenseForCategory + "/" + expenseForCategory);
+        if (showExpense) {
+            expenseMsg = ExpenseUIResponse.printExpenses(filteredExpenses);
         }
 
-        System.out.println("Extra deposits: $" + totalDeposits);
-        System.out.println("Total budget progress: $" + totalExpenses + "/"
-            + totalBudgets + "(+" + totalDeposits + ")");
-
-        if (totalExpenses <= (totalBudgets + totalDeposits)) {
-            System.out.println("Good job! You are on the right track!");
-        } else {
-            System.out.println("Oh no! You seem to be spending above your budget!");
-        }
+        statsUi.printStats(month, year, totalBudgets, totalDeposits, totalExpenses, budgetMsg, depositMsg, expenseMsg);
     }
 
-    private double getExpenses(String categoryName) {
-        double totalExpenses = 0;
+    /**
+     * Prints user instructions on how to use budget commands
+     */
+    public void statsHelp() {
+        statsUi.printStatsCommands();
+    }
 
-        for (Expense e : data.getExpenses()) {
-            if (e.getCategory().equals(categoryName)) {
-                totalExpenses += e.getAmount();
-            }
-        }
+    private ArrayList<String> showBudget(LocalDate startDate, LocalDate endDate,
+        int month, int year, ArrayList<Expense> filteredExpenses) {
 
-        return totalExpenses;
+        // Used to format the printing
+        int longestBudgetName = BudgetAction.getLongestBudgetName(budgets);
+
+        // Get the total expenses of each budget
+        double[] budgetsExpenseTotal = BudgetAction.getBudgetsExpenseTotal(budgets, filteredExpenses,
+            startDate, endDate);
+
+        ArrayList<String> msgs = BudgetUIResponse
+            .getListBudgetsMsg(budgets, budgetsExpenseTotal, longestBudgetName);
+
+        return msgs;
     }
 }

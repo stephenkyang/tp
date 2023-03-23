@@ -51,6 +51,8 @@ public class Duke {
             System.exit(1);
         } finally {
             ui.greetUser();
+            // BudgetAction.summaryBudget(data.getExpenses(), data.getBudgets());
+            // System.out.println(Messages.LINE_DIVIDER);
         }
     }
 
