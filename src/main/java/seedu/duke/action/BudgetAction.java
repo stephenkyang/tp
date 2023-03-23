@@ -43,8 +43,10 @@ public class BudgetAction {
             return;
         }
 
+
         Budget budget = new Budget(budgetName, budgetLimit);
         budgets.add(budget);
+        assert budget.getAmount() >= 0 : "Budget limit is negative!";
 
         budgetUi.printBudgetAddSuccessful(budget, budgets.size());
 
@@ -61,7 +63,7 @@ public class BudgetAction {
             budgetUi.printBudgetDoesNotExist();
             return;
         }
-
+        assert budgets.indexOf(budget) < budgets.size() : "budget should not exist!";
         budgets.remove(budget);
         budgetUi.printBudgetDelSuccessful(budget, budgets.size());
     }
@@ -82,9 +84,8 @@ public class BudgetAction {
             budgetUi.printBudgetLimitNegative();
             return;
         }
-
+        assert budgets.contains(budget) : "budget does not exist!";
         budget.setAmount(budgetLimit);
-
         budgetUi.printBudgetSetSuccessful(budget, budgets.size());
     }
 
@@ -105,9 +106,12 @@ public class BudgetAction {
         if (foundBudgets.isEmpty()) {
             budgetUi.printBudgetDoesNotExist();
         } else {
+
             budgetUi.printListBudgets(foundBudgets);
         }
+        assert (foundBudgets.size() != 0) : "empty list of found budgets!";
         foundBudgets.clear();
+        assert (foundBudgets.size() == 0) : "found budgets is not cleared!";
     }
 
 
