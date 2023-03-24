@@ -4,8 +4,8 @@ import seedu.duke.Data;
 import seedu.duke.action.BudgetAction;
 import seedu.duke.action.ExpenseAction;
 import seedu.duke.action.StatsAction;
-import seedu.duke.command.StatsCommand;
-import seedu.duke.exception.*;
+import seedu.duke.exception.BBException;
+import seedu.duke.exception.StatsInvalidOptionsException;
 import seedu.duke.model.Budget;
 import seedu.duke.model.Deposit;
 import seedu.duke.model.Expense;
@@ -13,14 +13,11 @@ import seedu.duke.model.Expense;
 import org.junit.jupiter.api.Test;
 import seedu.duke.Ui;
 import seedu.duke.action.DepositAction;
-import seedu.duke.model.Deposit;
 
-import java.sql.Array;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.concurrent.ThreadPoolExecutor;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import static org.junit.jupiter.api.Assertions.fail;
 
 public class StatsTest {
