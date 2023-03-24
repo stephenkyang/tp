@@ -29,6 +29,7 @@ The command consists of three components: Enum CommandEnum, Abstract class Comma
 #### Command
 #### CommandParser
 
+## Product scope
 ### Item Component
 
 The main 3 classes of Duke are the `budget` , `expense` and `deposit` class. Users are able to add, store and visualise
@@ -52,7 +53,7 @@ The class diagram below shows how the `BudgetCommand` parent class is implemente
 
 ![img.png](uml/BudgetCommand.png)
 
-## Product scope
+
 =======
 ### Deposit Component
 
@@ -65,12 +66,12 @@ deposits using keywords, and list all deposits.
 The user's input is split by the parser in the `CommandParser` class and is redirected to the 'DepositCommand' class if the first word
 is "deposit." Based on the second word, a method in `DepositAction` class is called corresponding to the command requested by the user.
 
-Attached below is the how the `DepositCommand` class is implemented along with its relation with the other `Data` classes and the abstract
+Attached below is how the `DepositCommand` class is implemented along with its relation with the other `Data` classes and the abstract
 `Command` class.
 
 ![img.png](uml/DepositCommand.png)
 
-###Design & Implementation of the Deposit Feature
+### Design & Implementation of the Deposit Feature
 
 Like all other functionalities of BudgetBuddy, the deposit feature is heavily modularized and designed with an OOP lens. Because of this, 
 the parsing of user input, the parsers for each feature, and each feature's actions are all in separate classes. 
@@ -84,6 +85,15 @@ a specific location.
 ### Expense Component
 
 ### Stats Component
+
+### StatsCommand Class
+The 'StatsCommand' class contains methods that are related to the execution of the stats functionality in BudgetBuddy. Users can 
+use this command to view all the details of their expenses, budgets and deposits in the current month. Through this feature, users will know
+their current progress and if their expenses have exceeded their budget. <Add diagram>
+
+### Design & Implementation of the Stats Feature
+The stats feature, just like all other features, also is designed and implemented to incorporate good OOP. Therefore, there are 
+separate classes for each part of the Stats Feature, which includes StatsAction, StatsUIResponse and StatsCommand.
 
 ### Others
 #### Exception Component

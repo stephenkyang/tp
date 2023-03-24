@@ -62,8 +62,8 @@ public class StatsCommand extends Command {
                 throw new StatsInvalidOptionsException();
             }
 
-            showDeposit = verboseOptions.contains("d") ? true : false;
-            showExpense = verboseOptions.contains("e") ? true : false;
+            showDeposit = verboseOptions.contains("d");
+            showExpense = verboseOptions.contains("e");
         }
 
         statsAction.showStats(month, year, showDeposit, showExpense);
