@@ -1,0 +1,58 @@
+@startuml
+
+hide footbox
+
+ -> ":CommandParser": input: String
+
+activate ":CommandParser"
+":CommandParser" -> ":CommandParser": parse(input)
+activate  ":CommandParser"
+":CommandParser" -> ":CommandParser": getCommandName(input)
+activate ":CommandParser"
+return commandName: CommandEnum
+
+":CommandParser" -> ":Command"
+activate ":Command"
+
+":Command" -> ":Command": getActions
+activate ":Command"
+return length :Integer
+
+
+opt length is 0
+    ":Command" --> ":CommandParser": command
+
+   end
+
+
+
+activate ":Command"
+
+
+":Command" -> ":Command": getAction(command,input)
+activate ":Command"
+return action :String
+
+":Command" -> ":Command": setAction(action)
+activate ":Command"
+return
+
+":Command" -> ":Command": getRequiredParams(command,action,input)
+activate ":Command"
+return requiredParams :String[]
+
+":Command" -> ":Command": getOptionalParams(command,action,input)
+activate ":Command"
+return optionalParams :String[]
+
+":Command" -> ":Command": setParams(requiredParams, optionalParams)
+activate ":Command"
+return optionalParans :String[]
+
+
+return command
+destroy ":Command"
+deactivate ":Command"
+
+
+@enduml

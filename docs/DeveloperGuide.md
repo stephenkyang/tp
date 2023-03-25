@@ -5,7 +5,8 @@
 Budget Buddy aims to help those who want a Command Line Interface App that is a one-stop solution to keep track of their
 expenses, help them with budgeting and also be help them to visualise what they have spent.
 
-Overspending and the lack of savings is a significant problem found in most fresh graduates. We want to create tools necessary for them so that they can realize their actual spending and achieve financial freedom in the future.
+Overspending and the lack of savings is a significant problem found in most fresh graduates. We want to create tools
+necessary for them so that they can realize their actual spending and achieve financial freedom in the future.
 
 ## Setting up the project
 
@@ -17,19 +18,35 @@ Overspending and the lack of savings is a significant problem found in most fres
 
 ![](uml/MainSeq.png)
 
-In the main (Duke) class, the main method first calls startApplication() which initalizes the Log Manager for logging (disabled if in production stage) and Ui object for printing output messages. After initialized, it will then attempt to import the user's data from `data.json`. If there is no file, it will initalize a blank data. If importing fails, the application will print an error message and exit with code 1. Once done, it will greet the user with a message.
+In the main (Duke) class, the main method first calls startApplication() which initalizes the Log Manager for logging (
+disabled if in production stage) and Ui object for printing output messages. After initialized, it will then attempt to
+import the user's data from `data.json`. If there is no file, it will initalize a blank data. If importing fails, the
+application will print an error message and exit with code 1. Once done, it will greet the user with a message.
 
-The application then runs an infinite loop to take in and execute commands, until when the inputs `exit` to exit the application. After which, it will output a bye message and exits the application safely.
+The application then runs an infinite loop to take in and execute commands, until when the inputs `exit` to exit the
+application. After which, it will output a bye message and exits the application safely.
 
 ### Command Component
 
-The command consists of three components: Enum CommandEnum, Abstract class Command and Class CommandParser. Each of them plays a role in retrieving the commands input by the user and redirecting to the correct components.
+The command consists of three components: Enum CommandEnum, Abstract class Command and Class CommandParser. Each of them
+plays a role in retrieving the commands input by the user and redirecting to the correct components.
 
 #### CommandEnum
+
 #### Command
+
 #### CommandParser
 
+The `CommandParser` class takes in an input from the `Duke` class as seen in the sequence diagram above. It then parses
+the information
+to create a command of a specific type (eg `BudgetCommand`, `DepositCommand` , explained in the class diagram above)
+based
+the input.
+
+![img.png](uml/CommandParserSequence.png)
+
 ## Product scope
+
 ### Item Component
 
 The main 3 classes of Duke are the `budget` , `expense` and `deposit` class. Users are able to add, store and visualise
@@ -53,33 +70,43 @@ The class diagram below shows how the `BudgetCommand` parent class is implemente
 
 ![img.png](uml/BudgetCommand.png)
 
-
 =======
+
 ### Deposit Component
 
 ### DepositCommand Class
 
-The `DepositCommand` class contains methods that relate to the execution of the deposit functionality in BudgetBuddy. Users can 
-create new deposits with a timestamp (if necessary). These deposits are stored in a deposit list and users can delete deposits, find
+The `DepositCommand` class contains methods that relate to the execution of the deposit functionality in BudgetBuddy.
+Users can
+create new deposits with a timestamp (if necessary). These deposits are stored in a deposit list and users can delete
+deposits, find
 deposits using keywords, and list all deposits.
 
-The user's input is split by the parser in the `CommandParser` class and is redirected to the 'DepositCommand' class if the first word
-is "deposit." Based on the second word, a method in `DepositAction` class is called corresponding to the command requested by the user.
+The user's input is split by the parser in the `CommandParser` class and is redirected to the 'DepositCommand' class if
+the first word
+is "deposit." Based on the second word, a method in `DepositAction` class is called corresponding to the command
+requested by the user.
 
-Attached below is how the `DepositCommand` class is implemented along with its relation with the other `Data` classes and the abstract
+Attached below is how the `DepositCommand` class is implemented along with its relation with the other `Data` classes
+and the abstract
 `Command` class.
 
 ![img.png](uml/DepositCommand.png)
 
 ### Design & Implementation of the Deposit Feature
 
-Like all other functionalities of BudgetBuddy, the deposit feature is heavily modularized and designed with an OOP lens. Because of this, 
-the parsing of user input, the parsers for each feature, and each feature's actions are all in separate classes. 
+Like all other functionalities of BudgetBuddy, the deposit feature is heavily modularized and designed with an OOP lens.
+Because of this,
+the parsing of user input, the parsers for each feature, and each feature's actions are all in separate classes.
 
-On a high level, the deposit feature starts with `CommandParser` taking in the input and choosing which `Command` class to execute from.
-This happens with all user input in BudgetBuddy. Then if the first word is "deposit," the `execute` function of the `DepositCommand` class
-will run, creating a new `DepositAction` class. The `execute` function will run a method corresponding to what the user inputs. The design
-of this three class system is meant to modularize the different aspects of the internal logic so future problems would be encapsulated in
+On a high level, the deposit feature starts with `CommandParser` taking in the input and choosing which `Command` class
+to execute from.
+This happens with all user input in BudgetBuddy. Then if the first word is "deposit," the `execute` function of
+the `DepositCommand` class
+will run, creating a new `DepositAction` class. The `execute` function will run a method corresponding to what the user
+inputs. The design
+of this three class system is meant to modularize the different aspects of the internal logic so future problems would
+be encapsulated in
 a specific location.
 
 ### Expense Component
@@ -87,16 +114,23 @@ a specific location.
 ### Stats Component
 
 ### StatsCommand Class
-The 'StatsCommand' class contains methods that are related to the execution of the stats functionality in BudgetBuddy. Users can 
-use this command to view all the details of their expenses, budgets and deposits in the current month. Through this feature, users will know
+
+The 'StatsCommand' class contains methods that are related to the execution of the stats functionality in BudgetBuddy.
+Users can
+use this command to view all the details of their expenses, budgets and deposits in the current month. Through this
+feature, users will know
 their current progress and if their expenses have exceeded their budget. <Add diagram>
 
 ### Design & Implementation of the Stats Feature
-The stats feature, just like all other features, also is designed and implemented to incorporate good OOP. Therefore, there are 
+
+The stats feature, just like all other features, also is designed and implemented to incorporate good OOP. Therefore,
+there are
 separate classes for each part of the Stats Feature, which includes StatsAction, StatsUIResponse and StatsCommand.
 
 ### Others
+
 #### Exception Component
+
 #### File IO Component
 
 ## Appendix A: User Stories
