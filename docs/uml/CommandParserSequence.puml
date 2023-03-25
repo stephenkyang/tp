@@ -2,6 +2,7 @@
 
 hide footbox
 
+
  -> ":CommandParser": input: String
 
 activate ":CommandParser"
@@ -18,16 +19,9 @@ activate ":Command"
 activate ":Command"
 return length :Integer
 
-
 opt length is 0
     ":Command" --> ":CommandParser": command
-
-   end
-
-
-
-activate ":Command"
-
+end
 
 ":Command" -> ":Command": getAction(command,input)
 activate ":Command"
@@ -49,10 +43,11 @@ return optionalParams :String[]
 activate ":Command"
 return optionalParans :String[]
 
-
 return command
 destroy ":Command"
+return command
 deactivate ":Command"
+
 
 
 @enduml
