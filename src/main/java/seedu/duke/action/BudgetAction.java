@@ -98,8 +98,6 @@ public class BudgetAction {
 
 
     /**
-     * Checks if a certain budget exists
-     * =======
      * Checks if a certain budget exists.
      *
      * @param budgetName budget name to check for if it has been used
@@ -163,7 +161,7 @@ public class BudgetAction {
      * @return array of double that contains total expense of each budget
      */
     public static double[] getBudgetsExpenseTotal(ArrayList<Budget> budgets, ArrayList<Expense> expenses,
-                                                  LocalDate startDate, LocalDate endDate) {
+        LocalDate startDate, LocalDate endDate) {
 
         double[] budgetsExpenseTotal = new double[budgets.size()];
 
@@ -218,6 +216,28 @@ public class BudgetAction {
         return total;
     }
 
+    /**
+     * Prints a message about budgets that are close to the limit upon the initialisation of Duke
+     */
+    public static ArrayList<String> summaryBudget(ArrayList<Budget> budgets, ArrayList<Expense> expenses) {
+        ArrayList<String> msgs = new ArrayList<String>();
+
+        // check if there is budget data
+        if (budgets.size() == 0) {
+            return msgs;
+        }
+
+        // for each budget, get expenses total on current month
+        LocalDate startDate = LocalDate.now().with(TemporalAdjusters.firstDayOfMonth());
+        LocalDate endDate = startDate.with(TemporalAdjusters.lastDayOfMonth());
+
+        double[] budgetsExpenseTotal = getBudgetsExpenseTotal(budgets, expenses, startDate, endDate);
+        int longestBudgetName = getLongestBudgetName(budgets);
+
+        msgs.addAll(BudgetUIResponse.getSummaryBudget(budgets, budgetsExpenseTotal, longestBudgetName));
+        return msgs;
+    }
+
     // /**
     //  * Finds if a budget contains the keywords input by user
     //  *
@@ -238,26 +258,6 @@ public class BudgetAction {
     //         budgetUi.printFindBudgets(foundBudgets);
     //     }
     //     foundBudgets.clear();
-    // }
-
-    // /**
-    //  * Prints a message about budgets that are close to the limit upon the initialisation of Duke
-    //  */
-    // public static void summaryBudget(ArrayList<Expense> expenses, ArrayList<Budget> budgets) {
-    //     int count = 0;
-
-    //     for (Budget budget : budgets) {
-    //         double amountSpent = ExpenseUIResponse.findTotalRelatedExpenses(expenses, budget.getName());
-    //         double ratio = amountSpent / budget.getAmount();
-    //         if (ratio >= 0.75) {
-    //             count += 1;
-    //             System.out.println(count + ". Warning: " + budget.getName() + " budget:");
-    //             printBudgetDetailBar(ratio);
-    //         }
-    //     }
-    //     if (count == 0 && budgets.size() != 0) {
-    //         System.out.println("Good Job! There are no budgets that are close to its limit!");
-    //     }
     // }
 
     // /**

@@ -17,6 +17,7 @@ public class Constants {
 
     // COLOUR CODES
     public static final String ANSI_RED = "\u001B[31m";
+    public static final String ANSI_GREEN = "\u001B[32m";
     public static final String ANSI_YELLOW = "\u001B[33m";
     public static final String ANSI_RESET = "\u001B[0m";
 
@@ -24,4 +25,6 @@ public class Constants {
     public static final int MAX_BARS = 20;
     public static final String BLACK_BAR = "\u2588";
     public static final String WHITE_BAR = "\u2591";
+    public static final int YELLOW_BAR_MIN_COUNT = 15;
+    public static final int RED_BAR_MIN_COUNT = 18;
 }

@@ -56,7 +56,7 @@ public class BudgetUIResponse {
     }
 
     public static ArrayList<String> getListBudgetsMsg(ArrayList<Budget> budgets, double[] budgetExpensesTotal,
-                                                      int longestBudgetName) {
+        int longestBudgetName) {
 
         ArrayList<String> msgs = new ArrayList<String>();
 
@@ -66,7 +66,7 @@ public class BudgetUIResponse {
     }
 
     public void printListBudgets(ArrayList<Budget> budgets, double[] budgetExpensesTotal, int month,
-                                 int year, int longestBudgetName) {
+        int year, int longestBudgetName) {
 
         if (budgets.size() == 0) {
             ui.printMessage(Messages.BUDGET_LIST_NOTHING.toString());
@@ -87,7 +87,7 @@ public class BudgetUIResponse {
     }
 
     public static ArrayList<String> printBudgets(ArrayList<Budget> budgets, double[] budgetExpensesTotal,
-                                                 int longestBudgetName) {
+        int longestBudgetName) {
 
         ArrayList<String> msgs = new ArrayList<String>();
 
@@ -107,8 +107,14 @@ public class BudgetUIResponse {
         return msgs;
     }
 
-    // public void printFindBudgets(ArrayList<Budget> budgets) {
-    //     ArrayList<String> msgs = new ArrayList<String>();
-    //     msgs.AddAll()
-    // }
+    public static ArrayList<String> getSummaryBudget(ArrayList<Budget> budgets,
+        double[] budgetExpensesTotal, int longestBudgetName) {
+
+        ArrayList<String> msgs = new ArrayList<String>();
+        msgs.add(Messages.BUDGET_CURRENT_PROGRESS.toString());
+        
+        msgs.addAll(printBudgets(budgets, budgetExpensesTotal, longestBudgetName));
+
+        return msgs;
+    }
 }
