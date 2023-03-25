@@ -1,7 +1,9 @@
 package seedu.duke;
 
+import java.util.ArrayList;
 import java.util.logging.LogManager;
 
+import seedu.duke.action.BudgetAction;
 import seedu.duke.command.Command;
 import seedu.duke.command.CommandParser;
 import seedu.duke.exception.BBException;
@@ -49,9 +51,8 @@ public class Duke {
             ui.printErrorMessage(err.getMessage());
             System.exit(1);
         } finally {
-            ui.greetUser();
-            // BudgetAction.summaryBudget(data.getExpenses(), data.getBudgets());
-            // System.out.println(Messages.LINE_DIVIDER);
+            ArrayList<String> summaryMsgs = BudgetAction.summaryBudget(data.getBudgets(), data.getExpenses());
+            ui.greetUser(summaryMsgs);
         }
     }
 

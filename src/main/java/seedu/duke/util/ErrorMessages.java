@@ -13,7 +13,7 @@ public enum ErrorMessages {
     ERROR_BUDGET_LIST_INVALID_MONTHYEAR("Please input a valid month or month & date that is before today."),
 
     ERROR_DEPOSIT_INVALID_ACTION("Invalid action for deposit. Use these actions: add, del, list, clear, help"),
-    ERROR_DEPOSIT_ADD_INVALID_PARAM("Invalid parameters. Example: deposit add /n lottery /a 3000.00 [/d] 23-03-"),
+    ERROR_DEPOSIT_ADD_INVALID_PARAM("Invalid parameters. Example: deposit add /n lottery /a 3000.00 [/d] 23-03-2023"),
     ERROR_DEPOSIT_DEL_INVALID_PARAM("Invalid parameters. Example: deposit del /n 1" + 
         "\n Delete with the corresponding list number from `deposit list`."),
     ERROR_DEPOSIT_FIND_INVALID_PARAM("Invalid parameters. Example: deposit find /n lottery"),

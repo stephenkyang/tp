@@ -1,5 +1,6 @@
 package seedu.duke;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import seedu.duke.util.Messages;
@@ -54,8 +55,13 @@ public class Ui {
     /**
      * Greets the user and shows the app logo.
      */
-    public void greetUser() {
-        printMessage(Messages.APP_LOGO.toString(), Messages.INFO_WELCOME.toString());
+    public void greetUser(ArrayList<String> summaryMsgs) {
+        ArrayList<String> msgs = new ArrayList<String>();
+        msgs.add(Messages.APP_LOGO.toString());
+        msgs.add(Messages.INFO_WELCOME.toString());
+        msgs.addAll(summaryMsgs);
+
+        printMessage(msgs.toArray(new String[msgs.size()]));
     }
 
     /**
