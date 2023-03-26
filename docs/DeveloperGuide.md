@@ -106,7 +106,6 @@ Like all other functionalities of BudgetBuddy, the deposit feature is heavily mo
 Because of this,
 the parsing of user input, the parsers for each feature, and each feature's actions are all in separate classes.
 
-<<<<<<< HEAD
 On a high level, the deposit feature starts with `CommandParser` taking in the input and choosing which `Command` class
 to execute from.
 This happens with all user input in BudgetBuddy. Then if the first word is "deposit," the `execute` function of
@@ -114,40 +113,43 @@ the `DepositCommand` class
 will run, creating a new `DepositAction` class. The `execute` function will run a method corresponding to what the user
 inputs. The design
 of this three class system is meant to modularize the different aspects of the internal logic so future problems would
-be encapsulated in
-=======
-On a high level, the deposit feature starts with `CommandParser` taking in the input and choosing which `Command` class to execute from.
-This happens with all user input in BudgetBuddy. Then, if the first word is "deposit", the `execute` function of the `DepositCommand` class
-will run, creating a new `DepositAction` class. The `execute` function will run a method corresponding to what the user inputs. The design
-of this three class system is meant to modularize the different aspects of the internal logic so future problems would be encapsulated in
->>>>>>> 28cf47e2da1f373f06d2c02f0e30bcc91384f106
-a specific location.
+be encapsulated in a specific location.
 
 ### Expense Component
 
 ### ExpenseCommand Class
 
-The `ExpenseCommand` class contains methods that relate to the execution of the expense functionality in BudgetBuddy. Users can
-create new expense entries with a timestamp (if necessary). These expenses are then stored in an expense list and users can delete existing
+The `ExpenseCommand` class contains methods that relate to the execution of the expense functionality in BudgetBuddy.
+Users can
+create new expense entries with a timestamp (if necessary). These expenses are then stored in an expense list and users
+can delete existing
 expenses, find expenses using keywords, and list all expenses according to their categories.
 
-The user input is split by the parser in the `CommandParser` class and is redirected to the `ExpenseCommand` class if the first word is 
-"expense". Based on the second command word, a method in `CommandAction` class is called corresponding to the command entered by the user.
+The user input is split by the parser in the `CommandParser` class and is redirected to the `ExpenseCommand` class if
+the first word is
+"expense". Based on the second command word, a method in `CommandAction` class is called corresponding to the command
+entered by the user.
 
-Attached below is how the `ExpenseCommand` class is implemented along with its relation with the other `Data` classes and the abstract 
+Attached below is how the `ExpenseCommand` class is implemented along with its relation with the other `Data` classes
+and the abstract
 `Command` class.
 
 ![img.png](uml/ExpenseCommand.png)
 
 ### Design & Implementation of the Expense Feature
 
-The expense feature is similarly modularized and designed with an OOP lens. As such, its functionalities have been separated into different
+The expense feature is similarly modularized and designed with an OOP lens. As such, its functionalities have been
+separated into different
 classes such as the parsing of user input, and the parsing and execution of each of its features.
 
-On a high level, the expense feature starts with `CommandParser` taking in the input and choosing which `Command` class to execute from.
-This happens with all user input in BudgetBuddy. Then, if the first word is "expense", the `execute` function of the `ExpenseCommand` class
-will run, creating a new `ExpenseAction` class. The `execute` function will run a method corresponding to what the user inputs. The design
-of this three class system is meant to modularize the different aspects of the internal logic so future problems would be encapsulated in
+On a high level, the expense feature starts with `CommandParser` taking in the input and choosing which `Command` class
+to execute from.
+This happens with all user input in BudgetBuddy. Then, if the first word is "expense", the `execute` function of
+the `ExpenseCommand` class
+will run, creating a new `ExpenseAction` class. The `execute` function will run a method corresponding to what the user
+inputs. The design
+of this three class system is meant to modularize the different aspects of the internal logic so future problems would
+be encapsulated in
 a specific location.
 
 ### Stats Component
