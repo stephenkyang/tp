@@ -96,7 +96,7 @@ public class BudgetCommand extends Command {
     }
 
     private void executeListBudget(BudgetAction budgetAction, String[] optionalParams,
-        ArrayList<Expense> expenses) throws BBException {
+                                   ArrayList<Expense> expenses) throws BBException {
         // int does not have null value, use -1 instead
         // if year is not provided, use current year
         int month = LocalDate.now().getMonthValue();

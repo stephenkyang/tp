@@ -58,6 +58,7 @@ Use the command `budget help` to learn the specific budget related commands
 5. You can search for budgets that include a certain keyword:
 
    `budget find /c (keyword)`
+   <br/><br/>
 
 <br/><br/>
 
