@@ -2,9 +2,9 @@ package seedu.duke.util;
 
 public enum Messages {
     LINE_DIVIDER("_______________"),
-    APP_LOGO("\n" +
-        " █▀▀█ █   █ █▀▀▄ █▀▀▀ █▀▀ ▀▀█▀▀ 　  █▀▀█ █  █ █▀▀▄ █▀▀▄ █  █ \n" +
-        " █▀▀▄ █   █ █  █ █ ▀█ █▀▀   █   　  █▀▀▄ █  █ █  █ █  █ █▄▄█ \n" +
+    APP_LOGO(System.lineSeparator() +
+        " █▀▀█ █   █ █▀▀▄ █▀▀▀ █▀▀ ▀▀█▀▀ 　  █▀▀█ █  █ █▀▀▄ █▀▀▄ █  █ " + System.lineSeparator() +
+        " █▀▀▄ █   █ █  █ █ ▀█ █▀▀   █   　  █▀▀▄ █  █ █  █ █  █ █▄▄█ " + System.lineSeparator() +
         " █▄▄█  ▀▀▀  ▀▀▀  ▀▀▀▀ ▀▀▀   ▀   　  █▄▄█  ▀▀▀ ▀▀▀  ▀▀▀  ▄▄▄█"),
     INFO_WELCOME("Welcome to BudgetBuddy! What can I do for you?"),
     INFO_EXIT("Bye! Hope to see you soon!"),
@@ -31,7 +31,8 @@ public enum Messages {
     BUDGET_LIST("Your budget list for %s %d:"),
     BUDGET_LIST_NOTHING("You have no budgets."),
     BUDGET_NUMBER_OF("There are %d budget categories."),
-    BUDGET_HELP_COMMANDS("\n1. You can add a monthly budget: " + System.lineSeparator()
+    BUDGET_CURRENT_PROGRESS(System.lineSeparator() + "Here is your current progress on the budget: "),
+    BUDGET_HELP_COMMANDS("1. You can add a monthly budget: " + System.lineSeparator()
         + "   budget add /c (category name) /l (spending limit)" + System.lineSeparator()
         + "2. You can modify an existing budget: " + System.lineSeparator()
         + "   budget set /c (category) /l (spending limit)" + System.lineSeparator()
@@ -88,7 +89,7 @@ public enum Messages {
         + "   expense list [optional] /c (category name) /f DD-MM-YYYY /t DD-MM-YYYY" + System.lineSeparator()
         + "4. You can search for expenses that include a certain keyword:" + System.lineSeparator()
         + "   expense find /n (keyword)" + System.lineSeparator()
-        + "5. You can clear expenses (by category, date or both): \n" + System.lineSeparator()
+        + "5. You can clear expenses (by category, date or both): " + System.lineSeparator()
         + "   expense clear [optional] /c (category name) /f DD-MM-YYYY /t DD-MM-YYYY"),
 
     STATS_PRINT_INTRO("Your current progress for %s %d:"),
@@ -100,8 +101,8 @@ public enum Messages {
     STATS_PRINT_RIGHT_TRACK("Good job! You are on the right track!"),
     STATS_PRINT_OVERSPEND("Oh no! You seem to be spending too much!"),
     STATS_PRINT_NO_STATS("There are no stats currently! Please try another command!"),
-    STATS_HELP_COMMANDS("1. You can show stats by: \n" +
-        "   stats show [/m <month>] [/y <year>] [/v <d for deposit, e for expense, de for both>] \n");
+    STATS_HELP_COMMANDS("1. You can show stats by: " + System.lineSeparator() +
+        "   stats show [/m <month>] [/y <year>] [/v <d for deposit, e for expense, de for both>]");
 
     private final String message;
 
