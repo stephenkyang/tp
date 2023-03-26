@@ -70,7 +70,14 @@ The class diagram below shows how the `BudgetCommand` parent class is implemente
 
 ![img.png](uml/BudgetCommand.png)
 
-=======
+#### BudgetCommand Sequence
+
+Once a string `input` from the user has been deemed as a `Budget` command as explained in the `CommandParser` sequence
+diagram above,
+the `input` will be passed into the `BudgetCommand` class. This class determines what budget commands to carry out to
+update the `data` stored in the `Budget` and `Expense` array lists, as shown in the sequence diagram below.
+
+![img.png](uml/BudgetCommandSequence.png)
 
 ### Deposit Component
 
