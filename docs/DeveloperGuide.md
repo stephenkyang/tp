@@ -16,7 +16,7 @@ necessary for them so that they can realize their actual spending and achieve fi
 
 ### Main Component
 
-![](uml/MainSeq.png)
+![MainSeq.png](uml/MainSequence.png)
 
 In the main (Duke) class, the main method first calls startApplication() which initalizes the Log Manager for logging (
 disabled if in production stage) and Ui object for printing output messages. After initialized, it will then attempt to
@@ -145,6 +145,14 @@ and the abstract
 
 ![ExpenseCommand.png](uml/ExpenseCommand.png)
 
+### ExpenseCommand Sequence
+
+Once a string `input` from the user has been deemed as an `Expense` command, the `input` will be passed into the
+`ExpenseCommand` class. This class determines what expense commands to carry out to update the `data` stored in the
+`Budget` and `Expense` array lists, as shown in the sequence diagram below.
+
+![img.png](uml/ExpenseCommandSequence.png)
+
 ### Design & Implementation of the Expense Feature
 
 The expense feature is similarly modularized and designed with an OOP lens. As such, its functionalities have been
@@ -178,6 +186,8 @@ their current progress and if their expenses have exceeded their budget.
 The stats feature, just like all other features, also is designed and implemented to incorporate good OOP. Therefore,
 there are
 separate classes for each part of the Stats Feature, which includes StatsAction, StatsUIResponse and StatsCommand.
+
+![img.png](uml/StatsCommandSequence.png)
 
 ### Others
 
@@ -233,6 +243,7 @@ separate classes for each part of the Stats Feature, which includes StatsAction,
 * *Budget* - A category of a budget (e.g. Transport, Food, Electricity) with the maximum spending budget indicated by the user.
 * *Deposit* - Additional earnings (e.g. Lottery, Bank interest) that is made by the user
 * *Expense* - An item that the user has spent on, which must be related to a Budget.
+* *Stats* - Statistics of savings and expenditure
 
 ## Appendix D: Instructions for manual testing
 
