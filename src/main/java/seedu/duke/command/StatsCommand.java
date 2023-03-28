@@ -12,11 +12,12 @@ import seedu.duke.util.Pair;
 
 //@@author SaiChaitanya13
 public class StatsCommand extends Command {
-    // Format for Stats command.
-    // Actions, required and optional parameters (w/ data type) of each action are specified.
-    private static final String[] ACTIONS = {"show", "help"};
-    private static final Pair[][] ACTIONS_REQUIRED_PARAMS = {{},{}};
-    private static final Pair[][] ACTIONS_OPTIONAL_PARAMS = {
+
+    // Format
+    private static String[] ACTIONS = {"show", "help"};
+    private static Pair[][] ACTIONS_REQUIRED_PARAMS = {{},{}};
+    private static Pair[][] ACTIONS_OPTIONAL_PARAMS = {
+
         {new Pair("/m", int.class), new Pair("/y", int.class), new Pair ("/v", String.class)},
         {}
     };
@@ -25,6 +26,13 @@ public class StatsCommand extends Command {
         super(CommandEnum.STATS, ACTIONS, ACTIONS_REQUIRED_PARAMS, ACTIONS_OPTIONAL_PARAMS);
     }
 
+    /**
+     * Executes different functions based on stats action
+     *
+     * @param data Stored information regarding the different transactions
+     * @param ui User interface of the application
+     * @throws BBException For unknown and invalid inputs
+     */
     @Override
     public void execute(Data data, Ui ui) throws BBException {
         StatsAction statsAction = new StatsAction(data, ui);
@@ -41,14 +49,16 @@ public class StatsCommand extends Command {
         }
     }
 
+
     /**
      * Parses the optional attributes such as month, year, verbose options,
      * which will be used to execute show stats in the action class.
      * If neither month and year is specified, use the current's month and year.
      * 
-     * @param statsAction action selected will be execute through action class
+     * @param statsAction action selected will be executed through action class
      * @param optionalParams parameters containing the optional attributes
      * @throws BBException for any error thrown in the action class
+
      */
     private void executeShowStats(StatsAction statsAction, String[] optionalParams) throws BBException {
         // if year is not provided, use current year
@@ -78,10 +88,19 @@ public class StatsCommand extends Command {
         statsAction.showStats(month, year, showDeposit, showExpense);
     }
 
+    /**
+     * Executes stats help command
+     *
+     * @param statsAction Object of class StatsAction
+     */
     private void executeHelpStats(StatsAction statsAction) {
         statsAction.statsHelp();
     }
 
+    /**
+     * Function to show program should not exit
+     * @return false --> Program should not exit
+     */
     @Override
     public boolean isExit() {
         return false;

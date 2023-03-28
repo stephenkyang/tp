@@ -6,8 +6,8 @@ import seedu.duke.util.ErrorMessages;
 
 //@@author pinyoko573
 public class CommandParamInvalidException extends BBException {
-    private CommandEnum commandName;
-    private String action;
+    private final CommandEnum commandName;
+    private final String action;
 
     public CommandParamInvalidException(Command command) {
         this.commandName = command.getCommandName();
@@ -91,11 +91,9 @@ public class CommandParamInvalidException extends BBException {
     }
 
     private String getStatsMessage(String action) {
-        switch(action) {
-        case "show":
+        if (action.equals("show")) {
             return ErrorMessages.ERROR_STATS_SHOW_INVALID_PARAM.toString();
-        default:
-            return ErrorMessages.ERROR_UNKNOWN_INVALID_ACTION.toString();
         }
+        return ErrorMessages.ERROR_UNKNOWN_INVALID_ACTION.toString();
     }
 }

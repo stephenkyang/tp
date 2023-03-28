@@ -13,6 +13,8 @@ import seedu.duke.model.Expense;
 import seedu.duke.util.Commons;
 
 //@@author SaiChaitanya13
+
+
 public class StatsAction {
     private StatsUIResponse statsUi;
 
@@ -20,6 +22,12 @@ public class StatsAction {
     private ArrayList<Deposit> deposits;
     private ArrayList<Expense> expenses;
 
+    /**
+     * Constructor for StatsAction class
+     *
+     * @param data Data of the various transactions
+     * @param ui UI of the application
+     */
     public StatsAction(Data data, Ui ui) {
         this.budgets = data.getBudgets();
         this.deposits = data.getDeposits();
@@ -28,6 +36,15 @@ public class StatsAction {
         statsUi = new StatsUIResponse(ui);
     }
 
+    /**
+     * Function shows the different stats and prints them, filtered based on date and checks if the date is valid
+     *
+     * @param month Current month
+     * @param year Current year
+     * @param showDeposit If there are deposits
+     * @param showExpense If there are expenses
+     * @throws BBException Throws exception for unknown and invalid inputs
+     */
     public void showStats(int month, int year, boolean showDeposit, boolean showExpense) throws BBException {
         // Check if month and year is valid
         LocalDate endDate = Commons.isValidMonthYear(month, year);
@@ -65,6 +82,16 @@ public class StatsAction {
         statsUi.printStatsCommands();
     }
 
+    /**
+     * Gets the budgets that are present
+     *
+     * @param startDate Start date of budgets to be shown
+     * @param endDate End date of budgets to be shown
+     * @param month Current month
+     * @param year Current year
+     * @param filteredExpenses Filtered expenses
+     * @return Messages to be printed out to the user
+     */
     private ArrayList<String> showBudget(LocalDate startDate, LocalDate endDate,
         int month, int year, ArrayList<Expense> filteredExpenses) {
 
