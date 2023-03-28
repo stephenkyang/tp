@@ -16,11 +16,11 @@ import seedu.duke.util.Commons;
 
 
 public class StatsAction {
-    private final StatsUIResponse statsUi;
+    private StatsUIResponse statsUi;
 
-    private final ArrayList<Budget> budgets;
-    private final ArrayList<Deposit> deposits;
-    private final ArrayList<Expense> expenses;
+    private ArrayList<Budget> budgets;
+    private ArrayList<Deposit> deposits;
+    private ArrayList<Expense> expenses;
 
     /**
      * Constructor for StatsAction class

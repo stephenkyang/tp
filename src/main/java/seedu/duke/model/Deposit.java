@@ -4,8 +4,8 @@ import java.time.LocalDate;
 
 //@@author stephenkyang
 public class Deposit extends Item {
-    private final LocalDate date;
-    private final int id;
+    private LocalDate date;
+    private int id;
     
     /**
      * Creates a template for each deposit, which includes the name, amount and date deposited.

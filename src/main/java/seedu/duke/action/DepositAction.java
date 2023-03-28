@@ -14,11 +14,11 @@ import seedu.duke.util.Commons;
 
 // @@author stephenkyang
 public class DepositAction {
-    private static final Comparator<Deposit> comparator = (deposit1, deposit2) -> deposit1.getDate()
+    private static Comparator<Deposit> comparator = (deposit1, deposit2) -> deposit1.getDate()
             .compareTo(deposit2.getDate());
     
-    private final ArrayList<Deposit> deposits;
-    private final DepositUIResponse depositUi;
+    private ArrayList<Deposit> deposits;
+    private DepositUIResponse depositUi;
 
     public DepositAction(ArrayList<Deposit> deposits, Ui ui) {
         this.deposits = deposits;

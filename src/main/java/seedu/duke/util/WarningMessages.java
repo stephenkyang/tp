@@ -3,7 +3,7 @@ package seedu.duke.util;
 public enum WarningMessages {
     WARNING_FILE_NOT_FOUND("Could not locate data.json file! Creating a new file...");
 
-    private final String warningMessage;
+    private String warningMessage;
 
     WarningMessages(String warningMessage) {
         this.warningMessage = warningMessage;

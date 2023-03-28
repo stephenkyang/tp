@@ -10,7 +10,7 @@ import seedu.duke.util.Messages;
 
 //@@author tzixi
 public class ExpenseUIResponse {
-    private final Ui ui;
+    private Ui ui;
 
     public ExpenseUIResponse(Ui ui) {
         this.ui = ui;

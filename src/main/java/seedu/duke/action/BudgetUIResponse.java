@@ -14,7 +14,7 @@ import java.util.ArrayList;
  * Contains User Interface text responses when a budget method is run
  */
 public class BudgetUIResponse {
-    private final Ui ui;
+    private Ui ui;
 
     public BudgetUIResponse(Ui ui) {
         this.ui = ui;

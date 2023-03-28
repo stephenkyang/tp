@@ -13,7 +13,7 @@ import seedu.duke.util.Messages;
  * Contains User Interface text responses when a deposit method is run
  */
 public class DepositUIResponse {
-    private final Ui ui;
+    private Ui ui;
 
     public DepositUIResponse(Ui ui) {
         this.ui = ui;

@@ -6,7 +6,7 @@ import seedu.duke.util.ErrorMessages;
 
 //@@author pinyoko573
 public class CommandActionInvalidException extends BBException {
-    private final CommandEnum commandName;
+    private CommandEnum commandName;
 
     public CommandActionInvalidException(Command command) {
         this.commandName = command.getCommandName();

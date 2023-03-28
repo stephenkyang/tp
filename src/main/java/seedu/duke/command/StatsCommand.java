@@ -13,9 +13,9 @@ import seedu.duke.util.Pair;
 //@@author SaiChaitanya13
 public class StatsCommand extends Command {
     // Format
-    private static final String[] ACTIONS = {"show", "help"};
-    private static final Pair[][] ACTIONS_REQUIRED_PARAMS = {{},{}};
-    private static final Pair[][] ACTIONS_OPTIONAL_PARAMS = {
+    private static String[] ACTIONS = {"show", "help"};
+    private static Pair[][] ACTIONS_REQUIRED_PARAMS = {{},{}};
+    private static Pair[][] ACTIONS_OPTIONAL_PARAMS = {
         {new Pair("/m", int.class), new Pair("/y", int.class), new Pair ("/v", String.class)},
         {}
     };
