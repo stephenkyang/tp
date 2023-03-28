@@ -136,6 +136,14 @@ and the abstract
 
 ![img.png](uml/ExpenseCommand.png)
 
+### ExpenseCommand Sequence
+
+Once a string `input` from the user has been deemed as an `Expense` command, the `input` will be passed into the
+`ExpenseCommand` class. This class determines what expense commands to carry out to update the `data` stored in the
+`Budget` and `Expense` array lists, as shown in the sequence diagram below.
+
+![img.png](uml/ExpenseCommandSequence.png)
+
 ### Design & Implementation of the Expense Feature
 
 The expense feature is similarly modularized and designed with an OOP lens. As such, its functionalities have been
@@ -215,11 +223,19 @@ separate classes for each part of the Stats Feature, which includes StatsAction,
 
 ## Appendix B: Non-Functional Requirements
 
-{Give non-functional requirements}
+1. Should work on common operating systems including Windows, macOSX and Linux as long as it has Java 11 or above
+installed.
+2. A user with an above average typing speed for regular English text (i.e. normal English words, not referring to
+coding) should be able to accomplish most of the tasks faster than using a mouse.
+3. Does not require an active internet connection to use the application.
+4. Should respond quickly to commands (i.e. less than 3 seconds response time)
 
 ## Appendix C: Glossary
 
-* *glossary item* - Definition
+* *Budget* - An estimated spending threshold for the user to follow
+* *Deposit* - Inflow of money (i.e. monthly income or reimbursements)
+* *Expense* - Payments made on monetary transactions
+* *Stats* - Statistics of savings and expenditure
 
 ## Appendix D: Instructions for manual testing
 
