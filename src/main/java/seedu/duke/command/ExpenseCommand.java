@@ -112,7 +112,7 @@ public class ExpenseCommand extends Command {
         expenseAction.addExpense(expenseCategory, expenseName, expenseAmount, expenseDate, budgets);
     }
 
-     /**
+    /**
      * Parses the required attributes such as expense no,
      * which will be used to execute del expense in the action class.
      * 
