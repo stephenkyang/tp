@@ -6,121 +6,70 @@ hide footbox
 
 activate ":StatsCommand"
 ":StatsCommand" -> ":StatsCommand": execute(data, ui)
-activate  ":BudgetCommand"
-":BudgetCommand" -> ":data": getBudgets()
-activate ":data"
-return budgetList: ArrayList<Budget>
-deactivate ":data"
+activate  ":StatsCommand"
+":StatsCommand" -> ":StatsAction" :statsAction
+activate ":StatsAction"
 
-activate  ":BudgetCommand"
-":BudgetCommand" -> ":data": getExpenses()
+":StatsAction" -> ":data" :getBudgets()
+activate ":data"
+return budgets: ArrayList<Budget>
+deactivate ":data"
+":StatsAction" -> ":data" :getDeposits()
+activate ":data"
+return deposits: ArrayList<Deposit>
+deactivate ":data"
+":StatsAction" -> ":data" :getExpenses()
 activate ":data"
 return expenses: ArrayList<Expense>
+deactivate ":data"
+
+
+deactivate ":StatsAction"
 
 
 
-":BudgetCommand" -> ":BudgetAction" : budgetList,ui
-activate ":BudgetAction"
-":BudgetAction" -> ":BudgetCommand" : budgetAction :BudgetAction
-deactivate ":BudgetAction"
-
-alt actions is add
-activate  ":BudgetCommand"
-":BudgetCommand" -> ":BudgetCommand": executeAddBudget(budgetAction, requiredParams);
-activate ":BudgetCommand"
-":BudgetCommand" -> ":BudgetAction" : budgetName, budgetLimit
-activate ":BudgetAction"
-":BudgetAction" -> ":BudgetAction" : addBudget(budgetName, budgetLimit)
-activate ":BudgetAction"
-return
-return
+alt action is show
+":StatsCommand" -> ":StatsCommand" :executeShowStats(statsAction, optionalParams)
+activate ":StatsCommand"
 
 
-else actions is set
-activate  ":BudgetCommand"
-":BudgetCommand" -> ":BudgetCommand": executeSetBudget(budgetAction, requiredParams)
-activate ":BudgetCommand"
-":BudgetCommand" -> ":BudgetAction" : budgetName, budgetLimit
-activate ":BudgetAction"
-":BudgetAction" -> ":BudgetAction" : setBudget(budgetName, budgetLimit)
-activate ":BudgetAction"
-return
-return
-
-
-else actions is del
-activate  ":BudgetCommand"
-":BudgetCommand" -> ":BudgetCommand": executeDelBudget(budgetAction, requiredParams, expenses)
-activate ":BudgetCommand"
-":BudgetCommand" -> ":BudgetAction" : budgetName, budgetLimit
-activate ":BudgetAction"
-":BudgetAction" -> ":BudgetAction" : deleteBudget(budgetName, expenses)
-activate ":BudgetAction"
-return
-return
-
-else actions is list
-activate  ":BudgetCommand"
-":BudgetCommand" -> ":BudgetCommand": executeListBudget(budgetAction, optionalParams, expenses)
-activate ":BudgetCommand"
-
-":BudgetCommand" -> ":LocalDate":
+":StatsCommand" -> ":LocalDate":
 activate ":LocalDate"
 ":LocalDate" -> ":LocalDate": getMonthValue()
 activate ":LocalDate"
 return month: Integer
 return month
 
-":BudgetCommand" -> ":LocalDate":
+
+":StatsCommand" -> ":LocalDate":
 activate ":LocalDate"
 ":LocalDate" -> ":LocalDate": getYear()
 activate ":LocalDate"
 return year: Integer
 return year
 
-":BudgetCommand" -> ":BudgetAction" : month, year, expenses
-activate ":BudgetAction"
-":BudgetAction" -> ":BudgetAction" : printBudgets(month, year, expenses)
-activate ":BudgetAction"
+":StatsCommand" -> ":StatsAction" :month, year, showDeposit, showExpense
+activate ":StatsAction"
+":StatsAction" -> ":StatsAction" :showStats(month, year, showDeposit, showExpense)
+activate ":StatsAction"
 return
 return
 
-
-else actions is help
-activate  ":BudgetCommand"
-":BudgetCommand" -> ":BudgetCommand": executeBudgetHelp(budgetAction)
-activate ":BudgetCommand"
-":BudgetCommand" -> ":BudgetAction"
-activate ":BudgetAction"
-":BudgetAction" -> ":BudgetAction" : budgetHelp()
-activate ":BudgetAction"
+else action is help
+activate ":StatsCommand"
+":StatsCommand" -> ":StatsAction"
+activate ":StatsAction"
+":StatsAction" -> ":StatsAction" : statsHelp()
+activate ":StatsAction"
 return
 return
-
-
-deactivate ":BudgetCommand"
-deactivate ":BudgetCommand"
-deactivate ":BudgetCommand"
-deactivate ":BudgetCommand"
-deactivate ":BudgetCommand"
-deactivate ":BudgetCommand"
-deactivate ":BudgetCommand"
-deactivate ":BudgetCommand"
-deactivate ":BudgetCommand"
-deactivate ":BudgetCommand"
-deactivate ":BudgetCommand"
-deactivate ":BudgetCommand"
-
-
-":BudgetCommand" -> ":data": exportData()
-activate ":data"
-return
-
-deactivate ":data"
-destroy ":data"
-
 
 end
+
+
+deactivate ":StatsCommand"
+deactivate ":StatsCommand"
+
 
 
 

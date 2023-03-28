@@ -89,7 +89,15 @@ Use the command `Expenses help` to learn the specific budget related commands
 
 <br/><br/>
 
-#### 3. Exiting BudgetBuddy
+
+#### 3. Stats 
+
+Use the command `Stats Help` to learn the specific stats related commands. 
+
+1. You can show stats.
+2. You can show stats help.
+
+#### 4. Exiting BudgetBuddy
 
 You can exit the application using the `exit` command.
 
