@@ -1,12 +1,22 @@
 package seedu.duke.util;
 
+//@@author pinyoko573
 public class CommonsUi {
+    /**
+     * Forms the string of colored and white bars
+     * based on amount and maxAmount.
+     * 
+     * @param amount money amount
+     * @param maxAmount max mouney amount
+     * @return string of colored and white bars
+     */
     public static String formatBar(double amount, double maxAmount) {
         int noOfBlackBars = getNumberOfBlackBars(amount, maxAmount);
         int noOfWhiteBars = Constants.MAX_BARS - noOfBlackBars;
 
         // Add colors based on number of bars
         String coloredBars = Constants.BLACK_BAR.repeat(noOfBlackBars) + Constants.ANSI_RESET;
+
         if (noOfBlackBars >= Constants.RED_BAR_MIN_COUNT) {
             coloredBars = Constants.ANSI_RED + coloredBars;
         } else if (noOfBlackBars >= Constants.YELLOW_BAR_MIN_COUNT) {
@@ -18,6 +28,14 @@ public class CommonsUi {
         return coloredBars + Constants.WHITE_BAR.repeat(noOfWhiteBars);
     }
 
+    /**
+     * Gets the number of black (or colored) bars
+     * based on ratio of amount and maxAmount.
+     * 
+     * @param amount money amount
+     * @param maxAmount max mouney amount
+     * @return the number of black or colored bars to be printed
+     */
     private static int getNumberOfBlackBars(double amount, double maxAmount) {
         int noOfBlackBars = (int) Math.round(amount / maxAmount * Constants.MAX_BARS);
         if (noOfBlackBars > Constants.MAX_BARS) {

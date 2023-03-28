@@ -90,6 +90,13 @@ public class DepositAction {
     }
 
     //@@author pinyoko573
+    /**
+     * Filter and sort the deposits by date.
+     * 
+     * @param from (optional) starting date of the deposits for filtering
+     * @param to (optional) ending date of the deposits for filtering
+     * @throws GlobalDateFromAfterToException when from date is after to date
+     */
     public void listDepositsRange(LocalDate from, LocalDate to) throws GlobalDateFromAfterToException {
         if (from == null) {
             from = LocalDate.MIN;
@@ -109,6 +116,10 @@ public class DepositAction {
     }
 
     // @@author stephenkyang
+    /**
+     * List deposits that contains the keyword specified by user 
+     * @param name keyword that the user is finding
+     */
     public void findDeposits(String name) {
         ArrayList<Deposit> filteredDeposits = new ArrayList<Deposit>();
         for (Deposit d : deposits) {
@@ -139,11 +150,22 @@ public class DepositAction {
     }
 
     // @@author stephenkyang
+    /**
+     * Prints user instructions on how to use deposit commands
+     */
     public void depositHelp() {
         depositUi.printDepositCommands();
     }
 
     //@@author pinyoko573
+    /**
+     * Checks if a certain deposit already exists using id.
+     * Used for deletion.
+     * 
+     * @param depositId id of the deposit
+     * @return the deposit found in the nth element in list
+     * @throws GlobalInvalidNumberException when deposit is not found
+     */
     private int validateDeposit(int depositId) throws GlobalInvalidNumberException {        
         int elementNo = 0;
         for (Deposit d : deposits) {
@@ -157,6 +179,11 @@ public class DepositAction {
     }
 
     // @@author pinyoko573
+    /**
+     * Delete multiple deposits through the list of deposits given
+     * 
+     * @param removingDeposits deposits that will be deleted from the list
+     */
     private void deleteDeposits(ArrayList<Deposit> removingDeposits) {
         for (Deposit d : removingDeposits) {
             deposits.remove(d);
@@ -164,6 +191,12 @@ public class DepositAction {
     }
 
     // @@author pinyoko573
+    /**
+     * Sorts the deposits given by date and returns back.
+     * 
+     * @param deposits list of deposits
+     * @return deposits that are sorted by date
+     */
     @SuppressWarnings("unchecked")
     public static ArrayList<Deposit> sortDepositsByDate(ArrayList<Deposit> deposits) {
         ArrayList<Deposit> sortedDeposits = (ArrayList<Deposit>) deposits.clone();
@@ -172,6 +205,14 @@ public class DepositAction {
     }
 
     // @@author pinyoko573
+    /**
+     * Filter the deposits given by date range and returns back.
+     * 
+     * @param deposits list of deposits
+     * @param from starting date
+     * @param to ending date
+     * @return list of deposits that are within the date range
+     */
     public static ArrayList<Deposit> filterDepositsByDate(ArrayList<Deposit> deposits, LocalDate from, LocalDate to) {
         ArrayList<Deposit> filteredDeposits = new ArrayList<Deposit>();
         
@@ -186,6 +227,12 @@ public class DepositAction {
     }
 
     // @@author pinyoko573
+    /**
+     * Get the total amount of deposit from given list of deposits.
+     * 
+     * @param deposits list of deposits
+     * @return total amount of deposits
+     */
     public static double getTotalDeposits(ArrayList<Deposit> deposits) {
         double total = 0;
         

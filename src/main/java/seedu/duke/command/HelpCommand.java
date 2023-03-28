@@ -7,7 +7,7 @@ import seedu.duke.util.Pair;
 
 //@@author chongyongrui
 public class HelpCommand extends Command {
-    // Format
+    // Format for Help command. No actions required.
     private static final String[] ACTIONS = {};
     private static final Pair[][] ACTIONS_REQUIRED_PARAMS = {};
     private static final Pair[][] ACTIONS_OPTIONAL_PARAMS = {};

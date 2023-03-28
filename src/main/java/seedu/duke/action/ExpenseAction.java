@@ -93,6 +93,14 @@ public class ExpenseAction {
     }
 
     //@@author pinyoko573
+    /**
+     * Filter and sort the expenses by date.
+     * 
+     * @param from (optional) starting date of the expense for filtering
+     * @param to (optional) ending date of the expense for filtering
+     * @param category (optional) category name to be filtered
+     * @throws GlobalDateFromAfterToException when from date is after to date
+     */
     @SuppressWarnings("unchecked")
     public void listExpensesRange(LocalDate from, LocalDate to, String category) throws GlobalDateFromAfterToException {
         if (from == null) {
@@ -115,7 +123,12 @@ public class ExpenseAction {
         expenseUi.printListExpensesRange(sortedExpenses, from, to, category);
     }
 
-    // @@author pinyoko573
+    // @@author tzixi
+    /**
+     * List expenses that contains the keyword specified by user
+     * 
+     * @param name keyword that the user is finding
+     */
     public void findExpenses(String name) {
         ArrayList<Expense> filteredExpenses = new ArrayList<Expense>();
         for (Expense e : expenses) {
@@ -127,7 +140,15 @@ public class ExpenseAction {
         expenseUi.printFindExpenses(filteredExpenses);
     }
 
-    // @@author pinyoko573
+    // @@author tzixi
+    /**
+     * Clear multiple expenses based on the date range and/or category.
+     * 
+     * @param from (optional) starting date of the expense
+     * @param to (optional) ending date of the expense
+     * @param category (optional) category name
+     * @throws GlobalDateFromAfterToException when from date is after to date
+     */
     @SuppressWarnings("unchecked")
     public void clearExpenses(LocalDate from, LocalDate to, String category) throws GlobalDateFromAfterToException {
         if (from == null) {
@@ -152,12 +173,23 @@ public class ExpenseAction {
         expenseUi.printClearExpenses(expenseList);
     }
 
-    // @@author pinyoko573
+    // @@author tzixi
+    /**
+     * Prints user instructions on how to use expense commands
+     */
     public void expenseHelp() {
         expenseUi.printExpenseCommands();
     }
 
     // @@author pinyoko573
+    /**
+     * Checks if a certain expense already exists using id.
+     * Used for deletion.
+     * 
+     * @param expenseId id of the expense
+     * @return the expense found in the nth element in list
+     * @throws GlobalInvalidNumberException when expense is not found
+     */
     private int validateExpense(int expenseId) throws GlobalInvalidNumberException {
         int elementNo = 0;
         for (Expense e : expenses) {
@@ -171,6 +203,11 @@ public class ExpenseAction {
     }
 
     // @@author pinyoko573
+    /**
+     * Delete multiple expenses through the list of expenses given
+     * 
+     * @param removingExpenses expenses that will be deleted from the list
+     */
     private void deleteExpenses(ArrayList<Expense> removingExpenses) {
         for (Expense e : removingExpenses) {
             expenses.remove(e);
@@ -178,6 +215,13 @@ public class ExpenseAction {
     }
 
     // @@author pinyoko573
+    /**
+     * When a budget is deleted, it will clear all the expenses
+     * pertaining to that budget name.
+     * 
+     * @param budgetName name of the budget
+     * @param expenses list of expenses
+     */
     public static void clearExpensesByCategory(String budgetName, ArrayList<Expense> expenses) {
         for (Expense e : expenses) {
             if (e.getCategory().equals(budgetName)) {
@@ -187,6 +231,12 @@ public class ExpenseAction {
     }
 
     // @@author pinyoko573
+    /**
+     * Sorts the deposits given by date and returns back.
+     * 
+     * @param expenses list of expenses
+     * @return expenses that are sorted by date
+     */
     @SuppressWarnings("unchecked")
     public static ArrayList<Expense> sortExpensesByDate(ArrayList<Expense> expenses) {
         ArrayList<Expense> sortedExpenses = (ArrayList<Expense>) expenses.clone();
@@ -195,6 +245,14 @@ public class ExpenseAction {
     }
 
     // @@author pinyoko573
+    /**
+     * Filter the expenses given by date range and returns back.
+     * 
+     * @param expenses list of expenses
+     * @param from starting date
+     * @param to ending date
+     * @return list of expenses that are within the date range
+     */
     public static ArrayList<Expense> filterExpensesByDate(ArrayList<Expense> expenses, LocalDate from, LocalDate to) {
         ArrayList<Expense> filteredExpenses = new ArrayList<Expense>();
         
@@ -209,6 +267,14 @@ public class ExpenseAction {
     }
 
     // @@author pinyoko573
+    /**
+     * Filter the expenses given by budget category name
+     * and returns back.
+     * 
+     * @param expenses list of expenses
+     * @param category budget category name
+     * @return list of expenses that contains the category
+     */
     public static ArrayList<Expense> filterExpensesByCategory(ArrayList<Expense> expenses, String category) {
         ArrayList<Expense> filteredExpenses = new ArrayList<Expense>();
 
@@ -222,6 +288,12 @@ public class ExpenseAction {
     }
 
     // @@author pinyoko573
+    /**
+     * Get the total amount of expense from given list of expenses.
+     * 
+     * @param expenses list of expenses
+     * @return total amount of expense
+     */
     public static double getTotalExpenses(ArrayList<Expense> expenses) {
         double total = 0;
         for (Expense e : expenses) {
