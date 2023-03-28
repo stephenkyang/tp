@@ -17,7 +17,7 @@ import java.util.ArrayList;
  */
 public class BudgetAction {
     private static BudgetUIResponse budgetUi;
-    private ArrayList<Budget> budgets;
+    private final ArrayList<Budget> budgets;
 
     public BudgetAction(ArrayList<Budget> budgets, Ui ui) {
         this.budgets = budgets;

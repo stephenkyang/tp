@@ -106,7 +106,7 @@ public enum Messages {
 
     private final String message;
 
-    private Messages(String message) {
+    Messages(String message) {
         this.message = message;
     }
 

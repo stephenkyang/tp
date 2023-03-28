@@ -34,11 +34,11 @@ public class Data {
         .registerTypeAdapter(LocalDate.class, new LocalDateAdapter())
         .setPrettyPrinting()
         .create();
-    private static Logger logger = Logger.getLogger("File");
+    private static final Logger logger = Logger.getLogger("File");
 
-    private ArrayList<Budget> budgets;
-    private ArrayList<Deposit> deposits;
-    private ArrayList<Expense> expenses;
+    private final ArrayList<Budget> budgets;
+    private final ArrayList<Deposit> deposits;
+    private final ArrayList<Expense> expenses;
 
     public Data() {
         budgets = new ArrayList<Budget>();
@@ -56,7 +56,7 @@ public class Data {
      */
     public static Data importData() throws FileImportException {
         try {
-            File file = new File(Constants.FILE_NAME.toString());
+            File file = new File(Constants.FILE_NAME);
             if (!file.exists()) {
                 System.out.println(WarningMessages.WARNING_FILE_NOT_FOUND);
                 logger.log(Level.WARNING, "File not found, using empty list.");
@@ -82,7 +82,7 @@ public class Data {
      */
     public void exportData() throws FileExportException {
         try {
-            FileWriter fw = new FileWriter(Constants.FILE_NAME.toString());
+            FileWriter fw = new FileWriter(Constants.FILE_NAME);
             String jsonString = gson.toJson(this);
 
             fw.write(jsonString);

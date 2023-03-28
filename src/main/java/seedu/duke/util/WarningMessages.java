@@ -5,7 +5,7 @@ public enum WarningMessages {
 
     private final String warningMessage;
 
-    private WarningMessages(String warningMessage) {
+    WarningMessages(String warningMessage) {
         this.warningMessage = warningMessage;
     }
 

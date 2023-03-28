@@ -8,7 +8,7 @@ import seedu.duke.util.Messages;
 
 //@@author SaiChaitanya13
 public class StatsUIResponse {
-    private Ui ui;
+    private final Ui ui;
 
     /**
      * Constructor for StatsUIResponse class

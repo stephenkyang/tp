@@ -17,10 +17,10 @@ import seedu.duke.util.Commons;
 
 //@@author tzixi
 public class ExpenseAction {
-    private static Comparator<Expense> comparator = (expense1, expense2) -> expense1.getDate()
+    private static final Comparator<Expense> comparator = (expense1, expense2) -> expense1.getDate()
             .compareTo(expense2.getDate());
     public ArrayList<Expense> expenses;
-    private ExpenseUIResponse expenseUi;
+    private final ExpenseUIResponse expenseUi;
 
     public ExpenseAction(ArrayList<Expense> expenses, Ui ui) {
         this.expenses = expenses;

@@ -11,7 +11,7 @@ import seedu.duke.util.Messages;
  * Handles the user interface of the application, including user inputs and message outputs
  */
 public class Ui {
-    private Scanner in;
+    private final Scanner in;
     private String input;
 
     public Ui() {
