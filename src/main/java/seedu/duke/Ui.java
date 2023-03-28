@@ -54,6 +54,9 @@ public class Ui {
 
     /**
      * Greets the user and shows the app logo.
+     * Also prints the current budget progress if there is data.
+     * 
+     * @param summaryMsgs messages for current budget progress
      */
     public void greetUser(ArrayList<String> summaryMsgs) {
         ArrayList<String> msgs = new ArrayList<String>();
