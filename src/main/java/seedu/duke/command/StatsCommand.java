@@ -24,6 +24,13 @@ public class StatsCommand extends Command {
         super(CommandEnum.STATS, ACTIONS, ACTIONS_REQUIRED_PARAMS, ACTIONS_OPTIONAL_PARAMS);
     }
 
+    /**
+     * Executes different functions based on stats action
+     *
+     * @param data Stored information regarding the different transactions
+     * @param ui User interface of the application
+     * @throws BBException For unknown and invalid inputs
+     */
     @Override
     public void execute(Data data, Ui ui) throws BBException {
         StatsAction statsAction = new StatsAction(data, ui);
@@ -40,6 +47,14 @@ public class StatsCommand extends Command {
         }
     }
 
+
+    /**
+     * Executes show stats command
+     *
+     * @param statsAction An object of class StatsAction that processes the Stats Command
+     * @param optionalParams String with optional parameters
+     * @throws BBException for invalid input
+     */
     private void executeShowStats(StatsAction statsAction, String[] optionalParams) throws BBException {
         // int does not have null value, use -1 instead
         // if year is not provided, use current year
@@ -69,10 +84,19 @@ public class StatsCommand extends Command {
         statsAction.showStats(month, year, showDeposit, showExpense);
     }
 
+    /**
+     * Executes stats help command
+     *
+     * @param statsAction Object of class StatsAction
+     */
     private void executeHelpStats(StatsAction statsAction) {
         statsAction.statsHelp();
     }
 
+    /**
+     * Function to show program should not exit
+     * @return false --> Program should not exit
+     */
     @Override
     public boolean isExit() {
         return false;
