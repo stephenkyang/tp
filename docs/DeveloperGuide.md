@@ -176,25 +176,40 @@ separate classes for each part of the Stats Feature, which includes StatsAction,
 
 ## Appendix A: User Stories
 
-|Version| As a ... | I want to ...                                                   | So that I can ...                                                               |
-|--------|----------|-----------------------------------------------------------------|---------------------------------------------------------------------------------|
-|v1.0| new user | see usage instructions                                          | refer to them when I forget how to use the application                          |
-|v1.0| user     | add new expense                                                 | track my expenditure                                                            |
-|v1.0| user     | add new deposit                                                 | increase my savings                                                             |
-|v1.0| user     | delete existing expense                                         | remove a wrong input                                                            |
-|v1.0| user     | delete existing deposit                                         | remove a wrong input                                                            |
-|v1.0| user     | list all expenses                                               | refer to them when I forget how to use the application                          |
-|v1.0| user     | list all deposits                                               | refer to them when I forget how to use the application                          |
-|v1.0| user     | add my monthly budget for a category <br/>(e.g. transportation) | have an organized view of my overall budget                                     |
-|v1.0| user     | list down my budget for each category                           | tell if my salary/earnings is sufficient for the total amount<br/>of the budget |
-|v1.0| user     | modify my budget for a category                                 | allocate more/less to that category                                             |
-|v1.0| user     | delete a budget category                                        | delete a wrongly named category                                                 |
-|v1.0| user     | view my expense history                                         | see how much I have spent                                                       |
-|v1.0| user     | view my overall statistics                                      | know what my saving progress is like for this month                             |
-|v1.0| user     | load my budget and expense data                                 | retain all information when the app is relaunched                               |
-|v1.0| user     | save my budget and expense data                                 | retain all information when the app is relaunched                               |
-|v1.0| user     | delete existing deposit                                         | refer to them when I forget how to use the application                          |
-|v2.0| user     | find a to-do item by name                                       | locate a to-do without having to go through the entire list                     |
+| Version | As a ...       | I want to ...                                                                   | So that I can ...                                                            |
+|---------|----------------|---------------------------------------------------------------------------------|------------------------------------------------------------------------------|
+| v1.0    | quick user     | enter my inputs immediately rather than clicking and typing                     | have a convenient way of managing my budget                                  |
+| v1.0    | new user       | know how to setup my application                                                | use the application and insert my financial data                             |
+| v1.0    | forgetful user | get all the commands I can input                                                | know what are the commands available                                         |
+| v1.0    | forgetful user | know the syntax for each action                                                 | know how to perform an action                                                |
+| v1.0    | careless user  | receive an error message when entering a wrong command                          | rectify my errors in the next input                                          |
+| v1.0    | user           | add my monthly budget for a category (eg. transportation, utilities, food etc.) | have an organised view of my overall budget                                  |
+| v1.0    | user           | list down my budget for each category                                           | tell if my salary/earnings is sufficient for the total amount of all budgets |
+| v1.0    | user           | modify my budget for a category                                                 | allocate more/less budget to a category                                      |
+| v1.0    | user           | delete a budget category                                                        | remove a budget category that I wrote the category name wrongly              |
+| v1.0    | user           | add in additional deposit from bank interest/investments                        | increase my savings                                                          |
+| v1.0    | user           | remove my additional deposits that I added                                      | delete wrong inputs                                                          |
+| v1.0    | user           | list down all my additional deposits                                            | tell how much additional deposits I have made in total                       |
+| v1.0    | user           | add an expense for an item I have spent on                                      | keep track of what I have spent on and how much I have spent                 |
+| v1.0    | user           | set an expense to a category                                                    | organise my expense history and deduct from the selected category            |
+| v1.0    | user           | delete an expense                                                               | delete wrong inputs                                                          |
+| v1.0    | user           | view my expense history                                                         | see how much I have spent overall                                            |
+| v1.0    | user           | view the overall statistics                                                     | know what is my progress on spending and saving for the month                |
+| v1.0    | user           | load my deposit, budget and expense data                                        | retain all my information when I launch the application again                | 
+| v1.0    | user           | save my deposit, budget and expense data                                        | retain all my information when I launch the application again                |
+| v1.0    | leaving user   | know if I exited the application safely                                         | ensure that there are no errors in the application                           |
+| v2.0    | careless user  | get all the actions of a command I can input                                    | know what actions are available                                              |
+| v2.0    | user           | show the current progress of my budget                                          | check if I have overspent a category                                         |
+| v2.0    | user           | show my budget results for a certain month/year                                 | check my past budget results                                                 |
+| v2.0    | user           | find deposit(s) based on name                                                   | recall how much I made from a deposit                                        |
+| v2.0    | user           | list down my deposits and/or expenses at a date range                           | check my past deposits/expenses that I've added                              |
+| v2.0    | user           | list down my expenses based on category                                         | know what I've spent for a specific category                                 | 
+| v2.0    | user           | clear deposits and/or expenses at a date range (or all)                         | delete quickly without doing one by one                                      |
+| v2.0    | user           | clear expenses based on category                                                | delete quickly without doing one by one                                      |
+| v2.0    | user           | display more stats information such as deposits and expenses                    | have a brief overview of a month’s spending                                  |
+| v2.0    | user           | view the overall statistics for a certain month/year                            | check my past results                                                        |
+| v2.0    | returning user | be reminded of my budget progress when I launch the app                         | realise my progress and minimise my spending                                 |
+
 
 ## Appendix B: Non-Functional Requirements
 
