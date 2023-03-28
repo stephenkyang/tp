@@ -68,7 +68,7 @@ public class BudgetCommand extends Command {
             executeListBudget(budgetAction, optionalParams, expenses);
             break;
         case "help":
-            executeBudgetHelp(budgetAction);
+            executeHelpBudget(budgetAction);
             break;
         default:
             throw new CommandActionExecuteInvalidException();
@@ -77,7 +77,7 @@ public class BudgetCommand extends Command {
         data.exportData();
     }
 
-    private void executeBudgetHelp(BudgetAction budgetAction) {
+    private void executeHelpBudget(BudgetAction budgetAction) {
         budgetAction.budgetHelp();
     }
 
