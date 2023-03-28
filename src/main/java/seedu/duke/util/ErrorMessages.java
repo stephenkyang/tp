@@ -44,7 +44,7 @@ public enum ErrorMessages {
 
     private String errorMessage;
 
-    ErrorMessages(String errorMessage) {
+    private ErrorMessages(String errorMessage) {
         this.errorMessage = errorMessage;
     }
 
