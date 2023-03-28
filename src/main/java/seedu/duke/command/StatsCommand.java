@@ -12,10 +12,12 @@ import seedu.duke.util.Pair;
 
 //@@author SaiChaitanya13
 public class StatsCommand extends Command {
+
     // Format
     private static String[] ACTIONS = {"show", "help"};
     private static Pair[][] ACTIONS_REQUIRED_PARAMS = {{},{}};
     private static Pair[][] ACTIONS_OPTIONAL_PARAMS = {
+
         {new Pair("/m", int.class), new Pair("/y", int.class), new Pair ("/v", String.class)},
         {}
     };
@@ -49,14 +51,16 @@ public class StatsCommand extends Command {
 
 
     /**
-     * Executes show stats command
-     *
-     * @param statsAction An object of class StatsAction that processes the Stats Command
-     * @param optionalParams String with optional parameters
-     * @throws BBException for invalid input
+     * Parses the optional attributes such as month, year, verbose options,
+     * which will be used to execute show stats in the action class.
+     * If neither month and year is specified, use the current's month and year.
+     * 
+     * @param statsAction action selected will be executed through action class
+     * @param optionalParams parameters containing the optional attributes
+     * @throws BBException for any error thrown in the action class
+
      */
     private void executeShowStats(StatsAction statsAction, String[] optionalParams) throws BBException {
-        // int does not have null value, use -1 instead
         // if year is not provided, use current year
         int month = LocalDate.now().getMonthValue();
         int year = LocalDate.now().getYear();

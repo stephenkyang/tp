@@ -44,13 +44,11 @@ public class BudgetAction {
             return;
         }
 
-
         Budget budget = new Budget(budgetName, budgetLimit);
         budgets.add(budget);
         assert budget.getAmount() >= 0 : "Budget limit is negative!";
 
         budgetUi.printBudgetAddSuccessful(budget, budgets.size());
-
     }
 
     /**
@@ -101,6 +99,7 @@ public class BudgetAction {
      * Checks if a certain budget exists.
      *
      * @param budgetName budget name to check for if it has been used
+     * @return budget object which is found. Else, null is returned.
      */
     private Budget getBudget(String budgetName) {
         for (Budget budget : budgets) {
@@ -115,7 +114,10 @@ public class BudgetAction {
     /**
      * Prints all the details of all budgets in the list.
      *
-     * @throws GlobalInvalidMonthYearException
+     * @param month Month of the budget that user wants to view
+     * @param year Year of the budget that user wants to view
+     * @param expenses Calculate expense total of each budget category 
+     * @throws GlobalInvalidMonthYearException invalid date that cannot be parsed
      */
     public void printBudgets(int month, int year, ArrayList<Expense> expenses) throws GlobalInvalidMonthYearException {
         // Check if month and year is valid
@@ -191,6 +193,7 @@ public class BudgetAction {
      *
      * @param budgetName budget name to check for if it has been used
      * @param budgets    containing the list of budgets
+     * @return true if budget name exists in the budget list, else false
      */
     protected static boolean validateBudget(String budgetName, ArrayList<Budget> budgets) {
         for (Budget b : budgets) {
@@ -204,7 +207,7 @@ public class BudgetAction {
     /**
      * Gets the total amount of all budgets.
      *
-     * @param budgets containing the list of budgets
+     * @param  budgets containing the list of budgets
      * @return total amount of all budgets
      */
     public static double getTotalBudgets(ArrayList<Budget> budgets) {
@@ -217,7 +220,11 @@ public class BudgetAction {
     }
 
     /**
-     * Prints a message about budgets that are close to the limit upon the initialisation of Duke
+     * Prints a message about budgets that are close to the limit upon the initialisation of Duke.
+     * 
+     * @param budgets   containing the list of budgets
+     * @param expenses  use to calculate total expense based on category
+     * @return list of messages that will be printed in Ui from Main
      */
     public static ArrayList<String> summaryBudget(ArrayList<Budget> budgets, ArrayList<Expense> expenses) {
         ArrayList<String> msgs = new ArrayList<String>();
