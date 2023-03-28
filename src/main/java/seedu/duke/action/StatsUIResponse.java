@@ -58,7 +58,7 @@ public class StatsUIResponse {
     }
 
     /**
-     * Prints stats for Budget
+     * Adds stats for Budget
      *
      * @param month Current month
      * @param year Current year
@@ -78,7 +78,7 @@ public class StatsUIResponse {
     }
 
     /**
-     * Prints stats for Deposit
+     * Adds stats for Deposit
      *
      * @param totalDeposits Total amount of deposits
      * @param depositMsg Arraylist containing the messages for Deposit
@@ -97,7 +97,7 @@ public class StatsUIResponse {
     }
 
     /**
-     * Print stats for Expense
+     * Adds stats for Expense
      *
      * @param totalExpenses Total amount of expenses
      * @param expenseMsg Arraylist containing the messages for Expense
@@ -116,7 +116,7 @@ public class StatsUIResponse {
     }
 
     /**
-     * Prints the summary of the stats (if on right track or overspending)
+     * Adds summary of the stats (if on right track or overspending)
      *
      * @param totalBudgets Total amount of budgets
      * @param totalDeposits Total amount of deposits

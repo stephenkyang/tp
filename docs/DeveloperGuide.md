@@ -170,6 +170,8 @@ The stats feature, just like all other features, also is designed and implemente
 there are
 separate classes for each part of the Stats Feature, which includes StatsAction, StatsUIResponse and StatsCommand.
 
+![img.png](uml/StatsCommandSequence.png)
+
 ### Others
 
 #### Exception Component
