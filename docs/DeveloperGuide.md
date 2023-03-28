@@ -16,7 +16,7 @@ necessary for them so that they can realize their actual spending and achieve fi
 
 ### Main Component
 
-![](uml/MainSeq.png)
+![MainSeq.png](uml/MainSequence.png)
 
 In the main (Duke) class, the main method first calls startApplication() which initalizes the Log Manager for logging (
 disabled if in production stage) and Ui object for printing output messages. After initialized, it will then attempt to
@@ -28,22 +28,31 @@ application. After which, it will output a bye message and exits the application
 
 ### Command Component
 
+![Command.png](uml/Command.png)
+
 The command consists of three components: Enum CommandEnum, Abstract class Command and Class CommandParser. Each of them
 plays a role in retrieving the commands input by the user and redirecting to the correct components.
 
 #### CommandEnum
 
+The CommandEnum Enum contains all the commands that are available in the application.
+These are the only commands that can be input in the command line.
+
 #### Command
 
+The abstract class Command extends to several commands (eg `BudgetCommand`, `DepositCommand`, `ExpenseCommand`) and contains abstract methods execute() and isExit().
+The execute() method is executed from main, where it will go to the action class (eg `BudgetAction`) and run the requested action such as `add`.
+After execute() from main, isExit() controls the termination of BudgetBuddy by returning a boolean.
+
 #### CommandParser
+
+![CommandParserSequence.png](uml/CommandParserSequence.png)
 
 The `CommandParser` class takes in an input from the `Duke` class as seen in the sequence diagram above. It then parses
 the information
 to create a command of a specific type (eg `BudgetCommand`, `DepositCommand` , explained in the class diagram above)
 based
 the input.
-
-![img.png](uml/CommandParserSequence.png)
 
 ## Product scope
 
@@ -53,7 +62,7 @@ The main 3 classes of Duke are the `budget` , `expense` and `deposit` class. Use
 the date relate to each
 of these classes. Each of these classes are modelled as an `Item`.
 
-![img.png](uml/ItemClasses.png)
+![ItemClasses.png](uml/ItemClasses.png)
 
 ### Budget Component
 
@@ -68,7 +77,7 @@ Command word is "budget", it will be processed into the `BudgetCommand` class. T
 the `BudgetAction` class.
 The class diagram below shows how the `BudgetCommand` parent class is implemented, as well as its extended classes.
 
-![img.png](uml/BudgetCommand.png)
+![BudgetCommand.png](uml/BudgetCommand.png)
 
 #### BudgetCommand Sequence
 
@@ -77,7 +86,7 @@ diagram above,
 the `input` will be passed into the `BudgetCommand` class. This class determines what budget commands to carry out to
 update the `data` stored in the `Budget` and `Expense` array lists, as shown in the sequence diagram below.
 
-![img.png](uml/BudgetCommandSequence.png)
+![BudgetCommandSequence.png](uml/BudgetCommandSequence.png)
 
 ### Deposit Component
 
@@ -98,7 +107,7 @@ Attached below is how the `DepositCommand` class is implemented along with its r
 and the abstract
 `Command` class.
 
-![img.png](uml/DepositCommand.png)
+![DepositCommand.png](uml/DepositCommand.png)
 
 ### Design & Implementation of the Deposit Feature
 
@@ -134,7 +143,7 @@ Attached below is how the `ExpenseCommand` class is implemented along with its r
 and the abstract
 `Command` class.
 
-![img.png](uml/ExpenseCommand.png)
+![ExpenseCommand.png](uml/ExpenseCommand.png)
 
 ### ExpenseCommand Sequence
 
@@ -170,7 +179,7 @@ use this command to view all the details of their expenses, budgets and deposits
 feature, users will know
 their current progress and if their expenses have exceeded their budget. 
 
-![img.png](uml/StatsCommand.png)
+![StatsCommand.png](uml/StatsCommand.png)
 
 ### Design & Implementation of the Stats Feature
 
@@ -225,18 +234,15 @@ separate classes for each part of the Stats Feature, which includes StatsAction,
 
 ## Appendix B: Non-Functional Requirements
 
-1. Should work on common operating systems including Windows, macOSX and Linux as long as it has Java 11 or above
-installed.
-2. A user with an above average typing speed for regular English text (i.e. normal English words, not referring to
-coding) should be able to accomplish most of the tasks faster than using a mouse.
-3. Does not require an active internet connection to use the application.
-4. Should respond quickly to commands (i.e. less than 3 seconds response time)
+1. Works on any common operating systems (Windows, Mac OS, Linux) with Java 11 or above installed.
+2. A user with average typing speed should take up to 7 seconds for the longest command (expense add).
+3. Data of the application is still preserved when migrating from one computer to another.
 
 ## Appendix C: Glossary
 
-* *Budget* - An estimated spending threshold for the user to follow
-* *Deposit* - Inflow of money (i.e. monthly income or reimbursements)
-* *Expense* - Payments made on monetary transactions
+* *Budget* - A category of a budget (e.g. Transport, Food, Electricity) with the maximum spending budget indicated by the user.
+* *Deposit* - Additional earnings (e.g. Lottery, Bank interest) that is made by the user
+* *Expense* - An item that the user has spent on, which must be related to a Budget.
 * *Stats* - Statistics of savings and expenditure
 
 ## Appendix D: Instructions for manual testing
@@ -245,5 +251,4 @@ coding) should be able to accomplish most of the tasks faster than using a mouse
 
 ## Appendix E: Acknowledgements
 
-{list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the
-original source as well}
+[Gson](https://github.com/google/gson)

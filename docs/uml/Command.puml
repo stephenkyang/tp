@@ -1,0 +1,112 @@
+@startuml
+hide footbox
+skinparam classAttributeIconSize 0
+
+abstract class "{abstract} \n Command" {
+    #actions : String[]
+    #requiredParamsList : Pair[][]
+    #optionalParamsList : Pair[][]
+    #name : CommandEnum
+    #action : String
+    #requiredParams : String[]
+    #optionalParams : String[]
+
+    +execute(Data, Ui) : void {abstract}
+    +isExit() : boolean {abstract}
+    +getCommandName() : CommandEnum
+    +getActions() : String[]
+    +getAction() : String
+    +getActionNo(String) : int
+    +getRequiredParams(int) : Pair[]
+    +getOptionalParams(int) : Pair[]
+    +setAction(String) : void
+    +setParams(String[], String[]) : void
+}
+
+enum CommandEnum {
+    BUDGET
+    DEPOSIT
+    EXPENSE
+    STATS
+    EXIT
+    HELP
+}
+
+class CommandParser {
+    +parse(String) : Command
+    -getCommandName(String) : CommandEnum
+    -getAction(Command, String) : String
+    -getRequiredParams(Command, String, String) : String[]
+    -getOptionalParams(Command, String, String) : String[]
+    -validateParamType(String, Class<?>) : void
+}
+
+CommandParser --> "{abstract} \n Command"
+
+class BudgetCommand {
+    -ACTIONS: String[]
+    -ACTIONS_REQUIRED_PARAMS: String[]
+    -ACTIONS_OPTIONAL_PARAMS: String[]
+
+    -executeAddBudget(BudgetAction, String[]) : void
+    -executeSetBudget(BudgetAction, String[]) : void
+    -executeDelBudget(BudgetAction, String[], ArrayList<Expense>) : void
+    -executeListBudget(BudgetAction, String[], ArrayList<Expense>) : void
+    -executeHelpBudget(BudgetAction) : void
+}
+
+class DepositCommand {
+    -ACTIONS: String[]
+    -ACTIONS_REQUIRED_PARAMS: String[]
+    -ACTIONS_OPTIONAL_PARAMS: String[]
+
+    -executeAddDeposit(DepositAction, String[], String[]) : void
+    -executeDelDeposit(DepositAction, String[]) : void
+    -executeFindDeposit(DepositAction, String[]) : void
+    -executeClearDeposit(DepositAction, String[]) : void
+    -executeListDeposit(DepositAction, String[]) : void
+    -executeHelpDeposit(DepositAction) : void
+}
+
+class ExpenseCommand {
+    -ACTIONS: String[]
+    -ACTIONS_REQUIRED_PARAMS: String[]
+    -ACTIONS_OPTIONAL_PARAMS: String[]
+
+    -executeAddExpense(ExpenseAction, String[], String[], ArrayList<Budget>) : void
+    -executeDelExpense(ExpenseAction, String[]) : void
+    -executeFindExpense(ExpenseAction, String[]) : void
+    -executeClearExpense(ExpenseAction, String[]) : void
+    -executeListExpense(ExpenseAction, String[]) : void
+    -executeHelpExpense(ExpenseAction) : void
+}
+
+class StatsCommand {
+    -ACTIONS: String[]
+    -ACTIONS_REQUIRED_PARAMS: String[]
+    -ACTIONS_OPTIONAL_PARAMS: String[]
+
+    -executeShowStats(StatsAction, String[]) : void
+    -executeHelpStats(ExpenseAction) : void
+}
+
+class HelpCommand {
+    -ACTIONS: String[]
+    -ACTIONS_REQUIRED_PARAMS: String[]
+    -ACTIONS_OPTIONAL_PARAMS: String[]
+}
+
+class ExitCommand {
+    -ACTIONS: String[]
+    -ACTIONS_REQUIRED_PARAMS: String[]
+    -ACTIONS_OPTIONAL_PARAMS: String[]
+}
+
+"{abstract} \n Command" <|-- BudgetCommand
+"{abstract} \n Command" <|-- DepositCommand
+"{abstract} \n Command" <|-- ExpenseCommand
+"{abstract} \n Command" <|-- StatsCommand
+"{abstract} \n Command" <|-- ExitCommand
+"{abstract} \n Command" <|-- HelpCommand
+
+@enduml
