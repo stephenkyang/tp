@@ -104,9 +104,9 @@ public enum Messages {
     STATS_HELP_COMMANDS("1. You can show stats by: " + System.lineSeparator() +
         "   stats show [/m <month>] [/y <year>] [/v <d for deposit, e for expense, de for both>]");
 
-    private String message;
+    private final String message;
 
-    Messages(String message) {
+    private Messages(String message) {
         this.message = message;
     }
 

@@ -160,7 +160,9 @@ The 'StatsCommand' class contains methods that are related to the execution of t
 Users can
 use this command to view all the details of their expenses, budgets and deposits in the current month. Through this
 feature, users will know
-their current progress and if their expenses have exceeded their budget. <Add diagram>
+their current progress and if their expenses have exceeded their budget. 
+
+![img.png](uml/StatsCommand.png)
 
 ### Design & Implementation of the Stats Feature
 

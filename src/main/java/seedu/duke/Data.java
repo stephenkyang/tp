@@ -34,11 +34,11 @@ public class Data {
         .registerTypeAdapter(LocalDate.class, new LocalDateAdapter())
         .setPrettyPrinting()
         .create();
-    private static final Logger logger = Logger.getLogger("File");
+    private static Logger logger = Logger.getLogger("File");
 
-    private final ArrayList<Budget> budgets;
-    private final ArrayList<Deposit> deposits;
-    private final ArrayList<Expense> expenses;
+    private ArrayList<Budget> budgets;
+    private ArrayList<Deposit> deposits;
+    private ArrayList<Expense> expenses;
 
     public Data() {
         budgets = new ArrayList<Budget>();

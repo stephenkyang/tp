@@ -42,7 +42,7 @@ public enum ErrorMessages {
     ERROR_FILE_NOT_FOUND("Could not read the file! BudgetBuddy will terminate unexpectedly..."),
     ERROR_FILE_EXPORT("Could not export the file! Please restart the application.");
 
-    private final String errorMessage;
+    private String errorMessage;
 
     ErrorMessages(String errorMessage) {
         this.errorMessage = errorMessage;
