@@ -1,0 +1,123 @@
+@startuml
+
+hide footbox
+
+ -> ":DepositCommand":
+
+activate ":DepositCommand"
+":DepositCommand" -> ":DepositCommand": execute(data, ui)
+activate  ":DepositCommand"
+":DepositCommand" -> ":data": getDeposits()
+activate ":data"
+return Deposits: ArrayList<Deposit>
+deactivate ":data"
+
+activate  ":DepositCommand"
+":DepositCommand" -> ":data": getDeposits()
+activate ":data"
+return Deposits: ArrayList<Deposit>
+
+
+
+":DepositCommand" -> ":DepositAction" : Deposits, ui
+activate ":DepositAction"
+":DepositAction" -> ":DepositCommand" : DepositAction :DepositAction
+deactivate ":DepositAction"
+
+
+alt action is add
+activate  ":DepositCommand"
+":DepositCommand" -> ":DepositCommand": executeAddDeposit(depositAction, requiredParams, optionalParams);
+activate ":DepositCommand"
+
+":DepositCommand" -> ":DepositAction" : depositName, depositAmount, depositDate
+activate ":DepositAction"
+":DepositAction" -> ":DepositAction" : addDeposit(depositName, depositAmount, depositDate)
+activate ":DepositAction"
+return
+
+
+else action is find
+activate  ":DepositCommand"
+":DepositCommand" -> ":DepositCommand": executeFindDeposit(depositAction, requiredParams)
+activate ":DepositCommand"
+":DepositCommand" -> ":DepositAction" : depositNo
+activate ":DepositAction"
+":DepositAction" -> ":DepositAction" : findDeposit(depositNo)
+activate ":DepositAction"
+return
+
+
+else action is del
+activate  ":DepositCommand"
+":DepositCommand" -> ":DepositCommand": executeDelDeposit(DepositAction, requiredParams)
+activate ":DepositCommand"
+":DepositCommand" -> ":DepositAction" : depositNo
+activate ":DepositAction"
+":DepositAction" -> ":DepositAction" : deleteDeposit(depositNo)
+activate ":DepositAction"
+return
+
+else action is list
+activate  ":DepositCommand"
+":DepositCommand" -> ":DepositCommand": executeListDeposit(DepositAction, optionalParams)
+activate ":DepositCommand"
+":DepositCommand" -> ":DepositAction" : DepositFrom, DepositTo, DepositCategory
+activate ":DepositAction"
+":DepositAction" -> ":DepositAction" : listDeposits()
+activate ":DepositAction"
+return
+return
+
+
+else action is clear
+activate  ":DepositCommand"
+":DepositCommand" -> ":DepositCommand": executeClearDeposit(DepositAction, optionalParams)
+activate ":DepositCommand"
+":DepositCommand" -> ":DepositAction" : depositFrom, depositTo
+activate ":DepositAction"
+":DepositAction" -> ":DepositAction" : clearDeposits(depositFrom, depositTo)
+activate ":DepositAction"
+return
+return
+
+
+else action is help
+activate  ":DepositCommand"
+":DepositCommand" -> ":DepositCommand": executeDepositHelp(depositAction)
+activate ":DepositCommand"
+":DepositCommand" -> ":DepositAction"
+activate ":DepositAction"
+":DepositAction" -> ":DepositAction" : depositHelp()
+activate ":DepositAction"
+return
+return
+
+
+deactivate ":DepositCommand"
+deactivate ":DepositCommand"
+deactivate ":DepositCommand"
+deactivate ":DepositCommand"
+deactivate ":DepositCommand"
+deactivate ":DepositCommand"
+deactivate ":DepositCommand"
+deactivate ":DepositCommand"
+deactivate ":DepositCommand"
+deactivate ":DepositCommand"
+deactivate ":DepositCommand"
+deactivate ":DepositCommand"
+
+
+":DepositCommand" -> ":data": exportData()
+activate ":data"
+return
+
+deactivate ":data"
+destroy ":data"
+
+
+end
+
+
+
+@enduml
