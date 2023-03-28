@@ -121,7 +121,8 @@ public class StatsUIResponse {
      * @param totalBudgets Total amount of budgets
      * @param totalDeposits Total amount of deposits
      * @param totalExpenses Total amount of expenses
-     * @return Messages which show ui of total amount of budgets, expenses and deposits and wheter on right track or overspent
+     * @return Messages which show ui of total amount of budgets, expenses and
+     *      deposits and whether on right track or overspent
      */
     private ArrayList<String> printSummary(double totalBudgets, double totalDeposits, double totalExpenses) {
         ArrayList<String> msgs = new ArrayList<String>();

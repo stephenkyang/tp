@@ -18,13 +18,11 @@ public class Ui {
         in = new Scanner(System.in);
     }
 
-
     /**
      * Reads the input from IO.
      *
      * @return the string of the input
      */
-
     public String readInput() {
         input = in.nextLine();
         return input;
