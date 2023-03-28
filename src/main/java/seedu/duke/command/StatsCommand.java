@@ -12,12 +12,11 @@ import seedu.duke.util.Pair;
 
 //@@author SaiChaitanya13
 public class StatsCommand extends Command {
-
-    // Format
-    private static String[] ACTIONS = {"show", "help"};
-    private static Pair[][] ACTIONS_REQUIRED_PARAMS = {{},{}};
-    private static Pair[][] ACTIONS_OPTIONAL_PARAMS = {
-
+    // Format for Stats command.
+    // Actions, required and optional parameters (w/ data type) of each action are specified.
+    private static final String[] ACTIONS = {"show", "help"};
+    private static final Pair[][] ACTIONS_REQUIRED_PARAMS = {{},{}};
+    private static final Pair[][] ACTIONS_OPTIONAL_PARAMS = {
         {new Pair("/m", int.class), new Pair("/y", int.class), new Pair ("/v", String.class)},
         {}
     };
@@ -49,7 +48,6 @@ public class StatsCommand extends Command {
         }
     }
 
-
     /**
      * Parses the optional attributes such as month, year, verbose options,
      * which will be used to execute show stats in the action class.
@@ -58,7 +56,6 @@ public class StatsCommand extends Command {
      * @param statsAction action selected will be executed through action class
      * @param optionalParams parameters containing the optional attributes
      * @throws BBException for any error thrown in the action class
-
      */
     private void executeShowStats(StatsAction statsAction, String[] optionalParams) throws BBException {
         // if year is not provided, use current year
@@ -97,10 +94,6 @@ public class StatsCommand extends Command {
         statsAction.statsHelp();
     }
 
-    /**
-     * Function to show program should not exit
-     * @return false --> Program should not exit
-     */
     @Override
     public boolean isExit() {
         return false;
