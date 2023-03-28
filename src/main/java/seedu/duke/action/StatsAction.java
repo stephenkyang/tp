@@ -13,8 +13,6 @@ import seedu.duke.model.Expense;
 import seedu.duke.util.Commons;
 
 //@@author SaiChaitanya13
-
-
 public class StatsAction {
     private StatsUIResponse statsUi;
 
