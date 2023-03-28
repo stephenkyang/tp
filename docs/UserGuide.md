@@ -90,6 +90,35 @@ Use the command `Expenses help` to learn the specific budget related commands
 <br/><br/>
 
 
+#### 3. Deposits
+
+Use the command `deposit help` to learn the specific deposit related commands
+
+1. You can add a deposit with an optional feature of adding a timestamp:
+
+   `deposit add /n (deposit name) /a (amount) [optional param] /d (timestamp in the form of DD-MM-YYYY)`
+   <br/><br/>
+
+2. You can remove a deposit:
+
+   `deposit del /n (name)`
+   <br/><br/>
+   
+3. You can clear deposits in a timeframe:
+      `deposit clear /s (timestamp in the form of DD-MM-YYYY) /e (timestamp in the form of DD-MM-YYYY)`
+      <br/><br/>
+4. You can list all deposts:
+
+   `deposit list`
+   <br/><br/>
+5. You can search for deposit that include a certain keyword:
+
+   `deposit find /c (keyword)`
+
+<br/><br/>
+
+
+
 #### 3. Stats 
 
 Use the command `Stats Help` to learn the specific stats related commands. 
