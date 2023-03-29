@@ -79,14 +79,14 @@ class Deposit {
 
 
 
-"{abstract} \n Command" <|-down- BudgetCommand
-"{abstract} \n Command" <|-right- Ui
-"{abstract} \n Command" <|-left- Data
+"{abstract} \n Command" <-down- BudgetCommand
+"{abstract} \n Command" <-right- Ui
+"{abstract} \n Command" <-left- Data
 
 
-"Budget" <|-down-"\n0..  " Data
-"Expense" <|-right "0.. "Data
-"Deposit" <|-up-"0..  " Data
+"Budget" <-down-"\n0..  " Data
+"Expense" <-right "0.. "Data
+"Deposit" <-up-"0..  " Data
 
 
 
