@@ -32,7 +32,19 @@ activate ":BudgetAction"
 ":BudgetAction" -> ":BudgetAction" : addBudget(budgetName, budgetLimit)
 activate ":BudgetAction"
 
+return
+return
 
+deactivate ":BudgetCommand"
+
+else actions is set
+
+":BudgetCommand" -> ":BudgetCommand": executeSetBudget(budgetAction, requiredParams)
+activate ":BudgetCommand"
+":BudgetCommand" -> ":BudgetAction" : budgetName, budgetLimit
+activate ":BudgetAction"
+":BudgetAction" -> ":BudgetAction" : setBudget(budgetName, budgetLimit)
+activate ":BudgetAction"
 
 return
 return
