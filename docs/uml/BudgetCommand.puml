@@ -1,6 +1,8 @@
 @startuml
 
 
+
+
 class "{abstract} \n Command"  {
          +actions: String[]
          +requiredParamsList: Pair[][]
@@ -30,14 +32,19 @@ class BudgetCommand {
     +ACTIONS_OPTIONAL_PARAMS: Pair[][]
      +void execute(Data data, Ui ui)
      +void executeBudgetDetail(BudgetAction budgetAction, String[] requiredParams, ArrayList<Expense> expenses)
+
+
      +void executeFindBudget(BudgetAction budgetAction, String[] requiredParams)
-     +void executeBudgetHelp(BudgetAction budgetAction)
-     +void executeAddBudget(BudgetAction budgetAction, String[] requiredParams)
-     +void executeSetBudget(BudgetAction budgetAction, String[] requiredParams)
-     +void executeDelBudget(BudgetAction budgetAction, String[] requiredParams, ArrayList<Expense> expenses)
-     +void executeListBudget(BudgetAction budgetAction)
+
      +boolean isExit()
 }
+
+note right
+ void executeBudgetHelp(), void executeAddBudget(),
+ void executeSetBudget(), void executeDelBudget(),
+ void executeListBudget() are the other methods under BudgetCommand
+
+end note
 
 class Data {
 + budgets: ArrayList<Budget>
