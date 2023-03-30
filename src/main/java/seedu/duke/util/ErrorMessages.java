@@ -5,11 +5,10 @@ public enum ErrorMessages {
     ERROR_UNKNOWN_INVALID_ACTION("Invalid action for unknown command."),
     ERROR_UNKNOWN_INVALID_ACTION_EXECUTE("Invalid execution for unknown action."),
 
-    ERROR_BUDGET_INVALID_ACTION("Invalid action for budget. Use these actions: add, set, del, list, find, help"),
+    ERROR_BUDGET_INVALID_ACTION("Invalid action for budget. Use these actions: add, set, del, list, help"),
     ERROR_BUDGET_ADD_INVALID_PARAM("Invalid parameters. Example: budget add /c transport /l 3000.00"),
     ERROR_BUDGET_SET_INVALID_PARAM("Invalid parameters. Example: budget set /c transport /l 5000.00"),
     ERROR_BUDGET_DEL_INVALID_PARAM("Invalid parameters. Example: budget del /c transport"),
-    ERROR_BUDGET_FIND_INVALID_PARAM("Invalid parameters. Example: budget find /c transport"),
     ERROR_BUDGET_LIST_INVALID_MONTHYEAR("Please input a valid month or month & date that is before today."),
 
     ERROR_DEPOSIT_INVALID_ACTION("Invalid action for deposit. Use these actions: add, del, list, clear, help"),
@@ -22,7 +21,7 @@ public enum ErrorMessages {
             "clear /f 23-01-2000 /t 23-03-2023"),
     
     ERROR_EXPENSE_INVALID_ACTION("Invalid action for expense. Use these actions: add, del, list"),
-    ERROR_EXPENSE_ADD_INVALID_PARAM("Invalid parameters. Example: expense add /c transport /n mrt /a 1.00 [/d] today"),
+    ERROR_EXPENSE_ADD_INVALID_PARAM("Invalid parameters. Example: expense add /c transport /n mrt /a 1.00 [/d] 23-03-2023"),
     ERROR_EXPENSE_DEL_INVALID_PARAM("Invalid parameters. Example: expense del /n mrt"),
     ERROR_EXPENSE_FIND_INVALID_PARAM("Invalid parameters. Example: expense find /n mrt"),
     ERROR_EXPENSE_LIST_INVALID_PARAM("Invalid parameters. Example: expense list [/c] transport"

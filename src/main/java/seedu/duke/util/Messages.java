@@ -57,7 +57,7 @@ public enum Messages {
     DEPOSIT_LIST_RANGE("Here are your deposits from %s to %s:"),
     DEPOSIT_LIST_NOTHING("You have no deposits."),
     DEPOSIT_HELP_COMMANDS("1. You can add an deposit by: " + System.lineSeparator()
-        + "   deposit add /n (category name) /a (amount) [optional] /d DD-MM-YYYY" + System.lineSeparator()
+        + "   deposit add /n (name) /a (amount) [optional] /d DD-MM-YYYY" + System.lineSeparator()
         + "2. You can delete a deposit: " + System.lineSeparator()
         + "   deposit del /n (deposit number)" + System.lineSeparator()
         + "3. You can list all deposits (by date): " + System.lineSeparator()
