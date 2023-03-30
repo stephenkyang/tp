@@ -11,6 +11,6 @@ public enum WarningMessages {
 
     @Override
     public String toString() {
-        return Constants.ANSI_YELLOW + warningMessage + Constants.ANSI_RESET;
+        return warningMessage;
     }
 }

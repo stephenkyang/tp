@@ -3,9 +3,9 @@ package seedu.duke.util;
 public enum Messages {
     LINE_DIVIDER("_______________"),
     APP_LOGO(System.lineSeparator() +
-        " █▀▀█ █   █ █▀▀▄ █▀▀▀ █▀▀ ▀▀█▀▀ 　  █▀▀█ █  █ █▀▀▄ █▀▀▄ █  █ " + System.lineSeparator() +
-        " █▀▀▄ █   █ █  █ █ ▀█ █▀▀   █   　  █▀▀▄ █  █ █  █ █  █ █▄▄█ " + System.lineSeparator() +
-        " █▄▄█  ▀▀▀  ▀▀▀  ▀▀▀▀ ▀▀▀   ▀   　  █▄▄█  ▀▀▀ ▀▀▀  ▀▀▀  ▄▄▄█"),
+        " █▀▀█ █   █ █▀▀▄ █▀▀▀ █▀▀ ▀▀█▀▀    █▀▀█ █  █ █▀▀▄ █▀▀▄ █  █ " + System.lineSeparator() +
+        " █▀▀▄ █   █ █  █ █ ▀█ █▀▀   █      █▀▀▄ █  █ █  █ █  █ █▄▄█ " + System.lineSeparator() +
+        " █▄▄█  ▀▀▀  ▀▀▀  ▀▀▀▀ ▀▀▀   ▀      █▄▄█  ▀▀▀ ▀▀▀  ▀▀▀  ▄▄▄█"),
     INFO_WELCOME("Welcome to BudgetBuddy! What can I do for you?"),
     INFO_EXIT("Bye! Hope to see you soon!"),
 
