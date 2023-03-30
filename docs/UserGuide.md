@@ -126,6 +126,60 @@ _______________
 
 ### 4. Expenses
 
+To add an expense, type the category of the expense followed by the name, amount
+and date.
+(If no date is listed, it is treated as today) : 
+expense add /c (category name) /n (name) /a (amount) [optional] /d DD-MM-YYYY
+```
+expense add /c transport /n mrt /a 2.50 /d 01-03-2023
+_______________
+The following expense has been added:
+1. [transport] mrt ($2.50) on 01 Mar 2023
+_______________
+```
+
+If you want to remove a specific expense:
+expense del /n (expense number)
+```
+expense del /n 2
+_______________
+The following expense has been removed:
+2. [transport] bus ($0.50) on 31 Mar 2023
+_______________
+```
+
+You can alo list the expenses made within a specific start and end date, with an
+optional modifier for the category of the expenses in that timeframe: 
+expense list [optional] /c (category name) /f DD-MM-YYYY /t DD-MM-YYYY
+```
+expense list /f 01-02-2023 /t 28-02-2023
+_______________
+Here are your expenses from 01 Feb 2023 to 28 Feb 2023 for all:
+3. [food] kfc ($30.00) on 01 Feb 2023
+_______________
+```
+
+If you want to find a specific expense: 
+expense find /n (keyword)
+```
+expense find /n mrt
+_______________
+Here are the expenses you searched:
+1. [transport] mrt ($2.50) on 01 Mar 2023
+_______________
+ 
+```
+
+If you want to delete expenses in a certain timeframe, with an optional modifier
+for the category of expenses: 
+expense clear [optional] /c (category name) /f DD-MM-YYYY /t DD-MM-YYYY
+```
+expense clear /c food
+_______________
+These are the expenses cleared:
+3. [food] kfc ($30.00) on 01 Feb 2023
+_______________
+```
 
 
 ### 5. Stats
