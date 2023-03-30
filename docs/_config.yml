@@ -1,2 +1,2 @@
 # Build settings
-theme: minima
+remote_theme: rundocs/jekyll-rtd-theme
