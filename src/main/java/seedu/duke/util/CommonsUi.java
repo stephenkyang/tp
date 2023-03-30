@@ -14,18 +14,7 @@ public class CommonsUi {
         int noOfBlackBars = getNumberOfBlackBars(amount, maxAmount);
         int noOfWhiteBars = Constants.MAX_BARS - noOfBlackBars;
 
-        // Add colors based on number of bars
-        String coloredBars = Constants.BLACK_BAR.repeat(noOfBlackBars) + Constants.ANSI_RESET;
-
-        if (noOfBlackBars >= Constants.RED_BAR_MIN_COUNT) {
-            coloredBars = Constants.ANSI_RED + coloredBars;
-        } else if (noOfBlackBars >= Constants.YELLOW_BAR_MIN_COUNT) {
-            coloredBars = Constants.ANSI_YELLOW + coloredBars;
-        } else {
-            coloredBars = Constants.ANSI_GREEN + coloredBars;
-        }
-
-        return coloredBars + Constants.WHITE_BAR.repeat(noOfWhiteBars);
+        return Constants.BLACK_BAR.repeat(noOfBlackBars) + Constants.WHITE_BAR.repeat(noOfWhiteBars);
     }
 
     /**
