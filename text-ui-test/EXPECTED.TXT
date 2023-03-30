@@ -1,4 +1,4 @@
-Could not locate data.json file! Creating a new file...
+Could not locate data.json file. A file will be automatically created after an action!
 _______________
 
  █▀▀█ █   █ █▀▀▄ █▀▀▀ █▀▀ ▀▀█▀▀    █▀▀█ █  █ █▀▀▄ █▀▀▄ █  █ 
