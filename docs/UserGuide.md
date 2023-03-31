@@ -122,6 +122,58 @@ _______________
 
 ### 3. Deposits
 
+If you want to create a deposit, use the following command,
+(if no date is listed, it is treated as today)
+deposit add /n (name) /a (amount) [optional] /d DD-MM-YYYY
+```
+deposit add /n picked up from ground /a 50.00 /d 31-03-2023
+_______________
+The following deposit has been added:
+1. picked up from ground ($50.00) on 31 Mar 2023
+_______________
+```
+
+To delete the deposit use the this command. The deposit number can be found wiht `deposit list`
+deposit del /n (deposit number)
+```
+deposit del /n 1
+_______________
+The following deposit has been removed:
+1. picked up from ground ($50.00) on 31 Mar 2023
+_______________
+```
+
+To list deposits, use this command. The optional parameter are dates from the start to the end range.
+deposit list [optional] /f DD-MM-YYYY /t DD-MM-YYYY
+```
+deposit list
+_______________
+Here are your deposits for this month:
+1. lottery ($3000.00) on 31 Mar 2023
+2. bank interest ($5.00) on 31 Mar 2023
+_______________
+```
+
+To find a deposit given a keyword, use this commmand.
+deposit find /n (keyword)
+```
+deposit find /n bank
+_______________
+Here are the deposits you searched:
+2. bank interest ($5.00) on 31 Mar 2023
+_______________
+```
+
+To clear all deposits, use this command. Optionally, if you want to clear within a range, use the optional params.
+deposit clear [optional] /f DD-MM-YYYY /t DD-MM-YYYY
+```
+deposit clear
+_______________
+These are the deposits cleared:
+1. lottery ($3000.00) on 31 Mar 2023
+2. bank interest ($5.00) on 31 Mar 2023
+_______________
+```
 
 
 ### 4. Expenses
