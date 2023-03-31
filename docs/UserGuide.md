@@ -68,6 +68,7 @@ Budget Buddy ensures that your data is always with us!
 
 ###### Commands that have the keyword [optional] means it is not required to key in after!
 
+
 ### 1. Help
 
 To know what commands are available, simply type in `help`!
@@ -105,6 +106,7 @@ _______________
    budget find /c (keyword)
 _______________
 ```
+
 
 ### 2. Budgets
 
@@ -152,6 +154,7 @@ Your budget list for Mar 2023:
 2. transport ░░░░░░░░░░░░░░░░░░░░ ($0.00/500.00)
 _______________
 ```
+
 
 ### 3. Deposits
 
@@ -278,9 +281,9 @@ _______________
 
 ### 5. Stats
 
-You can find out the stats for the month or year.
-The format is stats show [optional] /m month /y year
-(/v means verbose options, d for deposit, e for expense)
+You can find out the stats for the month or year. The format is:
+
+stats show [optional] /m month /y year /v verbose (d for deposit, e for expense)
 ```
 stats show /m 03 /y 2023 /v de
 _______________
