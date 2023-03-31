@@ -81,6 +81,7 @@ _______________
 ### 2. Budgets
 
 To add a budget, type the name of the budget you want followed by the spending limit:
+
 budget add /c (category name) /l (spending limit)
 ```
 budget add /c food /l 600.00
@@ -91,6 +92,7 @@ _______________
 ```
 
 You can also set a modify that was wrongly inserted:
+
 budget set /c (category) /l spending limit
 ```
 budget set /c food /l 500.00
@@ -101,6 +103,7 @@ _______________
 ```
 
 If you want to remove a certain budget,
+
 budget del /c (category)
 ```
 budget del /c transport
@@ -111,8 +114,10 @@ _______________
 ```
 
 Finally, list down the budgets that show each progress.
+
+budget list [optional] /m month /y year
 ```
-budget list [optional] /m 
+budget list
 _______________
 Your budget list for Mar 2023:
 1. food      ░░░░░░░░░░░░░░░░░░░░ ($0.00/500.00)
@@ -124,6 +129,7 @@ _______________
 
 If you want to create a deposit, use the following command,
 (if no date is listed, it is treated as today)
+
 deposit add /n (name) /a (amount) [optional] /d DD-MM-YYYY
 ```
 deposit add /n picked up from ground /a 50.00 /d 31-03-2023
@@ -133,7 +139,8 @@ The following deposit has been added:
 _______________
 ```
 
-To delete the deposit use the this command. The deposit number can be found wiht `deposit list`
+To delete the deposit use the this command. The deposit number can be found with `deposit list`
+
 deposit del /n (deposit number)
 ```
 deposit del /n 1
@@ -144,6 +151,7 @@ _______________
 ```
 
 To list deposits, use this command. The optional parameter are dates from the start to the end range.
+
 deposit list [optional] /f DD-MM-YYYY /t DD-MM-YYYY
 ```
 deposit list
@@ -155,6 +163,7 @@ _______________
 ```
 
 To find a deposit given a keyword, use this commmand.
+
 deposit find /n (keyword)
 ```
 deposit find /n bank
@@ -165,6 +174,7 @@ _______________
 ```
 
 To clear all deposits, use this command. Optionally, if you want to clear within a range, use the optional params.
+
 deposit clear [optional] /f DD-MM-YYYY /t DD-MM-YYYY
 ```
 deposit clear
@@ -179,8 +189,8 @@ _______________
 ### 4. Expenses
 
 To add an expense, type the category of the expense followed by the name, amount
-and date.
-(If no date is listed, it is treated as today) : 
+and date. (If no date is listed, it is treated as today): 
+
 expense add /c (category name) /n (name) /a (amount) [optional] /d DD-MM-YYYY
 ```
 expense add /c transport /n mrt /a 2.50 /d 01-03-2023
@@ -200,8 +210,9 @@ The following expense has been removed:
 _______________
 ```
 
-You can alo list the expenses made within a specific start and end date, with an
+You can also list the expenses made within a specific start and end date, with an
 optional modifier for the category of the expenses in that timeframe: 
+
 expense list [optional] /c (category name) /f DD-MM-YYYY /t DD-MM-YYYY
 ```
 expense list /f 01-02-2023 /t 28-02-2023
@@ -212,6 +223,7 @@ _______________
 ```
 
 If you want to find a specific expense: 
+
 expense find /n (keyword)
 ```
 expense find /n mrt
@@ -224,6 +236,7 @@ _______________
 
 If you want to delete expenses in a certain timeframe, with an optional modifier
 for the category of expenses: 
+
 expense clear [optional] /c (category name) /f DD-MM-YYYY /t DD-MM-YYYY
 ```
 expense clear /c food
