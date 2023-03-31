@@ -18,6 +18,8 @@ BudgetBuddy is built using Java version 11. Ensure that you are running Java ver
 4. If you are using **command prompt or powershell in Windows**, change the code page to UTF-8 by typing `chcp 65001` in the prompt.
 5. Run the following command: `java -jar duke.jar`
 
+**NOTE: It is not recommended to edit the data.json file unless you know what you are doing!**
+
 You will be then greeted by Duke as shown below:
 
 ```
