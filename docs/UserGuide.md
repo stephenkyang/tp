@@ -33,7 +33,35 @@ _______________
 ```
 
 ## Features
+Here are some features that Budget Buddy offers:
 
+#### Track your expenses
+
+You can keep track any items that you have just spent on BudgetBuddy!
+
+#### Categorize your budget into different names
+
+Instead of keeping your expenses into a single list, split up into different categories (e.g. Transport, Food, Bills)!
+
+#### Keep a list of your deposits
+
+Have extra earnings that you wish to keep track too? Fret not!
+
+#### Show your overall budget result
+
+Summarize your overall budget and see what needs to be improved!
+
+#### Remind your spending
+
+Always have a buddy to remind your spending (:
+
+#### Sort and filter deposits and expenses
+
+You can sort deposits and expenses by categories and date too!
+
+#### Persistent Data
+
+Budget Buddy ensures that your data is always with us!
 
 
 ## Commands
@@ -91,7 +119,7 @@ There are 2 budget categories.
 _______________
 ```
 
-You can also set a modify that was wrongly inserted:
+You can also set and modify that was wrongly inserted:
 
 budget set /c (category) /l spending limit
 ```
@@ -250,6 +278,29 @@ _______________
 
 ### 5. Stats
 
+You can find out the stats for the month or year.
+The format is stats show [optional] /m month /y year
+(/v means verbose options, d for deposit, e for expense)
+```
+stats show /m 03 /y 2023 /v de
+_______________
+Your current progress for Mar 2023:
+1. food      ████████░░░░░░░░░░░░ ($200.00/500.00)
+2. transport ████████████████░░░░ ($402.50/500.00)
+ 
+Deposits
+Total deposits: $0.00
+ 
+Expenses
+1. [transport] mrt ($2.50) on 01 Mar 2023
+2. [food] mac ($200.00) on 31 Mar 2023
+3. [transport] taxi ($400.00) on 31 Mar 2023
+Total expenses: $602.50
+ 
+Total budget progress: $602.50/1000.00 (+0.00)
+Good job! You are on the right track!
+_______________
+```
 
 
 ### 6. Exiting BudgetBuddy
