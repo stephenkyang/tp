@@ -15,7 +15,7 @@ BudgetBuddy is built using Java version 11. Ensure that you are running Java ver
 1. Download the `budgetbuddy.jar` file under [Releases](https://github.com/AY2223S2-CS2113-W15-3/tp/releases)
 2. Copy the file into a folder of your choice. Ensure that you do not have `data.json` in the same directory.
 3. Launch your command prompt/terminal and navigate to the folder where `budgetbuddy.jar` is located.
-4. If you are using **command prompt or powershell in Windows**, change the code page to UTF-8 by typing `chcp 65001`.
+4. If you are using **command prompt or powershell in Windows**, change the code page to UTF-8 by typing `chcp 65001` in the prompt.
 5. Run the following command: `java -jar duke.jar`
 
 You will be then greeted by Duke as shown below:
@@ -201,6 +201,7 @@ _______________
 ```
 
 If you want to remove a specific expense:
+
 expense del /n (expense number)
 ```
 expense del /n 2
