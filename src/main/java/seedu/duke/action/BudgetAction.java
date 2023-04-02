@@ -40,7 +40,7 @@ public class BudgetAction {
             budgetUi.printBudgetNameUsed();
             return;
         } else if (budgetLimit < 0) {
-            budgetUi.printBudgetLimitNegative();
+            // budgetUi.printBudgetLimitNegative();
             return;
         }
 
@@ -86,7 +86,7 @@ public class BudgetAction {
             budgetUi.printBudgetDoesNotExist();
             return;
         } else if (budgetLimit < 0) {
-            budgetUi.printBudgetLimitNegative();
+            // budgetUi.printBudgetLimitNegative();
             return;
         }
         assert budgets.contains(budget) : "budget does not exist!";

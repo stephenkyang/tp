@@ -9,12 +9,12 @@ public enum ErrorMessages {
     ERROR_BUDGET_ADD_INVALID_PARAM("Invalid parameters. Example: budget add /c transport /l 3000.00"),
     ERROR_BUDGET_SET_INVALID_PARAM("Invalid parameters. Example: budget set /c transport /l 5000.00"),
     ERROR_BUDGET_DEL_INVALID_PARAM("Invalid parameters. Example: budget del /c transport"),
-    ERROR_BUDGET_LIST_INVALID_MONTHYEAR("Please input a valid month or month & date that is before today."),
+    ERROR_BUDGET_LIST_INVALID_MONTHYEAR("Please input a valid month or month & year (in YYYY format) " +
+        "that is before today."),
 
     ERROR_DEPOSIT_INVALID_ACTION("Invalid action for deposit. Use these actions: add, del, list, clear, help"),
     ERROR_DEPOSIT_ADD_INVALID_PARAM("Invalid parameters. Example: deposit add /n lottery /a 3000.00 [/d] 23-03-2023"),
-    ERROR_DEPOSIT_DEL_INVALID_PARAM("Invalid parameters. Example: deposit del /n 1" + 
-        "\n Delete with the corresponding list number from `deposit list`."),
+    ERROR_DEPOSIT_DEL_INVALID_PARAM("Invalid parameters. Example: deposit del /n 1"),
     ERROR_DEPOSIT_FIND_INVALID_PARAM("Invalid parameters. Example: deposit find /n lottery"),
     ERROR_DEPOSIT_LIST_INVALID_PARAM("Invalid parameters. Example: deposit list [/f] 01-01-2023 [/t] 01-03-2023"),
     ERROR_DEPOSIT_CLEAR_INVALID_PARAM("Invalid parameters. Example: deposit" +

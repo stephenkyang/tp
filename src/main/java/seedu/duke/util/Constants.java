@@ -15,6 +15,9 @@ public class Constants {
     public static final String OUTPUT_DATE_FORMAT_STRING = "dd MMM yyyy";
     public static final DateTimeFormatter OUTPUT_DATE_FORMAT = DateTimeFormatter.ofPattern(OUTPUT_DATE_FORMAT_STRING);
 
+    // MAX LENGTH FOR ALL STRING
+    public static final int STRING_MAX_LENGTH = 30;
+
     // COLOUR CODES
     public static final String ANSI_RED = "\u001B[31m";
     public static final String ANSI_GREEN = "\u001B[32m";
