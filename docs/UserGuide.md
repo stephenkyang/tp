@@ -8,19 +8,23 @@ you have to have a better understanding of your overall spending and saving.
 
 ## System requirements
 
-BudgetBuddy is built using Java version 11. Ensure that you are running Java version 11 on your device.
+BudgetBuddy is built using Java version 11 and only works on Windows, MAC and Linux OS. Ensure that you are running Java version 11 on your device.
 
 ## Installation guide
 
 1. Download the `budgetbuddy.jar` file under [Releases](https://github.com/AY2223S2-CS2113-W15-3/tp/releases)
 2. Copy the file into a folder of your choice. Ensure that you do not have `data.json` in the same directory.
 3. Launch your command prompt/terminal and navigate to the folder where `budgetbuddy.jar` is located.
-4. If you are using **command prompt or powershell in Windows**, change the code page to UTF-8 by typing `chcp 65001` in the prompt.
-5. Run the following command: `java -jar duke.jar`
+4. Run the following command: `java -jar budgetbuddy.jar`
 
 **NOTE: It is not recommended to edit the data.json file unless you know what you are doing!**
 
-You will be then greeted by Duke as shown below:
+**Please change your command line interface's character encoding to UTF-8 if the application displays text such as ????.**
+
+For Windows, if you are using command prompt or powershell, change the code page by typing `chcp 65001` in the prompt.
+For Mac, change the Text encoding to `UTF-8` under International section in your Terminal Settings.
+
+You will be then greeted by Budget Buddy as shown below:
 
 ```
 Could not locate data.json file. A file will be automatically created after an action!
@@ -55,7 +59,7 @@ Summarize your overall budget and see what needs to be improved!
 
 #### Remind your spending
 
-Always have a buddy to remind your spending (:
+Always have a buddy to remind your spending!
 
 #### Sort and filter deposits and expenses
 
@@ -70,6 +74,7 @@ Budget Buddy ensures that your data is always with us!
 
 ###### Commands that have the keyword [optional] means it is not required to key in after!
 
+###### Please input the parameters in correct format so as to prevent abnormal behavior.
 
 ### 1. Help
 
@@ -79,7 +84,7 @@ To know what commands are available, simply type in `help`!
 help
 _______________
 Budget Buddy helps you to manage your finances better.
-Budget Buddy has 3 main categories:
+Budget Buddy has 4 main categories:
 1. Budget
    - Choose how much money you want to allocate to a budget of your specified name
 2. Expense
@@ -99,13 +104,11 @@ _______________
 1. You can add a monthly budget: 
    budget add /c (category name) /l (spending limit)
 2. You can modify an existing budget: 
-   budget set /c (category) /l (spending limit)
+   budget set /c (category name) /l (spending limit)
 3. You can remove a monthly budget: 
-   budget del /c (category)
-4. You can list all budgets: 
-   budget list
-5. You can search for budgets that include a certain keyword: 
-   budget find /c (keyword)
+   budget del /c (category name)
+4. You can list and check each budget's status for a certain month/year: 
+   budget list [optional] /m (month) /y (year in YYYY format)
 _______________
 ```
 
@@ -113,6 +116,8 @@ _______________
 ### 2. Budgets
 
 To add a budget, type the name of the budget you want followed by the spending limit:
+
+The category name must be less than 30 characters.
 
 budget add /c (category name) /l (spending limit)
 ```
@@ -147,7 +152,9 @@ _______________
 
 Finally, list down the budgets that show each progress.
 
-budget list [optional] /m month /y year
+Note that you can only input year from 1000 to current year.
+
+budget list [optional] /m month (0-12) /y year (in YYYY)
 ```
 budget list
 _______________
@@ -162,6 +169,8 @@ _______________
 
 If you want to create a deposit, use the following command,
 (if no date is listed, it is treated as today)
+
+The deposit name must be less than 30 characters, and the date can only be input before today.
 
 deposit add /n (name) /a (amount) [optional] /d DD-MM-YYYY
 ```
@@ -223,6 +232,8 @@ _______________
 
 To add an expense, type the category of the expense followed by the name, amount
 and date. (If no date is listed, it is treated as today): 
+
+The expense name must be less than 30 characters, and the date can only be input before today.
 
 expense add /c (category name) /n (name) /a (amount) [optional] /d DD-MM-YYYY
 ```
@@ -286,6 +297,8 @@ _______________
 You can find out the stats for the month or year. The format is:
 
 stats show [optional] /m month /y year /v verbose (d for deposit, e for expense)
+
+Note that you can only input year from 1000 to current year.
 ```
 stats show /m 03 /y 2023 /v de
 _______________
@@ -312,6 +325,6 @@ _______________
 
 You can exit the application using the `exit` command.
 
-Upon exiting BudgetBuddy, BudgetBuddy will save the current tasks in the list to a local text file in your device.
-These saved tasks will be imported into Duke when it is subsequently launched in the future,
-ensuring that you do not lose track of you tasks.
+Upon exiting BudgetBuddy, BudgetBuddy will save the current data in the list to a local text file in your device.
+The saved data will be imported into BudgetBuddy when it is subsequently launched in the future,
+ensuring that you do not lose track of it.

@@ -28,9 +28,9 @@ public class BudgetUIResponse {
         ui.printMessage(Messages.BUDGET_NAME_USED.toString());
     }
 
-    public void printBudgetLimitNegative() {
-        ui.printMessage(Messages.BUDGET_LIMIT_NEGATIVE.toString());
-    }
+    // public void printBudgetLimitNegative() {
+    //     ui.printMessage(Messages.BUDGET_LIMIT_NEGATIVE.toString());
+    // }
 
     /**
      * Prints the added budget along with the total no of budgets.

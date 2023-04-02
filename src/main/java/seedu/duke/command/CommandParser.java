@@ -145,7 +145,7 @@ public class CommandParser {
                 Class<?> paramType = param.getValue();
 
                 // Gets parameter value from the parameter syntax
-                String paramValue = input.split(" " + paramName + " ")[1].split(" /")[0];
+                String paramValue = input.split(" " + paramName + " ")[1].split(" /")[0].strip();
 
                 // Check if the parameter value suits for the class type (e.g. int, string)
                 validateParamType(paramValue, paramType);
@@ -193,7 +193,7 @@ public class CommandParser {
                     continue;
                 }
 
-                String paramValue = splitParam[1].split(" /")[0];
+                String paramValue = splitParam[1].split(" /")[0].strip();
 
                 // Check if the parameter value suits for the class type (e.g. int, string)
                 validateParamType(paramValue, paramType);
@@ -225,15 +225,26 @@ public class CommandParser {
             } else if (paramType.isAssignableFrom(double.class)) {
                 double value = Double.parseDouble(paramValue);
 
-                //Solution below adapted from https://stackoverflow.com/questions/32531910/
+                // Solution below adapted from https://stackoverflow.com/questions/32531910/
                 // Check if input only contains at most 2 dec points and is positive
-                if (BigDecimal.valueOf(value).scale() > 2 && value > 0) {
+                if (BigDecimal.valueOf(value).scale() > 2 || value < 0) {
                     throw new NumberFormatException();
                 }
             } else if (paramType.isAssignableFrom(LocalDate.class)) {
-                LocalDate.parse(paramValue, Constants.ACCEPTABLE_DATE_FORMAT);
+                LocalDate date = LocalDate.parse(paramValue, Constants.ACCEPTABLE_DATE_FORMAT);
+
+                // Throw if year is not in 4 digits
+                int yearDigits = String.valueOf(date.getYear()).length();
+                if (yearDigits != 4) {
+                    throw new CommandParamTypeInvalidException();
+                }
+            } else if (paramType.isAssignableFrom(String.class)) {
+                // Check if input contains less than 30 characters
+                if (paramValue.length() > Constants.STRING_MAX_LENGTH) {
+                    throw new CommandParamTypeInvalidException();
+                }
             }
-        } catch (NumberFormatException | DateTimeParseException err) {
+        } catch (NumberFormatException | DateTimeParseException | CommandParamTypeInvalidException err) {
             throw new CommandParamTypeInvalidException();
         }
     }
