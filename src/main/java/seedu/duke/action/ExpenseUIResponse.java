@@ -123,20 +123,5 @@ public class ExpenseUIResponse {
         return msgs;
     }
 
-    // @@author chongyongrui
-    // public static double printRelatedExpenses(ArrayList<Expense> expenses, String budgetName) {
-    //     int i = 1;
-    //     double totalExpenseValue = 0;
-    //     System.out.println("These are the expenses that are under the " + budgetName + " budget:");
-    //     for (Expense expense : expenses) {
-    //         if (expense != null) {
-    //             if (Objects.equals(expense.getCategory(), budgetName)) {
-    //                 System.out.println(i + ". " + expense.getName() + " with amount of $" + expense.getAmount());
-    //                 totalExpenseValue += expense.getAmount();
-    //                 i++;
-    //             }
-    //         }
-    //     }
-    //     return totalExpenseValue;
-    // }
+
 }

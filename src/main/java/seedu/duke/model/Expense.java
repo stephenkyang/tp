@@ -8,7 +8,7 @@ public class Expense extends Item {
     private LocalDate date;
     private int id;
 
-    public Expense(String category, String name, double amount, LocalDate date, int id){
+    public Expense(String category, String name, double amount, LocalDate date, int id) {
         super(name, amount);
         this.category = category;
         this.date = date;
@@ -23,7 +23,4 @@ public class Expense extends Item {
         return this.date;
     }
 
-    public int getId() {
-        return this.id;
-    }
 }
