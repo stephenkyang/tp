@@ -159,7 +159,7 @@ Finally, list down the budgets that show each progress.
 
 Note that you can only input year from 1000 to current year.
 
-budget list [optional] /m month (0-12) /y year (in YYYY)
+budget list [optional] /m month (1-12) /y year (in YYYY)
 
 ```
 budget list
