@@ -38,15 +38,15 @@ public class ExpenseTest {
         } catch (BBException e) {
             fail();
         }
-
+        
         assert expenseList.size() != 0 : "add failed";
         assertEquals(1, expenseList.size());
         try {
-            expenseAction.deleteExpense(0);
+            expenseAction.deleteExpense(1);
         } catch (GlobalInvalidNumberException e) {
             fail();
         }
-        assert expenseList.size() == 0 : "delete failed";
+        assert expenseList.size() != 1 : "delete failed";
         assertEquals(0, expenseList.size());
     }
 }
