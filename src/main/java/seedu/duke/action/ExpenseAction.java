@@ -60,11 +60,10 @@ public class ExpenseAction {
             Expense deletedExpense = expenses.remove(expenseId);
 
             expenseUi.printExpenseDelSuccessful(deletedExpense);
-        } else {
-            System.out.println(ErrorMessages.ERROR_GLOBAL_INVALID_NUMBER.toString());
-        }
+        } else System.out.println(ErrorMessages.ERROR_GLOBAL_INVALID_NUMBER.toString());
     }
-    
+
+    @SuppressWarnings("unchecked")
     public void listExpenses(String category) {
         ArrayList<Expense> expenseList = (ArrayList<Expense>) expenses.clone();
         // Filter the expenses by category, if any
