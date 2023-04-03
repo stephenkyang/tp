@@ -240,7 +240,9 @@ _______________
 ### 4. Expenses
 
 To add an expense, type the category of the expense followed by the name, amount
-and date. (If no date is listed, it is treated as today):
+and date. (If no date is listed, it is treated as today)
+
+The budget linked to this new expense must already exist, in order to link your new expense to a pre-existing budget.
 
 The expense name must be less than 30 characters, and the date can only be input before today.
 
