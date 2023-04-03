@@ -22,19 +22,19 @@ public class ExpenseUIResponse {
     }
 
     public void printExpenseAddSuccessful(Expense expense) {
-        String msg = String.format(Messages.EXPENSE_EXPENSE.toString(), expense.getId(), expense.getCategory(),
-            expense.getName(), expense.getAmount(), expense.getDate().format(Constants.OUTPUT_DATE_FORMAT));
+        String msg = String.format(Messages.EXPENSE_EXPENSE.toString(), 1, expense.getCategory(),
+                expense.getName(), expense.getAmount(), expense.getDate().format(Constants.OUTPUT_DATE_FORMAT));
         ui.printMessage(Messages.EXPENSE_ADD_SUCCESSFUL.toString(), msg);
     }
 
     public void printExpenseDelSuccessful(Expense expense) {
-        String msg = String.format(Messages.EXPENSE_EXPENSE.toString(), expense.getId(), expense.getCategory(),
-            expense.getName(), expense.getAmount(), expense.getDate().format(Constants.OUTPUT_DATE_FORMAT));
+        String msg = String.format(Messages.EXPENSE_EXPENSE.toString(), 1, expense.getCategory(),
+                expense.getName(), expense.getAmount(), expense.getDate().format(Constants.OUTPUT_DATE_FORMAT));
         ui.printMessage(Messages.EXPENSE_DELETE_SUCCESSFUL.toString(), msg);
     }
 
     public void printListExpenses(ArrayList<Expense> previousExpenses, ArrayList<Expense> currentExpenses,
-        String category) {
+                                  String category) {
 
         if (previousExpenses.size() == 0 && currentExpenses.size() == 0) {
             ui.printMessage(Messages.EXPENSE_LIST_NOTHING.toString());
@@ -86,13 +86,13 @@ public class ExpenseUIResponse {
         String msg;
         if (from.equals(LocalDate.MIN)) {
             msg = String.format(Messages.EXPENSE_LIST_RANGE_TO.toString(), to.format(Constants.OUTPUT_DATE_FORMAT),
-                categoryMsg);
+                    categoryMsg);
         } else if (to.equals(LocalDate.MAX)) {
             msg = String.format(Messages.EXPENSE_LIST_RANGE_FROM.toString(), from.format(Constants.OUTPUT_DATE_FORMAT),
-                categoryMsg);
+                    categoryMsg);
         } else {
             msg = String.format(Messages.EXPENSE_LIST_RANGE.toString(), from.format(Constants.OUTPUT_DATE_FORMAT),
-                to.format(Constants.OUTPUT_DATE_FORMAT), categoryMsg);
+                    to.format(Constants.OUTPUT_DATE_FORMAT), categoryMsg);
         }
         msgs.add(msg);
 
@@ -105,17 +105,19 @@ public class ExpenseUIResponse {
         ArrayList<String> msgs = new ArrayList<String>();
 
         msgs.add(Messages.EXPENSE_CLEAR_SUCCESSFUL.toString());
-        
+
         msgs.addAll(printExpenses(expenses));
         ui.printMessage(msgs.toArray(new String[msgs.size()]));
     }
 
     public static ArrayList<String> printExpenses(ArrayList<Expense> expenses) {
         ArrayList<String> msgs = new ArrayList<String>();
+        int i = 1;
         for (Expense e : expenses) {
-            String msg = String.format(Messages.EXPENSE_EXPENSE.toString(), e.getId(), e.getCategory(),
-                e.getName(), e.getAmount(), e.getDate().format(Constants.OUTPUT_DATE_FORMAT));
+            String msg = String.format(Messages.EXPENSE_EXPENSE.toString(), i, e.getCategory(),
+                    e.getName(), e.getAmount(), e.getDate().format(Constants.OUTPUT_DATE_FORMAT));
             msgs.add(msg);
+            i++;
         }
 
         return msgs;
