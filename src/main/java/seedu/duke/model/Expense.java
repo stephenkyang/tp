@@ -23,4 +23,8 @@ public class Expense extends Item {
         return this.date;
     }
 
+    public int getId() {
+        return this.id;
+    }
+    
 }
