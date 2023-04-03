@@ -262,7 +262,7 @@ expense del /n (expense number)
 expense del /n 2
 _______________
 The following expense has been removed:
-2. [transport] bus ($0.50) on 31 Mar 2023
+1. [transport] bus ($0.50) on 31 Mar 2023
 _______________
 ```
 
