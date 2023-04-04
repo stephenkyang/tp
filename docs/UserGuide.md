@@ -8,7 +8,8 @@ you have to have a better understanding of your overall spending and saving.
 
 ## System requirements
 
-BudgetBuddy is built using Java version 11 and only works on Windows, MAC and Linux OS. Ensure that you are running Java version 11 on your device.
+BudgetBuddy is built using Java version 11 and only works on Windows, MAC and Linux OS. Ensure that you are running Java
+version 11 on your device.
 
 ## Installation guide
 
@@ -19,7 +20,8 @@ BudgetBuddy is built using Java version 11 and only works on Windows, MAC and Li
 
 **NOTE: It is not recommended to edit the data.json file unless you know what you are doing!**
 
-**Please change your command line interface's character encoding to UTF-8 if the application displays text such as ????.**
+**Please change your command line interface's character encoding to UTF-8 if the application displays text such as
+????.**
 
 For Windows, if you are using command prompt or powershell, change the code page by typing `chcp 65001` in the prompt.
 For Mac, change the Text encoding to `UTF-8` under International section in your Terminal Settings.
@@ -39,6 +41,7 @@ _______________
 ```
 
 ## Features
+
 Here are some features that Budget Buddy offers:
 
 #### Track your expenses
@@ -69,7 +72,6 @@ You can sort deposits and expenses by categories and date too!
 
 Budget Buddy ensures that your data is always with us!
 
-
 ## Commands
 
 ###### Commands that have the keyword [optional] means it is not required to key in after!
@@ -87,10 +89,10 @@ Budget Buddy helps you to manage your finances better.
 Budget Buddy has 4 main categories:
 1. Budget
    - Choose how much money you want to allocate to a budget of your specified name
-2. Expense
-   - track how much money you have spent, and link it to a certain budget of yours
-3. Deposit 
+2. Deposit 
    - track how much money you have earned or received
+3. Expense
+   - track how much money you have spent, and link it to a certain budget of yours
 4. Stats 
    - shows the progress on spending so far as well as the total number of deposits
 To learn the specific commands for each category, input "(category) help"
@@ -98,6 +100,7 @@ _______________
 ```
 
 You can also know what are the actions for a specific category (e.g. budget)!
+
 ```
 budget help
 _______________
@@ -112,7 +115,6 @@ _______________
 _______________
 ```
 
-
 ### 2. Budgets
 
 To add a budget, type the name of the budget you want followed by the spending limit:
@@ -120,6 +122,7 @@ To add a budget, type the name of the budget you want followed by the spending l
 The category name must be less than 30 characters.
 
 budget add /c (category name) /l (spending limit)
+
 ```
 budget add /c food /l 600.00
 _______________
@@ -131,6 +134,7 @@ _______________
 You can also set and modify that was wrongly inserted:
 
 budget set /c (category) /l spending limit
+
 ```
 budget set /c food /l 500.00
 _______________
@@ -142,6 +146,7 @@ _______________
 If you want to remove a certain budget,
 
 budget del /c (category)
+
 ```
 budget del /c transport
 _______________
@@ -154,7 +159,8 @@ Finally, list down the budgets that show each progress.
 
 Note that you can only input year from 1000 to current year.
 
-budget list [optional] /m month (0-12) /y year (in YYYY)
+budget list [optional] /m month (1-12) /y year (in YYYY)
+
 ```
 budget list
 _______________
@@ -164,7 +170,6 @@ Your budget list for Mar 2023:
 _______________
 ```
 
-
 ### 3. Deposits
 
 If you want to create a deposit, use the following command,
@@ -173,6 +178,7 @@ If you want to create a deposit, use the following command,
 The deposit name must be less than 30 characters, and the date can only be input before today.
 
 deposit add /n (name) /a (amount) [optional] /d DD-MM-YYYY
+
 ```
 deposit add /n picked up from ground /a 50.00 /d 31-03-2023
 _______________
@@ -184,6 +190,7 @@ _______________
 To delete the deposit use the this command. The deposit number can be found with `deposit list`
 
 deposit del /n (deposit number)
+
 ```
 deposit del /n 1
 _______________
@@ -195,6 +202,7 @@ _______________
 To list deposits, use this command. The optional parameter are dates from the start to the end range.
 
 deposit list [optional] /f DD-MM-YYYY /t DD-MM-YYYY
+
 ```
 deposit list
 _______________
@@ -207,6 +215,7 @@ _______________
 To find a deposit given a keyword, use this commmand.
 
 deposit find /n (keyword)
+
 ```
 deposit find /n bank
 _______________
@@ -218,6 +227,7 @@ _______________
 To clear all deposits, use this command. Optionally, if you want to clear within a range, use the optional params.
 
 deposit clear [optional] /f DD-MM-YYYY /t DD-MM-YYYY
+
 ```
 deposit clear
 _______________
@@ -227,15 +237,17 @@ These are the deposits cleared:
 _______________
 ```
 
-
 ### 4. Expenses
 
 To add an expense, type the category of the expense followed by the name, amount
-and date. (If no date is listed, it is treated as today): 
+and date. (If no date is listed, it is treated as today)
+
+The budget linked to this new expense must already exist, in order to link your new expense to a pre-existing budget.
 
 The expense name must be less than 30 characters, and the date can only be input before today.
 
 expense add /c (category name) /n (name) /a (amount) [optional] /d DD-MM-YYYY
+
 ```
 expense add /c transport /n mrt /a 2.50 /d 01-03-2023
 _______________
@@ -247,18 +259,20 @@ _______________
 If you want to remove a specific expense:
 
 expense del /n (expense number)
+
 ```
 expense del /n 2
 _______________
 The following expense has been removed:
-2. [transport] bus ($0.50) on 31 Mar 2023
+1. [transport] bus ($0.50) on 31 Mar 2023
 _______________
 ```
 
 You can also list the expenses made within a specific start and end date, with an
-optional modifier for the category of the expenses in that timeframe: 
+optional modifier for the category of the expenses in that timeframe:
 
 expense list [optional] /c (category name) /f DD-MM-YYYY /t DD-MM-YYYY
+
 ```
 expense list /f 01-02-2023 /t 28-02-2023
 _______________
@@ -267,9 +281,10 @@ Here are your expenses from 01 Feb 2023 to 28 Feb 2023 for all:
 _______________
 ```
 
-If you want to find a specific expense: 
+If you want to find a specific expense:
 
 expense find /n (keyword)
+
 ```
 expense find /n mrt
 _______________
@@ -280,9 +295,10 @@ _______________
 ```
 
 If you want to delete expenses in a certain timeframe, with an optional modifier
-for the category of expenses: 
+for the category of expenses:
 
 expense clear [optional] /c (category name) /f DD-MM-YYYY /t DD-MM-YYYY
+
 ```
 expense clear /c food
 _______________
@@ -291,7 +307,6 @@ These are the expenses cleared:
 _______________
 ```
 
-
 ### 5. Stats
 
 You can find out the stats for the month or year. The format is:
@@ -299,6 +314,7 @@ You can find out the stats for the month or year. The format is:
 stats show [optional] /m month /y year /v verbose (d for deposit, e for expense)
 
 Note that you can only input year from 1000 to current year.
+
 ```
 stats show /m 03 /y 2023 /v de
 _______________
@@ -319,7 +335,6 @@ Total budget progress: $602.50/1000.00 (+0.00)
 Good job! You are on the right track!
 _______________
 ```
-
 
 ### 6. Exiting BudgetBuddy
 
