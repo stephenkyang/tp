@@ -115,16 +115,4 @@ destroy ":data"
 deactivate ":data"
 deactivate ":BudgetCommand"
 
-
-
-
-
-
-
-
-
-
-
-
-
 @enduml
