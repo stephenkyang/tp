@@ -1,9 +1,9 @@
 package seedu.duke.action;
 
 import seedu.duke.Ui;
+import seedu.duke.model.Expense;
 import seedu.duke.exception.GlobalInvalidMonthYearException;
 import seedu.duke.model.Budget;
-import seedu.duke.model.Expense;
 import seedu.duke.util.Commons;
 
 import java.time.LocalDate;
@@ -114,9 +114,9 @@ public class BudgetAction {
     /**
      * Prints all the details of all budgets in the list.
      *
-     * @param month Month of the budget that user wants to view
-     * @param year Year of the budget that user wants to view
-     * @param expenses Calculate expense total of each budget category 
+     * @param month    Month of the budget that user wants to view
+     * @param year     Year of the budget that user wants to view
+     * @param expenses Calculate expense total of each budget category
      * @throws GlobalInvalidMonthYearException invalid date that cannot be parsed
      */
     public void printBudgets(int month, int year, ArrayList<Expense> expenses) throws GlobalInvalidMonthYearException {
@@ -163,7 +163,7 @@ public class BudgetAction {
      * @return array of double that contains total expense of each budget
      */
     public static double[] getBudgetsExpenseTotal(ArrayList<Budget> budgets, ArrayList<Expense> expenses,
-        LocalDate startDate, LocalDate endDate) {
+                                                  LocalDate startDate, LocalDate endDate) {
 
         double[] budgetsExpenseTotal = new double[budgets.size()];
 
@@ -207,7 +207,7 @@ public class BudgetAction {
     /**
      * Gets the total amount of all budgets.
      *
-     * @param  budgets containing the list of budgets
+     * @param budgets containing the list of budgets
      * @return total amount of all budgets
      */
     public static double getTotalBudgets(ArrayList<Budget> budgets) {
@@ -221,9 +221,9 @@ public class BudgetAction {
 
     /**
      * Prints a message about budgets that are close to the limit upon the initialisation of Duke.
-     * 
-     * @param budgets   containing the list of budgets
-     * @param expenses  use to calculate total expense based on category
+     *
+     * @param budgets  containing the list of budgets
+     * @param expenses use to calculate total expense based on category
      * @return list of messages that will be printed in Ui from Main
      */
     public static ArrayList<String> summaryBudget(ArrayList<Budget> budgets, ArrayList<Expense> expenses) {

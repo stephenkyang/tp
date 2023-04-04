@@ -122,7 +122,7 @@ public class ExpenseCommand extends Command {
      */
     private void executeDelExpense(ExpenseAction expenseAction, String[] requiredParams) throws BBException {
         int expenseNo = Integer.parseInt(requiredParams[0]);
-        expenseAction.deleteExpense(expenseNo - 1);
+        expenseAction.deleteExpense(expenseNo);
     }
 
     /**

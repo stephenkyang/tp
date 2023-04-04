@@ -14,7 +14,6 @@ import seedu.duke.exception.GlobalInvalidNumberException;
 import seedu.duke.model.Budget;
 import seedu.duke.model.Expense;
 import seedu.duke.util.Commons;
-import seedu.duke.util.ErrorMessages;
 
 //@@author tzixi
 public class ExpenseAction {
@@ -44,7 +43,8 @@ public class ExpenseAction {
         // Get the id of last expense and increment it
         int expenseId;
         if (expenses.size() != 0) {
-            expenseId = expenses.size() + 1;
+            Expense lastExpense = expenses.get(expenses.size() - 1);
+            expenseId = lastExpense.getId() + 1;
         } else {
             expenseId = 1;
         }
@@ -56,11 +56,10 @@ public class ExpenseAction {
     }
 
     public void deleteExpense(int expenseId) throws GlobalInvalidNumberException {
-        if (isValidateExpenseNumber(expenseId)) {
-            Expense deletedExpense = expenses.remove(expenseId);
+        int elementNo = validateExpense(expenseId);
+        Expense deletedExpense = expenses.remove(elementNo);
 
-            expenseUi.printExpenseDelSuccessful(deletedExpense);
-        } else System.out.println(ErrorMessages.ERROR_GLOBAL_INVALID_NUMBER.toString());
+        expenseUi.printExpenseDelSuccessful(deletedExpense);
     }
 
     @SuppressWarnings("unchecked")
@@ -194,12 +193,18 @@ public class ExpenseAction {
      *
      * @param expenseId id of the expense
      * @return the expense found in the nth element in list
+     * @throws GlobalInvalidNumberException when expense is not found
      */
-    private Boolean isValidateExpenseNumber(int expenseId) {
-        if (expenseId >= expenses.size() || expenseId < 0) {
-            return false;
+    private int validateExpense(int expenseId) throws GlobalInvalidNumberException {
+        int elementNo = 0;
+        for (Expense e : expenses) {
+            if (e.getId() == expenseId) {
+                return elementNo;
+            }
+            elementNo++;
         }
-        return true;
+
+        throw new GlobalInvalidNumberException();
     }
 
     // @@author pinyoko573

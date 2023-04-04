@@ -26,5 +26,4 @@ public class Expense extends Item {
     public int getId() {
         return this.id;
     }
-    
 }
