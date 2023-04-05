@@ -10,6 +10,8 @@ import seedu.duke.exception.CommandParamInvalidException;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+//@@author chongyongrui
+
 class CommandParserTest {
 
     @Test
@@ -57,6 +59,6 @@ class CommandParserTest {
             CommandParser.parse("deposit add /n pick up from ground /a 10");
             // input with double, optional params
             CommandParser.parse("expense add /c transport /n mrt /a 2.00 /d 30-01-2020");
-        });           
+        });
     }
 }

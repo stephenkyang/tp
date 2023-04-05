@@ -16,8 +16,7 @@ import seedu.duke.util.Pair;
 
 //@@author chongyongrui
 public class BudgetCommand extends Command {
-    // Format for Budget command.
-    // Actions, required and optional parameters (w/ data type) of each action are specified.
+
     private static final String[] ACTIONS = {"add", "set", "del", "list", "help"};
     private static final Pair[][] ACTIONS_REQUIRED_PARAMS = {
             {new Pair("/c", String.class), new Pair("/l", double.class)},
@@ -39,12 +38,12 @@ public class BudgetCommand extends Command {
     }
 
     /**
-     * Executes the command. Action, required and optional parameters are 
+     * Executes the command. Action, required and optional parameters are
      * previously set by CommandParser parse. Execution of the action depends
      * on the action name.
-     * 
-     * @param data  Data containing budget, deposit and expense info
-     * @param ui    For printing messages through Ui object
+     *
+     * @param data Data containing budget, deposit and expense info
+     * @param ui   For printing messages through Ui object
      * @throws BBException for any error thrown in the action class
      */
     @Override
@@ -84,8 +83,8 @@ public class BudgetCommand extends Command {
     /**
      * Parses the required attributes such as budget name, limit,
      * which will be used to execute add budget in the action class.
-     * 
-     * @param budgetAction action selected will be execute through action class
+     *
+     * @param budgetAction   action selected will be execute through action class
      * @param requiredParams parameters containing the required attributes
      */
     private void executeAddBudget(BudgetAction budgetAction, String[] requiredParams) {
@@ -97,8 +96,8 @@ public class BudgetCommand extends Command {
     /**
      * Parses the required attributes such as budget name, limit,
      * which will be used to execute set budget in the action class.
-     * 
-     * @param budgetAction action selected will be execute through action class
+     *
+     * @param budgetAction   action selected will be execute through action class
      * @param requiredParams parameters containing the required attributes
      */
     private void executeSetBudget(BudgetAction budgetAction, String[] requiredParams) {
@@ -110,10 +109,10 @@ public class BudgetCommand extends Command {
     /**
      * Parses the required attributes such as budget name,
      * which will be used to execute del budget in the action class.
-     * 
-     * @param budgetAction action selected will be execute through action class
+     *
+     * @param budgetAction   action selected will be execute through action class
      * @param requiredParams parameters containing the required attributes
-     * @param expenses Expense data that will be used to delete if category is deleted
+     * @param expenses       Expense data that will be used to delete if category is deleted
      */
     private void executeDelBudget(BudgetAction budgetAction, String[] requiredParams, ArrayList<Expense> expenses) {
         String budgetName = requiredParams[0];
@@ -124,13 +123,13 @@ public class BudgetCommand extends Command {
      * Parses the optional attributes such as month, year,
      * which will be used to execute list budget in the action class.
      * If neither month and year is specified, use the current's month and year.
-     * 
-     * @param budgetAction action selected will be execute through action class
+     *
+     * @param budgetAction   action selected will be execute through action class
      * @param optionalParams parameters containing the optional attributes
-     * @param expenses Expense data that will be used to calculate the expense for each category
+     * @param expenses       Expense data that will be used to calculate the expense for each category
      */
     private void executeListBudget(BudgetAction budgetAction, String[] optionalParams,
-        ArrayList<Expense> expenses) throws BBException {
+                                   ArrayList<Expense> expenses) throws BBException {
         // if year is not provided, use current year
         int month = LocalDate.now().getMonthValue();
         int year = LocalDate.now().getYear();
@@ -145,15 +144,6 @@ public class BudgetCommand extends Command {
         budgetAction.printBudgets(month, year, expenses);
     }
 
-    // private void executeBudgetDetail(BudgetAction budgetAction, String[] requiredParams,ArrayList<Expense> expenses){
-    //     String budgetName = requiredParams[0];
-    //     budgetAction.detailedBudget(budgetName, expenses);
-    // }
-
-    // private void executeFindBudget(BudgetAction budgetAction, String[] requiredParams) {
-    //     String budgetName = requiredParams[0];
-    //     budgetAction.findBudget(budgetName);
-    // }
 
     @Override
     public boolean isExit() {
