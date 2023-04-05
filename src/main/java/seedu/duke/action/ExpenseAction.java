@@ -30,7 +30,7 @@ public class ExpenseAction {
     public void addExpense(String expenseCategory, String expenseName, Double expenseAmount,
                            LocalDate expenseDate, ArrayList<Budget> budgets) throws BBException {
         // Check if the expense category exists
-        boolean isExist = BudgetAction.validateBudget(expenseCategory, budgets);
+        boolean isExist = BudgetAction.isDuplicateBudgetName(expenseCategory, budgets);
         if (!isExist) {
             throw new ExpenseBudgetNotFoundException();
         }

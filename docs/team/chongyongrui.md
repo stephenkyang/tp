@@ -4,10 +4,6 @@
 
 BudgetBuddy is a one-stop Command Line Interface application that helps you to keep track of anything finance related.
 One of the key features is the possibility of creating, editing and deleting budgets.
-These budgets serve as the main building block the app, as expenses created by the user can be linked to
-these budgets. The statistics of each budget can then be tracked and visualised to better show the user if they are
-hitting
-their budget targets.
 
 ### Summary of Contributions
 
@@ -18,15 +14,28 @@ to my tP Code Dashboard
 
 ##### Main features worked on
 
-1. `Budget` class and its accompanying classes, such as the Parser and UI Response code
+1. `Budget` class:
+    1. These budgets serve as the main building block the app, as expenses created by the user can be linked to
+       these budgets. The statistics of each budget can then be tracked and visualised to better show the user if they
+       are
+       hitting
+       their budget targets.
 
-2. Implementation of the visual bars and underlying logic used in the budget-related output of the `stats` command and
+
+2. Accompanying budget classes, such as the BudgetParser, BudgetCommand and BudgetUIResponse classes
+
+
+3. Implementation of the visual bars and underlying logic used in the budget-related output of the `stats` command and
    the addition of color to the bars when a budget is
    exceeded
 
-3. Assist in the skeleton code and brainstorming new ideas for features to include for our app
 
-4. Testing of budget commands and fixing of app bugs
+4. Assist in the skeleton code and brainstorming new ideas for features to include for our app
+
+
+5. Testing of budget commands and fixing of app bugs
+
+6. Creation of Budget Buddy logo
 
 #### Contributions to the User Guide
 
@@ -45,7 +54,8 @@ to my tP Code Dashboard
 
 #### Contributions to the Developer Guide
 
-1. I added the instructions for the `BudgetCommand` class commands, showing its related classes and how commands such as
+1. I added the documentation for the `BudgetCommand` class commands, showing its related classes and how commands such
+   as
    `budget add`, `budget set` and `budget del` commands are implemented together with its related classes.
    I also helped to initiate the creation of the `help` command to create a better experience for new users who are not
    aware of the commands to use the Budget Buddy app.

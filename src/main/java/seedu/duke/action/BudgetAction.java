@@ -36,17 +36,17 @@ public class BudgetAction {
      */
     public void addBudget(String budgetName, double budgetLimit) {
         // Check if there are any duplicate budgets
-        if (validateBudget(budgetName, budgets)) {
+        if (isDuplicateBudgetName(budgetName, budgets)) {
             budgetUi.printBudgetNameUsed();
             return;
         } else if (budgetLimit < 0) {
-            // budgetUi.printBudgetLimitNegative();
             return;
         }
 
         Budget budget = new Budget(budgetName, budgetLimit);
-        budgets.add(budget);
         assert budget.getAmount() >= 0 : "Budget limit is negative!";
+        budgets.add(budget);
+
 
         budgetUi.printBudgetAddSuccessful(budget, budgets.size());
     }
@@ -195,7 +195,7 @@ public class BudgetAction {
      * @param budgets    containing the list of budgets
      * @return true if budget name exists in the budget list, else false
      */
-    protected static boolean validateBudget(String budgetName, ArrayList<Budget> budgets) {
+    protected static boolean isDuplicateBudgetName(String budgetName, ArrayList<Budget> budgets) {
         for (Budget b : budgets) {
             if (b.getName().equals(budgetName)) {
                 return true;
@@ -244,62 +244,5 @@ public class BudgetAction {
         msgs.addAll(BudgetUIResponse.getSummaryBudget(budgets, budgetsExpenseTotal, longestBudgetName));
         return msgs;
     }
-
-    // /**
-    //  * Finds if a budget contains the keywords input by user
-    //  *
-    //  * @param keyword the word the user wants to check for
-    //  */
-    // public void findBudget(String keyword) {
-    //     ArrayList<Budget> foundBudgets = new ArrayList<>();
-    //     for (Budget budget : budgets) {
-
-    //         if (budget.getName().contains(keyword)) {
-    //             foundBudgets.add(budget);
-    //         }
-    //     }
-
-    //     if (foundBudgets.isEmpty()) {
-    //         budgetUi.printBudgetDoesNotExist();
-    //     } else {
-    //         budgetUi.printFindBudgets(foundBudgets);
-    //     }
-    //     foundBudgets.clear();
-    // }
-
-    // /**
-    //  * Prints the budget progress bar
-    //  *
-    //  * @param ratio the percentage of what is spent compared to the budget limit
-    //  */
-    // public static void printBudgetDetailBar(double ratio) {
-    //     int numberOfBlocks = 0;
-    //     if ((int) ratio >= 1) {
-    //         numberOfBlocks = 40;
-    //     } else {
-    //         numberOfBlocks = (int) (ratio * 40);
-    //     }
-    //     int excess = (int) ratio;
-    //     int i = 0;
-    //     int numberOfBlanks = 40 - numberOfBlocks;
-    //     while (i < numberOfBlocks) {
-    //         if (excess == 0) {
-    //             System.out.print("█");
-    //         } else {
-    //             System.out.print(Constants.ANSI_RED + "█" + Constants.ANSI_RESET);
-    //         }
-    //         i++;
-    //     }
-    //     i = 0;
-    //     while (i < numberOfBlanks) {
-    //         System.out.print("░");
-    //         i++;
-    //     }
-    //     System.out.println(" ");
-    //     if (ratio >= 1) {
-    //         System.out.println("You have exceeded the budget limit by " + (ratio - 1) * 100 + "%!");
-    //     } else {
-    //         System.out.println(ratio * 100 + "% of your budget has been spent!");
-    //     }
-    // }
+    
 }
