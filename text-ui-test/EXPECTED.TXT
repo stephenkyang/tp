@@ -15,5 +15,238 @@ Successfully added school transport with limit of $99.00
 There are 2 budget categories.
 _______________
 _______________
+Successfully added spaces with limit of $100.00
+There are 3 budget categories.
+_______________
+_______________
+Successfully added more spaces with limit of $1.00
+There are 4 budget categories.
+_______________
+_______________
+Invalid parameters. Example: budget add /c transport /l 3000.00
+_______________
+_______________
+Invalid parameters. Example: budget add /c transport /l 3000.00
+_______________
+_______________
+Invalid parameters. Example: budget add /c transport /l 3000.00
+_______________
+_______________
+Invalid parameters. Example: budget add /c transport /l 3000.00
+_______________
+_______________
+Successfully added 😂😂😂 with limit of $100.00
+There are 5 budget categories.
+_______________
+_______________
+Successfully added food with limit of $10.00
+There are 6 budget categories.
+_______________
+_______________
+This budget name is already in use!
+_______________
+_______________
+Invalid parameters. Example: budget add /c transport /l 3000.00
+_______________
+_______________
+Successfully added /l 3124 with limit of $3124.00
+There are 7 budget categories.
+_______________
+_______________
+Invalid parameters. Example: budget add /c transport /l 3000.00
+_______________
+_______________
+Invalid command. Use help for the list of commands.
+_______________
+_______________
+This budget does not exist!
+_______________
+_______________
+Invalid parameters. Example: budget set /c transport /l 5000.00
+_______________
+_______________
+Successfully modified spaces to have a limit of $31.00
+There are 7 budget categories.
+_______________
+_______________
+Successfully modified food to have a limit of $3.00
+There are 7 budget categories.
+_______________
+_______________
+Successfully modified food to have a limit of $3.50
+There are 7 budget categories.
+_______________
+_______________
+Successfully modified food to have a limit of $4.00
+There are 7 budget categories.
+_______________
+_______________
+Invalid command. Use help for the list of commands.
+_______________
+_______________
+This budget does not exist!
+_______________
+_______________
+Invalid parameters. Example: budget del /c transport
+_______________
+_______________
+This budget does not exist!
+_______________
+_______________
+This budget does not exist!
+_______________
+_______________
+This budget does not exist!
+_______________
+_______________
+This budget does not exist!
+_______________
+_______________
+This budget does not exist!
+_______________
+_______________
+Invalid command. Use help for the list of commands.
+_______________
+_______________
+The following expense has been added:
+1. [food] taco ($7.34) on 05 Apr 2023
+_______________
+_______________
+Invalid parameters. Example: expense add /c transport /n mrt /a 1.00 [/d] 23-03-2023
+_______________
+_______________
+Invalid parameters. Example: expense add /c transport /n mrt /a 1.00 [/d] 23-03-2023
+_______________
+_______________
+Invalid parameters. Example: expense add /c transport /n mrt /a 1.00 [/d] 23-03-2023
+_______________
+_______________
+Invalid parameters. Example: expense add /c transport /n mrt /a 1.00 [/d] 23-03-2023
+_______________
+_______________
+Invalid parameters. Example: expense add /c transport /n mrt /a 1.00 [/d] 23-03-2023
+_______________
+_______________
+Invalid parameters. Example: expense add /c transport /n mrt /a 1.00 [/d] 23-03-2023
+_______________
+_______________
+Invalid command. Use help for the list of commands.
+_______________
+_______________
+Your current progress for Apr 2023:
+  1. school work      ???????????????????? ($0.00/1000.00)
+  2. school transport ???????????????????? ($0.00/99.00)
+  3. spaces           ???????????????????? ($0.00/31.00)
+  4. more spaces      ???????????????????? ($0.00/1.00)
+  5. 😂😂😂     ???????????????????? ($0.00/100.00)
+  6. food             ???????????????????? ($7.34/4.00)
+  7. /l 3124          ???????????????????? ($0.00/3124.00)
+
+Deposits
+Total deposits: $0.00
+
+Expenses
+Total expenses: $7.34
+
+Total budget progress: $7.34/4359.00 (+0.00)
+Good job! You are on the right track!
+_______________
+_______________
+Invalid command. Use help for the list of commands.
+_______________
+_______________
+Successfully deleted school work.
+There are 6 budget categories.
+_______________
+_______________
+This budget does not exist!
+_______________
+_______________
+Successfully deleted school transport.
+There are 5 budget categories.
+_______________
+_______________
+Successfully deleted 😂😂😂.
+There are 4 budget categories.
+_______________
+_______________
+This budget does not exist!
+_______________
+_______________
+This budget does not exist!
+_______________
+_______________
+Successfully deleted /l 3124.
+There are 3 budget categories.
+_______________
+_______________
+Successfully deleted spaces.
+There are 2 budget categories.
+_______________
+_______________
+Invalid command. Use help for the list of commands.
+_______________
+_______________
+Invalid action for budget. Use these actions: add, set, del, list, help
+_______________
+_______________
+Invalid action for budget. Use these actions: add, set, del, list, help
+_______________
+_______________
+Invalid action for budget. Use these actions: add, set, del, list, help
+_______________
+_______________
+Invalid action for budget. Use these actions: add, set, del, list, help
+_______________
+_______________
+Invalid command. Use help for the list of commands.
+_______________
+_______________
+Invalid command. Use help for the list of commands.
+_______________
+_______________
+Your current progress for Apr 2023:
+  1. more spaces ???????????????????? ($0.00/1.00)
+  2. food        ???????????????????? ($7.34/4.00)
+
+Deposits
+Total deposits: $0.00
+
+Expenses
+Total expenses: $7.34
+
+Total budget progress: $7.34/5.00 (+0.00)
+Oh no! You seem to be spending too much!
+_______________
+_______________
+Invalid command. Use help for the list of commands.
+_______________
+_______________
+1. You can add a monthly budget:
+   budget add /c (category name) /l (spending limit)
+2. You can modify an existing budget:
+   budget set /c (category name) /l (spending limit)
+3. You can remove a monthly budget:
+   budget del /c (category name)
+4. You can list and check each budget's status for a certain month/year:
+   budget list [optional] /m (month) /y (year in YYYY format)
+_______________
+_______________
+Invalid action for budget. Use these actions: add, set, del, list, help
+_______________
+_______________
+1. You can add a monthly budget:
+   budget add /c (category name) /l (spending limit)
+2. You can modify an existing budget:
+   budget set /c (category name) /l (spending limit)
+3. You can remove a monthly budget:
+   budget del /c (category name)
+4. You can list and check each budget's status for a certain month/year:
+   budget list [optional] /m (month) /y (year in YYYY format)
+_______________
+_______________
+Invalid command. Use help for the list of commands.
+_______________
+_______________
 Bye! Hope to see you soon!
 _______________
