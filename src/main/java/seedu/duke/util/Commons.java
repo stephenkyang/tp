@@ -1,8 +1,8 @@
 package seedu.duke.util;
 
 import java.text.DateFormatSymbols;
+import java.time.DateTimeException;
 import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
 import java.time.temporal.TemporalAdjusters;
 
 import seedu.duke.exception.GlobalDateFromAfterToException;
@@ -22,6 +22,12 @@ public class Commons {
      */
     public static LocalDate isValidMonthYear(int month, int year) throws GlobalInvalidMonthYearException {
         try {
+            // Check if year is in the format YYYY
+            int yearDigits = String.valueOf(year).length();
+            if (yearDigits != 4) {
+                throw new GlobalInvalidMonthYearException();
+            }
+
             // Set day to last day of month
             LocalDate testDate = LocalDate.of(year, month, 1);
             testDate = testDate.with(TemporalAdjusters.lastDayOfMonth());
@@ -37,7 +43,7 @@ public class Commons {
             }
 
             return testDate;
-        } catch (DateTimeParseException | GlobalDateAfterTodayException err) {
+        } catch (DateTimeException | GlobalDateAfterTodayException | GlobalInvalidMonthYearException err) {
             throw new GlobalInvalidMonthYearException();
         }
     }

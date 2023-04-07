@@ -12,44 +12,48 @@ activate ":data"
 return budgetList: ArrayList<Budget>
 deactivate ":data"
 
-activate  ":BudgetCommand"
+
+
 ":BudgetCommand" -> ":data": getExpenses()
 activate ":data"
 return expenses: ArrayList<Expense>
-
-
 
 ":BudgetCommand" -> ":BudgetAction" : budgetList,ui
 activate ":BudgetAction"
 ":BudgetAction" -> ":BudgetCommand" : budgetAction :BudgetAction
 deactivate ":BudgetAction"
 
+
 alt actions is add
-activate  ":BudgetCommand"
 ":BudgetCommand" -> ":BudgetCommand": executeAddBudget(budgetAction, requiredParams);
 activate ":BudgetCommand"
 ":BudgetCommand" -> ":BudgetAction" : budgetName, budgetLimit
 activate ":BudgetAction"
 ":BudgetAction" -> ":BudgetAction" : addBudget(budgetName, budgetLimit)
 activate ":BudgetAction"
+
 return
 return
 
+deactivate ":BudgetCommand"
 
 else actions is set
-activate  ":BudgetCommand"
+
 ":BudgetCommand" -> ":BudgetCommand": executeSetBudget(budgetAction, requiredParams)
 activate ":BudgetCommand"
 ":BudgetCommand" -> ":BudgetAction" : budgetName, budgetLimit
 activate ":BudgetAction"
 ":BudgetAction" -> ":BudgetAction" : setBudget(budgetName, budgetLimit)
 activate ":BudgetAction"
+
 return
 return
 
+
+
+deactivate ":BudgetCommand"
 
 else actions is del
-activate  ":BudgetCommand"
 ":BudgetCommand" -> ":BudgetCommand": executeDelBudget(budgetAction, requiredParams, expenses)
 activate ":BudgetCommand"
 ":BudgetCommand" -> ":BudgetAction" : budgetName, budgetLimit
@@ -59,8 +63,9 @@ activate ":BudgetAction"
 return
 return
 
+deactivate ":BudgetCommand"
+
 else actions is list
-activate  ":BudgetCommand"
 ":BudgetCommand" -> ":BudgetCommand": executeListBudget(budgetAction, optionalParams, expenses)
 activate ":BudgetCommand"
 
@@ -70,6 +75,7 @@ activate ":LocalDate"
 activate ":LocalDate"
 return month: Integer
 return month
+
 
 ":BudgetCommand" -> ":LocalDate":
 activate ":LocalDate"
@@ -85,9 +91,9 @@ activate ":BudgetAction"
 return
 return
 
+deactivate ":BudgetCommand"
 
 else actions is help
-activate  ":BudgetCommand"
 ":BudgetCommand" -> ":BudgetCommand": executeBudgetHelp(budgetAction)
 activate ":BudgetCommand"
 ":BudgetCommand" -> ":BudgetAction"
@@ -97,31 +103,16 @@ activate ":BudgetAction"
 return
 return
 
-
 deactivate ":BudgetCommand"
-deactivate ":BudgetCommand"
-deactivate ":BudgetCommand"
-deactivate ":BudgetCommand"
-deactivate ":BudgetCommand"
-deactivate ":BudgetCommand"
-deactivate ":BudgetCommand"
-deactivate ":BudgetCommand"
-deactivate ":BudgetCommand"
-deactivate ":BudgetCommand"
-deactivate ":BudgetCommand"
-deactivate ":BudgetCommand"
-
+end
 
 ":BudgetCommand" -> ":data": exportData()
 activate ":data"
 return
-
 deactivate ":data"
 destroy ":data"
 
-
-end
-
-
+deactivate ":data"
+deactivate ":BudgetCommand"
 
 @enduml

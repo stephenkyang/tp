@@ -3,14 +3,14 @@ package seedu.duke.util;
 public enum Messages {
     LINE_DIVIDER("_______________"),
     APP_LOGO(System.lineSeparator() +
-        " █▀▀█ █   █ █▀▀▄ █▀▀▀ █▀▀ ▀▀█▀▀ 　  █▀▀█ █  █ █▀▀▄ █▀▀▄ █  █ " + System.lineSeparator() +
-        " █▀▀▄ █   █ █  █ █ ▀█ █▀▀   █   　  █▀▀▄ █  █ █  █ █  █ █▄▄█ " + System.lineSeparator() +
-        " █▄▄█  ▀▀▀  ▀▀▀  ▀▀▀▀ ▀▀▀   ▀   　  █▄▄█  ▀▀▀ ▀▀▀  ▀▀▀  ▄▄▄█"),
+        " █▀▀█ █   █ █▀▀▄ █▀▀▀ █▀▀ ▀▀█▀▀    █▀▀█ █  █ █▀▀▄ █▀▀▄ █  █ " + System.lineSeparator() +
+        " █▀▀▄ █   █ █  █ █ ▀█ █▀▀   █      █▀▀▄ █  █ █  █ █  █ █▄▄█ " + System.lineSeparator() +
+        " █▄▄█  ▀▀▀  ▀▀▀  ▀▀▀▀ ▀▀▀   ▀      █▄▄█  ▀▀▀ ▀▀▀  ▀▀▀  ▄▄▄█"),
     INFO_WELCOME("Welcome to BudgetBuddy! What can I do for you?"),
     INFO_EXIT("Bye! Hope to see you soon!"),
 
     HELP_SHOW_COMMANDS("Budget Buddy helps you to manage your finances better." + System.lineSeparator()
-        + "Budget Buddy has 3 main categories:" + System.lineSeparator()
+        + "Budget Buddy has 4 main categories:" + System.lineSeparator()
         + "1. Budget" + System.lineSeparator()
         + "   - Choose how much money you want to allocate to a budget of your specified name" + System.lineSeparator()
         + "2. Expense" + System.lineSeparator()
@@ -21,7 +21,7 @@ public enum Messages {
         + "   - shows the progress on spending so far as well as the total number of deposits" + System.lineSeparator()
         + "To learn the specific commands for each category, input \"(category) help\""),
 
-    BUDGET_BUDGET("%d. %s ($%.2f/%.2f)"),
+    BUDGET_BUDGET("%3d. %s ($%.2f/%.2f)"),
     BUDGET_DOES_NOT_EXIST("This budget does not exist!"),
     BUDGET_LIMIT_NEGATIVE("This limit cannot be negative!"),
     BUDGET_NAME_USED("This budget name is already in use!"),
@@ -35,13 +35,11 @@ public enum Messages {
     BUDGET_HELP_COMMANDS("1. You can add a monthly budget: " + System.lineSeparator()
         + "   budget add /c (category name) /l (spending limit)" + System.lineSeparator()
         + "2. You can modify an existing budget: " + System.lineSeparator()
-        + "   budget set /c (category) /l (spending limit)" + System.lineSeparator()
+        + "   budget set /c (category name) /l (spending limit)" + System.lineSeparator()
         + "3. You can remove a monthly budget: " + System.lineSeparator()
-        + "   budget del /c (category)" + System.lineSeparator()
-        + "4. You can list all budgets: " + System.lineSeparator()
-        + "   budget list" + System.lineSeparator()
-        + "5. You can search for budgets that include a certain keyword: " + System.lineSeparator()
-        + "   budget find /c (keyword)"),
+        + "   budget del /c (category name)" + System.lineSeparator()
+        + "4. You can list and check each budget's status for a certain month/year: " + System.lineSeparator()
+        + "   budget list [optional] /m (month) /y (year in YYYY format)"),
 
     DEPOSIT_DEPOSIT("%d. %s ($%.2f) on %s"),
     DEPOSIT_ADD_SUCCESSFUL("The following deposit has been added:"),
@@ -57,7 +55,7 @@ public enum Messages {
     DEPOSIT_LIST_RANGE("Here are your deposits from %s to %s:"),
     DEPOSIT_LIST_NOTHING("You have no deposits."),
     DEPOSIT_HELP_COMMANDS("1. You can add an deposit by: " + System.lineSeparator()
-        + "   deposit add /n (category name) /a (amount) [optional] /d DD-MM-YYYY" + System.lineSeparator()
+        + "   deposit add /n (name) /a (amount) [optional] /d DD-MM-YYYY" + System.lineSeparator()
         + "2. You can delete a deposit: " + System.lineSeparator()
         + "   deposit del /n (deposit number)" + System.lineSeparator()
         + "3. You can list all deposits (by date): " + System.lineSeparator()
@@ -102,7 +100,7 @@ public enum Messages {
     STATS_PRINT_OVERSPEND("Oh no! You seem to be spending too much!"),
     STATS_PRINT_NO_STATS("There are no stats currently! Please try another command!"),
     STATS_HELP_COMMANDS("1. You can show stats by: " + System.lineSeparator() +
-        "   stats show [/m <month>] [/y <year>] [/v <d for deposit, e for expense, de for both>]");
+        "   stats show [optional] /m (month) /y (year in YYYY format) /v (d for deposit, e for expense, de for both)");
 
     private final String message;
 

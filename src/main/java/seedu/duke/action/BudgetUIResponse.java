@@ -28,15 +28,12 @@ public class BudgetUIResponse {
         ui.printMessage(Messages.BUDGET_NAME_USED.toString());
     }
 
-    public void printBudgetLimitNegative() {
-        ui.printMessage(Messages.BUDGET_LIMIT_NEGATIVE.toString());
-    }
 
     /**
      * Prints the added budget along with the total no of budgets.
-     * 
+     *
      * @param budget budget that was just added
-     * @param count total no of budgets
+     * @param count  total no of budgets
      */
     public void printBudgetAddSuccessful(Budget budget, int count) {
         String msg = String.format(Messages.BUDGET_ADD_SUCCESSFUL.toString(), budget.getName(), budget.getAmount());
@@ -46,9 +43,9 @@ public class BudgetUIResponse {
 
     /**
      * Prints the deleted budget along with the total no of budgets.
-     * 
+     *
      * @param budget budget that was just deleted
-     * @param count total no of budgets
+     * @param count  total no of budgets
      */
     public void printBudgetDelSuccessful(Budget budget, int count) {
         String msg = String.format(Messages.BUDGET_DELETE_SUCCESSFUL.toString(), budget.getName());
@@ -58,9 +55,9 @@ public class BudgetUIResponse {
 
     /**
      * Prints the deleted budget along with the total no of budgets.
-     * 
+     *
      * @param budget budget that was just deleted
-     * @param count total no of budgets
+     * @param count  total no of budgets
      */
     public void printBudgetSetSuccessful(Budget budget, int count) {
         String msg = String.format(Messages.BUDGET_SET_SUCCESSFUL.toString(), budget.getName(), budget.getAmount());
@@ -80,14 +77,14 @@ public class BudgetUIResponse {
      * Gets the list of strings containing each budget information,
      * such as budget name, limit and total expense.
      * Used for displaying summary.
-     * 
-     * @param budgets list of budgets
+     *
+     * @param budgets             list of budgets
      * @param budgetExpensesTotal total amount of expense for each budget
-     * @param longestBudgetName indention for aligning budget name
+     * @param longestBudgetName   indention for aligning budget name
      * @return list of strings that will be used for displaying summary
      */
     public static ArrayList<String> getListBudgetsMsg(ArrayList<Budget> budgets, double[] budgetExpensesTotal,
-        int longestBudgetName) {
+                                                      int longestBudgetName) {
 
         ArrayList<String> msgs = new ArrayList<String>();
 
@@ -99,15 +96,15 @@ public class BudgetUIResponse {
     /**
      * Prints the list of budgets.
      * Used for budget list.
-     * 
-     * @param budgets budgets list of budgets
+     *
+     * @param budgets             budgets list of budgets
      * @param budgetExpensesTotal total amount of expense for each budget
-     * @param month month of the budget information
-     * @param year year of the budget information
-     * @param longestBudgetName indention for aligning budget name
+     * @param month               month of the budget information
+     * @param year                year of the budget information
+     * @param longestBudgetName   indention for aligning budget name
      */
     public void printListBudgets(ArrayList<Budget> budgets, double[] budgetExpensesTotal, int month,
-        int year, int longestBudgetName) {
+                                 int year, int longestBudgetName) {
 
         if (budgets.size() == 0) {
             ui.printMessage(Messages.BUDGET_LIST_NOTHING.toString());
@@ -131,14 +128,14 @@ public class BudgetUIResponse {
      * Returns the list of strings containing each budget information,
      * such as budget name, limit and total expense.
      * Used for constructing the string for each budget.
-     * 
-     * @param budgets budgets list of budgets
+     *
+     * @param budgets             budgets list of budgets
      * @param budgetExpensesTotal total amount of expense for each budget
-     * @param longestBudgetName indention for aligning budget name
+     * @param longestBudgetName   indention for aligning budget name
      * @return list of strings containing each budget information
      */
     public static ArrayList<String> printBudgets(ArrayList<Budget> budgets, double[] budgetExpensesTotal,
-        int longestBudgetName) {
+                                                 int longestBudgetName) {
 
         ArrayList<String> msgs = new ArrayList<String>();
 
@@ -159,19 +156,19 @@ public class BudgetUIResponse {
     }
 
     /**
-     * Prints the summary message and budget 
-     * 
-     * @param budgets budgets list of budgets
+     * Prints the summary message and budget
+     *
+     * @param budgets             budgets list of budgets
      * @param budgetExpensesTotal total amount of expense for each budget
-     * @param longestBudgetName indention for aligning budget name
+     * @param longestBudgetName   indention for aligning budget name
      * @return list of strings of summary budget, used for displaying in Stats Ui
      */
     public static ArrayList<String> getSummaryBudget(ArrayList<Budget> budgets,
-        double[] budgetExpensesTotal, int longestBudgetName) {
+                                                     double[] budgetExpensesTotal, int longestBudgetName) {
 
         ArrayList<String> msgs = new ArrayList<String>();
         msgs.add(Messages.BUDGET_CURRENT_PROGRESS.toString());
-        
+
         msgs.addAll(printBudgets(budgets, budgetExpensesTotal, longestBudgetName));
 
         return msgs;

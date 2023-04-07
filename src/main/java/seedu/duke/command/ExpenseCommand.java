@@ -20,20 +20,20 @@ public class ExpenseCommand extends Command {
     // Actions, required and optional parameters (w/ data type) of each action are specified.
     private static final String[] ACTIONS = {"add", "del", "find", "list", "clear", "help"};
     private static final Pair[][] ACTIONS_REQUIRED_PARAMS = {
-        { new Pair("/c", String.class), new Pair("/n", String.class), new Pair("/a", double.class) },
-        { new Pair("/n", int.class) },
-        { new Pair("/n", String.class) },
-        {},
-        {},
-        {}
+            {new Pair("/c", String.class), new Pair("/n", String.class), new Pair("/a", double.class)},
+            {new Pair("/n", int.class)},
+            {new Pair("/n", String.class)},
+            {},
+            {},
+            {}
     };
     private static final Pair[][] ACTIONS_OPTIONAL_PARAMS = {
-        { new Pair("/d", LocalDate.class) },
-        {},
-        {},
-        { new Pair("/c", String.class), new Pair("/f", LocalDate.class), new Pair("/t", LocalDate.class) },
-        { new Pair("/c", String.class), new Pair("/f", LocalDate.class), new Pair("/t", LocalDate.class) },
-        {}
+            {new Pair("/d", LocalDate.class)},
+            {},
+            {},
+            {new Pair("/c", String.class), new Pair("/f", LocalDate.class), new Pair("/t", LocalDate.class)},
+            {new Pair("/c", String.class), new Pair("/f", LocalDate.class), new Pair("/t", LocalDate.class)},
+            {}
     };
 
     public ExpenseCommand() {
@@ -41,12 +41,12 @@ public class ExpenseCommand extends Command {
     }
 
     /**
-     * Executes the command. Action, required and optional parameters are 
+     * Executes the command. Action, required and optional parameters are
      * previously set by CommandParser parse. Execution of the action depends
      * on the action name.
-     * 
-     * @param data  Data containing budget, deposit and expense info
-     * @param ui    For printing messages through Ui object
+     *
+     * @param data Data containing budget, deposit and expense info
+     * @param ui   For printing messages through Ui object
      * @throws BBException for any error thrown in the action class
      */
     @Override
@@ -90,14 +90,14 @@ public class ExpenseCommand extends Command {
      * and optional attributes such as date
      * which will be used to execute add expense in the action class.
      * If date is not specified, use today's date.
-     * 
-     * @param expenseAction action selected will be execute through action class
+     *
+     * @param expenseAction  action selected will be execute through action class
      * @param requiredParams parameters containing the required attributes
      * @param optionalParams parameters containing the optional attributes
      * @throws BBException for any error thrown in the action class
      */
     private void executeAddExpense(ExpenseAction expenseAction, String[] requiredParams,
-        String[] optionalParams, ArrayList<Budget> budgets) throws BBException {
+                                   String[] optionalParams, ArrayList<Budget> budgets) throws BBException {
         String expenseCategory = requiredParams[0];
         String expenseName = requiredParams[1];
         Double expenseAmount = Double.parseDouble(requiredParams[2]);
@@ -115,8 +115,8 @@ public class ExpenseCommand extends Command {
     /**
      * Parses the required attributes such as expense no,
      * which will be used to execute del expense in the action class.
-     * 
-     * @param expenseAction action selected will be execute through action class
+     *
+     * @param expenseAction  action selected will be execute through action class
      * @param requiredParams parameters containing the required attributes
      * @throws BBException for any error thrown in the action class
      */
@@ -128,8 +128,8 @@ public class ExpenseCommand extends Command {
     /**
      * Parses the required attributes such as expense name
      * which will be used to execute find expense in the action class.
-     * 
-     * @param expenseAction action selected will be execute through action class
+     *
+     * @param expenseAction  action selected will be execute through action class
      * @param requiredParams parameters containing the required attributes
      * @throws BBException for any error thrown in the action class
      */
@@ -141,8 +141,8 @@ public class ExpenseCommand extends Command {
     /**
      * Parses optional attributes such as category, from and to date,
      * which will be used to execute clear expense in the action class.
-     * 
-     * @param expenseAction action selected will be execute through action class
+     *
+     * @param expenseAction  action selected will be execute through action class
      * @param optionalParams parameters containing the optional attributes
      * @throws BBException for any error thrown in the action class
      */
@@ -163,8 +163,8 @@ public class ExpenseCommand extends Command {
      * which will be used to execute list expenses in the action class.
      * If neither dates are specified, list all the expenses.
      * If either or both dates are specified, filter expense by date.
-     * 
-     * @param expenseAction action selected will be execute through action class
+     *
+     * @param expenseAction  action selected will be execute through action class
      * @param optionalParams parameters containing the optional attributes
      * @throws BBException for any error thrown in the action class
      */
@@ -190,3 +190,6 @@ public class ExpenseCommand extends Command {
         return false;
     }
 }
+
+
+

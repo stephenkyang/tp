@@ -1,7 +1,7 @@
 package seedu.duke.util;
 
 public enum WarningMessages {
-    WARNING_FILE_NOT_FOUND("Could not locate data.json file! Creating a new file...");
+    WARNING_FILE_NOT_FOUND("Could not locate data.json file. A file will be automatically created after an action!");
 
     private final String warningMessage;
 
@@ -11,6 +11,6 @@ public enum WarningMessages {
 
     @Override
     public String toString() {
-        return Constants.ANSI_YELLOW + warningMessage + Constants.ANSI_RESET;
+        return warningMessage;
     }
 }
