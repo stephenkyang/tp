@@ -1,18 +1,19 @@
 package seedu.duke.util;
 
 import java.time.format.DateTimeFormatter;
+import java.time.format.ResolverStyle;
 
 public class Constants {
     // DATA FILE NAME USED FOR APPLIATION. default: data.json
     public static final String FILE_NAME = "data.json";
 
-    // ACCEPTABLE DATE FORMAT FOR DEPOSIT AND EXPENSE. default: dd-MM-yyyy
-    public static final String ACCEPTABLE_DATE_FORMAT_STRING = "dd-MM-yyyy";
+    // ACCEPTABLE DATE FORMAT FOR DEPOSIT AND EXPENSE. default: dd-MM-uuuu
+    public static final String ACCEPTABLE_DATE_FORMAT_STRING = "dd-MM-uuuu";
     public static final DateTimeFormatter ACCEPTABLE_DATE_FORMAT = DateTimeFormatter.ofPattern
-        (ACCEPTABLE_DATE_FORMAT_STRING);
+        (ACCEPTABLE_DATE_FORMAT_STRING).withResolverStyle(ResolverStyle.STRICT);
 
-    // OUTPUT DATE FORMAT FOR DISPLAYING DATE. default: dd MMM yyyy
-    public static final String OUTPUT_DATE_FORMAT_STRING = "dd MMM yyyy";
+    // OUTPUT DATE FORMAT FOR DISPLAYING DATE. default: dd MMM uuuu
+    public static final String OUTPUT_DATE_FORMAT_STRING = "dd MMM uuuu";
     public static final DateTimeFormatter OUTPUT_DATE_FORMAT = DateTimeFormatter.ofPattern(OUTPUT_DATE_FORMAT_STRING);
 
     // MAX LENGTH FOR ALL STRING

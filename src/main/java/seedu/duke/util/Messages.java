@@ -41,7 +41,7 @@ public enum Messages {
         + "4. You can list and check each budget's status for a certain month/year: " + System.lineSeparator()
         + "   budget list [optional] /m (month) /y (year in YYYY format)"),
 
-    DEPOSIT_DEPOSIT("%d. %s ($%.2f) on %s"),
+    DEPOSIT_DEPOSIT("Deposit No %3d. %s ($%.2f) on %s"),
     DEPOSIT_ADD_SUCCESSFUL("The following deposit has been added:"),
     DEPOSIT_DELETE_SUCCESSFUL("The following deposit has been removed:"),
     DEPOSIT_CLEAR_SUCCESSFUL("These are the deposits cleared:"),
@@ -65,7 +65,7 @@ public enum Messages {
         + "5. You can clear deposits (by date): " + System.lineSeparator()
         + "   deposit clear [optional] /f DD-MM-YYYY /t DD-MM-YYYY"),
 
-    EXPENSE_EXPENSE("%d. [%s] %s ($%.2f) on %s"),
+    EXPENSE_EXPENSE("Expense No %3d. [%s] %s ($%.2f) on %s"),
     EXPENSE_ADD_SUCCESSFUL("The following expense has been added:"),
     EXPENSE_DELETE_SUCCESSFUL("The following expense has been removed:"),
     EXPENSE_CLEAR_SUCCESSFUL("These are the expenses cleared:"),

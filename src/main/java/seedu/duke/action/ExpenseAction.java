@@ -188,7 +188,7 @@ public class ExpenseAction {
     // @@author pinyoko573
 
     /**
-     * Checks if a certain expense already exists using id.
+     * Checks if a certain expense already exists using the expense id.
      * Used for deletion.
      *
      * @param expenseId id of the expense
@@ -313,20 +313,4 @@ public class ExpenseAction {
 
         return total;
     }
-
-    // public double findRelatedExpenses(String budgetName) {
-    //     int i = 1;
-    //     double totalExpenseValue = 0;
-    //     for (Expense expense : expenses) {
-    //         if (expense != null) {
-    //             if (Objects.equals(expense.getCategory(), budgetName)) {
-    //                 System.out.println(i + ". " + expense.getName() + " with amount of $" + expense.getAmount());
-    //                 totalExpenseValue += expense.getAmount();
-    //             }
-    //         }
-
-    //     }
-    //     return totalExpenseValue;
-    // }
 }
-

@@ -40,7 +40,9 @@ public enum ErrorMessages {
     ERROR_GLOBAL_DATE_AFTER_TODAY("You cannot input a date that is after today."),
 
     ERROR_FILE_NOT_FOUND("Could not read the file! BudgetBuddy will terminate unexpectedly..."),
-    ERROR_FILE_EXPORT("Could not export the file! Please restart the application.");
+    ERROR_FILE_EXPORT("Could not export the file! Please restart the application."),
+    ERROR_FILE_CORRUPTED("The data file " + Constants.FILE_NAME + " is corrupted. Please delete the file " + 
+        "and relaunch the application.");
 
     private String errorMessage;
 
