@@ -109,7 +109,7 @@ Invalid command. Use help for the list of commands.
 _______________
 _______________
 The following expense has been added:
-1. [food] taco ($7.34) on 05 Apr 2023
+1. [food] taco ($7.34) on 07 Apr 2023
 _______________
 _______________
 Invalid parameters. Example: expense add /c transport /n mrt /a 1.00 [/d] 23-03-2023
@@ -217,32 +217,6 @@ Total expenses: $7.34
 
 Total budget progress: $7.34/5.00 (+0.00)
 Oh no! You seem to be spending too much!
-_______________
-_______________
-Invalid command. Use help for the list of commands.
-_______________
-_______________
-1. You can add a monthly budget:
-   budget add /c (category name) /l (spending limit)
-2. You can modify an existing budget:
-   budget set /c (category name) /l (spending limit)
-3. You can remove a monthly budget:
-   budget del /c (category name)
-4. You can list and check each budget's status for a certain month/year:
-   budget list [optional] /m (month) /y (year in YYYY format)
-_______________
-_______________
-Invalid action for budget. Use these actions: add, set, del, list, help
-_______________
-_______________
-1. You can add a monthly budget:
-   budget add /c (category name) /l (spending limit)
-2. You can modify an existing budget:
-   budget set /c (category name) /l (spending limit)
-3. You can remove a monthly budget:
-   budget del /c (category name)
-4. You can list and check each budget's status for a certain month/year:
-   budget list [optional] /m (month) /y (year in YYYY format)
 _______________
 _______________
 Invalid command. Use help for the list of commands.

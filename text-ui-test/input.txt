@@ -55,11 +55,7 @@ budget Del /c
 
 stats show
 
-budget help add
-budget Help
-budget help
-
 Exit
-     .
+
 
 exit
