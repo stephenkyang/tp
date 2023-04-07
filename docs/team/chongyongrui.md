@@ -71,6 +71,8 @@ to my tP Code Dashboard
    the related
    command parser for the different inputs.
 
+4. I added the architecture diagram and the documentation for the architecture diagram.
+
 #### Contributions to team-based tasks
 
 1. I helped to initiate and push members to finish their tasks on time so as to not delay the development of our app.

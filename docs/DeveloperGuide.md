@@ -14,9 +14,20 @@ necessary for them so that they can realize their actual spending and achieve fi
 
 {Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
 
+### General Overview
+
+Below is an architectural diagram that describes the overview of how BudgetBuddy works.
+
+![ArchitectureDiagram.png](images/ArchitectureDiagram.png)
+
+When the user initialises Budget Buddy, the logic of Budget Buddy will check if there is any pre-existing stored data.
+This persistence is done by using Gson read stored data into classes that will be used in
+Budget Buddy. As the user interacts with the UI, the logic will change the data of Budget Buddy, which is then written
+in Json format to update the storage. This process continues until the user exits Budget Buddy.
+
 ### Main Component
 
-![MainSeq.png](uml/MainSequence.png)
+![MainSeq.png](images/MainSequence.png)
 
 In the main (Duke) class, the main method first calls startApplication() which initalizes the Log Manager for logging (
 disabled if in production stage) and Ui object for printing output messages. After initialized, it will then attempt to
@@ -28,7 +39,7 @@ application. After which, it will output a bye message and exits the application
 
 ### Command Component
 
-![Command.png](uml/Command.png)
+![Command.png](images/Command.png)
 
 The command consists of three components: Enum CommandEnum, Abstract class Command and Class CommandParser. Each of them
 plays a role in retrieving the commands input by the user and redirecting to the correct components.
@@ -40,13 +51,15 @@ These are the only commands that can be input in the command line.
 
 #### Command
 
-The abstract class Command extends to several commands (eg `BudgetCommand`, `DepositCommand`, `ExpenseCommand`) and contains abstract methods execute() and isExit().
-The execute() method is executed from main, where it will go to the action class (eg `BudgetAction`) and run the requested action such as `add`.
+The abstract class Command extends to several commands (eg `BudgetCommand`, `DepositCommand`, `ExpenseCommand`) and
+contains abstract methods execute() and isExit().
+The execute() method is executed from main, where it will go to the action class (eg `BudgetAction`) and run the
+requested action such as `add`.
 After execute() from main, isExit() controls the termination of BudgetBuddy by returning a boolean.
 
 #### CommandParser
 
-![CommandParserSequence.png](uml/CommandParserSequence.png)
+![CommandParserSequence.png](images/CommandParserSequence.png)
 
 The `CommandParser` class takes in an input from the `Duke` class as seen in the sequence diagram above. It then parses
 the information
@@ -62,7 +75,7 @@ The main 3 classes of Duke are the `budget` , `expense` and `deposit` class. Use
 the date relate to each
 of these classes. Each of these classes are modelled as an `Item`.
 
-![ItemClasses.png](uml/ItemClasses.png)
+![ItemClasses.png](images/ItemClasses.png)
 
 ### Budget Component
 
@@ -77,7 +90,7 @@ Command word is "budget", it will be processed into the `BudgetCommand` class. T
 the `BudgetAction` class.
 The class diagram below shows how the `BudgetCommand` parent class is implemented, as well as its extended classes.
 
-![BudgetCommand.png](uml/BudgetCommand.png)
+![BudgetCommand.png](images/BudgetCommand.png)
 
 #### BudgetCommand Sequence
 
@@ -86,7 +99,7 @@ diagram above,
 the `input` will be passed into the `BudgetCommand` class. This class determines what budget commands to carry out to
 update the `data` stored in the `Budget` and `Expense` array lists, as shown in the sequence diagram below.
 
-![BudgetCommandSequence.png](uml/BudgetCommandSequence.png)
+![BudgetCommandSequence.png](images/BudgetCommandSequence.png)
 
 ### Deposit Component
 
@@ -107,7 +120,7 @@ Attached below is how the `DepositCommand` class is implemented along with its r
 and the abstract
 `Command` class.
 
-![DepositCommand.png](uml/DepositCommand.png)
+![DepositCommand.png](images/DepositCommand.png)
 
 ### Design & Implementation of the Deposit Feature
 
@@ -143,7 +156,7 @@ Attached below is how the `ExpenseCommand` class is implemented along with its r
 and the abstract
 `Command` class.
 
-![ExpenseCommand.png](uml/ExpenseCommand.png)
+![ExpenseCommand.png](images/ExpenseCommand.png)
 
 ### ExpenseCommand Sequence
 
@@ -151,7 +164,7 @@ Once a string `input` from the user has been deemed as an `Expense` command, the
 `ExpenseCommand` class. This class determines what expense commands to carry out to update the `data` stored in the
 `Budget` and `Expense` array lists, as shown in the sequence diagram below.
 
-![img.png](uml/ExpenseCommandSequence.png)
+![img.png](images/ExpenseCommandSequence.png)
 
 ### Design & Implementation of the Expense Feature
 
@@ -177,9 +190,9 @@ The 'StatsCommand' class contains methods that are related to the execution of t
 Users can
 use this command to view all the details of their expenses, budgets and deposits in the current month. Through this
 feature, users will know
-their current progress and if their expenses have exceeded their budget. 
+their current progress and if their expenses have exceeded their budget.
 
-![StatsCommand.png](uml/StatsCommand.png)
+![StatsCommand.png](images/StatsCommand.png)
 
 ### Design & Implementation of the Stats Feature
 
@@ -187,7 +200,7 @@ The stats feature, just like all other features, also is designed and implemente
 there are
 separate classes for each part of the Stats Feature, which includes StatsAction, StatsUIResponse and StatsCommand.
 
-![img.png](uml/StatsCommandSequence.png)
+![img.png](images/StatsCommandSequence.png)
 
 ### Others
 
@@ -231,7 +244,6 @@ separate classes for each part of the Stats Feature, which includes StatsAction,
 | v2.0    | user           | view the overall statistics for a certain month/year                            | check my past results                                                        |
 | v2.0    | returning user | be reminded of my budget progress when I launch the app                         | realise my progress and minimise my spending                                 |
 
-
 ## Appendix B: Non-Functional Requirements
 
 1. Works on any common operating systems (Windows, Mac OS, Linux) with Java 11 or above installed.
@@ -240,7 +252,8 @@ separate classes for each part of the Stats Feature, which includes StatsAction,
 
 ## Appendix C: Glossary
 
-* *Budget* - A category of a budget (e.g. Transport, Food, Electricity) with the maximum spending budget indicated by the user.
+* *Budget* - A category of a budget (e.g. Transport, Food, Electricity) with the maximum spending budget indicated by
+  the user.
 * *Deposit* - Additional earnings (e.g. Lottery, Bank interest) that is made by the user
 * *Expense* - An item that the user has spent on, which must be related to a Budget.
 * *Stats* - Statistics of savings and expenditure
