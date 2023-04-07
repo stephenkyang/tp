@@ -2,7 +2,7 @@
 
 ## Introduction
 
-BudgetBuddy is a one stop Command Line Interface application that helps you to keep track of anything finance related!
+BudgetBuddy is a one-stop Command Line Interface application that helps you to keep track of anything finance related!
 You can keep track of your expenses better by creating and editing custom budgets, and also taking note of what deposits
 you have to have a better understanding of your overall spending and saving.
 
@@ -76,7 +76,7 @@ Budget Buddy ensures that your data is always with us!
 
 ###### Commands that have the keyword [optional] means it is not required to key in after!
 
-###### Please input the parameters in correct format so as to prevent abnormal behavior.
+###### Please input the parameters in correct format to prevent abnormal behavior.
 
 ### 1. Help
 
