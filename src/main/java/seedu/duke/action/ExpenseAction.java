@@ -16,6 +16,10 @@ import seedu.duke.model.Expense;
 import seedu.duke.util.Commons;
 
 //@@author tzixi
+
+/**
+ * Contains methods related to expense function.
+ */
 public class ExpenseAction {
     private static Comparator<Expense> comparator = (expense1, expense2) -> expense1.getDate()
             .compareTo(expense2.getDate());
@@ -27,6 +31,17 @@ public class ExpenseAction {
         expenseUi = new ExpenseUIResponse(ui);
     }
 
+    /**
+     * Creates an expense in a specific budget category, with a name and amount inputted by the user.
+     * The date is optional.
+     *
+     * @param expenseCategory   The category that the expense will be categorized under
+     * @param expenseName       The name of the expense
+     * @param expenseAmount     The amount of the expense in dollars and cents
+     * @param expenseDate       The date of the expenditure
+     * @param budgets           Budget array list for budget category
+     * @throws BBException
+     */
     public void addExpense(String expenseCategory, String expenseName, Double expenseAmount,
                            LocalDate expenseDate, ArrayList<Budget> budgets) throws BBException {
         // Check if the expense category exists
@@ -55,6 +70,12 @@ public class ExpenseAction {
         expenseUi.printExpenseAddSuccessful(expense);
     }
 
+    /**
+     * Deletes an existing expense according to the index of the expense.
+     *
+     * @param expenseId     The index of the expense to be deleted.
+     * @throws GlobalInvalidNumberException
+     */
     public void deleteExpense(int expenseId) throws GlobalInvalidNumberException {
         int elementNo = validateExpense(expenseId);
         Expense deletedExpense = expenses.remove(elementNo);
@@ -62,6 +83,11 @@ public class ExpenseAction {
         expenseUi.printExpenseDelSuccessful(deletedExpense);
     }
 
+    /**
+     * Lists all the existing expenses in the specified category (optional)
+     *
+     * @param category      (optional) category name
+     */
     @SuppressWarnings("unchecked")
     public void listExpenses(String category) {
         ArrayList<Expense> expenseList = (ArrayList<Expense>) expenses.clone();
