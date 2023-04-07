@@ -36,7 +36,6 @@ expense add /c food /n taco4 /a 1.111111111111111111111
 expense add /c food /n     taco5 /a 0.0000000000001
 expense add /c food /n 😂😂😂 /a -~:"|*^%@&#^@&(!"
 
-stats show
 
 budget del /c school work
 budget del /c Spaces
@@ -52,8 +51,6 @@ budget add/ctest/l123
 budget set/ctest/1
 budget Del /c
 
-
-stats show
 
 Exit
 

@@ -133,25 +133,6 @@ _______________
 Invalid command. Use help for the list of commands.
 _______________
 _______________
-Your current progress for Apr 2023:
-  1. school work      ░░░░░░░░░░░░░░░░░░░░ ($0.00/1000.00)
-  2. school transport ░░░░░░░░░░░░░░░░░░░░ ($0.00/99.00)
-  3. spaces           ░░░░░░░░░░░░░░░░░░░░ ($0.00/31.00)
-  4. more spaces      ░░░░░░░░░░░░░░░░░░░░ ($0.00/1.00)
-  5. 😂😂😂           ░░░░░░░░░░░░░░░░░░░░ ($0.00/100.00)
-  6. food             ████████████████████ ($7.34/4.00)
-  7. /l 3124          ░░░░░░░░░░░░░░░░░░░░ ($0.00/3124.00)
-
-Deposits
-Total deposits: $0.00
-
-Expenses
-Total expenses: $7.34
-
-Total budget progress: $7.34/4359.00 (+0.00)
-Good job! You are on the right track!
-_______________
-_______________
 Invalid command. Use help for the list of commands.
 _______________
 _______________
@@ -200,23 +181,6 @@ Invalid action for budget. Use these actions: add, set, del, list, help
 _______________
 _______________
 Invalid command. Use help for the list of commands.
-_______________
-_______________
-Invalid command. Use help for the list of commands.
-_______________
-_______________
-Your current progress for Apr 2023:
-  1. more spaces ░░░░░░░░░░░░░░░░░░░░ ($0.00/1.00)
-  2. food        ████████████████████ ($7.34/4.00)
-
-Deposits
-Total deposits: $0.00
-
-Expenses
-Total expenses: $7.34
-
-Total budget progress: $7.34/5.00 (+0.00)
-Oh no! You seem to be spending too much!
 _______________
 _______________
 Invalid command. Use help for the list of commands.
