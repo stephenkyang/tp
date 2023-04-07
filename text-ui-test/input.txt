@@ -1,3 +1,65 @@
 budget add /c school work /l 1000
 budget add /c school transport /l 99
+budget add /c   spaces /l 100
+budget add /c more spaces /l      1
+budget add /c    /l
+budget add /c  this   /l -99
+budget add /c   those /l twenty
+budget add /c \  /l  😂
+budget add /c 😂😂😂 /l 100
+budget add /c food /l 10
+budget add /c    food /l 10
+budget add /c food      /l -1231----32
+budget add /c /l 3124
+budget add /c /l
+
+budget set /c school /l 10
+budget set /c school work /l100
+budget set /c spaces /l 31
+budget set /c food /l 3
+budget set /c     food /l 3.50
+budget set /c food   /l 4
+
+budget del /c schoolwork
+budget del /c
+budget del /c school   work
+budget del /c    schoool work
+budget del /c School work
+budget del /c school Work
+budget del /c ;&*%@$%#@
+
+expense add /c food /n taco /a 7.34
+expense add /c food /n taco1 /a
+expense add /c food /n taco2 /a -999999999999999999
+expense add /c food /n taco3 /a 😂😂😂
+expense add /c food /n taco4 /a 1.111111111111111111111
+expense add /c food /n     taco5 /a 0.0000000000001
+expense add /c food /n 😂😂😂 /a -~:"|*^%@&#^@&(!"
+
+stats show
+
+budget del /c school work
+budget del /c Spaces
+budget del /c   school transport
+budget del /c    😂😂😂
+budget del /c 😂😂😂
+budget del /c school Work
+budget del /c /l 3124
+budget del /c spaces
+
+budget Add /C test /l 142
+budget add/ctest/l123
+budget set/ctest/1
+budget Del /c
+
+
+stats show
+
+budget help add
+budget Help
+budget help
+
+Exit
+     .
+
 exit

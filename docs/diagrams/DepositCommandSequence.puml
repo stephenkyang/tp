@@ -62,7 +62,7 @@ else action is list
 activate  ":DepositCommand"
 ":DepositCommand" -> ":DepositCommand": executeListDeposit(DepositAction, optionalParams)
 activate ":DepositCommand"
-":DepositCommand" -> ":DepositAction" : DepositFrom, DepositTo, DepositCategory
+":DepositCommand" -> ":DepositAction" : depositFrom, depositTo
 activate ":DepositAction"
 ":DepositAction" -> ":DepositAction" : listDeposits()
 activate ":DepositAction"

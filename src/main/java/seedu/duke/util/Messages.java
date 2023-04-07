@@ -10,7 +10,7 @@ public enum Messages {
     INFO_EXIT("Bye! Hope to see you soon!"),
 
     HELP_SHOW_COMMANDS("Budget Buddy helps you to manage your finances better." + System.lineSeparator()
-        + "Budget Buddy has 4 main categories:" + System.lineSeparator()
+        + "Budget Buddy is split into 4 main classifications:" + System.lineSeparator()
         + "1. Budget" + System.lineSeparator()
         + "   - Choose how much money you want to allocate to a budget of your specified name" + System.lineSeparator()
         + "2. Expense" + System.lineSeparator()
