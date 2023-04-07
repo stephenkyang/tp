@@ -1,17 +1,17 @@
-budget add /c school work /l 1000
-budget add /c school transport /l 99
-budget add /c   spaces /l 100
-budget add /c more spaces /l      1
-budget add /c    /l
-budget add /c  this   /l -99
-budget add /c   those /l twenty
-budget add /c \  /l  😂
-budget add /c 😂😂😂 /l 100
-budget add /c food /l 10
-budget add /c    food /l 10
-budget add /c food      /l -1231----32
-budget add /c /l 3124
-budget add /c /l
+budget add /c school work /a 1000
+budget add /c school transport /a 99
+budget add /c   spaces /a 100
+budget add /c more spaces /a      1
+budget add /c    /a
+budget add /c  this   /a -99
+budget add /c   those /a twenty
+budget add /c \  /a  😂
+budget add /c 😂😂😂 /a 100
+budget add /c food /a 10
+budget add /c    food /a 10
+budget add /c food      /a -1231----32
+budget add /c /a 3124
+budget add /c /a
 
 budget set /c school /l 10
 budget set /c school work /l100
@@ -28,7 +28,7 @@ budget del /c School work
 budget del /c school Work
 budget del /c ;&*%@$%#@
 
-expense add /c food /n taco /a 7.34
+expense add /c food /n taco /a 7.34 /d 07-04-2023
 expense add /c food /n taco1 /a
 expense add /c food /n taco2 /a -999999999999999999
 expense add /c food /n taco3 /a 😂😂😂

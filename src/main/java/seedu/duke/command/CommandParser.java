@@ -8,6 +8,7 @@ import seedu.duke.exception.BBException;
 import seedu.duke.exception.CommandActionInvalidException;
 import seedu.duke.exception.CommandInvalidException;
 import seedu.duke.exception.CommandParamInvalidException;
+import seedu.duke.exception.CommandParamSlashException;
 import seedu.duke.exception.CommandParamTypeInvalidException;
 import seedu.duke.util.Constants;
 import seedu.duke.util.Pair;
@@ -107,7 +108,7 @@ public class CommandParser {
     private static String getAction(Command command, String input) throws CommandActionInvalidException {
         String[] splitInput = input.split(" ", 3);
         try {
-            String actionName = splitInput[1];
+            String actionName = splitInput[1].toLowerCase();
             int actionNo = command.getActionNo(actionName);
 
             if (actionNo != -1) {
@@ -144,19 +145,27 @@ public class CommandParser {
                 String paramName = param.getKey();
                 Class<?> paramType = param.getValue();
 
-                // Gets parameter value from the parameter syntax
+                // Gets parameter value from the parameter syntax, throw if value contains /
                 String paramValue = input.split(" " + paramName + " ")[1].split(" /")[0].strip();
+                if (paramValue.contains("/")) {
+                    throw new CommandParamSlashException();
+                }
 
                 // Check if the parameter value suits for the class type (e.g. int, string)
-                validateParamType(paramValue, paramType);
+                validateParamType(paramName, paramValue, paramType);
 
                 assert !paramValue.isEmpty() : "Value of a parameter must contain something";
 
                 params[paramCount] = paramValue;
                 paramCount++;
             }
-        } catch (ArrayIndexOutOfBoundsException | CommandParamTypeInvalidException err) {
+        } catch (ArrayIndexOutOfBoundsException err) {
             throw new CommandParamInvalidException(command);
+        } catch (CommandParamTypeInvalidException err) {
+            // Initalize action message to get invalid action message and throw
+            CommandParamInvalidException exc = new CommandParamInvalidException(command);
+            err.setActionMessage(exc.getMessage());
+            throw err;
         }
 
         return params;
@@ -193,18 +202,27 @@ public class CommandParser {
                     continue;
                 }
 
+                // Throw if param value contains /
                 String paramValue = splitParam[1].split(" /")[0].strip();
+                if (paramValue.contains("/")) {
+                    throw new CommandParamSlashException();
+                }
 
                 // Check if the parameter value suits for the class type (e.g. int, string)
-                validateParamType(paramValue, paramType);
+                validateParamType(paramName, paramValue, paramType);
 
                 assert !paramValue.isEmpty() : "Value of a parameter must contain something";
 
                 params[paramCount] = paramValue;
                 paramCount++;
             }
-        } catch (ArrayIndexOutOfBoundsException | CommandParamTypeInvalidException err) {
+        } catch (ArrayIndexOutOfBoundsException err) {
             throw new CommandParamInvalidException(command);
+        } catch (CommandParamTypeInvalidException err) {
+            // Initalize action message to get invalid action message and throw
+            CommandParamInvalidException exc = new CommandParamInvalidException(command);
+            err.setActionMessage(exc.getMessage());
+            throw err;
         }
 
         return params;
@@ -218,33 +236,73 @@ public class CommandParser {
      * @param paramType Data type of the parameter
      * @throws BBException if invalid parameter type
      */
-    private static void validateParamType(String paramValue, Class<?> paramType) throws BBException {
+    private static void validateParamType(String paramName, String paramValue, Class<?> paramType) throws BBException {
         try {
             if (paramType.isAssignableFrom(int.class)) {
                 Integer.parseInt(paramValue);
             } else if (paramType.isAssignableFrom(double.class)) {
-                double value = Double.parseDouble(paramValue);
-
-                // Solution below adapted from https://stackoverflow.com/questions/32531910/
-                // Check if input only contains at most 2 dec points and is positive
-                if (BigDecimal.valueOf(value).scale() > 2 || value < 0) {
-                    throw new NumberFormatException();
-                }
+                validateParamDouble(paramValue);
             } else if (paramType.isAssignableFrom(LocalDate.class)) {
-                LocalDate date = LocalDate.parse(paramValue, Constants.ACCEPTABLE_DATE_FORMAT);
-
-                // Throw if year is not in 4 digits
-                int yearDigits = String.valueOf(date.getYear()).length();
-                if (yearDigits != 4) {
-                    throw new CommandParamTypeInvalidException();
-                }
+                validateParamDate(paramValue);
             } else if (paramType.isAssignableFrom(String.class)) {
-                // Check if input contains less than 30 characters
-                if (paramValue.length() > Constants.STRING_MAX_LENGTH) {
-                    throw new CommandParamTypeInvalidException();
-                }
+                validateParamString(paramValue);
             }
         } catch (NumberFormatException | DateTimeParseException | CommandParamTypeInvalidException err) {
+            throw new CommandParamTypeInvalidException(paramName, paramType);
+        }
+    }
+
+    /**
+     * Check if the input value given can be parsed
+     * to double.
+     * 
+     * @param paramValue value of the parameter provided by user
+     * @throws NumberFormatException when double is not positive/contain alphabet/above 3dp
+     */
+    private static void validateParamDouble(String paramValue) throws NumberFormatException {
+        if (paramValue.matches("[a-zA-Z]")) {
+            throw new NumberFormatException();
+        }
+
+        double value = Double.parseDouble(paramValue);
+
+        // Solution below adapted from https://stackoverflow.com/questions/32531910/
+        // Check if input only contains at most 2 dec points and is positive
+        if (BigDecimal.valueOf(value).scale() > 2 || value <= 0) {
+            throw new NumberFormatException();
+        }
+    }
+
+    /**
+     * Check if the input value given can be parsed
+     * to date.
+     * 
+     * @param paramValue value of the parameter provided by user
+     * @throws CommandParamTypeInvalidException when date is not in 4 digits
+     * @throws DateTimeParseException when date format is invalid
+     */
+    private static void validateParamDate(String paramValue) throws CommandParamTypeInvalidException,
+            DateTimeParseException {
+
+        LocalDate date = LocalDate.parse(paramValue, Constants.ACCEPTABLE_DATE_FORMAT);
+
+        // Throw if year is not in 4 digits
+        int yearDigits = String.valueOf(date.getYear()).length();
+        if (yearDigits != 4) {
+            throw new CommandParamTypeInvalidException();
+        }
+    }
+
+    /**
+     * Check if the input value given can be parsed
+     * to string.
+     * 
+     * @param paramValue value of the parameter provided by user
+     * @throws CommandParamTypeInvalidException when string is empty/above 31 chars
+     */
+    private static void validateParamString(String paramValue) throws CommandParamTypeInvalidException {
+        // Check if input contains less than 30 characters
+        if (paramValue.length() > Constants.STRING_MAX_LENGTH || paramValue.isEmpty()) {
             throw new CommandParamTypeInvalidException();
         }
     }

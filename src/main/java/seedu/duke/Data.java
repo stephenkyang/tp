@@ -12,7 +12,9 @@ import java.util.logging.Logger;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonParseException;
 
+import seedu.duke.exception.FileCorruptedException;
 import seedu.duke.exception.FileExportException;
 import seedu.duke.exception.FileImportException;
 
@@ -54,7 +56,7 @@ public class Data {
      * @return Data containing Budget, Deposit and Expense data
      * @throws FileImportException File could not be opened for unknown reason
      */
-    public static Data importData() throws FileImportException {
+    public static Data importData() throws FileImportException, FileCorruptedException {
         try {
             File file = new File(Constants.FILE_NAME);
             if (!file.exists()) {
@@ -66,10 +68,14 @@ public class Data {
             FileReader fileReader = new FileReader(file);
             Data data = gson.fromJson(fileReader, Data.class);
 
+            validateData(data);
+
             logger.log(Level.INFO, "File successfully loaded");
             return data;
         } catch (FileNotFoundException err) {
             throw new FileImportException();
+        } catch (JsonParseException err) {
+            throw new FileCorruptedException();
         }
     }
 
@@ -120,5 +126,17 @@ public class Data {
      */
     public ArrayList<Expense> getExpenses() {
         return expenses;
+    }
+
+    /**
+     * Validates the data given from the file.
+     * Does not check for any empty string values.
+     * 
+     * @throws FileCorruptedException When data is corrupted
+     */
+    private static void validateData(Data data) throws FileCorruptedException {
+        if (data == null || data.budgets == null || data.deposits == null || data.expenses == null) {
+            throw new FileCorruptedException();
+        }
     }
 }

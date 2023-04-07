@@ -25,23 +25,24 @@ public enum Messages {
     BUDGET_DOES_NOT_EXIST("This budget does not exist!"),
     BUDGET_LIMIT_NEGATIVE("This limit cannot be negative!"),
     BUDGET_NAME_USED("This budget name is already in use!"),
+    BUDGET_MAX_LIMIT("You have reached the maximum no of budgets. Please delete some budgets before adding."),
     BUDGET_ADD_SUCCESSFUL("Successfully added %s with limit of $%.2f"),
     BUDGET_SET_SUCCESSFUL("Successfully modified %s to have a limit of $%.2f"),
-    BUDGET_DELETE_SUCCESSFUL("Successfully deleted %s."),
+    BUDGET_DELETE_SUCCESSFUL("Successfully deleted budget %s with %d related expenses."),
     BUDGET_LIST("Your budget list for %s %d:"),
     BUDGET_LIST_NOTHING("You have no budgets."),
     BUDGET_NUMBER_OF("There are %d budget categories."),
     BUDGET_CURRENT_PROGRESS(System.lineSeparator() + "Here is your current progress on the budget: "),
     BUDGET_HELP_COMMANDS("1. You can add a monthly budget: " + System.lineSeparator()
-        + "   budget add /c (category name) /l (spending limit)" + System.lineSeparator()
+        + "   budget add /c (category name) /a (spending limit)" + System.lineSeparator()
         + "2. You can modify an existing budget: " + System.lineSeparator()
-        + "   budget set /c (category name) /l (spending limit)" + System.lineSeparator()
+        + "   budget set /c (category name) /a (spending limit)" + System.lineSeparator()
         + "3. You can remove a monthly budget: " + System.lineSeparator()
         + "   budget del /c (category name)" + System.lineSeparator()
         + "4. You can list and check each budget's status for a certain month/year: " + System.lineSeparator()
         + "   budget list [optional] /m (month) /y (year in YYYY format)"),
 
-    DEPOSIT_DEPOSIT("%d. %s ($%.2f) on %s"),
+    DEPOSIT_DEPOSIT("Deposit No %d. %s ($%.2f) on %s"),
     DEPOSIT_ADD_SUCCESSFUL("The following deposit has been added:"),
     DEPOSIT_DELETE_SUCCESSFUL("The following deposit has been removed:"),
     DEPOSIT_CLEAR_SUCCESSFUL("These are the deposits cleared:"),
@@ -65,7 +66,7 @@ public enum Messages {
         + "5. You can clear deposits (by date): " + System.lineSeparator()
         + "   deposit clear [optional] /f DD-MM-YYYY /t DD-MM-YYYY"),
 
-    EXPENSE_EXPENSE("%d. [%s] %s ($%.2f) on %s"),
+    EXPENSE_EXPENSE("Expense No %d. [%s] %s ($%.2f) on %s"),
     EXPENSE_ADD_SUCCESSFUL("The following expense has been added:"),
     EXPENSE_DELETE_SUCCESSFUL("The following expense has been removed:"),
     EXPENSE_CLEAR_SUCCESSFUL("These are the expenses cleared:"),

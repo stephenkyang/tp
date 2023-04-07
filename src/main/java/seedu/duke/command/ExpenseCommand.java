@@ -20,20 +20,20 @@ public class ExpenseCommand extends Command {
     // Actions, required and optional parameters (w/ data type) of each action are specified.
     private static final String[] ACTIONS = {"add", "del", "find", "list", "clear", "help"};
     private static final Pair[][] ACTIONS_REQUIRED_PARAMS = {
-            {new Pair("/c", String.class), new Pair("/n", String.class), new Pair("/a", double.class)},
-            {new Pair("/n", int.class)},
-            {new Pair("/n", String.class)},
-            {},
-            {},
-            {}
+        {new Pair("/c", String.class), new Pair("/n", String.class), new Pair("/a", double.class)},
+        {new Pair("/n", int.class)},
+        {new Pair("/n", String.class)},
+        {},
+        {},
+        {}
     };
     private static final Pair[][] ACTIONS_OPTIONAL_PARAMS = {
-            {new Pair("/d", LocalDate.class)},
-            {},
-            {},
-            {new Pair("/c", String.class), new Pair("/f", LocalDate.class), new Pair("/t", LocalDate.class)},
-            {new Pair("/c", String.class), new Pair("/f", LocalDate.class), new Pair("/t", LocalDate.class)},
-            {}
+        {new Pair("/d", LocalDate.class)},
+        {},
+        {},
+        {new Pair("/c", String.class), new Pair("/f", LocalDate.class), new Pair("/t", LocalDate.class)},
+        {new Pair("/c", String.class), new Pair("/f", LocalDate.class), new Pair("/t", LocalDate.class)},
+        {}
     };
 
     public ExpenseCommand() {

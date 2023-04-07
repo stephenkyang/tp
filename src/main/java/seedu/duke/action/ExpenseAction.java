@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.temporal.TemporalAdjusters;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.Iterator;
 
 import seedu.duke.Ui;
 import seedu.duke.exception.BBException;
@@ -188,7 +189,7 @@ public class ExpenseAction {
     // @@author pinyoko573
 
     /**
-     * Checks if a certain expense already exists using id.
+     * Checks if a certain expense already exists using the expense id.
      * Used for deletion.
      *
      * @param expenseId id of the expense
@@ -228,13 +229,26 @@ public class ExpenseAction {
      *
      * @param budgetName name of the budget
      * @param expenses   list of expenses
+     * @return number of expenses deleted
      */
-    public static void clearExpensesByCategory(String budgetName, ArrayList<Expense> expenses) {
-        for (Expense e : expenses) {
+    public static int clearExpensesByCategory(String budgetName, ArrayList<Expense> expenses) {
+        // for (Expense e : expenses) {
+        //     if (e.getCategory().equals(budgetName)) {
+        //         expenses.remove(e);
+        //     }
+        // }
+        int noOfDeletedExpenses = 0;
+
+        Iterator<Expense> iter = expenses.iterator();
+        while(iter.hasNext()) {
+            Expense e = iter.next();
             if (e.getCategory().equals(budgetName)) {
-                expenses.remove(e);
+                iter.remove();
+                noOfDeletedExpenses++;
             }
         }
+
+        return noOfDeletedExpenses;
     }
 
     // @@author pinyoko573
@@ -313,20 +327,4 @@ public class ExpenseAction {
 
         return total;
     }
-
-    // public double findRelatedExpenses(String budgetName) {
-    //     int i = 1;
-    //     double totalExpenseValue = 0;
-    //     for (Expense expense : expenses) {
-    //         if (expense != null) {
-    //             if (Objects.equals(expense.getCategory(), budgetName)) {
-    //                 System.out.println(i + ". " + expense.getName() + " with amount of $" + expense.getAmount());
-    //                 totalExpenseValue += expense.getAmount();
-    //             }
-    //         }
-
-    //     }
-    //     return totalExpenseValue;
-    // }
 }
-

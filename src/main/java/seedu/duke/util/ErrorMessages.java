@@ -5,9 +5,16 @@ public enum ErrorMessages {
     ERROR_UNKNOWN_INVALID_ACTION("Invalid action for unknown command."),
     ERROR_UNKNOWN_INVALID_ACTION_EXECUTE("Invalid execution for unknown action."),
 
+    ERROR_INVALID_PARAM_SLASH("Please do not input slash (/) in the value of a parameter."),
+    ERROR_INVALID_PARAM_INTEGER("Parameter %s: Input must be a valid number."),
+    ERROR_INVALID_PARAM_DOUBLE("Parameter %s: Input must be a valid positive number, with at most 2 decimal places."),
+    ERROR_INVALID_PARAM_DATE("Parameter %s: Input must be in a valid date in this format \"DD-MM-YYYY\""),
+    ERROR_INVALID_PARAM_STRING("Parameter %s: Input must be a string that is below " +
+        Constants.STRING_MAX_LENGTH + " characters."),
+
     ERROR_BUDGET_INVALID_ACTION("Invalid action for budget. Use these actions: add, set, del, list, help"),
-    ERROR_BUDGET_ADD_INVALID_PARAM("Invalid parameters. Example: budget add /c transport /l 3000.00"),
-    ERROR_BUDGET_SET_INVALID_PARAM("Invalid parameters. Example: budget set /c transport /l 5000.00"),
+    ERROR_BUDGET_ADD_INVALID_PARAM("Invalid parameters. Example: budget add /c transport /a 3000.00"),
+    ERROR_BUDGET_SET_INVALID_PARAM("Invalid parameters. Example: budget set /c transport /a 5000.00"),
     ERROR_BUDGET_DEL_INVALID_PARAM("Invalid parameters. Example: budget del /c transport"),
     ERROR_BUDGET_LIST_INVALID_MONTHYEAR("Please input a valid month or month & year (in YYYY format) " +
         "that is before today."),
@@ -40,7 +47,9 @@ public enum ErrorMessages {
     ERROR_GLOBAL_DATE_AFTER_TODAY("You cannot input a date that is after today."),
 
     ERROR_FILE_NOT_FOUND("Could not read the file! BudgetBuddy will terminate unexpectedly..."),
-    ERROR_FILE_EXPORT("Could not export the file! Please restart the application.");
+    ERROR_FILE_EXPORT("Could not export the file! Please restart the application."),
+    ERROR_FILE_CORRUPTED("The data file " + Constants.FILE_NAME + " is corrupted. Please delete the file " + 
+        "and relaunch the application.");
 
     private String errorMessage;
 
