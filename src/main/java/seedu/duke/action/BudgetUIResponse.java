@@ -28,6 +28,10 @@ public class BudgetUIResponse {
         ui.printMessage(Messages.BUDGET_NAME_USED.toString());
     }
 
+    public void printMaxBudget() {
+        ui.printMessage(Messages.BUDGET_MAX_LIMIT.toString());
+    }
+
 
     /**
      * Prints the added budget along with the total no of budgets.
@@ -47,8 +51,8 @@ public class BudgetUIResponse {
      * @param budget budget that was just deleted
      * @param count  total no of budgets
      */
-    public void printBudgetDelSuccessful(Budget budget, int count) {
-        String msg = String.format(Messages.BUDGET_DELETE_SUCCESSFUL.toString(), budget.getName());
+    public void printBudgetDelSuccessful(Budget budget, int count, int noOfDeletedExpenses) {
+        String msg = String.format(Messages.BUDGET_DELETE_SUCCESSFUL.toString(), budget.getName(), noOfDeletedExpenses);
         String countMsg = String.format(Messages.BUDGET_NUMBER_OF.toString(), count);
         ui.printMessage(msg, countMsg);
     }
@@ -141,11 +145,11 @@ public class BudgetUIResponse {
 
         int i = 1;
         for (Budget b : budgets) {
-            String barNameFormat = "%-" + longestBudgetName + "s " +
+            String barFormat = "%-" + longestBudgetName + "s " +
                     CommonsUi.formatBar(budgetExpensesTotal[i - 1], b.getAmount());
-            String barName = String.format(barNameFormat, b.getName());
+            String barString = String.format(barFormat, b.getName());
 
-            String msg = String.format(Messages.BUDGET_BUDGET.toString(), i, barName,
+            String msg = String.format(Messages.BUDGET_BUDGET.toString(), i, barString,
                     budgetExpensesTotal[i - 1], b.getAmount());
 
             msgs.add(msg);

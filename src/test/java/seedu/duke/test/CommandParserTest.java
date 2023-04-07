@@ -6,11 +6,12 @@ import seedu.duke.command.CommandParser;
 import seedu.duke.exception.CommandActionInvalidException;
 import seedu.duke.exception.CommandInvalidException;
 import seedu.duke.exception.CommandParamInvalidException;
+import seedu.duke.exception.CommandParamTypeInvalidException;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-//@@author chongyongrui
+//@@author pinyoko573
 
 class CommandParserTest {
 
@@ -37,15 +38,15 @@ class CommandParserTest {
 
     @Test
     void commandParser_invalidParameterDoubleType_test() {
-        assertThrows(CommandParamInvalidException.class, () -> {
-            CommandParser.parse("budget add /c asd /i asd");
+        assertThrows(CommandParamTypeInvalidException.class, () -> {
+            CommandParser.parse("budget add /c asd /a asd");
         });
     }
 
     @Test
     void commandParser_invalidParameterDateType_test() {
         // date format must be dd-mm-yyyy
-        assertThrows(CommandParamInvalidException.class, () -> {
+        assertThrows(CommandParamTypeInvalidException.class, () -> {
             CommandParser.parse("deposit add /n from ground /a 01-30-2020");
         });
     }
@@ -54,7 +55,7 @@ class CommandParserTest {
     void commandParser_validParameter_test() {
         assertDoesNotThrow(() -> {
             // normal input
-            CommandParser.parse("budget add /c transport /l 2000");
+            CommandParser.parse("budget add /c transport /a 2000");
             // input with number parsed to double, no optional params
             CommandParser.parse("deposit add /n pick up from ground /a 10");
             // input with double, optional params

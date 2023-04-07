@@ -19,6 +19,9 @@ public class Constants {
     // MAX LENGTH FOR ALL STRING
     public static final int STRING_MAX_LENGTH = 30;
 
+    // MAX LIMIT FOR NUMBER OF BUDGETS
+    public static final int MAX_NO_OF_BUDGETS = 15;
+
     // COLOUR CODES
     public static final String ANSI_RED = "\u001B[31m";
     public static final String ANSI_GREEN = "\u001B[32m";

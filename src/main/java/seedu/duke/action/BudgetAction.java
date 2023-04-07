@@ -5,6 +5,7 @@ import seedu.duke.model.Expense;
 import seedu.duke.exception.GlobalInvalidMonthYearException;
 import seedu.duke.model.Budget;
 import seedu.duke.util.Commons;
+import seedu.duke.util.Constants;
 
 import java.time.LocalDate;
 import java.time.temporal.TemporalAdjusters;
@@ -35,13 +36,18 @@ public class BudgetAction {
      * @param budgetLimit the monetary limit of the budget
      */
     public void addBudget(String budgetName, double budgetLimit) {
-        // Check if there are any duplicate budgets
+        // Check if there are any duplicate budgets, or no. of budgets is more than limit
+        if (budgets.size() >= Constants.MAX_NO_OF_BUDGETS) {
+            budgetUi.printMaxBudget();
+            return;
+        }
+
         if (isDuplicateBudgetName(budgetName, budgets)) {
             budgetUi.printBudgetNameUsed();
             return;
-        } else if (budgetLimit < 0) {
-            return;
         }
+
+        assert budgets.size() <= Constants.MAX_NO_OF_BUDGETS : "No of budgets must be below limit";
 
         Budget budget = new Budget(budgetName, budgetLimit);
         assert budget.getAmount() >= 0 : "Budget limit is negative!";
@@ -68,10 +74,10 @@ public class BudgetAction {
 
 
         // Clears the expenses if budget delete too
-        ExpenseAction.clearExpensesByCategory(budgetName, expenses);
+        int noOfDeletedExpenses = ExpenseAction.clearExpensesByCategory(budgetName, expenses);
 
         budgets.remove(budget);
-        budgetUi.printBudgetDelSuccessful(budget, budgets.size());
+        budgetUi.printBudgetDelSuccessful(budget, budgets.size(), noOfDeletedExpenses);
     }
 
     /**

@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.temporal.TemporalAdjusters;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.Iterator;
 
 import seedu.duke.Ui;
 import seedu.duke.exception.BBException;
@@ -228,13 +229,26 @@ public class ExpenseAction {
      *
      * @param budgetName name of the budget
      * @param expenses   list of expenses
+     * @return number of expenses deleted
      */
-    public static void clearExpensesByCategory(String budgetName, ArrayList<Expense> expenses) {
-        for (Expense e : expenses) {
+    public static int clearExpensesByCategory(String budgetName, ArrayList<Expense> expenses) {
+        // for (Expense e : expenses) {
+        //     if (e.getCategory().equals(budgetName)) {
+        //         expenses.remove(e);
+        //     }
+        // }
+        int noOfDeletedExpenses = 0;
+
+        Iterator<Expense> iter = expenses.iterator();
+        while(iter.hasNext()) {
+            Expense e = iter.next();
             if (e.getCategory().equals(budgetName)) {
-                expenses.remove(e);
+                iter.remove();
+                noOfDeletedExpenses++;
             }
         }
+
+        return noOfDeletedExpenses;
     }
 
     // @@author pinyoko573
