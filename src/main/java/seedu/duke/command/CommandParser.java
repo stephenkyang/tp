@@ -108,7 +108,7 @@ public class CommandParser {
     private static String getAction(Command command, String input) throws CommandActionInvalidException {
         String[] splitInput = input.split(" ", 3);
         try {
-            String actionName = splitInput[1];
+            String actionName = splitInput[1].toLowerCase();
             int actionNo = command.getActionNo(actionName);
 
             if (actionNo != -1) {
