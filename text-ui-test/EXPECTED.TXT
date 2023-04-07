@@ -109,7 +109,7 @@ Invalid command. Use help for the list of commands.
 _______________
 _______________
 The following expense has been added:
-Expense No 1. [food] taco ($7.34) on 08 Apr 2023
+Expense No 1. [food] taco ($7.34) on 07 Apr 2023
 _______________
 _______________
 Invalid parameters. Example: expense add /c transport /n mrt /a 1.00 [/d] 23-03-2023

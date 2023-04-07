@@ -28,7 +28,7 @@ budget del /c School work
 budget del /c school Work
 budget del /c ;&*%@$%#@
 
-expense add /c food /n taco /a 7.34
+expense add /c food /n taco /a 7.34 /d 07-04-2023
 expense add /c food /n taco1 /a
 expense add /c food /n taco2 /a -999999999999999999
 expense add /c food /n taco3 /a 😂😂😂
