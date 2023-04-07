@@ -1,29 +1,26 @@
+Could not locate data.json file. A file will be automatically created after an action!
 _______________
 
  █▀▀█ █   █ █▀▀▄ █▀▀▀ █▀▀ ▀▀█▀▀    █▀▀█ █  █ █▀▀▄ █▀▀▄ █  █ 
  █▀▀▄ █   █ █  █ █ ▀█ █▀▀   █      █▀▀▄ █  █ █  █ █  █ █▄▄█ 
  █▄▄█  ▀▀▀  ▀▀▀  ▀▀▀▀ ▀▀▀   ▀      █▄▄█  ▀▀▀ ▀▀▀  ▀▀▀  ▄▄▄█
 Welcome to BudgetBuddy! What can I do for you?
-
-Here is your current progress on the budget: 
-  1. hehe ░░░░░░░░░░░░░░░░░░░░ ($0.00/123.00)
-  2.      ░░░░░░░░░░░░░░░░░░░░ ($0.00/3000.00)
 _______________
 _______________
 Successfully added school work with limit of $1000.00
-There are 3 budget categories.
+There are 1 budget categories.
 _______________
 _______________
 Successfully added school transport with limit of $99.00
-There are 4 budget categories.
+There are 2 budget categories.
 _______________
 _______________
 Successfully added spaces with limit of $100.00
-There are 5 budget categories.
+There are 3 budget categories.
 _______________
 _______________
 Successfully added more spaces with limit of $1.00
-There are 6 budget categories.
+There are 4 budget categories.
 _______________
 _______________
 Parameter /c: Input must be a string that is below 30 characters.
@@ -43,11 +40,11 @@ Invalid parameters. Example: budget add /c transport /a 3000.00
 _______________
 _______________
 Successfully added 😂😂😂 with limit of $100.00
-There are 7 budget categories.
+There are 5 budget categories.
 _______________
 _______________
 Successfully added food with limit of $10.00
-There are 8 budget categories.
+There are 6 budget categories.
 _______________
 _______________
 This budget name is already in use!
@@ -112,7 +109,7 @@ Invalid command. Use help for the list of commands.
 _______________
 _______________
 The following expense has been added:
-Expense No 2. [food] taco ($7.34) on 08 Apr 2023
+Expense No 1. [food] taco ($7.34) on 08 Apr 2023
 _______________
 _______________
 Invalid parameters. Example: expense add /c transport /n mrt /a 1.00 [/d] 23-03-2023
@@ -145,18 +142,18 @@ Invalid command. Use help for the list of commands.
 _______________
 _______________
 Successfully deleted budget school work with 0 related expenses.
-There are 7 budget categories.
+There are 5 budget categories.
 _______________
 _______________
 This budget does not exist!
 _______________
 _______________
 Successfully deleted budget school transport with 0 related expenses.
-There are 6 budget categories.
+There are 4 budget categories.
 _______________
 _______________
 Successfully deleted budget 😂😂😂 with 0 related expenses.
-There are 5 budget categories.
+There are 3 budget categories.
 _______________
 _______________
 This budget does not exist!
@@ -169,7 +166,7 @@ Please do not input slash (/) in the value of a parameter.
 _______________
 _______________
 Successfully deleted budget spaces with 0 related expenses.
-There are 4 budget categories.
+There are 2 budget categories.
 _______________
 _______________
 Invalid command. Use help for the list of commands.
