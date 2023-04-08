@@ -77,13 +77,17 @@ After execute() is done, isExit() controls the termination of the application by
 
 The `CommandParser` class is responsible for validating the input given by the user, which in return will pass a Command object (containing the user's requested action) that can be executed.
 
-The parse() function first checks the command name, which will return the list of actions that are available if the command is valid. Then, it will retrieve the action name and see if it matches in the list of actions. **(Note that commands such as Help and Exit do not have any action, which the command will be returned immediately.)**
+The parse() function first checks the command name, which will return the list of actions that are available if the command is valid. Then, it will retrieve the action name and see if it matches in the list of actions.
+
+**(Note that commands such as Help and Exit do not have any action, which the command will be returned immediately.)**
 
 After verifying that the action exists, it will then verify all the parameters that are needed to execute.
 
 In required parameters, each parameter must have a value. Whereas for optional parameters, the user can choose to input values for none, some, or all of the optional parameters. When the value of the parameter does not match the parameter type, it will stop the parsing process and return an exception.
 
-**Command and action names are not case sensitive, but values are. Also, it is possible to rearrange the order of parameters.**
+**Command and action names are not case sensitive, but values are.**
+
+**Also, it is possible to rearrange the order of parameters.**
 
 ## Product scope
 

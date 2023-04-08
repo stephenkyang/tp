@@ -2,6 +2,8 @@ package seedu.duke;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import seedu.duke.util.Messages;
 
@@ -11,6 +13,8 @@ import seedu.duke.util.Messages;
  * Handles the user interface of the application, including user inputs and message outputs
  */
 public class Ui {
+    private static Logger logger = Logger.getLogger("Message");
+    
     private Scanner in;
     private String input;
 
@@ -47,6 +51,7 @@ public class Ui {
      * @param message the error message.
      */
     public void printErrorMessage(String message) {
+        logger.log(Level.SEVERE, "Error occured.");
         printMessage(message);
     }
 

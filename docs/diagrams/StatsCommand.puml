@@ -1,5 +1,7 @@
 @startuml
 
+hide circle
+skinparam classAttributeIconSize 0
 
 class "{abstract} \n Command"  {
          +actions: String[]
@@ -57,7 +59,6 @@ class Data {
 
 }
 
-
 class StatsCommand {
 + ACTIONS: String[]
 + ACTIONS_REQUIRED_PARAMS: Pair[][]
@@ -70,15 +71,11 @@ class StatsCommand {
 
 }
 
-
-
 "Budget" <|-down-"\n0..  " Data
 "Expense" <|-right "0.. "Data
 "{abstract} \n Command" <|-right- Ui
 "Deposit" <|-up-"0..  " Data
 "{abstract} \n Command" <|-left- Data
 "{abstract} \n Command" <|-down- StatsCommand
-
-
 
 @enduml

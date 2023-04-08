@@ -28,6 +28,16 @@ public class ExpenseAction {
         expenseUi = new ExpenseUIResponse(ui);
     }
 
+    /**
+     * Creates an expense and adds into the expense list
+     * 
+     * @param expenseCategory budget category, which must exist in budgets
+     * @param expenseName name of expense
+     * @param expenseAmount expense amount
+     * @param expenseDate date of expense
+     * @param budgets list of budgets that will check if category exists
+     * @throws BBException when budget is not found, or date of expense is after today
+     */
     public void addExpense(String expenseCategory, String expenseName, Double expenseAmount,
                            LocalDate expenseDate, ArrayList<Budget> budgets) throws BBException {
         // Check if the expense category exists
@@ -56,6 +66,11 @@ public class ExpenseAction {
         expenseUi.printExpenseAddSuccessful(expense);
     }
 
+    /**
+     * Deletes a expense from the expense list based on the expense id
+     * @param expenseId id of the expense
+     * @throws GlobalInvalidNumberException when the expense could not be found
+     */
     public void deleteExpense(int expenseId) throws GlobalInvalidNumberException {
         int elementNo = validateExpense(expenseId);
         Expense deletedExpense = expenses.remove(elementNo);
@@ -63,6 +78,12 @@ public class ExpenseAction {
         expenseUi.printExpenseDelSuccessful(deletedExpense);
     }
 
+    /**
+     * Lists down all previous' expenses and current's month expenses.
+     * Can also be filtered by budget category.
+     * 
+     * @param category name of budget
+     */
     @SuppressWarnings("unchecked")
     public void listExpenses(String category) {
         ArrayList<Expense> expenseList = (ArrayList<Expense>) expenses.clone();
@@ -94,7 +115,6 @@ public class ExpenseAction {
     }
 
     //@@author pinyoko573
-
     /**
      * Filter and sort the expenses by date.
      *
@@ -126,7 +146,6 @@ public class ExpenseAction {
     }
 
     // @@author tzixi
-
     /**
      * List expenses that contains the keyword specified by user
      *
@@ -144,7 +163,6 @@ public class ExpenseAction {
     }
 
     // @@author tzixi
-
     /**
      * Clear multiple expenses based on the date range and/or category.
      *
@@ -178,7 +196,6 @@ public class ExpenseAction {
     }
 
     // @@author tzixi
-
     /**
      * Prints user instructions on how to use expense commands
      */
@@ -187,7 +204,6 @@ public class ExpenseAction {
     }
 
     // @@author pinyoko573
-
     /**
      * Checks if a certain expense already exists using the expense id.
      * Used for deletion.
@@ -209,7 +225,6 @@ public class ExpenseAction {
     }
 
     // @@author pinyoko573
-
     /**
      * Delete multiple expenses through the list of expenses given
      *
@@ -222,7 +237,6 @@ public class ExpenseAction {
     }
 
     // @@author pinyoko573
-
     /**
      * When a budget is deleted, it will clear all the expenses
      * pertaining to that budget name.
@@ -252,7 +266,6 @@ public class ExpenseAction {
     }
 
     // @@author pinyoko573
-
     /**
      * Sorts the deposits given by date and returns back.
      *
@@ -267,7 +280,6 @@ public class ExpenseAction {
     }
 
     // @@author pinyoko573
-
     /**
      * Filter the expenses given by date range and returns back.
      *
@@ -290,7 +302,6 @@ public class ExpenseAction {
     }
 
     // @@author pinyoko573
-
     /**
      * Filter the expenses given by budget category name
      * and returns back.
@@ -312,7 +323,6 @@ public class ExpenseAction {
     }
 
     // @@author pinyoko573
-
     /**
      * Get the total amount of expense from given list of expenses.
      *

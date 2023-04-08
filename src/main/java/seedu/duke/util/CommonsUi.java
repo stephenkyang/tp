@@ -26,6 +26,8 @@ public class CommonsUi {
      * @return the number of black or colored bars to be printed
      */
     private static int getNumberOfBlackBars(double amount, double maxAmount) {
+        assert maxAmount == 0 : "maxAmount cannot 0 as divsion will be undefined.";
+
         int noOfBlackBars = (int) Math.round(amount / maxAmount * Constants.MAX_BARS);
         if (noOfBlackBars > Constants.MAX_BARS) {
             return Constants.MAX_BARS;
