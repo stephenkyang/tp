@@ -2,91 +2,102 @@
 
 hide footbox
 
- -> ":ExpenseCommand":
+ -> ExpenseCommand:
 
-activate ":ExpenseCommand"
-":ExpenseCommand" -> ":ExpenseCommand": execute(data, ui)
-activate  ":ExpenseCommand"
-":ExpenseCommand" -> ":data": getExpenses()
+activate ExpenseCommand
+ExpenseCommand -> ExpenseCommand: execute(data, ui)
+activate  ExpenseCommand
+ExpenseCommand -> ":data": getExpenses()
+
 activate ":data"
 return Expenses: ArrayList<Expense>
 deactivate ":data"
 
-activate  ":ExpenseCommand"
-":ExpenseCommand" -> ":data": getExpenses()
+ExpenseCommand -> ":data": getExpenses()
+
 activate ":data"
 return Expenses: ArrayList<Expense>
 
 
-
-":ExpenseCommand" -> ":ExpenseAction" : Expenses, ui
 activate ":ExpenseAction"
-":ExpenseAction" -> ":ExpenseCommand" : ExpenseAction :ExpenseAction
+ExpenseCommand -> ":ExpenseAction" : Expenses, ui
+activate ":data"
+":ExpenseAction" -> ExpenseCommand : ExpenseAction :ExpenseAction
 deactivate ":ExpenseAction"
 
 
 alt action is add
-activate  ":ExpenseCommand"
-":ExpenseCommand" -> ":ExpenseCommand": executeAddExpense(expenseAction, requiredParams, optionalParams, budgets);
-activate ":ExpenseCommand"
-
-":ExpenseCommand" -> ":ExpenseAction" : expenseCategory, expenseName, expenseAmount, expenseDate, budgets
+ExpenseCommand -> ExpenseCommand: executeAddExpense(expenseAction, requiredParams, optionalParams);
+activate ExpenseCommand
+ExpenseCommand -> ":ExpenseAction" : expenseCategory, expenseName, expenseAmount, expenseDate, budgets
 activate ":ExpenseAction"
 ":ExpenseAction" -> ":ExpenseAction" : addExpense(expenseCategory, expenseName, expenseAmount, expenseDate, budgets)
 activate ":ExpenseAction"
+
 return
+return
+
+deactivate ExpenseCommand
 
 
 else action is find
-activate  ":ExpenseCommand"
-":ExpenseCommand" -> ":ExpenseCommand": executeFindExpense(expenseAction, requiredParams)
-activate ":ExpenseCommand"
-":ExpenseCommand" -> ":ExpenseAction" : expenseName
+ExpenseCommand -> ExpenseCommand: executeFindExpense(expenseAction, requiredParams)
+
+activate ExpenseCommand
+ExpenseCommand -> ":ExpenseAction" : expenseName
 activate ":ExpenseAction"
 ":ExpenseAction" -> ":ExpenseAction" : findExpense(expenseName)
 activate ":ExpenseAction"
+
 return
+return
+
+deactivate ExpenseCommand
 
 
 else action is del
-activate  ":ExpenseCommand"
-":ExpenseCommand" -> ":ExpenseCommand": executeDelExpense(ExpenseAction, requiredParams)
-activate ":ExpenseCommand"
-":ExpenseCommand" -> ":ExpenseAction" : expenseNo
+ExpenseCommand -> ExpenseCommand: executeDelExpense(ExpenseAction, requiredParams)
+activate ExpenseCommand
+ExpenseCommand -> ":ExpenseAction" : expenseNo
 activate ":ExpenseAction"
 ":ExpenseAction" -> ":ExpenseAction" : deleteExpense(expenseNo)
 activate ":ExpenseAction"
+
 return
+return
+
+deactivate ExpenseCommand
 
 else action is list
-activate  ":ExpenseCommand"
-":ExpenseCommand" -> ":ExpenseCommand": executeListExpense(ExpenseAction, optionalParams)
-activate ":ExpenseCommand"
-":ExpenseCommand" -> ":ExpenseAction" : expenseFrom, expenseTo, expenseCategory
+
+ExpenseCommand -> ExpenseCommand: executeListExpense(ExpenseAction, optionalParams)
+activate ExpenseCommand
+ExpenseCommand -> ":ExpenseAction" : expenseFrom, expenseTo, expenseCategory
 activate ":ExpenseAction"
-":ExpenseAction" -> ":ExpenseAction" : listExpenseRange(expenseFrom, expenseTo, expenseCategory)
+":ExpenseAction" -> ":ExpenseAction" : listExpensesRange(expenseFrom, expenseTo, expenseCategory)
 activate ":ExpenseAction"
+
 return
 return
 
+deactivate ExpenseCommand
 
 else action is clear
-activate  ":ExpenseCommand"
-":ExpenseCommand" -> ":ExpenseCommand": executeClearExpense(ExpenseAction, optionalParams)
-activate ":ExpenseCommand"
-":ExpenseCommand" -> ":ExpenseAction" : expenseFrom, expenseTo, expenseCategory
+ExpenseCommand -> ExpenseCommand: executeClearExpense(ExpenseAction, optionalParams)
+activate ExpenseCommand
+ExpenseCommand -> ":ExpenseAction" : expenseFrom, expenseTo, expenseCategory
 activate ":ExpenseAction"
-":ExpenseAction" -> ":ExpenseAction" : clearExpenses(expenseFrom, expenseTo, expenseCategory)
+":ExpenseAction" -> ":ExpenseAction" : clearExpense(expenseFrom, expenseTo, expenseCategory)
 activate ":ExpenseAction"
 return
 return
 
+deactivate ExpenseCommand
 
 else action is help
-activate  ":ExpenseCommand"
-":ExpenseCommand" -> ":ExpenseCommand": executeHelpExpense(expenseAction)
-activate ":ExpenseCommand"
-":ExpenseCommand" -> ":ExpenseAction"
+ExpenseCommand -> ExpenseCommand: executeHelpExpense(expenseAction)
+activate ExpenseCommand
+ExpenseCommand -> ":ExpenseAction"
 activate ":ExpenseAction"
 ":ExpenseAction" -> ":ExpenseAction" : expenseHelp()
 activate ":ExpenseAction"
@@ -94,29 +105,21 @@ return
 return
 
 
-deactivate ":ExpenseCommand"
-deactivate ":ExpenseCommand"
-deactivate ":ExpenseCommand"
-deactivate ":ExpenseCommand"
-deactivate ":ExpenseCommand"
-deactivate ":ExpenseCommand"
-deactivate ":ExpenseCommand"
-deactivate ":ExpenseCommand"
-deactivate ":ExpenseCommand"
-deactivate ":ExpenseCommand"
-deactivate ":ExpenseCommand"
-deactivate ":ExpenseCommand"
+deactivate ExpenseCommand
 
 
-":ExpenseCommand" -> ":data": exportData()
+
+end
+ExpenseCommand -> ":data": exportData()
 activate ":data"
 return
 
 deactivate ":data"
 destroy ":data"
 
+deactivate ":data"
+deactivate ExpenseCommand
 
-end
 
 
 
