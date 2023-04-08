@@ -51,6 +51,7 @@ activate ":DepositAction"
 
 return
 return
+
 deactivate ":DepositCommand"
 
 
@@ -61,6 +62,7 @@ activate ":DepositCommand"
 activate ":DepositAction"
 ":DepositAction" -> ":DepositAction" : deleteDeposit(depositNo)
 activate ":DepositAction"
+
 return
 return
 
@@ -74,6 +76,7 @@ activate ":DepositCommand"
 activate ":DepositAction"
 ":DepositAction" -> ":DepositAction" : listDeposits()
 activate ":DepositAction"
+
 return
 return
 
@@ -88,6 +91,7 @@ activate ":DepositAction"
 activate ":DepositAction"
 return
 return
+
 deactivate ":DepositCommand"
 
 else action is help
@@ -99,13 +103,17 @@ activate ":DepositAction"
 activate ":DepositAction"
 return
 return
+
+
 deactivate ":DepositCommand"
+
 
 
 end
 ":DepositCommand" -> ":data": exportData()
 activate ":data"
 return
+
 deactivate ":data"
 destroy ":data"
 
