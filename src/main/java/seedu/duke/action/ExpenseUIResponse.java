@@ -21,18 +21,35 @@ public class ExpenseUIResponse {
         ui.printMessage(msg);
     }
 
+    /**
+     * Prints the added expense.
+     *
+     * @param expense expense that was just added
+     */
     public void printExpenseAddSuccessful(Expense expense) {
         String msg = String.format(Messages.EXPENSE_EXPENSE.toString(), expense.getId(), expense.getCategory(),
             expense.getName(), expense.getAmount(), expense.getDate().format(Constants.OUTPUT_DATE_FORMAT));
         ui.printMessage(Messages.EXPENSE_ADD_SUCCESSFUL.toString(), msg);
     }
 
+    /**
+     * Prints the deleted expense.
+     *
+     * @param expense expense that was just deleted
+     */
     public void printExpenseDelSuccessful(Expense expense) {
         String msg = String.format(Messages.EXPENSE_EXPENSE.toString(), expense.getId(), expense.getCategory(),
             expense.getName(), expense.getAmount(), expense.getDate().format(Constants.OUTPUT_DATE_FORMAT));
         ui.printMessage(Messages.EXPENSE_DELETE_SUCCESSFUL.toString(), msg);
     }
 
+    /**
+     * Prints the expenses for this current month along with
+     * previous expenses.
+     * 
+     * @param previousExpenses list of previous expenses
+     * @param currentExpenses list of current expenses
+     */
     public void printListExpenses(ArrayList<Expense> previousExpenses, ArrayList<Expense> currentExpenses,
         String category) {
 
@@ -59,6 +76,11 @@ public class ExpenseUIResponse {
     }
 
     // @@author pinyoko573
+    /**
+     * Prints expenses that are filtered by the keyword.
+     * 
+     * @param expenses list of filtered expenses
+     */
     public void printFindExpenses(ArrayList<Expense> expenses) {
         if (expenses.size() == 0) {
             ui.printMessage(Messages.EXPENSE_FIND_NOTHING.toString());
@@ -73,6 +95,14 @@ public class ExpenseUIResponse {
     }
 
     // @@author pinyoko573
+    /**
+     * Prints expenses that are filtered by date and/or category
+     * 
+     * @param expenses list of filtered deposits
+     * @param from date displayed in output
+     * @param to date displayed in output
+     * @param category name of category displayed in output
+     */
     public void printListExpensesRange(ArrayList<Expense> expenses, LocalDate from, LocalDate to, String category) {
         if (expenses.size() == 0) {
             ui.printMessage(Messages.EXPENSE_LIST_NOTHING.toString());
@@ -101,6 +131,11 @@ public class ExpenseUIResponse {
     }
 
     // @@author pinyoko573
+    /**
+     * Prints the expenses that are cleared.
+     * 
+     * @param expenses list of expenses
+     */
     public void printClearExpenses(ArrayList<Expense> expenses) {
         ArrayList<String> msgs = new ArrayList<String>();
 
@@ -110,6 +145,11 @@ public class ExpenseUIResponse {
         ui.printMessage(msgs.toArray(new String[msgs.size()]));
     }
 
+    /**
+     * Prints the expenses in the given format in messages
+     * 
+     * @param expenses list of expenses
+     */
     public static ArrayList<String> printExpenses(ArrayList<Expense> expenses) {
         ArrayList<String> msgs = new ArrayList<String>();
         for (Expense e : expenses) {

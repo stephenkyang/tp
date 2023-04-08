@@ -1,7 +1,7 @@
 @startuml
 
-
-
+hide circle
+skinparam classAttributeIconSize 0
 
 class "{abstract} \n Command"  {
          +actions: String[]
@@ -32,10 +32,7 @@ class BudgetCommand {
     +ACTIONS_OPTIONAL_PARAMS: Pair[][]
      +void execute(Data data, Ui ui)
      +void executeBudgetDetail(BudgetAction budgetAction, String[] requiredParams, ArrayList<Expense> expenses)
-
-
      +void executeFindBudget(BudgetAction budgetAction, String[] requiredParams)
-
      +boolean isExit()
 }
 
@@ -52,7 +49,6 @@ class Data {
 + expenses: ArrayList<Expense>
 + Data importData()
 + void exportData()
-
 }
 
 class Ui {
