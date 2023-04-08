@@ -1,10 +1,12 @@
-@startuml Main
+@startuml
 hide footbox
+
 participant Duke
 participant Ui
 participant Data
 participant CommandParser
 participant Command
+actor User
 
 activate Duke
 
@@ -23,10 +25,15 @@ deactivate Data
 
 Duke -> Ui: greetUser()
 activate Ui
+
+Ui -> User
+
 Ui --> Duke
 deactivate Ui
 
 deactivate Duke
+
+' End of initialization
 
 loop true
 
@@ -46,12 +53,15 @@ CommandParser --> Duke: command
 deactivate CommandParser
 
 Duke -> Command: execute(data, ui)
+
 note right
 In execute method,
 there will be more paths
 shown in the next sections
 end note
+
 activate Command
+Command -> User
 Command --> Duke
 deactivate Command
 
@@ -60,18 +70,19 @@ activate Command
 Command --> Duke
 deactivate Command
 
-opt command.isExit()
+opt exit command
 
 Duke -> Duke: exitApplication()
 activate Duke
 Duke -> Ui: byeUser()
 activate Ui
+
+Ui -> User
+
 Ui --> Duke !!
 deactivate Ui
 deactivate Duke
 
 end
 end
-deactivate Duke
-
 @enduml

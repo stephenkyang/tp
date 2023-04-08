@@ -135,7 +135,7 @@ public class ExpenseAction {
     public void findExpenses(String name) {
         ArrayList<Expense> filteredExpenses = new ArrayList<Expense>();
         for (Expense e : expenses) {
-            if (e.getName().contains(name)) {
+            if (e.getName().toLowerCase().contains(name.toLowerCase())) {
                 filteredExpenses.add(e);
             }
         }
