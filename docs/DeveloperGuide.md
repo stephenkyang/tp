@@ -272,7 +272,7 @@ The input and output of a file is handled using Gson, a third-party plugin that 
 
 ## Appendix B: Non-Functional Requirements
 
-1. Works on any common operating systems (Windows, Mac OS, Linux) with Java 11 or above installed.
+1. Works on any common operating systems (Windows, Mac OS, Linux) with Java 11 installed.
 2. A user with average typing speed should take up to 7 seconds for the longest command (expense add).
 3. Data of the application is still preserved when migrating from one computer to another.
 
