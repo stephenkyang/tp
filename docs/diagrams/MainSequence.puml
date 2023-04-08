@@ -39,6 +39,7 @@ loop true
 
 Duke -> Ui: readInput()
 activate Ui
+User --> Ui
 Ui --> Duke: input
 deactivate Ui
 
