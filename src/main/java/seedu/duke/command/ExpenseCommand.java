@@ -91,7 +91,7 @@ public class ExpenseCommand extends Command {
      * which will be used to execute add expense in the action class.
      * If date is not specified, use today's date.
      *
-     * @param expenseAction  action selected will be execute through action class
+     * @param expenseAction  action selected will be executed through action class
      * @param requiredParams parameters containing the required attributes
      * @param optionalParams parameters containing the optional attributes
      * @throws BBException for any error thrown in the action class
@@ -116,7 +116,7 @@ public class ExpenseCommand extends Command {
      * Parses the required attributes such as expense no,
      * which will be used to execute del expense in the action class.
      *
-     * @param expenseAction  action selected will be execute through action class
+     * @param expenseAction  action selected will be executed through action class
      * @param requiredParams parameters containing the required attributes
      * @throws BBException for any error thrown in the action class
      */
@@ -129,7 +129,7 @@ public class ExpenseCommand extends Command {
      * Parses the required attributes such as expense name
      * which will be used to execute find expense in the action class.
      *
-     * @param expenseAction  action selected will be execute through action class
+     * @param expenseAction  action selected will be executed through action class
      * @param requiredParams parameters containing the required attributes
      * @throws BBException for any error thrown in the action class
      */
@@ -142,7 +142,7 @@ public class ExpenseCommand extends Command {
      * Parses optional attributes such as category, from and to date,
      * which will be used to execute clear expense in the action class.
      *
-     * @param expenseAction  action selected will be execute through action class
+     * @param expenseAction  action selected will be executed through action class
      * @param optionalParams parameters containing the optional attributes
      * @throws BBException for any error thrown in the action class
      */
@@ -164,7 +164,7 @@ public class ExpenseCommand extends Command {
      * If neither dates are specified, list all the expenses.
      * If either or both dates are specified, filter expense by date.
      *
-     * @param expenseAction  action selected will be execute through action class
+     * @param expenseAction  action selected will be executed through action class
      * @param optionalParams parameters containing the optional attributes
      * @throws BBException for any error thrown in the action class
      */

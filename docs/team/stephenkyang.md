@@ -51,6 +51,6 @@ to my tP Code Dashboard
 
 #### Contributions to team-based tasks
 
-1. I took initative in assigning myself issues that did not pertain to my specific portion of the project to
+1. I took initiative in assigning myself issues that did not pertain to my specific portion of the project to
    finish the project by deadline.
 2. I created issues in the Github repo for problems that I saw.
