@@ -123,7 +123,7 @@ public class DepositAction {
     public void findDeposits(String name) {
         ArrayList<Deposit> filteredDeposits = new ArrayList<Deposit>();
         for (Deposit d : deposits) {
-            if (d.getName().contains(name)) {
+            if (d.getName().toLowerCase().contains(name)) {
                 filteredDeposits.add(d);
             }
         }
