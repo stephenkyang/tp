@@ -19,8 +19,8 @@ public class BudgetCommand extends Command {
 
     private static final String[] ACTIONS = {"add", "set", "del", "list", "help"};
     private static final Pair[][] ACTIONS_REQUIRED_PARAMS = {
-            {new Pair("/c", String.class), new Pair("/l", double.class)},
-            {new Pair("/c", String.class), new Pair("/l", double.class)},
+            {new Pair("/c", String.class), new Pair("/a", double.class)},
+            {new Pair("/c", String.class), new Pair("/a", double.class)},
             {new Pair("/c", String.class)},
             {},
             {},

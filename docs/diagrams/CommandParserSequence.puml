@@ -1,53 +1,69 @@
 @startuml
 
+participant ":CommandParser"
+participant "Command"
+
 hide footbox
 
-
- -> ":CommandParser": input: String
-
+-> ":CommandParser": parse(input)
 activate ":CommandParser"
-":CommandParser" -> ":CommandParser": parse(input)
-activate  ":CommandParser"
+
 ":CommandParser" -> ":CommandParser": getCommandName(input)
 activate ":CommandParser"
-return commandName: CommandEnum
+return commandName
 
-":CommandParser" -> ":Command"
-activate ":Command"
+' getCommand() START
+":CommandParser" -> ":CommandParser": getCommand(commandName)
+activate ":CommandParser"
 
-":Command" -> ":Command": getActions
-activate ":Command"
-return length :Integer
+":CommandParser" -> Command **
+activate Command
+Command --> ":CommandParser"
+deactivate Command
+return command: Command
+' getCommand() END
 
-opt length is 0
-    ":Command" --> ":CommandParser": command
+' getActions() START
+":CommandParser" -> "Command": getActions()
+activate Command
+Command --> ":CommandParser": actions
+deactivate Command
+
+opt actions.length==0
+    note left
+    Commands such as Help, Exit
+    do not have any actions which
+    will return immediately.
+    end note
+    <-- ":CommandParser"
 end
 
-":Command" -> ":Command": getAction(command,input)
-activate ":Command"
-return action :String
+' getActions() END
 
-":Command" -> ":Command": setAction(action)
-activate ":Command"
+":CommandParser" -> ":CommandParser": getAction(command, input)
+activate ":CommandParser"
+return action
+
+":CommandParser" -> "Command": setAction(action)
+activate "Command"
 return
 
-":Command" -> ":Command": getRequiredParams(command,action,input)
-activate ":Command"
-return requiredParams :String[]
+' getRequiredParams() START
+":CommandParser" -> ":CommandParser": getRequiredParams(command, action, input)
+activate ":CommandParser"
+return requiredParams
+' getRequiredParams() END
 
-":Command" -> ":Command": getOptionalParams(command,action,input)
-activate ":Command"
-return optionalParams :String[]
+' getOptionalParams() START
+":CommandParser" -> ":CommandParser": getOptionalParams(command, action, input)
+activate ":CommandParser"
+return optionalParams
+' getOptionalParams() END
 
-":Command" -> ":Command": setParams(requiredParams, optionalParams)
-activate ":Command"
-return optionalParans :String[]
+":CommandParser" -> "Command": setParams(requiredParams, optionalParams)
+activate "Command"
+return
 
-return command
-destroy ":Command"
-return command
-deactivate ":Command"
-
-
+<-- ":CommandParser" !! : command
 
 @enduml

@@ -105,9 +105,9 @@ You can also know what are the actions for a specific category (e.g. budget)!
 budget help
 _______________
 1. You can add a monthly budget: 
-   budget add /c (category name) /l (spending limit)
+   budget add /c (category name) /a (spending limit)
 2. You can modify an existing budget: 
-   budget set /c (category name) /l (spending limit)
+   budget set /c (category name) /a (spending limit)
 3. You can remove a monthly budget: 
    budget del /c (category name)
 4. You can list and check each budget's status for a certain month/year: 
@@ -121,10 +121,10 @@ To add a budget, type the name of the budget you want followed by the spending l
 
 The category name must be less than 30 characters.
 
-budget add /c (category name) /l (spending limit)
+budget add /c (category name) /a (spending limit)
 
 ```
-budget add /c food /l 600.00
+budget add /c food /a 600.00
 _______________
 Successfully added food with limit of $600.00
 There are 2 budget categories.
@@ -133,10 +133,10 @@ _______________
 
 You can also set and modify that was wrongly inserted:
 
-budget set /c (category) /l spending limit
+budget set /c (category) /a spending limit
 
 ```
-budget set /c food /l 500.00
+budget set /c food /a 500.00
 _______________
 Successfully modified food to have a limit of $500.00
 There are 2 budget categories.

@@ -25,6 +25,14 @@ public class DepositAction {
         depositUi = new DepositUIResponse(ui);
     }
 
+    /**
+     * Creates a deposit and adds into the deposit list
+     * 
+     * @param depositName name of deposit
+     * @param depositAmount deposit amount
+     * @param depositDate date of the deposit
+     * @throws GlobalDateAfterTodayException when deposit date is after today
+     */
     public void addDeposit(String depositName, double depositAmount,
         LocalDate depositDate) throws GlobalDateAfterTodayException {
         
@@ -48,6 +56,11 @@ public class DepositAction {
         depositUi.printDepositAddSuccessful(deposit);
     }
 
+    /**
+     * Deletes a deposit from the deposit list based on the deposit id
+     * @param depositId id of the deposit
+     * @throws GlobalInvalidNumberException when the deposit could not be found
+     */
     public void deleteDeposit(int depositId) throws GlobalInvalidNumberException {
         assert deposits.size() > 0 : "No deposits to delete!";
         int elementNo = validateDeposit(depositId);
@@ -56,6 +69,9 @@ public class DepositAction {
         depositUi.printDepositDelSuccessful(deletedDeposit);
     }
 
+    /**
+     * Lists down all previous' months and current's month deposits.
+     */
     public void listDeposits() {
         // Sort the dates first
         ArrayList<Deposit> sortedDeposits = sortDepositsByDate(deposits);
@@ -77,16 +93,6 @@ public class DepositAction {
         }
         
         depositUi.printListDeposits(previousDeposits, currentDeposits);
-    }
-
-    public void findDeposit(String keyword) {
-        ArrayList<Deposit> depositsWithKeyword = new ArrayList<>();
-        for (Deposit deposit : this.deposits) {
-            if (deposit.getName().contains(keyword)) {
-                depositsWithKeyword.add(deposit);
-            }
-        }
-        depositUi.printFindDeposits(depositsWithKeyword);
     }
 
     //@@author pinyoko573
@@ -123,7 +129,7 @@ public class DepositAction {
     public void findDeposits(String name) {
         ArrayList<Deposit> filteredDeposits = new ArrayList<Deposit>();
         for (Deposit d : deposits) {
-            if (d.getName().contains(name)) {
+            if (d.getName().toLowerCase().contains(name.toLowerCase())) {
                 filteredDeposits.add(d);
             }
         }

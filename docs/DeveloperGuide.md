@@ -12,8 +12,6 @@ necessary for them so that they can realize their actual spending and achieve fi
 
 ## Design
 
-{Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
-
 ### General Overview
 
 Below is an architectural diagram that describes the overview of how BudgetBuddy works.
@@ -27,12 +25,13 @@ in Json format to update the storage. This process continues until the user exit
 
 ### Main Component
 
-![MainSeq.png](images/MainSequence.png)
+![MainSequence.png](images/MainSequence.png)
 
-In the main (Duke) class, the main method first calls startApplication() which initalizes the Log Manager for logging (
-disabled if in production stage) and Ui object for printing output messages. After initialized, it will then attempt to
+**This diagram only shows the main overview of the application. You can refer to other components for more information.**
+
+In the main class, the main method first calls startApplication() which initalizes the Log Manager for logging (disabled in production stage) and Ui object for printing output messages. After initialized, it will then attempt to
 import the user's data from `data.json`. If there is no file, it will initalize a blank data. If importing fails, the
-application will print an error message and exit with code 1. Once done, it will greet the user with a message.
+application will print an error message and terminate. Once done, it will greet the user and display the budget progress (for returning users).
 
 The application then runs an infinite loop to take in and execute commands, until when the inputs `exit` to exit the
 application. After which, it will output a bye message and exits the application safely.
@@ -44,44 +43,65 @@ application. After which, it will output a bye message and exits the application
 The command consists of three components: Enum CommandEnum, Abstract class Command and Class CommandParser. Each of them
 plays a role in retrieving the commands input by the user and redirecting to the correct components.
 
+For every command that the user wants to execute, the input of the command must be in this format as follows:
+> `(command) (action) (parameters) [optional parameters]`
+
+An example of a command can be seen in the user guide.
+
+For each parameter, the type of value must either be: `integer`, `double`, `date`, or `string`, depending on the parameter's specification.
+- integer: Input must be a valid integer.
+- double: Input must be a valid double that is positive, must not contain alphabet and at most 2 decimal places.
+- date: Input must be a valid date in the format `DD-MM-YYYY`, and year must be in 4 digits.
+- string: Input can be in any alphanumeric but at most 30 characters.
+
+Note that the value must not contain any slash (`/`), as it interferes with the parameter format.
+
 #### CommandEnum
 
-The CommandEnum Enum contains all the commands that are available in the application.
-These are the only commands that can be input in the command line.
+The Enum class CommandEnum contains all the commands that are available in the application, as shown in the diagram in Command Component. These are the commands that can only be input in the command line.
 
 #### Command
 
-The abstract class Command extends to several commands (eg `BudgetCommand`, `DepositCommand`, `ExpenseCommand`) and
-contains abstract methods execute() and isExit().
-The execute() method is executed from main, where it will go to the action class (eg `BudgetAction`) and run the
-requested action such as `add`.
-After execute() from main, isExit() controls the termination of BudgetBuddy by returning a boolean.
+The abstract class Command extends to several command classes (e.g. `BudgetCommand`, `DepositCommand`, `ExpenseCommand`) and contains abstract (execute() and isExit()) and normal methods.
+
+Each child (extended) class has a list of actions for its command and the list of required & optional parameters for each action. These list of actions and parameters are to be used in the CommandParser class, where it validates the input given by the user. For commands such as Help and Exit, no actions and parameters are required.
+
+In the execute() method, the method is executed from main, where it will go to the action class (eg `BudgetAction`) and run the requested action such as `add` along with the required & optional parameters.
+After execute() is done, isExit() controls the termination of the application by returning a boolean.
+
+**There are some variables and methods that are not shown in the class diagram for easier readability.**
 
 #### CommandParser
 
 ![CommandParserSequence.png](images/CommandParserSequence.png)
 
-The `CommandParser` class takes in an input from the `Duke` class as seen in the sequence diagram above. It then parses
-the information
-to create a command of a specific type (eg `BudgetCommand`, `DepositCommand` , explained in the class diagram above)
-based
-the input.
+The `CommandParser` class is responsible for validating the input given by the user, which in return will pass a Command object (containing the user's requested action) that can be executed.
+
+The parse() function first checks the command name, which will return the list of actions that are available if the command is valid. Then, it will retrieve the action name and see if it matches in the list of actions.
+
+**(Note that commands such as Help and Exit do not have any action, which the command will be returned immediately.)**
+
+After verifying that the action exists, it will then verify all the parameters that are needed to execute.
+
+In required parameters, each parameter must have a value. Whereas for optional parameters, the user can choose to input values for none, some, or all of the optional parameters. When the value of the parameter does not match the parameter type, it will stop the parsing process and return an exception.
+
+**Command and action names are not case sensitive, but values are.**
+
+**Also, it is possible to rearrange the order of parameters.**
 
 ## Product scope
 
 ### Item Component
 
-The main 3 classes of Duke are the `budget` , `expense` and `deposit` class. Users are able to add, store and visualise
-the date relate to each
-of these classes. Each of these classes are modelled as an `Item`.
+The main 4 classes of BudgetBuddy are the `budget` , `deposit`, `expense` and `stats` class. Users are able to add, store and visualise the date relate to each of these classes. Each of these classes are modelled as an `Item`.
 
-![ItemClasses.png](images/ItemClasses.png)
+![Item.png](images/Item.png)
 
 ### Budget Component
 
 #### BudgetCommand Class
 
-The `BudgetCommand` class contains methods that are related to the `Budget` function of Duke. Users are able to create
+The `BudgetCommand` class contains methods that are related to the `Budget` function. Users are able to create
 new budgets, which are stored in a budget list. The category word from the user's input is taken from the first word of
 the users input,
 and the second word of the users input is the action word. The first word is processed through the `CommandParser`
@@ -206,7 +226,13 @@ separate classes for each part of the Stats Feature, which includes StatsAction,
 
 #### Exception Component
 
+For invalid commands and application errors (such as file), BudgetBuddy will display an error message which requires the user to rectify his/her input or do something, including restarting the application. 
+
 #### File IO Component
+
+The input and output of a file is handled using Gson, a third-party plugin that can help to read/write .json file in the Json format. The data file `data.json` (default) is created under the directory that the user is running at after an action is executed in the application. If the application finds the file to be blank, or the format of json is corrupted, it prompts the user to manually delete the file before starting the application.
+
+**Therefore, It is not recommended for users to edit the file manually.**
 
 ## Appendix A: User Stories
 
@@ -246,7 +272,7 @@ separate classes for each part of the Stats Feature, which includes StatsAction,
 
 ## Appendix B: Non-Functional Requirements
 
-1. Works on any common operating systems (Windows, Mac OS, Linux) with Java 11 or above installed.
+1. Works on any common operating systems (Windows, Mac OS, Linux) with Java 11 installed.
 2. A user with average typing speed should take up to 7 seconds for the longest command (expense add).
 3. Data of the application is still preserved when migrating from one computer to another.
 

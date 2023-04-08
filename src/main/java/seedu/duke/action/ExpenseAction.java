@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.temporal.TemporalAdjusters;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.Iterator;
 
 import seedu.duke.Ui;
 import seedu.duke.exception.BBException;
@@ -32,15 +33,14 @@ public class ExpenseAction {
     }
 
     /**
-     * Creates an expense in a specific budget category, with a name and amount inputted by the user.
-     * The date is optional.
-     *
-     * @param expenseCategory   The category that the expense will be categorized under
-     * @param expenseName       The name of the expense
-     * @param expenseAmount     The amount of the expense in dollars and cents
-     * @param expenseDate       The date of the expenditure
-     * @param budgets           Budget array list for budget category
-     * @throws BBException
+     * Creates an expense and adds into the expense list
+     * 
+     * @param expenseCategory budget category, which must exist in budgets
+     * @param expenseName name of expense
+     * @param expenseAmount expense amount
+     * @param expenseDate date of expense
+     * @param budgets list of budgets that will check if category exists
+     * @throws BBException when budget is not found, or date of expense is after today
      */
     public void addExpense(String expenseCategory, String expenseName, Double expenseAmount,
                            LocalDate expenseDate, ArrayList<Budget> budgets) throws BBException {
@@ -71,10 +71,9 @@ public class ExpenseAction {
     }
 
     /**
-     * Deletes an existing expense according to the index of the expense.
-     *
-     * @param expenseId     The index of the expense to be deleted.
-     * @throws GlobalInvalidNumberException
+     * Deletes a expense from the expense list based on the expense id
+     * @param expenseId id of the expense
+     * @throws GlobalInvalidNumberException when the expense could not be found
      */
     public void deleteExpense(int expenseId) throws GlobalInvalidNumberException {
         int elementNo = validateExpense(expenseId);
@@ -84,9 +83,10 @@ public class ExpenseAction {
     }
 
     /**
-     * Lists all the existing expenses in the specified category (optional)
-     *
-     * @param category      (optional) category name
+     * Lists down all previous' expenses and current's month expenses.
+     * Can also be filtered by budget category.
+     * 
+     * @param category name of budget
      */
     @SuppressWarnings("unchecked")
     public void listExpenses(String category) {
@@ -119,7 +119,6 @@ public class ExpenseAction {
     }
 
     //@@author pinyoko573
-
     /**
      * Filter and sort the expenses by date.
      *
@@ -151,7 +150,6 @@ public class ExpenseAction {
     }
 
     // @@author tzixi
-
     /**
      * List expenses that contains the keyword specified by user
      *
@@ -160,7 +158,7 @@ public class ExpenseAction {
     public void findExpenses(String name) {
         ArrayList<Expense> filteredExpenses = new ArrayList<Expense>();
         for (Expense e : expenses) {
-            if (e.getName().contains(name)) {
+            if (e.getName().toLowerCase().contains(name.toLowerCase())) {
                 filteredExpenses.add(e);
             }
         }
@@ -169,7 +167,6 @@ public class ExpenseAction {
     }
 
     // @@author tzixi
-
     /**
      * Clear multiple expenses based on the date range and/or category.
      *
@@ -203,7 +200,6 @@ public class ExpenseAction {
     }
 
     // @@author tzixi
-
     /**
      * Prints user instructions on how to use expense commands
      */
@@ -212,9 +208,8 @@ public class ExpenseAction {
     }
 
     // @@author pinyoko573
-
     /**
-     * Checks if a certain expense already exists using id.
+     * Checks if a certain expense already exists using the expense id.
      * Used for deletion.
      *
      * @param expenseId id of the expense
@@ -234,7 +229,6 @@ public class ExpenseAction {
     }
 
     // @@author pinyoko573
-
     /**
      * Delete multiple expenses through the list of expenses given
      *
@@ -247,24 +241,35 @@ public class ExpenseAction {
     }
 
     // @@author pinyoko573
-
     /**
      * When a budget is deleted, it will clear all the expenses
      * pertaining to that budget name.
      *
      * @param budgetName name of the budget
      * @param expenses   list of expenses
+     * @return number of expenses deleted
      */
-    public static void clearExpensesByCategory(String budgetName, ArrayList<Expense> expenses) {
-        for (Expense e : expenses) {
+    public static int clearExpensesByCategory(String budgetName, ArrayList<Expense> expenses) {
+        // for (Expense e : expenses) {
+        //     if (e.getCategory().equals(budgetName)) {
+        //         expenses.remove(e);
+        //     }
+        // }
+        int noOfDeletedExpenses = 0;
+
+        Iterator<Expense> iter = expenses.iterator();
+        while(iter.hasNext()) {
+            Expense e = iter.next();
             if (e.getCategory().equals(budgetName)) {
-                expenses.remove(e);
+                iter.remove();
+                noOfDeletedExpenses++;
             }
         }
+
+        return noOfDeletedExpenses;
     }
 
     // @@author pinyoko573
-
     /**
      * Sorts the deposits given by date and returns back.
      *
@@ -279,7 +284,6 @@ public class ExpenseAction {
     }
 
     // @@author pinyoko573
-
     /**
      * Filter the expenses given by date range and returns back.
      *
@@ -302,7 +306,6 @@ public class ExpenseAction {
     }
 
     // @@author pinyoko573
-
     /**
      * Filter the expenses given by budget category name
      * and returns back.
@@ -324,7 +327,6 @@ public class ExpenseAction {
     }
 
     // @@author pinyoko573
-
     /**
      * Get the total amount of expense from given list of expenses.
      *
@@ -339,20 +341,4 @@ public class ExpenseAction {
 
         return total;
     }
-
-    // public double findRelatedExpenses(String budgetName) {
-    //     int i = 1;
-    //     double totalExpenseValue = 0;
-    //     for (Expense expense : expenses) {
-    //         if (expense != null) {
-    //             if (Objects.equals(expense.getCategory(), budgetName)) {
-    //                 System.out.println(i + ". " + expense.getName() + " with amount of $" + expense.getAmount());
-    //                 totalExpenseValue += expense.getAmount();
-    //             }
-    //         }
-
-    //     }
-    //     return totalExpenseValue;
-    // }
 }
-

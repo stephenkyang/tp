@@ -1,84 +1,34 @@
 @startuml
-
-
-class "{abstract} \n Command"  {
-         +actions: String[]
-         +requiredParamsList: Pair[][]
-         +optionalParamsList: Pair[][]
-         +name: CommandEnum
-         +action: String
-         +requiredParams: String[]
-         +optionalParams: String[]
-
-         +Command(CommandEnum name, String[] actions, Pair[][] requiredParamsList, Pair[][] optionalParamsList)
-         +FindCommand(reviews: ReviewList, searchTerm: String)
-         +void execute(Data data, Ui ui)
-         +boolean isExit()
-         +CommandEnum getCommandName()
-            +String[] getActions()
-            +String getAction()
-            +int getActionNo(String action)
-            +void setAction(String action)
-            +void setParams(String[] requiredParams, String[] optionalParams)
-
-}
-class Ui {
-+ String readInput()
-+ void printMessage(String... messages)
-+ void printErrorMessage(String message)
-+ void greetUser()
-+ void byeUser()
-}
-
-class Budget {
-    +Budget(String name, double amount)
-}
-
-class Expense {
-    +date: LocalDate
-    +category: String
-    +Expense(String category, String name, double amount, LocalDate date)
-    +String getCategory()
-    +LocalDate getDate()
-}
-
-class Deposit {
-    +date: LocalDate
-    +Deposit(String name, double amount, LocalDate date)
-    +LocalDate getDate()
-}
+hide footbox
+hide circle
+skinparam groupInheritance 2
+skinparam classAttributeIconSize 0
 
 class Data {
-+ budgets: ArrayList<Budget>
-+ deposits: ArrayList<Deposit>
-+ expenses: ArrayList<Expense>
-+ Data importData()
-+ void exportData()
-
 }
-
 
 class StatsCommand {
-+ ACTIONS: String[]
-+ ACTIONS_REQUIRED_PARAMS: Pair[][]
-+ ACTIONS_OPTIONAL_PARAMS: Pair[][]
-
-+ void execute(Data data, Ui ui)
-+ void executeShowStats(StatsAction statsAction, String[] optionalParams)
-+ void executeHelpStats(StatsAction statsAction)
-+ boolean isExit()
-
+  -executeShowStats(): void
+  -executeHelpStats(): void
 }
 
+class StatsAction {
+  +showStats(): void
+  +statsHelp(): void
+  -showBudget(): String[]
+}
 
+class StatsUIResponse {
+  +printStats(): void
+  +printStatsCommands(): void
+  -printBudgetStats(): String[]
+  -printDepositStats(): String[]
+  -printExpenseStats(): String[]
+  -printSummary(): String[]
+}
 
-"Budget" <|-down-"\n0..  " Data
-"Expense" <|-right "0.. "Data
-"{abstract} \n Command" <|-right- Ui
-"Deposit" <|-up-"0..  " Data
-"{abstract} \n Command" <|-left- Data
-"{abstract} \n Command" <|-down- StatsCommand
-
-
+Data --> StatsCommand
+StatsCommand-> StatsAction
+StatsAction-> StatsUIResponse
 
 @enduml

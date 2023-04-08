@@ -1,93 +1,47 @@
 @startuml
-
-
-class "{abstract} \n Command"  {
-         +actions: String[]
-         +requiredParamsList: Pair[][]
-         +optionalParamsList: Pair[][]
-         +name: CommandEnum
-         +action: String
-         +requiredParams: String[]
-         +optionalParams: String[]
-
-         +Command(CommandEnum name, String[] actions, Pair[][] requiredParamsList, Pair[][] optionalParamsList)
-         +FindCommand(reviews: ReviewList, searchTerm: String)
-         +void execute(Data data, Ui ui)
-         +boolean isExit()
-         +CommandEnum getCommandName()
-            +String[] getActions()
-            +String getAction()
-            +int getActionNo(String action)
-            +void setAction(String action)
-            +void setParams(String[] requiredParams, String[] optionalParams)
-
-}
-
-
-class DepositCommand {
-    +formatter: DateTimeFormatter.ofPattern(Constants.ACCEPTABLE_DATE_FORMAT.toString());
-    +ACTIONS: String[]
-    +ACTIONS_REQUIRED_PARAMS: Pair[][]
-    +ACTIONS_OPTIONAL_PARAMS: Pair[][]
-     +void execute(Data data, Ui ui)
-     +void executeAddDeposit(DepositAction depositAction, String[] requiredParams, String[] optionalParams)
-     +void executeDelDeposit(DepositAction depositAction, String[] requiredParams)     +void executeBudgetHelp(BudgetAction budgetAction)
-     +void executeClearDeposit(DepositAction depositAction, String[] requiredParams)
-     +void executeListDeposit(DepositAction depositAction, String[] optionalParams)
-     +void executeHelpDeposit(DepositAction depositAction)
-     +void executeFindDeposit(DepositAction depositAction, String[] requiredParams)
-     +boolean isExit()
-}
-
-class Data {
-+ budgets: ArrayList<Budget>
-+ deposits: ArrayList<Deposit>
-+ expenses: ArrayList<Expense>
-+ Data importData()
-+ void exportData()
-
-}
-
-class Ui {
-+ String readInput()
-+ void printMessage(String... messages)
-+ void printErrorMessage(String message)
-+ void greetUser()
-+ void byeUser()
-}
-
-class Budget {
-    +Budget(String name, double amount)
-}
-
-class Expense {
-    +date: LocalDate
-    +category: String
-    +Expense(String category, String name, double amount, LocalDate date)
-    +String getCategory()
-    +LocalDate getDate()
-}
+hide footbox
+hide circle
+skinparam groupInheritance 2
+skinparam classAttributeIconSize 0
 
 class Deposit {
-    +date: LocalDate
-    +Deposit(String name, double amount, LocalDate date)
-    +LocalDate getDate()
 }
 
+class DepositCommand {
+  -executeAddDeposit(): void
+  -executeDelDeposit(): void
+  -executeFindDeposit(): void
+  -executeClearDeposit(): void
+  -executeListDeposit(): void
+  -executeHelpDeposit(): void
+}
 
+class DepositAction {
+  +addDeposit(): void
+  +deleteDeposit(): void
+  +findDeposits(): void
+  +clearDeposits(): void
+  +listDeposits(): void
+  +listDepositsRange(): void
+  +sortDepositsByDate(): Deposit[]
+  +filterDepositsByDate(): Deposit[]
+  +getTotalDeposits(): double
+  -validateDeposit(): Integer
+  -deleteDeposits(): void
+}
 
+class DepositUIResponse {
+  +printDepositAddSuccessful(): void
+  +printDepositDelSuccessful(): void
+  +printFindDeposits(): void
+  +printClearDeposits(): void
+  +printListDeposits(): void
+  +printListDepositsRange(): void
+  +printDeposits(): String[]
+}
 
-
-
-"{abstract} \n Command" <|-down- DepositCommand
-"{abstract} \n Command" <|-right- Ui
-"{abstract} \n Command" <|-left- Data
-
-
-"Budget" <|-down-"\n0..  " Data
-"Expense" <|-right "0.. "Data
-"Deposit" <|-up-"0..  " Data
-
-
+Deposit --> DepositCommand
+DepositCommand -> DepositAction
+DepositAction -> DepositUIResponse
 
 @enduml

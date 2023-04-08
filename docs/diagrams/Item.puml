@@ -1,0 +1,41 @@
+@startuml
+hide footbox
+hide circle
+skinparam groupInheritance 2
+skinparam classAttributeIconSize 0
+
+class "{abstract} \n Item" {
+    -name: String
+    -amount: Double
+}
+
+class Budget {
+}
+
+class Deposit {
+    -id: Integer
+    -date: LocalDate
+}
+
+class Expense {
+    -id: Integer
+    -category: String
+    -date: LocalDate
+}
+
+class Data {
+    -budgets: Budget[]
+    -deposits: Deposit[]
+    -expenses: Expense[]
+    +importData(): void
+    +exportData(): void
+}
+
+"{abstract} \n Item" <|-down- Budget
+"{abstract} \n Item" <|-down- Deposit
+"{abstract} \n Item" <|-down- Expense
+
+Budget "0..*" --* "1" Data
+Deposit "0..*" --* "1" Data
+Expense "0..*" --* "1" Data
+@enduml

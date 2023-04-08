@@ -1,4 +1,4 @@
-package seedu.duke.test;
+package seedu.duke.test.stats;
 
 import seedu.duke.Data;
 import seedu.duke.action.BudgetAction;
@@ -17,8 +17,9 @@ import seedu.duke.action.DepositAction;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-
 import static org.junit.jupiter.api.Assertions.fail;
+
+//@@author SaiChaitanya13
 
 public class StatsTest {
     ArrayList<Expense> expenseList = new ArrayList<>();
@@ -63,10 +64,6 @@ public class StatsTest {
         } catch(StatsInvalidOptionsException e){
             fail();
         }
-        // assert something
-        // assert equals output?
-
-
     }
 
 

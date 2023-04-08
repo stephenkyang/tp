@@ -24,18 +24,35 @@ public class DepositUIResponse {
         ui.printMessage(msg);
     }
 
+    /**
+     * Prints the added deposit.
+     *
+     * @param deposit deposit that was just added
+     */
     public void printDepositAddSuccessful(Deposit deposit) {
         String msg = String.format(Messages.DEPOSIT_DEPOSIT.toString(), deposit.getId(), deposit.getName(),
             deposit.getAmount(), deposit.getDate().format(Constants.OUTPUT_DATE_FORMAT));
         ui.printMessage(Messages.DEPOSIT_ADD_SUCCESSFUL.toString(), msg);
     }
 
+    /**
+     * Prints the deleted deposit.
+     *
+     * @param deposit deposit that was just deleted
+     */
     public void printDepositDelSuccessful(Deposit deposit) {
         String msg = String.format(Messages.DEPOSIT_DEPOSIT.toString(), deposit.getId(), deposit.getName(),
             deposit.getAmount(), deposit.getDate().format(Constants.OUTPUT_DATE_FORMAT));
         ui.printMessage(Messages.DEPOSIT_DELETE_SUCCESSFUL.toString(), msg);
     }
 
+    /**
+     * Prints the deposits for this current month along with
+     * previous deposits.
+     * 
+     * @param previousDeposits list of previous deposits
+     * @param currentDeposits list of current deposits
+     */
     public void printListDeposits(ArrayList<Deposit> previousDeposits, ArrayList<Deposit> currentDeposits) {
         if (previousDeposits.size() == 0 && currentDeposits.size() == 0) {
             ui.printMessage(Messages.DEPOSIT_LIST_NOTHING.toString());
@@ -57,6 +74,11 @@ public class DepositUIResponse {
         ui.printMessage(msgs.toArray(new String[msgs.size()]));
     }
 
+    /**
+     * Prints deposits that are filtered by the keyword.
+     * 
+     * @param deposits list of filtered deposits
+     */
     public void printFindDeposits(ArrayList<Deposit> deposits) {
         if (deposits.size() == 0) {
             ui.printMessage(Messages.DEPOSIT_FIND_NOTHING.toString());
@@ -71,6 +93,13 @@ public class DepositUIResponse {
     }
 
     // @@author pinyoko573
+    /**
+     * Prints deposits that are filtered by date
+     * 
+     * @param deposits list of filtered deposits
+     * @param from date displayed in output
+     * @param to date displayed in output
+     */
     public void printListDepositsRange(ArrayList<Deposit> deposits, LocalDate from, LocalDate to) {
         if (deposits.size() == 0) {
             ui.printMessage(Messages.DEPOSIT_LIST_NOTHING.toString());
@@ -95,6 +124,11 @@ public class DepositUIResponse {
     }
 
     // @@author stephenkyang
+    /**
+     * Prints the deposits that are cleared.
+     * 
+     * @param deposits list of deposits
+     */
     public void printClearDeposits(ArrayList<Deposit> deposits) {
         if (deposits.size() == 0) {
             ui.printMessage(Messages.DEPOSIT_CLEAR_NOTHING.toString());   
@@ -109,6 +143,11 @@ public class DepositUIResponse {
         ui.printMessage(msgs.toArray(new String[msgs.size()]));
     }
 
+    /**
+     * Prints the deposits in the given format in messages
+     * 
+     * @param deposits list of deposits
+     */
     public static ArrayList<String> printDeposits(ArrayList<Deposit> deposits) {
         ArrayList<String> msgs = new ArrayList<String>();
         for (Deposit d : deposits) {
