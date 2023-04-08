@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.temporal.TemporalAdjusters;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.Locale;
 
 import seedu.duke.Ui;
 import seedu.duke.exception.GlobalDateFromAfterToException;
@@ -123,7 +124,7 @@ public class DepositAction {
     public void findDeposits(String name) {
         ArrayList<Deposit> filteredDeposits = new ArrayList<Deposit>();
         for (Deposit d : deposits) {
-            if (d.getName().contains(name)) {
+            if (d.getName().toLowerCase().contains(name)) {
                 filteredDeposits.add(d);
             }
         }
