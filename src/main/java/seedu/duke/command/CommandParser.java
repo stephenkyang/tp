@@ -37,29 +37,7 @@ public class CommandParser {
         CommandEnum commandName = getCommandName(input);
 
         // Assign the command class based on the command input by the user.
-        Command command;
-        switch (commandName) {
-        case BUDGET:
-            command = new BudgetCommand();
-            break;
-        case DEPOSIT:
-            command = new DepositCommand();
-            break;
-        case EXPENSE:
-            command = new ExpenseCommand();
-            break;
-        case STATS:
-            command = new StatsCommand();
-            break;
-        case EXIT:
-            command = new ExitCommand();
-            break;
-        case HELP:
-            command = new HelpCommand();
-            break;
-        default:
-            throw new CommandInvalidException();
-        }
+        Command command = getCommand(commandName);
 
         // For commands that do not have any action
         if (command.getActions().length == 0) {
@@ -94,6 +72,41 @@ public class CommandParser {
         } catch (IllegalArgumentException err) {
             throw new CommandInvalidException();
         }
+    }
+
+    /**
+     * Gets the command object from CommandEnum.
+     * 
+     * @param commandName CommandEnum from getCommandName
+     * @return command object from the valid CommandEnum given
+     * @throws CommandInvalidException if the CommandEnum given is not valid
+     */
+    private static Command getCommand(CommandEnum commandName) throws CommandInvalidException  {
+        Command command;
+        switch (commandName) {
+        case BUDGET:
+            command = new BudgetCommand();
+            break;
+        case DEPOSIT:
+            command = new DepositCommand();
+            break;
+        case EXPENSE:
+            command = new ExpenseCommand();
+            break;
+        case STATS:
+            command = new StatsCommand();
+            break;
+        case EXIT:
+            command = new ExitCommand();
+            break;
+        case HELP:
+            command = new HelpCommand();
+            break;
+        default:
+            throw new CommandInvalidException();
+        }
+
+        return command;
     }
 
     /**

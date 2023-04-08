@@ -79,16 +79,6 @@ public class DepositAction {
         depositUi.printListDeposits(previousDeposits, currentDeposits);
     }
 
-    public void findDeposit(String keyword) {
-        ArrayList<Deposit> depositsWithKeyword = new ArrayList<>();
-        for (Deposit deposit : this.deposits) {
-            if (deposit.getName().contains(keyword)) {
-                depositsWithKeyword.add(deposit);
-            }
-        }
-        depositUi.printFindDeposits(depositsWithKeyword);
-    }
-
     //@@author pinyoko573
     /**
      * Filter and sort the deposits by date.
@@ -123,7 +113,7 @@ public class DepositAction {
     public void findDeposits(String name) {
         ArrayList<Deposit> filteredDeposits = new ArrayList<Deposit>();
         for (Deposit d : deposits) {
-            if (d.getName().toLowerCase().contains(name)) {
+            if (d.getName().toLowerCase().contains(name.toLowerCase())) {
                 filteredDeposits.add(d);
             }
         }
