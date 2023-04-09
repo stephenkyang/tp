@@ -39,7 +39,7 @@ The command consists of three components: Enum CommandEnum, Abstract class Comma
 For every command that the user wants to execute, the input of the command must be in this format as follows:
 > `(command) (action) (parameters) [optional parameters]`
 
-**Command and action names are not case sensitive, but values are.**
+**Command and action names are not case-sensitive, but values are.**
 **Also, it is possible to rearrange the order of parameters.**
 
 An example of a command can be seen in the user guide.
@@ -135,6 +135,9 @@ Flow of the DepositCommand:
 2. getDeposits() is called to find the Deposit[] from the Data class.
 3. DepositCommand then calls the method in DepositAction that matches the actions parsed
 4. Within DepositAction, the action is done manipulating the DepositList, if necessary
+   <<<<<<< HEAD
+5. Within Deposit Action, the class DepositUIResponse is called to show an output depending on the action to the user
+6. After DepositList is sucessfully manipulated (if necessary) and a text reponse is given, DepositCommand exits. =======
 5. Within Deposit Action, the class DepositUIResponse is called to show an output depending on the action to the user
 6. After DepositList is sucessfully manipulated (if necessary) and a text reponse is given, DepositCommand exits.
 
@@ -165,6 +168,15 @@ Once a string `input` from the user has been deemed as an `Expense` command, the
 `Budget` and `Expense` array lists, as shown in the sequence diagram below.
 
 ![img.png](images/ExpenseCommandSequence.png)
+
+Flow of ExpenseCommand:
+
+1. ExpenseCommand calls execute(), which will find the command to be parsed.
+2. getExpenses() is called to find the Expense[] from the Data class.
+3. ExpenseCommand then calls the method in ExpenseAction that matches the parsed actions.
+4. If required, the action is done manipulating the ExpenseList in ExpenseAction.
+5. Within ExpenseAction, the class ExpenseUIResponse is called to output a response to the user depending on the action.
+6. After ExpenseList is successfully manipulated (if necessary) and a text response is given, ExpenseCommand exits.
 
 ### Design & Implementation of the Expense Feature
 
@@ -235,7 +247,7 @@ The input and output of a file is handled using Gson, a third-party plugin that 
 
 ## Appendix B: Non-Functional Requirements
 
-1. Works on any common operating systems (Windows, Mac OS, Linux) with Java 11 installed.
+1. Works on any common operating systems (Windows, macOS, Linux) with Java 11 installed.
 2. A user with average typing speed should take up to 7 seconds for the longest command (expense add).
 3. Data of the application is still preserved when migrating from one computer to another.
 

@@ -12,8 +12,16 @@ actor User
 
 activate "ExpenseCommand"
 "ExpenseCommand" -> "ExpenseCommand": execute(data, ui)
+note left
+    ExpenseCommand calls execute() to check the
+    command to be parsed in a switch-case block
+ end note
 activate  "ExpenseCommand"
 "ExpenseCommand" -> "Data": getExpenses()
+note left
+    getExpenses will get Expense data
+    from the Data class and Expense[]
+end note
 activate "Data"
 return expenses: Expense[]
 deactivate "Data"
@@ -23,9 +31,17 @@ return budgets: Budget[]
 deactivate "Data"
 
 "ExpenseCommand" -> "ExpenseAction" ** : (expenses,ui)
+note left
+    expenseAction commands take in the
+    Expense[] returned by getExpenses()
+end note
 activate "ExpenseAction"
 
 "ExpenseAction" -> "ExpenseUIResponse" ** : (ui)
+note left
+    ExpenseAction calls ExpenseUIResponse
+    upon initialization
+end note
 activate "ExpenseUIResponse"
 "ExpenseUIResponse" --> "ExpenseAction"
 deactivate "ExpenseUIResponse"
@@ -36,10 +52,18 @@ deactivate "ExpenseAction"
 
 alt actions is add
 "ExpenseCommand" -> "ExpenseCommand": executeAddExpense(expenseAction, requiredParams, optionalParams, budgets)
+note left
+    if the command is add, calls
+    ExpenseAction.addExpense()
+end note
 activate "ExpenseCommand"
 "ExpenseCommand" -> "ExpenseAction" : addExpense(expenseCategory, expenseName, expenseAmount, expenseDate, budgets)
 activate "ExpenseAction"
 "ExpenseAction" -> "ExpenseUIResponse" : printExpenseAddSuccessful(expense)
+note left
+    addExpense() calls printExpenseAddSuccessful()
+    showing user a successfully added message
+end note
 activate "ExpenseUIResponse"
 "ExpenseUIResponse" -> User
 return
@@ -49,10 +73,18 @@ deactivate "ExpenseCommand"
 
 else actions is del
 "ExpenseCommand" -> "ExpenseCommand": executeDelExpense(expenseAction, requiredParams)
+note left
+    if the command is del, calls
+    ExpenseAction.deleteExpense()
+end note
 activate "ExpenseCommand"
 "ExpenseCommand" -> "ExpenseAction" : deleteExpense(expenseId)
 activate "ExpenseAction"
 "ExpenseAction" -> "ExpenseUIResponse" : printExpenseDelSuccessful(deletedExpense)
+note left
+    deleteExpense() calls printExpenseDelSuccessful()
+    showing user a successfully deleted message
+end note
 activate "ExpenseUIResponse"
 "ExpenseUIResponse" -> User
 return
@@ -62,10 +94,19 @@ deactivate "ExpenseCommand"
 
 else actions is find
 "ExpenseCommand" -> "ExpenseCommand": executeFindExpense(expenseAction, requiredParams)
+note left
+    if the command is find, calls
+    ExpenseAction.findExpenses()
+end note
 activate "ExpenseCommand"
 "ExpenseCommand" -> "ExpenseAction" : findExpenses(expenseName)
 activate "ExpenseAction"
 "ExpenseAction" -> "ExpenseUIResponse" : printFindExpenses(filteredExpenses)
+note left
+    findExpenses() calls printFindExpenses()
+    showing user a list of matching expenses
+    from inputted keyword
+end note
 activate "ExpenseUIResponse"
 "ExpenseUIResponse" -> User
 return
@@ -75,10 +116,19 @@ deactivate "ExpenseCommand"
 
 else actions is clear
 "ExpenseCommand" -> "ExpenseCommand": executeClearExpense(expenseAction, optionalParams)
+note left
+    if the command is clear, calls
+    ExpenseAction.clearExpenses()
+end note
 activate "ExpenseCommand"
 "ExpenseCommand" -> "ExpenseAction" : clearExpenses(expenseFrom, expenseTo, expenseCategory)
 activate "ExpenseAction"
 "ExpenseAction" -> "ExpenseUIResponse" : printClearExpenses(expenseList)
+note left
+    clearExpenses() calls printClearExpenses()
+    showing user a list of expenses cleared
+    given the date range inputted
+end note
 activate "ExpenseUIResponse"
 "ExpenseUIResponse" -> User
 return
@@ -88,12 +138,26 @@ deactivate "ExpenseCommand"
 
 else actions is list
 "ExpenseCommand" -> "ExpenseCommand": executeListExpense(expenseAction, optionalParams)
+note left
+    if the command is list, calls
+    ExpenseAction.listExpenses() or
+    ExpenseAction.listExpensesRange()
+end note
 activate "ExpenseCommand"
 
 opt expenseFromString is null && expenseToString is null
 "ExpenseCommand" -> "ExpenseAction" : listExpenses(expenseCategory)
+note left
+    if the start and end date
+    is not given, calls
+    ExpenseAction.listExpenses()
+end note
 activate "ExpenseAction"
 "ExpenseAction" -> "ExpenseUIResponse" : printListExpenses(previousExpenses, currentExpenses, category)
+note left
+    listExpenses() calls printListExpenses()
+    showing user a list of existing expenses
+end note
 activate "ExpenseUIResponse"
 "ExpenseUIResponse" -> User
 return
@@ -101,9 +165,19 @@ end
 
 
 "ExpenseCommand" -> "ExpenseAction" : listExpensesRange(expenseFrom, expenseTo, expenseCategory)
+note left
+    else, calls
+    ExpenseAction.listExpensesRange()
+end note
 activate "ExpenseAction"
 "ExpenseAction" -> "ExpenseUIResponse" : printListExpenses(sortedExpenses, from, to, category)
+note left
+    listExpensesRange() calls printListExpenses()
+    showing user a list of existing expenses
+    given the start and end date inputted
+end note
 activate "ExpenseUIResponse"
+
 
 
 "ExpenseUIResponse" -> User
@@ -114,10 +188,19 @@ deactivate "ExpenseCommand"
 
 else actions is help
 "ExpenseCommand" -> "ExpenseCommand": executeHelpExpense(expenseAction)
+note left
+    if the command is help, calls
+    ExpenseAction.expenseHelp()
+end note
 activate "ExpenseCommand"
 "ExpenseCommand" -> "ExpenseAction" : expenseHelp()
 activate "ExpenseAction"
 "ExpenseAction" -> "ExpenseUIResponse" : printExpenseCommands()
+note left
+    expenseHelp() calls printExpenseCommands()
+    showing user a list valid commands for the
+    expense class
+end note
 activate "ExpenseUIResponse"
 "ExpenseUIResponse" -> User
 return
