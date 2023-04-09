@@ -225,6 +225,20 @@ there are
 separate classes for each part of the Stats Feature, which includes StatsAction, StatsUIResponse and StatsCommand.
 
 ![img.png](images/StatsCommandSequence.png)
+The StatsCommand class is responsible for displaying the stats based on the inputs by the user.
+Flow of the Stats Command:
+1.	From the main function, a StatsCommand object is created.
+2.	In the StatsCommand, it calls execute which takes in data and ui to execute this command. Within execute, a new object StatsAction is created.
+3.	Within StatsAction, getBudgets(), getDeposits() and getExpenses() are called from data, which return the arraylists containing budgets, deposits and expenses respectively.
+4.	A new StatsUIResponse object is then created by taking in ui.
+5.	This StatsAction object is then returned to StatsCommand.
+6.	In StatsCommand, based on the action, different functions are now executed.
+7.	If the action is show, executeShowStats(statsAction, optionalParams) is called within StatsCommand.
+8.	Within this function, another function showStats(month, year, showDeposit, showExpense) is called in StatsAction. In the showStats function, if showDeposit is true, the function printDeposits(filteredDeposits) is called in DepositUIResponse, which returns an arraylist of strings, depositMsg containing Deposit messages to be printed out. Likewise, if showExpense is true, the function printExpenses(filteredExpenses) is called in ExpenseUIResponse, which returns an arraylist of strings, expenseMsg containing Expense messages to be printed out.
+9.	After the two optional blocks, printStats(month, year, totalBudgets, totalDeposits, totalExpenses, budgetMsg, depositMsg, expenseMsg) is called in StatsUIResponse. This in turn prints to the user the stats.
+10.	 If action is help, executeHelpStats(statsAction) is called within StatsCommand. The function statsHelp() is then called in StatsAction. This in turn calls printStatsCommands() in StatsUIResponse and prints out the stats help message to the user.
+
+
 
 ### Others
 

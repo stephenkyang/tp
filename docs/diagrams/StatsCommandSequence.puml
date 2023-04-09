@@ -2,44 +2,28 @@
 
 hide footbox
 
-participant StatsCommand
-participant StatsAction
-participant Data
-participant DepositUIResponse
-participant ExpenseUIResponse
-participant StatsUIResponse
-actor User
+ -> ":StatsCommand":
 
- -> "StatsCommand":
+activate ":StatsCommand"
+":StatsCommand" -> ":StatsCommand": execute(data, ui)
+activate  ":StatsCommand"
+":StatsCommand" -> ":StatsAction" :statsAction
+activate ":StatsAction"
 
-activate "StatsCommand"
-"StatsCommand" -> "StatsCommand": execute(data, ui)
-activate  "StatsCommand"
-deactivate "Data"
-
-"StatsCommand" -> "StatsAction" ** : (data,ui)
-activate "StatsAction"
-
-"StatsAction" -> "Data": getBudgets()
-activate "Data"
-return expenses: Budget[]
-"StatsAction" -> "Data": getDeposits()
-activate "Data"
-return expenses: Deposit[]
-"StatsAction" -> "Data": getExpenses()
-activate "Data"
-return expenses: Expense[]
-
-"StatsAction" -> "StatsUIResponse" ** : (ui)
-activate "StatsUIResponse"
-"StatsUIResponse" --> "StatsAction"
-deactivate "StatsUIResponse"
-
-return StatsAction: StatsAction
-deactivate "StatsAction"
+":StatsAction" -> ":data" :getBudgets()
+activate ":data"
+return budgets: ArrayList<Budget>
+deactivate ":data"
+":StatsAction" -> ":data" :getDeposits()
+activate ":data"
+return deposits: ArrayList<Deposit>
+deactivate ":data"
+":StatsAction" -> ":data" :getExpenses()
+activate ":data"
+return expenses: ArrayList<Expense>
+deactivate ":data"
 
 
-<<<<<<< HEAD
 deactivate ":StatsAction"
 
 
@@ -82,54 +66,14 @@ activate ":StatsAction"
 return
 return
 deactivate ":StatsCommand"
-=======
-alt actions is show
-"StatsCommand" -> "StatsCommand": executeShowStats(statsAction, optionalParams)
-activate "StatsCommand"
-"StatsCommand" -> "StatsAction" : showStats(month, year, showDeposit, showExpense)
-activate "StatsAction"
->>>>>>> 0162208949162678485fac7105ee89988e253317
 
-opt showDeposit
-"StatsAction" -> "DepositUIResponse": printDeposits(filteredDeposits)
-activate "DepositUIResponse"
-return depositMsg
 end
 
-opt showExpense
-"StatsAction" -> "ExpenseUIResponse": printExpenses(filteredExpenses)
-activate "ExpenseUIResponse"
-return expenseMsg
-end
 
-<<<<<<< HEAD
 
 deactivate ":StatsCommand"
-=======
-"StatsAction" -> "StatsUIResponse" : printStats(month, year, totalBudgets, totalDeposits, totalExpenses, budgetMsg, depositMsg, expenseMsg)
-activate "StatsUIResponse"
-"StatsUIResponse" -> User
-return
-return
->>>>>>> 0162208949162678485fac7105ee89988e253317
 
-deactivate "StatsCommand"
 
-else actions is help
-"StatsCommand" -> "StatsCommand": executeHelpStats(statsAction)
-activate "StatsCommand"
-"StatsCommand" -> "StatsAction" : statsHelp()
-activate "StatsAction"
-"StatsAction" -> "StatsUIResponse" : printStatsCommands()
-activate "StatsUIResponse"
-"StatsUIResponse" -> User
-return
-return
 
-deactivate "StatsCommand"
-end
-
-destroy "StatsCommand"
-deactivate "StatsCommand"
 
 @enduml
