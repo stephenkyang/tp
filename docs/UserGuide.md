@@ -113,7 +113,7 @@ _______________
 _______________
 ```
 
-### 2. Budgets
+### 2. Budget
 
 #### Add Budget
 To add a budget, type the name of the budget you want followed by the spending limit: <br>
@@ -157,7 +157,7 @@ There are 1 budget categories.
 _______________
 ```
 
-#### List Budget
+#### List Budgets
 You can list down the budgets that you've have added, which will also show each budget's progress for the current month.<br>
 Alternatively, you may also show the progress for a certain month & year.<br>
 Take note that you can only input a month & year which is before today, and the year must be between 1000 to current year.
@@ -173,97 +173,89 @@ Your budget list for Apr 2023:
 _______________
 ```
 
-### 3. Deposits
+### 3. Deposit
 
-If you want to create a deposit, use the following command,
-(if no date is listed, it is treated as today)
+#### Add Deposit
+You can add a deposit by specifying the name, amount and date (optional)<br>
+The name of the deposit must be less than 30 characters.<br>
+If no date is listed, it is treated as today.<br>
+However if you would like to input a date, the date must be before today.
 
-The deposit name must be less than 30 characters, and the date can only be input before today.
-
-deposit add /n (name) /a (amount) [optional] /d DD-MM-YYYY
-
-The parameters are the following:
-
-    name: String
-    amount: Integer
-    date: datetime in the form of DD-MM-YYY
-
+Command: `deposit add /n (name) /a (amount) [optional] /d DD-MM-YYYY`
 ```
-deposit add /n picked up from ground /a 50.00 /d 31-03-2023
+deposit add /n 4d /a 10.00 /d 02-04-2023
 _______________
 The following deposit has been added:
-1. picked up from ground ($50.00) on 31 Mar 2023
+Deposit No 3. 4d ($10.00) on 02 Apr 2023
 _______________
 ```
 
-To delete the deposit use the this command. The deposit number can be found with `deposit list`
+#### Delete Deposit
+If you want to remove a specific deposit, you can remove by its deposit number.
 
-deposit del /n (deposit number)
-
-The parameters are the following:
-
-    deposit number: Integer
+Command: `deposit del /n (deposit number)`
 ```
-deposit del /n 1
+deposit del /n 3
 _______________
 The following deposit has been removed:
-1. picked up from ground ($50.00) on 31 Mar 2023
+Deposit No 3. 4d ($10.00) on 02 Apr 2023
 _______________
 ```
 
-To list deposits, use this command. The optional parameter are dates from the start to the end range.
+#### List Deposits
+You can list down the deposits that you've added, which will show the previous deposits and current deposits for this month:<br>
+Alternatively, you may also list down by date range.<br>
+If either from or to date is entered, it will show the deposits that are from/until that date.<br>
+Take note that for *from date*, you can only input a month & year which is before today, and the year must be between 1000 to current year.
 
-deposit list [optional] /f DD-MM-YYYY /t DD-MM-YYYY
-
-The parameters are the following:
-
-    start date: datetime in the form of DD-MM-YYY
-    end date: datetime in the form of DD-MM-YYY
-
+Command: `deposit list [optional] /f DD-MM-YYYY /t DD-MM-YYYY`
 ```
-deposit list
+deposit list /t 09-04-2023
 _______________
-Here are your deposits for this month:
-1. lottery ($3000.00) on 31 Mar 2023
-2. bank interest ($5.00) on 31 Mar 2023
+Here are your deposits until 09 Apr 2023:
+Deposit No 1. lottery ($50.00) on 09 Apr 2023
+Deposit No 2. money from ground ($10.00) on 09 Apr 2023
 _______________
 ```
 
-To find a deposit given a keyword, use this commmand.
+#### Find Deposits
+You can find deposits by the deposit name.
 
-deposit find /n (keyword)
-
-The parameters are the following:
-
-    keyword: String
-
+Command: `deposit find /n (keyword)`
 ```
-deposit find /n bank
+deposit find /n lottery
 _______________
 Here are the deposits you searched:
-2. bank interest ($5.00) on 31 Mar 2023
+Deposit No 1. lottery ($50.00) on 09 Apr 2023
+Deposit No 3. Lottery ($12.00) on 09 Apr 2023
+Deposit No 4. LoTtErY ($10.00) on 09 Apr 2023
+Deposit No 5. lotterY ($5.00) on 09 Apr 2023
 _______________
+ 
 ```
 
-To clear all deposits, use this command. Optionally, if you want to clear within a range, use the optional params.
+#### Clear Deposits
+You can delete multiple deposits at once.<br>
+Alternatively if you want to delete specific expenses, you can delete by date range.<br>
+If either from or to date is entered, it will show the deposits that are from/until that date.<br>
+Take note that for *from date*, you can only input a month & year which is before today, and the year must be between 1000 to current year.
 
-deposit clear [optional] /f DD-MM-YYYY /t DD-MM-YYYY
+**WARNING: Entering `deposit clear` will delete all deposits permanently. This action is irreversible!**
 
-The parameters are the following:
-
-    (optional) start date: datetime in the form of DD-MM-YYY
-    (optional) end date: datetime in the form of DD-MM-YYY
-
+Command: `deposit clear [optional] /f DD-MM-YYYY /t DD-MM-YYYY`
 ```
-deposit clear
+deposit clear /t 10-04-2023
 _______________
 These are the deposits cleared:
-1. lottery ($3000.00) on 31 Mar 2023
-2. bank interest ($5.00) on 31 Mar 2023
+Deposit No 1. lottery ($50.00) on 09 Apr 2023
+Deposit No 2. money from ground ($10.00) on 09 Apr 2023
+Deposit No 3. Lottery ($12.00) on 09 Apr 2023
+Deposit No 4. LoTtErY ($10.00) on 09 Apr 2023
+Deposit No 5. lotterY ($5.00) on 09 Apr 2023
 _______________
 ```
 
-### 4. Expenses
+### 4. Expense
 
 #### Add Expense
 To add an expense, type the category of the budget followed by the name, amount and date (optional).<br>
@@ -292,11 +284,11 @@ Expense No 2. [transport] mrt ($2.50) on 01 Mar 2023
 _______________
 ```
 
-#### List Expense
+#### List Expenses
 You can list down the expenses that you've added, which will show the previous expenses and current expenses for this month:<br>
 Alternatively, you may also list down by a specific category, or date range.<br>
-If either from or to date is not entered, it will show the expenses that are from/until that date.<br>
-Take note that you can only input a month & year which is before today, and the year must be between 1000 to current year.
+If either from or to date is entered, it will show the expenses that are from/until that date.<br>
+Take note that for *from date*, you can only input a month & year which is before today, and the year must be between 1000 to current year.
 
 Command: `expense list [optional] /c (category name) /f DD-MM-YYYY /t DD-MM-YYYY`
 ```
@@ -308,7 +300,7 @@ Expense No 2. [food] salmon don ($7.00) on 09 Apr 2023
 _______________
 ```
 
-#### Find Expense
+#### Find Expenses
 You can find expenses by the expense name.<br>
 If you want to find expenses by category, use `expense list`.
 
@@ -326,8 +318,8 @@ _______________
 #### Clear Expenses
 You can delete multiple expenses at once.<br>
 Alternatively if you want to delete specific expenses, you can delete by the category name, or a date range.<br>
-If either from or to date is not entered, it will show the expenses that are from/until that date.<br>
-Take note that you can only input a month & year which is before today, and the year must be between 1000 to current year.
+If either from or to date is entered, it will show the expenses that are from/until that date.<br>
+Take note that for *from date*, you can only input a month & year which is before today, and the year must be between 1000 to current year.
 
 **WARNING: Entering `expense clear` will delete all expenses permanently. This action is irreversible!**
 
@@ -354,8 +346,11 @@ The message of the overall budget is determined by:<br>
 total expenses / total budget limit + total deposits
 
 If total expenses is more than total budget limit+deposits, the following message will be displayed:
+
 > Oh no! You seem to be spending too much!
+
 <br>Else, the message will display:
+
 > Good job! You are on the right track!
 
 Command: `stats show [optional] /m month (1-12) /y year (in YYYY) /v (d for deposit, e for expense, de for both)`
