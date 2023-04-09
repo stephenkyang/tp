@@ -31,7 +31,7 @@ public class SetBudgetTest {
         assert budgetList.size() == 1 : "first budget creation error";
         Double newBudgetLimit = 123.0;
         budgetAction.setBudget(budgetName, newBudgetLimit);
-        assertEquals(budgetList.get(0).getAmount(), 123.0);
+        assertEquals(123.0, budgetList.get(0).getAmount());
         assert (budgetList.get(0).getAmount() == 123.0) : "set new budget limit error";
     }
 
@@ -46,8 +46,40 @@ public class SetBudgetTest {
         String invalidBudgetName = "food";
         Double newBudgetLimit = 123.0;
         budgetAction.setBudget(invalidBudgetName, newBudgetLimit);
-        assertEquals(budgetList.get(0).getAmount(), 10.0);
+        assertEquals(10.0, budgetList.get(0).getAmount());
         assert (budgetList.get(0).getAmount() == 10.0) : "set new budget limit error";
 
+    }
+
+    @Test
+    void setBudget_nullBudgetLimit_throwError() {
+
+        budgetList.clear();
+        String budgetName = "test";
+        Double budgetLimit = null;
+        budgetAction.addBudget(budgetName, 100);
+        try {
+            budgetAction.setBudget(budgetName, budgetLimit);
+        } catch (NullPointerException e) {
+            System.out.println("Invalid input");
+        }
+
+        assertEquals(1, budgetList.size());
+
+    }
+
+    @Test
+    void setBudget_negativeBudgetLimit_throwError() {
+        budgetList.clear();
+        String budgetName = "transport";
+        Double budgetLimit = -10.0;
+        budgetAction.addBudget(budgetName, 10);
+        assertEquals(1, budgetList.size());
+        assert budgetList.size() == 1 : "budget creation error";
+        try {
+            budgetAction.setBudget(budgetName, budgetLimit);
+        } catch (AssertionError e) {
+            System.out.println("Invalid input");
+        }
     }
 }

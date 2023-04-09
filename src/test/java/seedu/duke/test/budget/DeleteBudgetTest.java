@@ -48,4 +48,29 @@ public class DeleteBudgetTest {
         assertEquals(budgetList.size(), 1);
     }
 
+    @Test
+    void deleteBudget_caseSensitiveBudget_throwError() {
+        String budgetName = "transport";
+        Double budgetLimit = 10.0;
+        budgetAction.addBudget(budgetName, budgetLimit);
+        assertEquals(budgetList.size(), 1);
+        assert budgetList.size() == 1 : "budget creation error";
+        budgetAction.deleteBudget("Transport", expenseList);
+        assert budgetList.size() == 1 : "delete budget error";
+        assertEquals(budgetList.size(), 1);
+    }
+
+    @Test
+    void deleteBudget_spaceSensitiveBudgetName_throwError() {
+        String budgetName = "transport";
+        Double budgetLimit = 10.0;
+        budgetAction.addBudget(budgetName, budgetLimit);
+        assertEquals(budgetList.size(), 1);
+        assert budgetList.size() == 1 : "budget creation error";
+        budgetAction.deleteBudget("transport ", expenseList);
+        assert budgetList.size() == 1 : "delete budget error";
+        assertEquals(budgetList.size(), 1);
+    }
+
+
 }
