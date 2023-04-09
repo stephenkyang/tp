@@ -139,10 +139,11 @@ public class DepositTest {
         setUpStreams();
         depositAction.findDeposits("haha2");
         String outContentInString = outContent.toString();
-        String expectedOutput = ("_______________\n" +
-                "Here are the deposits you searched:\n" +
-                "Deposit No 2. haha2 ($300.00) on 09 Apr 2023\n" +
-                "_______________\n");
+        String newline = System.lineSeparator();
+        String expectedOutput = ("_______________" + newline +
+                "Here are the deposits you searched:" + newline +
+                "Deposit No 2. haha2 ($300.00) on 09 Apr 2023" + newline +
+                "_______________" + newline);
         for (int i = 0; i < expectedOutput.length(); i++) {
             if (expectedOutput.charAt(i) != outContentInString.charAt(i)) {
                 System.out.println(i);
