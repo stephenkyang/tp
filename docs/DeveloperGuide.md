@@ -333,6 +333,7 @@ Note that for the test cases listed for Budget, Deposit, Expense and Stats Comma
  - Note that the message of the invalid parameter depends on the type of parameter set by the application.
 
 #### Budget Commands
+
 #### Add Budget
 1. New Budget (Case 1)
 - Type `budget add /c transport /a 1000.00`
@@ -341,6 +342,7 @@ Note that for the test cases listed for Budget, Deposit, Expense and Stats Comma
 - Type `budget add /c transport /a 1.00`
 - Type `budget add /c transport /a 2.00`
 - Expected output: A message saying that the budget name is already in use.
+
 #### Delete Budget
 1. Delete Budget with no expenses (Case 1)
 - Type `budget add /c transport /a 1.00`
@@ -354,6 +356,7 @@ Note that for the test cases listed for Budget, Deposit, Expense and Stats Comma
 3. Delete non-existing Budget (case 3)
 - Type `budget del /c transport`
 - Expected output: A message saying that the budget does not exist.
+
 #### List Budget
 1. List (Case 1)
 - Type `budget add /c transport /a 1.00`
@@ -371,11 +374,14 @@ Note that for the test cases listed for Budget, Deposit, Expense and Stats Comma
 - Type `budget add /c transport /a 1.00`
 - Type `budget list /m 1 /y 2023`
 - Expected output: A message that shows the month (January), year 2023 and budget progress, consisting the name, progress bar, total expenses and budget amount.
+
 #### Help Budget
 1. Help (Case 1)
 - Type `budget help`
 - Expected output: A message that shows all the available actions.
+
 #### Deposit Commands
+
 #### Add Deposit
 1. New Deposit (today's date) (Case 1)
 - Type `deposit add /n lottery /a 3000.00`
@@ -383,6 +389,7 @@ Note that for the test cases listed for Budget, Deposit, Expense and Stats Comma
 2. New Deposit (date before today) (Case 2)
 - Type `deposit add /n lottery /a 3000.00 /d 01-01-2023`
 - Expected output: A message saying that it has been successfully added with deposit no, name, amount and date of deposit shown.
+
 #### Delete Deposit
 1. Delete Deposit (Case 1)
 - Type `deposit add /n lottery /a 3000.00`
@@ -391,11 +398,13 @@ Note that for the test cases listed for Budget, Deposit, Expense and Stats Comma
 2. Delete non-existing Deposit (Case 2)
 - Type `deposit del /n 1`
 - Expected output: A message saying that it the number is not valid.
+
 #### Find Deposit
 1. Find Deposit (Case 1)
 - Type `deposit add /n lottery /a 3000.00`
 - Type `deposit find /n lottery`
 - Expected output: A message that shows the list of deposits found based on the name.
+
 #### Clear Deposit
 1. Clear All Deposit (Case 1)
 - Type `deposit add /n lottery /a 3000.00`
@@ -413,6 +422,7 @@ Note that for the test cases listed for Budget, Deposit, Expense and Stats Comma
 - Type `deposit add /n lottery /a 3000.00`
 - Type `deposit clear /f <A date that is today in DD-MM-YYYY> /t <A date that is today in DD-MM-YYYY>`
 - Expected output: A message that shows all the deposits cleared on that date range.
+
 #### List Deposit
 1. List All Deposit (Case 1)
 - Type `deposit add /n lottery /a 3000.00`
@@ -430,12 +440,14 @@ Note that for the test cases listed for Budget, Deposit, Expense and Stats Comma
 - Type `deposit add /n lottery /a 3000.00`
 - Type `deposit list /f <A date that is today in DD-MM-YYYY> /t <A date that is today in DD-MM-YYYY>`
 - Expected output: A message that shows all the added deposits on that date range.
+
 #### Help Deposit
 1. Help (Case 1)
 - Type `deposit help`
 - Expected output: A message that shows all the available actions.
 
 #### Expense Commmands
+
 #### Add Expense
 1. New Expense (today's date) (Case 1)
 - Type `budget add /c transport /a 3000.00`
@@ -445,6 +457,7 @@ Note that for the test cases listed for Budget, Deposit, Expense and Stats Comma
 - Type `budget add /c transport /a 3000.00`
 - Type `expense add /c transport /n mrt 1.00 /d 01-01-2023`
 - Expected output: A message saying that it has been successfully added with expense no, category of the budget, name, amount and date of expense shown.
+
 #### Delete Expense
 1. Delete Expense (Case 1)
 - Type `budget add /c transport /a 3000.00`
@@ -454,12 +467,14 @@ Note that for the test cases listed for Budget, Deposit, Expense and Stats Comma
 2. Delete non-existing Expense (Case 2)
 - Type `expense del /n 1`
 - Expected output: A message saying that it the number is not valid.
+
 #### Find Expense
 1. Find Expense (Case 1)
 - Type `budget add /c transport /a 3000.00`
 - Type `expense add /c transport /n mrt 1.00`
 - Type `expense find /n mrt`
 - Expected output: A message that shows the list of expenses found based on the name.
+
 #### Clear Expense
 1. Clear All Expense (Case 1)
 - Type `budget add /c transport /a 3000.00`
@@ -491,6 +506,7 @@ Note that for the test cases listed for Budget, Deposit, Expense and Stats Comma
 - Type `expense add /c transport /n mrt 1.00`
 - Type `expense clear /c transport /f <A date that is today in DD-MM-YYYY> /t <A date that is today in DD-MM-YYYY>`
 - Expected output: A message that shows all the expenses cleared on the specified budget category name and date range.
+
 #### List Expense
 1. List All Expense (Case 1)
 - Type `budget add /c transport /a 3000.00`
@@ -522,12 +538,14 @@ Note that for the test cases listed for Budget, Deposit, Expense and Stats Comma
 - Type `expense add /c transport /n mrt 1.00`
 - Type `expense list /c transport /f <A date that is today in DD-MM-YYYY> /t <A date that is today in DD-MM-YYYY>`
 - Expected output: A message that shows all the added expenses on the specified budget category name and date range.
+
 #### Help Expense
 1. Help (Case 1)
 - Type `expense help`
 - Expected output: A message that shows all the available actions.
 
 #### Stats Commands
+
 #### Show Stats
 1. Show statistics (Case 1)
 - Type `budget add /c transport /a 3000.0`
@@ -571,14 +589,17 @@ Note that for the test cases listed for Budget, Deposit, Expense and Stats Comma
 - Type `expense add /c transport /n mrt /a 1.00`
 - Type `stats show /v de`
 - Expected output: A message that shows the budget progress, list of deposits, list of expenses, total amount of deposit and expense, and overall progress for current month and year.
+
 #### Help Stats
 1. Help (Case 1)
 - Type `stats help`
 - Expected output: A message that shows all the available actions.
+
 #### Help Command
 1. Help (Case 1)
 - Type `help`
-- Expected output: A message that shows all the available commands
+- Expected output: A message that shows all the available commands.
+
 #### Exit Command
 1. Exit (Case 1)
 - Type `exit`
