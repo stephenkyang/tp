@@ -16,7 +16,7 @@ Below is an architectural diagram that describes the overview of how BudgetBuddy
 
 ![ArchitectureDiagram.png](images/ArchitectureDiagram.png)
 
-When the user initialises Budget Buddy, the logic of Budget Buddy will check if there is any pre-existing stored data. This persistence is done by using Gson read stored data into classes that will be used in Budget Buddy. As the user interacts with the UI, the logic will change the data of Budget Buddy, which is then written in Json format to update the storage. This process continues until the user exits Budget Buddy.
+When the user initialises Budget Buddy, the logic of Budget Buddy will check if there is any pre-existing stored data. This persistence is done by using Gson. It reads stored Json data into classes that will be used in Budget Buddy. As the user interacts with the UI, the logic will change the data of Budget Buddy, which is then written in Json format to update the storage. This process continues until the user exits Budget Buddy.
 
 ### Main Component
 
@@ -104,6 +104,14 @@ Once a string `input` from the user has been deemed as a `Budget` command as exp
 
 ![BudgetCommandSequence.png](images/BudgetCommandSequence.png)
 
+1. The `BudgetCommand` object retrieves the existing `Budget` and `Exepnse` data stored in the `Data` class. This is retrieved using the getBudgets() and getExpenses() methods, which return the existing budgets and expenses as an array list.
+2. The `BudgetAction` object is then created, which then creates a `BudgetUIResponse` object.
+3. Depending on the action of the `BudgetCommand`, different methods will be called to carry out the related task. The possible actions are add, set, del (delete), list and help.
+4. If the action is `add`, the `BudgetCommand` object will self invoke its own executeAddBudget() method, which calls the addBudget() method in the `BudgetAction` object. This then calls the printBudgetAddSuccessful() in the `BudgetUIResponse` object, which prints out a message on the command line interface for the user. The sequence will be similar for other `BudgetCommand` actions.
+5. Following this, the `BudgetAction` and `BudgetUiResponse` will reach the end of its lifeline.
+6. After calling the related methods based on the action, the `BudgetCommand` object will call the exportData() method in the `Data` object, to update the existing data.
+7. The `BudgetCommand` object then reaches the end of its lifeline, and returns to the `CommandParser` object that called it.
+
 ### Deposit Component
 
 ### DepositCommand Class
@@ -120,6 +128,15 @@ Attached below is how the `DepositCommand` class is implemented along with its r
 ### DepositCommand Sequence
 
 ![img.png](images/DepositCommandSequence.png)
+
+Flow of the DepositCommand:
+
+1. DepositCommand calls execute(), which tries and find which command will be parsed.
+2. getDeposits() is called to find the Deposit[] from the Data class.
+3. DepositCommand then calls the method in DepositAction that matches the actions parsed
+4. Within DepositAction, the action is done manipulating the DepositList, if necessary
+5. Within Deposit Action, the class DepositUIResponse is called to show an output depending on the action to the user
+6. After DepositList is sucessfully manipulated (if necessary) and a text reponse is given, DepositCommand exits.
 
 ### Design & Implementation of the Deposit Feature
 
