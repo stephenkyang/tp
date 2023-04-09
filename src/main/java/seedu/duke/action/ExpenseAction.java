@@ -7,11 +7,7 @@ import java.util.Comparator;
 import java.util.Iterator;
 
 import seedu.duke.Ui;
-import seedu.duke.exception.BBException;
-import seedu.duke.exception.ExpenseBudgetNotFoundException;
-import seedu.duke.exception.GlobalDateFromAfterToException;
-import seedu.duke.exception.GlobalDateAfterTodayException;
-import seedu.duke.exception.GlobalInvalidNumberException;
+import seedu.duke.exception.*;
 import seedu.duke.model.Budget;
 import seedu.duke.model.Expense;
 import seedu.duke.util.Commons;
@@ -52,8 +48,11 @@ public class ExpenseAction {
 
         Expense expense = new Expense(expenseCategory, expenseName, expenseAmount, expenseDate, expenseId);
         expenses.add(expense);
-
         expenseUi.printExpenseAddSuccessful(expense);
+
+       // LocalDate endDate = expenseDate;
+       // LocalDate startDate = endDate.with(TemporalAdjusters.firstDayOfMonth());
+       // expenseUi.printBudgetStatus(expense, startDate,endDate, budgets, expenses);
     }
 
     public void deleteExpense(int expenseId) throws GlobalInvalidNumberException {

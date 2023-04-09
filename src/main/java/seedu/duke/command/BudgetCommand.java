@@ -84,7 +84,7 @@ public class BudgetCommand extends Command {
      * Parses the required attributes such as budget name, limit,
      * which will be used to execute add budget in the action class.
      *
-     * @param budgetAction   action selected will be execute through action class
+     * @param budgetAction   action selected will be executed through action class
      * @param requiredParams parameters containing the required attributes
      */
     private void executeAddBudget(BudgetAction budgetAction, String[] requiredParams) {
@@ -110,7 +110,7 @@ public class BudgetCommand extends Command {
      * Parses the required attributes such as budget name,
      * which will be used to execute del budget in the action class.
      *
-     * @param budgetAction   action selected will be execute through action class
+     * @param budgetAction   action selected will be executed through action class
      * @param requiredParams parameters containing the required attributes
      * @param expenses       Expense data that will be used to delete if category is deleted
      */
@@ -124,7 +124,7 @@ public class BudgetCommand extends Command {
      * which will be used to execute list budget in the action class.
      * If neither month and year is specified, use the current's month and year.
      *
-     * @param budgetAction   action selected will be execute through action class
+     * @param budgetAction   action selected will be executed through action class
      * @param optionalParams parameters containing the optional attributes
      * @param expenses       Expense data that will be used to calculate the expense for each category
      */
