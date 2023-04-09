@@ -147,13 +147,14 @@ and the abstract
 ![img.png](images/DepositCommandSequence.png)
 
 Flow of the DepositCommand:
-1. To instantiate the DepositCommand, getDeposits() mu 
-2. Command name from the input is retrieved, returning a CommandEnum
-3. Object command is created and initialized by constructor, based on the CommandEnum
-4. List of available actions for that command is retrieved. **Commands such as Help and Exit do not have any actions or parameters, which the command will be returned immediately.**
-5. Action from the input is checked from the list of actions to see if it valid. Then, it will set the action in command object.
-6. Based on the action, it will retrieve the required and optional parameters from input. Then, it will set the parameters in the command object.
-7. Object command is returned to the main, which it will be executed.
+1. DepositCommand calls execute(), which tries and find which command will be parsed.
+2. getDeposits() is called to find the Deposit[] from the Data class.
+3. DepositCommand then calls the method in DepositAction that matches the command parsed
+4. Within DepositAction, the action is done manipulating the DepositList, if necessary
+5. Within Deposit Action, the class DepositUIResponse is called to show a success/error message
+   to the user
+6. After DepositList is sucessfully manipulated and a text reponse is given, DepositCommand
+   exits.
 
 ### Design & Implementation of the Deposit Feature
 
