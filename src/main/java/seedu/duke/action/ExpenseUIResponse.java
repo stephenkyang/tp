@@ -224,7 +224,7 @@ public class ExpenseUIResponse {
     /**
      * Prints expenses
      * @param expenses Arraylist containing all expenses
-     * @return Arraylist with messages to be printed 
+     * @return Arraylist with messages to be printed
      */
     public static ArrayList<String> printExpenses(ArrayList<Expense> expenses) {
         ArrayList<String> msgs = new ArrayList<String>();

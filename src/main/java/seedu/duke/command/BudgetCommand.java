@@ -97,7 +97,7 @@ public class BudgetCommand extends Command {
      * Parses the required attributes such as budget name, limit,
      * which will be used to execute set budget in the action class.
      *
-     * @param budgetAction   action selected will be execute through action class
+     * @param budgetAction   action selected will be executed through action class
      * @param requiredParams parameters containing the required attributes
      */
     private void executeSetBudget(BudgetAction budgetAction, String[] requiredParams) {

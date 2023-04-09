@@ -55,19 +55,22 @@ activate ":StatsAction"
 return
 return
 
+deactivate ":StatsCommand"
+
 else action is help
-activate ":StatsCommand"
 ":StatsCommand" -> ":StatsAction"
+activate ":StatsCommand"
 activate ":StatsAction"
 ":StatsAction" -> ":StatsAction" : statsHelp()
 activate ":StatsAction"
 return
 return
+deactivate ":StatsCommand"
 
 end
 
 
-deactivate ":StatsCommand"
+
 deactivate ":StatsCommand"
 
 
