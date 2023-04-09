@@ -119,8 +119,8 @@ public class DepositCommand extends Command {
      * @throws BBException for any error thrown in the action class
      */
     private void executeDelDeposit(DepositAction depositAction, String[] requiredParams) throws BBException {
-        int depositNo = Integer.parseInt(requiredParams[0]);
-        depositAction.deleteDeposit(depositNo);
+        int depositId = Integer.parseInt(requiredParams[0]);
+        depositAction.deleteDeposit(depositId);
     }
 
     /**

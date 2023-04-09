@@ -220,7 +220,7 @@ their current progress and if their expenses have exceeded their budget.
 
 **There are some variables and methods that are not shown in the class diagram for easier readability.**
 
-
+### StatsCommand Sequence
 
 ![img.png](images/StatsCommandSequence.png)
 The StatsCommand class is responsible for displaying the stats based on the inputs by the user.

@@ -1,4 +1,5 @@
 @startuml
+
 hide footbox
 
 participant BudgetCommand
@@ -10,35 +11,19 @@ actor User
  -> "BudgetCommand":
 
 activate "BudgetCommand"
-
 "BudgetCommand" -> "BudgetCommand": execute(data, ui)
-note left
-    BudgetCommand calls execute() to see which
-    command will be parsed in a case-switch block
- end note
 activate  "BudgetCommand"
 "BudgetCommand" -> "Data": getBudgets()
-note left
-    getBudgets will get Budget data
-    from the Data class and Budget[]
- end note
 activate "Data"
-
 return budgetList: Budget[]
 deactivate "Data"
 
 
 "BudgetCommand" -> "Data": getExpenses()
-note left
-    getExpenses will get Expense data
-    from the Data class and Expense[]
- end note
 activate "Data"
 return expenses: Expense[]
 
-
 "BudgetCommand" -> "BudgetAction" ** : (budgetList,ui)
-
 activate "BudgetAction"
 
 "BudgetAction" -> "BudgetUIResponse" ** : (ui)
@@ -50,20 +35,12 @@ return budgetAction: BudgetAction
 deactivate "BudgetAction"
 
 
-alt actions is add
+alt action is add
 "BudgetCommand" -> "BudgetCommand": executeAddBudget(budgetAction, requiredParams)
 activate "BudgetCommand"
 "BudgetCommand" -> "BudgetAction" : addBudget(budgetName, budgetLimit)
-note left
-    if add then call
-    BudgetAction.addBudget()
- end note
 activate "BudgetAction"
 "BudgetAction" -> "BudgetUIResponse" : printBudgetAddSuccessful(budget, budgets.size())
-note left
-    addBudget() calls printBudgetAddSucessful()
-    to show the user a success message
- end note
 activate "BudgetUIResponse"
 "BudgetUIResponse" -> User
 return
@@ -71,22 +48,12 @@ return
 
 deactivate "BudgetCommand"
 
-else actions is set
-
+else action is set
 "BudgetCommand" -> "BudgetCommand": executeSetBudget(budgetAction, requiredParams)
-note left
-    if set then call
-    BudgetAction.setBudget()
- end note
 activate "BudgetCommand"
 "BudgetCommand" -> "BudgetAction" : setBudget(budgetName, budgetLimit)
-
 activate "BudgetAction"
 "BudgetAction" -> "BudgetUIResponse" : printBudgetSetSuccessful(budget, budgets.size())
-note left
-    setBudget() calls printBudgetSetSucessful
-    to show the user a success message
- end note
 activate "BudgetUIResponse"
 "BudgetUIResponse" -> User
 return
@@ -94,20 +61,12 @@ return
 
 deactivate "BudgetCommand"
 
-else actions is del
+else action is del
 "BudgetCommand" -> "BudgetCommand": executeDelBudget(budgetAction, requiredParams, expenses)
 activate "BudgetCommand"
 "BudgetCommand" -> "BudgetAction" : deleteBudget(budgetName, expenses)
-note left
-    if del then call
-    BudgetAction.deleteBudget()
- end note
 activate "BudgetAction"
 "BudgetAction" -> "BudgetUIResponse" : printBudgetDelSuccessful(budget, budgets.size(), noOfDeletedExpenses)
-note left
-    deleteBudget() calls printBudgetDelSucessful()
-    to show the user a success message
- end note
 activate "BudgetUIResponse"
 "BudgetUIResponse" -> User
 return
@@ -115,20 +74,12 @@ return
 
 deactivate "BudgetCommand"
 
-else actions is list
+else action is list
 "BudgetCommand" -> "BudgetCommand": executeListBudget(budgetAction, optionalParams, expenses)
 activate "BudgetCommand"
 "BudgetCommand" -> "BudgetAction" : printBudgets(month, year, expenses)
-note left
-    if list then call
-    BudgetAction.printBudget()
- end note
 activate "BudgetAction"
 "BudgetAction" -> "BudgetUIResponse" : printListBudgets(budgets, budgetsExpenseTotal, month, year, longestBudgetName)
-note left
-    printBudget() calls printListBudgets()
-    to show the list of the budgets in program
- end note
 activate "BudgetUIResponse"
 "BudgetUIResponse" -> User
 return
@@ -136,21 +87,12 @@ return
 
 deactivate "BudgetCommand"
 
-else actions is help
+else action is help
 "BudgetCommand" -> "BudgetCommand": executeHelpBudget(budgetAction)
-note left
-    if help then call
-    BudgetAction.budgetHelp()
- end note
 activate "BudgetCommand"
 "BudgetCommand" -> "BudgetAction" : budgetHelp()
 activate "BudgetAction"
 "BudgetAction" -> "BudgetUIResponse" : printBudgetCommands()
-note left
-    budgetHelp() calls printBudgetCommands()
-    to show the list of commands that can be used
-    in the budget feature
- end note
 activate "BudgetUIResponse"
 "BudgetUIResponse" -> User
 return
@@ -163,13 +105,8 @@ end
 activate "Data"
 return
 deactivate "Data"
-"BudgetCommand" --> "BudgetCommand"
+
 deactivate "BudgetCommand"
-
-
-
-<-- "BudgetCommand"
+ <-- "BudgetCommand":
 deactivate "BudgetCommand"
-
-
 @enduml

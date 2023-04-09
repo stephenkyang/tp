@@ -71,12 +71,6 @@ public class StatsCommand extends Command {
             year = Integer.parseInt(optionalParams[1]);
         }
 
-        //if (optionalParams[0] == null && optionalParams[1] != null){
-          //  month = 1;
-           // year = Integer.parseInt(optionalParams[1]);
-
-       // }
-
         // verbose for deposit and expense
         if (optionalParams[2] != null) {
             String verboseOptions = optionalParams[2];
