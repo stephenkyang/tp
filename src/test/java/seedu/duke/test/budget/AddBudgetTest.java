@@ -34,10 +34,23 @@ class AddCommandTest {
         budgetName = "food";
         budgetLimit = 123.0;
         budgetAction.addBudget(budgetName, budgetLimit);
-        assertEquals(budgetList.size(), 2);
+        assertEquals(2, budgetList.size());
         assert budgetList.size() == 2 : "second budget creation error";
         assertEquals(budgetList, budgetAction.getBudgets());
     }
+
+    @Test
+    void addBudget_negativeBudgetLimit_throwError() {
+        budgetList.clear();
+        String budgetName = "transport";
+        Double budgetLimit = -10.0;
+        try {
+            budgetAction.addBudget(budgetName, budgetLimit);
+        } catch (AssertionError e) {
+            System.out.println("Invalid input");
+        }
+    }
+
 
     @Test
     void addBudget_duplicateBudget_throwError() {
@@ -49,7 +62,42 @@ class AddCommandTest {
         Double duplicateBudgetLimit = 20.0;
         budgetAction.addBudget(duplicateBudgetName, duplicateBudgetLimit);
         assert budgetList.size() == 1 : "budget creation error";
-        assertEquals(budgetList.size(), 1);
+        assertEquals(1, budgetList.size());
 
     }
+
+    @Test
+    void addBudget_nullBudgetLimit_throwError() {
+
+        budgetList.clear();
+        String budgetName = "test";
+        Double budgetLimit = null;
+        try {
+            budgetAction.addBudget(budgetName, budgetLimit);
+        } catch (NullPointerException e) {
+            System.out.println("Invalid input");
+        }
+
+        assertEquals(0, budgetList.size());
+
+    }
+
+
+    @Test
+    void addBudget_emojiBudget_success() {
+
+        budgetList.clear();
+        String budgetName = "\uD83D\uDE1C";
+        Double budgetLimit = 100.0;
+        try {
+            budgetAction.addBudget(budgetName, budgetLimit);
+        } catch (NullPointerException e) {
+            System.out.println("Invalid input");
+        }
+
+        assertEquals(1, budgetList.size());
+
+    }
+
+
 }

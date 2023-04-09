@@ -193,7 +193,10 @@ return
 
 deactivate "Data"
 
-destroy "DepositCommand"
+"DepositCommand" --> "DepositCommand"
+deactivate "DepositCommand"
+
+<-- "DepositCommand"
 deactivate "DepositCommand"
 
 @enduml

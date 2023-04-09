@@ -10,6 +10,6 @@ node "Budget Buddy" {
 [User] -> [Ui (command line interface)]
 [Logic] <--> [Ui (command line interface)]
 [Logic] <--> [Data]
-[Data] <--> [Storage] : Google Gson
+[Data] <--> [Storage] : Json format
 [Logic] <--> [Storage]
 @enduml

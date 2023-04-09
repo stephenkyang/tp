@@ -1,5 +1,4 @@
 @startuml
-
 hide footbox
 
 participant BudgetCommand
@@ -164,8 +163,13 @@ end
 activate "Data"
 return
 deactivate "Data"
-
-destroy "BudgetCommand"
+"BudgetCommand" --> "BudgetCommand"
 deactivate "BudgetCommand"
+
+
+
+<-- "BudgetCommand"
+deactivate "BudgetCommand"
+
 
 @enduml

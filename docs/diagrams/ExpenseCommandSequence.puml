@@ -214,7 +214,10 @@ activate "Data"
 return
 deactivate "Data"
 
-destroy "ExpenseCommand"
+"ExpenseCommand" --> "ExpenseCommand"
+deactivate "ExpenseCommand"
+
+<-- "ExpenseCommand"
 deactivate "ExpenseCommand"
 
 @enduml
