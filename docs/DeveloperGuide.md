@@ -142,6 +142,10 @@ and the abstract
 
 ![DepositCommand.png](images/DepositCommand.png)
 
+### DepositCommand Sequence
+
+![img.png](images/DepositCommandSequence.png)
+
 ### Design & Implementation of the Deposit Feature
 
 Like all other functionalities of BudgetBuddy, the deposit feature is heavily modularized and designed with an OOP lens.
