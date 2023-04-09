@@ -50,5 +50,7 @@ to my tP Code Dashboard
 2. I added, edited and maintained the sequence diagram for the `ExpenseCommand` class, to show how inputs related to the
    expense command are parsed and processed and how expense commands are executed.
 
-   
+#### Contributions to team-based tasks
+
+1. I took initiative in assigning myself issues from the issue tracker that was not from my part of the project to solve.
    

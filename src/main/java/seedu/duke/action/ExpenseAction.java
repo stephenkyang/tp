@@ -17,6 +17,10 @@ import seedu.duke.model.Expense;
 import seedu.duke.util.Commons;
 
 //@@author tzixi
+
+/**
+ * Contains methods related to expense function.
+ */
 public class ExpenseAction {
     private static Comparator<Expense> comparator = (expense1, expense2) -> expense1.getDate()
             .compareTo(expense2.getDate());

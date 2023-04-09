@@ -267,6 +267,18 @@ The following expense has been removed:
 1. [transport] bus ($0.50) on 31 Mar 2023
 _______________
 ```
+You can list out the expenses of the month:
+
+expense list
+
+```
+expense list
+_______________
+Here are your expenses for this month for all:
+1. [food] salmon don ($7.00) on 01 Apr 2023
+2. [transport] mrt ($1.00) on 03 Apr 2023
+_______________
+```
 
 You can also list the expenses made within a specific start and end date, with an
 optional modifier for the category of the expenses in that timeframe:
