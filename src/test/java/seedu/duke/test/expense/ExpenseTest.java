@@ -5,7 +5,6 @@ import seedu.duke.Ui;
 import seedu.duke.action.BudgetAction;
 import seedu.duke.action.ExpenseAction;
 import seedu.duke.exception.BBException;
-import seedu.duke.exception.GlobalDateAfterTodayException;
 import seedu.duke.exception.GlobalDateFromAfterToException;
 import seedu.duke.exception.GlobalInvalidNumberException;
 import seedu.duke.model.Budget;
@@ -67,55 +66,51 @@ public class ExpenseTest {
         assertEquals(0, expenseList.size());
     }
 
-        @Test
-        void findExpense() {
-            String expenseCat = "Food";
-            Double budgetLimit = 100.0;
-            budgetAction.addBudget(expenseCat, budgetLimit);
+    @Test
+    void findExpense() {
+        String expenseCat = "Food";
+        Double budgetLimit = 100.0;
+        budgetAction.addBudget(expenseCat, budgetLimit);
 
-            String[] expenseNames = {"apple", "pear", "orange", "pineapple"};
-            double expenseAmount = 20.00;
-            LocalDate[] expenseDate = {LocalDate.of(2002, 1,1),
-                    LocalDate.of(2023, 4,9),
-                    LocalDate.now(), LocalDate.now()};
-            try {
-                for (int i = 0; i < expenseNames.length ; i++) {
-                    expenseAction.addExpense(expenseCat, expenseNames[i], expenseAmount, expenseDate[i], budgetList);
-                }
-            } catch (BBException e) {
-                System.out.println("fail");
+        String[] expenseNames = {"apple", "pear", "orange", "pineapple"};
+        double expenseAmount = 20.00;
+        LocalDate[] expenseDate = {LocalDate.of(2002, 1,1),
+                LocalDate.of(2023, 4,9),
+                LocalDate.now(), LocalDate.now()};
+        try {
+            for (int i = 0; i < expenseNames.length ; i++) {
+                expenseAction.addExpense(expenseCat, expenseNames[i], expenseAmount, expenseDate[i], budgetList);
             }
+        } catch (BBException e) {
+            System.out.println("fail");
+        }
 
-            assert expenseList.size() != 0 : "add failed";
-            assertEquals(4, expenseList.size());
-            try {
-                expenseAction.clearExpenses(expenseDate[0], expenseDate[0], expenseCat);
-            } catch (GlobalDateFromAfterToException e) {
+        assert expenseList.size() != 0 : "add failed";
+        assertEquals(4, expenseList.size());
+        try {
+            expenseAction.clearExpenses(expenseDate[0], expenseDate[0], expenseCat);
+        } catch (GlobalDateFromAfterToException e) {
+            fail();
+        }
+        assert expenseList.size() != 4 : "clear failed";
+        assertEquals(3, expenseList.size());
+
+        setUpStreams();
+        expenseAction.findExpenses("pear");
+        String outContentInString = outContent.toString();
+        String newline = System.lineSeparator();
+        String expectedOutput = ("_______________" + newline +
+                "Here are the expenses you searched:" + newline +
+                "Expense No 2. [Food] pear ($20.00) on 09 Apr 2023" + newline +
+                "_______________" + newline);
+        for (int i = 0; i < expectedOutput.length(); i++) {
+            if (expectedOutput.charAt(i) != outContentInString.charAt(i)) {
+                System.out.println(i);
+                assertEquals(i, -1);
                 fail();
             }
-            assert expenseList.size() != 4 : "clear failed";
-            assertEquals(3, expenseList.size());
-
-
-
-
-
-            setUpStreams();
-            expenseAction.findExpenses("pear");
-            String outContentInString = outContent.toString();
-            String newline = System.lineSeparator();
-            String expectedOutput = ("_______________" + newline +
-                    "Here are the expenses you searched:" + newline +
-                    "Expense No 2. [Food] pear ($20.00) on 09 Apr 2023" + newline +
-                    "_______________" + newline);
-            for (int i = 0; i < expectedOutput.length(); i++) {
-                if (expectedOutput.charAt(i) != outContentInString.charAt(i)) {
-                    System.out.println(i);
-                    assertEquals(i, -1);
-                    fail();
-                }
-            }
-            restoreStreams();
+        }
+        restoreStreams();
     }
 
     //@@author pinyoko573
