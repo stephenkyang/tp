@@ -62,7 +62,7 @@ note left
 activate "BudgetAction"
 "BudgetAction" -> "BudgetUIResponse" : printBudgetAddSuccessful(budget, budgets.size())
 note left
-    addBudget() calls printBudgetAddSucessful
+    addBudget() calls printBudgetAddSucessful()
     to show the user a success message
  end note
 activate "BudgetUIResponse"
@@ -106,7 +106,7 @@ note left
 activate "BudgetAction"
 "BudgetAction" -> "BudgetUIResponse" : printBudgetDelSuccessful(budget, budgets.size(), noOfDeletedExpenses)
 note left
-    deleteBudget() calls printBudgetDelSucessful
+    deleteBudget() calls printBudgetDelSucessful()
     to show the user a success message
  end note
 activate "BudgetUIResponse"
@@ -127,7 +127,7 @@ note left
 activate "BudgetAction"
 "BudgetAction" -> "BudgetUIResponse" : printListBudgets(budgets, budgetsExpenseTotal, month, year, longestBudgetName)
 note left
-    printBudget() calls printistBudgets()
+    printBudget() calls printListBudgets()
     to show the list of the budgets in program
  end note
 activate "BudgetUIResponse"
