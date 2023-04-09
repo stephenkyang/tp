@@ -47,6 +47,10 @@ public class StatsAction {
         // Check if month and year is valid
         LocalDate endDate = Commons.isValidMonthYear(month, year);
         LocalDate startDate = endDate.with(TemporalAdjusters.firstDayOfMonth());
+        
+        assert endDate != null;
+        assert startDate != null;
+        assert endDate.isAfter(startDate);
 
         // Filter deposits by date
         ArrayList<Deposit> filteredDeposits = DepositAction.filterDepositsByDate(deposits, startDate, endDate);
