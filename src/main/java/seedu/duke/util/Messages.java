@@ -90,7 +90,6 @@ public enum Messages {
         + "   expense find /n (keyword)" + System.lineSeparator()
         + "5. You can clear expenses (by category, date or both): " + System.lineSeparator()
         + "   expense clear [optional] /c (category name) /f DD-MM-YYYY /t DD-MM-YYYY"),
-    EXPENSE_ADD_BUDGET_STATUS(System.lineSeparator() + "Your current progress in %s for %s %d : " + System.lineSeparator() + "%s ($%.2f/%.2f)"),
 
     STATS_PRINT_INTRO("Your current progress for %s %d:"),
     STATS_PRINT_DEPOSITS(System.lineSeparator() + "Deposits"),
