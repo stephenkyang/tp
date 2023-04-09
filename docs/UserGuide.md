@@ -182,6 +182,12 @@ The deposit name must be less than 30 characters, and the date can only be input
 
 deposit add /n (name) /a (amount) [optional] /d DD-MM-YYYY
 
+The parameters are the following:
+
+    name: String
+    amount: Integer
+    date: datetime in the form of DD-MM-YYY
+
 ```
 deposit add /n picked up from ground /a 50.00 /d 31-03-2023
 _______________
@@ -194,6 +200,9 @@ To delete the deposit use the this command. The deposit number can be found with
 
 deposit del /n (deposit number)
 
+The parameters are the following:
+
+    deposit number: Integer
 ```
 deposit del /n 1
 _______________
@@ -205,6 +214,11 @@ _______________
 To list deposits, use this command. The optional parameter are dates from the start to the end range.
 
 deposit list [optional] /f DD-MM-YYYY /t DD-MM-YYYY
+
+The parameters are the following:
+
+    start date: datetime in the form of DD-MM-YYY
+    end date: datetime in the form of DD-MM-YYY
 
 ```
 deposit list
@@ -219,6 +233,10 @@ To find a deposit given a keyword, use this commmand.
 
 deposit find /n (keyword)
 
+The parameters are the following:
+
+    keyword: String
+
 ```
 deposit find /n bank
 _______________
@@ -230,6 +248,11 @@ _______________
 To clear all deposits, use this command. Optionally, if you want to clear within a range, use the optional params.
 
 deposit clear [optional] /f DD-MM-YYYY /t DD-MM-YYYY
+
+The parameters are the following:
+
+    (optional) start date: datetime in the form of DD-MM-YYY
+    (optional) end date: datetime in the form of DD-MM-YYY
 
 ```
 deposit clear
