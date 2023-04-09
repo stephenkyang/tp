@@ -2,75 +2,84 @@
 
 hide footbox
 
- -> ":StatsCommand":
+participant StatsCommand
+participant StatsAction
+participant Data
+participant DepositUIResponse
+participant ExpenseUIResponse
+participant StatsUIResponse
+actor User
 
-activate ":StatsCommand"
-":StatsCommand" -> ":StatsCommand": execute(data, ui)
-activate  ":StatsCommand"
-":StatsCommand" -> ":StatsAction" :statsAction
-activate ":StatsAction"
+ -> "StatsCommand":
 
-":StatsAction" -> ":data" :getBudgets()
-activate ":data"
-return budgets: ArrayList<Budget>
-deactivate ":data"
-":StatsAction" -> ":data" :getDeposits()
-activate ":data"
-return deposits: ArrayList<Deposit>
-deactivate ":data"
-":StatsAction" -> ":data" :getExpenses()
-activate ":data"
-return expenses: ArrayList<Expense>
-deactivate ":data"
+activate "StatsCommand"
+"StatsCommand" -> "StatsCommand": execute(data, ui)
+activate  "StatsCommand"
+deactivate "Data"
 
+"StatsCommand" -> "StatsAction" ** : (data,ui)
+activate "StatsAction"
 
-deactivate ":StatsAction"
+"StatsAction" -> "Data": getBudgets()
+activate "Data"
+return expenses: Budget[]
+"StatsAction" -> "Data": getDeposits()
+activate "Data"
+return expenses: Deposit[]
+"StatsAction" -> "Data": getExpenses()
+activate "Data"
+return expenses: Expense[]
 
+"StatsAction" -> "StatsUIResponse" ** : (ui)
+activate "StatsUIResponse"
+"StatsUIResponse" --> "StatsAction"
+deactivate "StatsUIResponse"
 
-
-alt action is show
-":StatsCommand" -> ":StatsCommand" :executeShowStats(statsAction, optionalParams)
-activate ":StatsCommand"
-
-
-":StatsCommand" -> ":LocalDate":
-activate ":LocalDate"
-":LocalDate" -> ":LocalDate": getMonthValue()
-activate ":LocalDate"
-return month: Integer
-return month
+return StatsAction: StatsAction
+deactivate "StatsAction"
 
 
-":StatsCommand" -> ":LocalDate":
-activate ":LocalDate"
-":LocalDate" -> ":LocalDate": getYear()
-activate ":LocalDate"
-return year: Integer
-return year
+alt actions is show
+"StatsCommand" -> "StatsCommand": executeShowStats(statsAction, optionalParams)
+activate "StatsCommand"
+"StatsCommand" -> "StatsAction" : showStats(month, year, showDeposit, showExpense)
+activate "StatsAction"
 
-":StatsCommand" -> ":StatsAction" :month, year, showDeposit, showExpense
-activate ":StatsAction"
-":StatsAction" -> ":StatsAction" :showStats(month, year, showDeposit, showExpense)
-activate ":StatsAction"
-return
-return
-
-else action is help
-activate ":StatsCommand"
-":StatsCommand" -> ":StatsAction"
-activate ":StatsAction"
-":StatsAction" -> ":StatsAction" : statsHelp()
-activate ":StatsAction"
-return
-return
-
+opt showDeposit
+"StatsAction" -> "DepositUIResponse": printDeposits(filteredDeposits)
+activate "DepositUIResponse"
+return depositMsg
 end
 
+opt showExpense
+"StatsAction" -> "ExpenseUIResponse": printExpenses(filteredExpenses)
+activate "ExpenseUIResponse"
+return expenseMsg
+end
 
-deactivate ":StatsCommand"
-deactivate ":StatsCommand"
+"StatsAction" -> "StatsUIResponse" : printStats(month, year, totalBudgets, totalDeposits, totalExpenses, budgetMsg, depositMsg, expenseMsg)
+activate "StatsUIResponse"
+"StatsUIResponse" -> User
+return
+return
 
+deactivate "StatsCommand"
 
+else actions is help
+"StatsCommand" -> "StatsCommand": executeHelpStats(statsAction)
+activate "StatsCommand"
+"StatsCommand" -> "StatsAction" : statsHelp()
+activate "StatsAction"
+"StatsAction" -> "StatsUIResponse" : printStatsCommands()
+activate "StatsUIResponse"
+"StatsUIResponse" -> User
+return
+return
 
+deactivate "StatsCommand"
+end
+
+destroy "StatsCommand"
+deactivate "StatsCommand"
 
 @enduml

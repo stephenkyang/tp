@@ -1,0 +1,126 @@
+@startuml
+
+hide footbox
+
+ -> ExpenseCommand:
+
+activate ExpenseCommand
+ExpenseCommand -> ExpenseCommand: execute(data, ui)
+activate  ExpenseCommand
+ExpenseCommand -> ":data": getExpenses()
+
+activate ":data"
+return Expenses: ArrayList<Expense>
+deactivate ":data"
+
+ExpenseCommand -> ":data": getExpenses()
+
+activate ":data"
+return Expenses: ArrayList<Expense>
+
+
+activate ":ExpenseAction"
+ExpenseCommand -> ":ExpenseAction" : Expenses, ui
+activate ":data"
+":ExpenseAction" -> ExpenseCommand : ExpenseAction :ExpenseAction
+deactivate ":ExpenseAction"
+
+
+alt action is add
+ExpenseCommand -> ExpenseCommand: executeAddExpense(expenseAction, requiredParams, optionalParams);
+activate ExpenseCommand
+ExpenseCommand -> ":ExpenseAction" : expenseCategory, expenseName, expenseAmount, expenseDate, budgets
+activate ":ExpenseAction"
+":ExpenseAction" -> ":ExpenseAction" : addExpense(expenseCategory, expenseName, expenseAmount, expenseDate, budgets)
+activate ":ExpenseAction"
+
+return
+return
+
+deactivate ExpenseCommand
+
+
+else action is find
+ExpenseCommand -> ExpenseCommand: executeFindExpense(expenseAction, requiredParams)
+
+activate ExpenseCommand
+ExpenseCommand -> ":ExpenseAction" : expenseName
+activate ":ExpenseAction"
+":ExpenseAction" -> ":ExpenseAction" : findExpense(expenseName)
+activate ":ExpenseAction"
+
+return
+return
+
+deactivate ExpenseCommand
+
+
+else action is del
+ExpenseCommand -> ExpenseCommand: executeDelExpense(ExpenseAction, requiredParams)
+activate ExpenseCommand
+ExpenseCommand -> ":ExpenseAction" : expenseNo
+activate ":ExpenseAction"
+":ExpenseAction" -> ":ExpenseAction" : deleteExpense(expenseNo)
+activate ":ExpenseAction"
+
+return
+return
+
+deactivate ExpenseCommand
+
+else action is list
+
+ExpenseCommand -> ExpenseCommand: executeListExpense(ExpenseAction, optionalParams)
+activate ExpenseCommand
+ExpenseCommand -> ":ExpenseAction" : expenseFrom, expenseTo, expenseCategory
+activate ":ExpenseAction"
+":ExpenseAction" -> ":ExpenseAction" : listExpensesRange(expenseFrom, expenseTo, expenseCategory)
+activate ":ExpenseAction"
+
+return
+return
+
+deactivate ExpenseCommand
+
+else action is clear
+ExpenseCommand -> ExpenseCommand: executeClearExpense(ExpenseAction, optionalParams)
+activate ExpenseCommand
+ExpenseCommand -> ":ExpenseAction" : expenseFrom, expenseTo, expenseCategory
+activate ":ExpenseAction"
+":ExpenseAction" -> ":ExpenseAction" : clearExpense(expenseFrom, expenseTo, expenseCategory)
+activate ":ExpenseAction"
+return
+return
+
+deactivate ExpenseCommand
+
+else action is help
+ExpenseCommand -> ExpenseCommand: executeHelpExpense(expenseAction)
+activate ExpenseCommand
+ExpenseCommand -> ":ExpenseAction"
+activate ":ExpenseAction"
+":ExpenseAction" -> ":ExpenseAction" : expenseHelp()
+activate ":ExpenseAction"
+return
+return
+
+
+deactivate ExpenseCommand
+
+
+
+end
+ExpenseCommand -> ":data": exportData()
+activate ":data"
+return
+
+deactivate ":data"
+destroy ":data"
+
+deactivate ":data"
+deactivate ExpenseCommand
+
+
+
+
+@enduml
