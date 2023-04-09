@@ -19,7 +19,7 @@ public enum ErrorMessages {
     ERROR_BUDGET_LIST_INVALID_MONTHYEAR("Please input a valid month or month & year (in YYYY format) " +
         "that is before today."),
 
-    ERROR_DEPOSIT_INVALID_ACTION("Invalid action for deposit. Use these actions: add, del, list, clear, help"),
+    ERROR_DEPOSIT_INVALID_ACTION("Invalid action for deposit. Use these actions: add, del, list, find, clear, help"),
     ERROR_DEPOSIT_ADD_INVALID_PARAM("Invalid parameters. Example: deposit add /n lottery /a 3000.00 [/d] 23-03-2023"),
     ERROR_DEPOSIT_DEL_INVALID_PARAM("Invalid parameters. Example: deposit del /n 1"),
     ERROR_DEPOSIT_FIND_INVALID_PARAM("Invalid parameters. Example: deposit find /n lottery"),
@@ -27,7 +27,7 @@ public enum ErrorMessages {
     ERROR_DEPOSIT_CLEAR_INVALID_PARAM("Invalid parameters. Example: deposit" +
         " clear /f 23-01-2000 /t 23-03-2023"),
     
-    ERROR_EXPENSE_INVALID_ACTION("Invalid action for expense. Use these actions: add, del, list"),
+    ERROR_EXPENSE_INVALID_ACTION("Invalid action for expense. Use these actions: add, del, list, find, clear, help"),
     ERROR_EXPENSE_ADD_INVALID_PARAM("Invalid parameters. Example: expense add /c transport /n mrt /a 1.00" +
         " [/d] 23-03-2023"),
     ERROR_EXPENSE_DEL_INVALID_PARAM("Invalid parameters. Example: expense del /n mrt"),

@@ -68,11 +68,11 @@ For every command that you want to execute, the input of the command must be str
 The following points apply to the rest of the commands below.
 - Command, action and parameter(s) must be keyed in in the input.
 - Some commands have optional parameters `[optional]`, which it is not required to key in.
-- The command and action names are not case sensitive, but the parameters and value of parameters are.
+- The command and action names are not case sensitive, but the parameters and value of parameters **are**.
 - It is possible to rearrange the order of parameters.
-- For values that accept double (or decimal), the application will only take the first 2 decimal places.
-- Value of the parameter must not contain any slash (`/`).
-- Please input the parameters in the correct format so as to prevent abnormal behavior.
+- For values that **accept double (or decimal)**, the application will only take the first 2 decimal places.
+- Value of the parameter **must not contain any slash (`/`)**.
+- Please input the parameters in the **correct format** so as to prevent abnormal behavior. Any other irrelevant parameter that you input will be ignored.
 
 ### 1. Help
 
@@ -131,7 +131,7 @@ _______________
 ```
 
 #### Set Budget
-You can also set and modify that was wrongly inserted:
+You can also modify a budget that was wrongly inserted:
 
 Command: `budget set /c (category) /a (spending limit)`
 
@@ -160,7 +160,7 @@ _______________
 #### List Budgets
 You can list down the budgets that you've have added, which will also show each budget's progress for the current month.<br>
 Alternatively, you may also show the progress for a certain month & year.<br>
-Take note that you can only input a month & year which is before today, and the year must be between 1000 to current year.
+Take note that you can only input a month & year which is before today, and the year must be above 1000.
 
 Command: `budget list [optional] /m month (1-12) /y year (in YYYY)`
 
@@ -179,7 +179,7 @@ _______________
 You can add a deposit by specifying the name, amount and date (optional)<br>
 The name of the deposit must be less than 30 characters.<br>
 If no date is listed, it is treated as today.<br>
-However if you would like to input a date, the date must be before today.
+However if you would like to input a date, the date must be before today and date of the year must be above 1000.
 
 Command: `deposit add /n (name) /a (amount) [optional] /d DD-MM-YYYY`
 ```
@@ -203,10 +203,10 @@ _______________
 ```
 
 #### List Deposits
-You can list down the deposits that you've added, which will show the previous deposits and current deposits for this month:<br>
+You can list down the deposits that you've added, which will show the previous deposits and current deposits for this month.<br>
 Alternatively, you may also list down by date range.<br>
 If either from or to date is entered, it will show the deposits that are from/until that date.<br>
-Take note that for *from date*, you can only input a month & year which is before today, and the year must be between 1000 to current year.
+Take note that the year of any date input must be above 1000.
 
 Command: `deposit list [optional] /f DD-MM-YYYY /t DD-MM-YYYY`
 ```
@@ -238,7 +238,7 @@ _______________
 You can delete multiple deposits at once.<br>
 Alternatively if you want to delete specific expenses, you can delete by date range.<br>
 If either from or to date is entered, it will show the deposits that are from/until that date.<br>
-Take note that for *from date*, you can only input a month & year which is before today, and the year must be between 1000 to current year.
+Take note that the year of any date input must be above 1000.
 
 **WARNING: Entering `deposit clear` will delete all deposits permanently. This action is irreversible!**
 
@@ -261,7 +261,7 @@ _______________
 To add an expense, type the category of the budget followed by the name, amount and date (optional).<br>
 The category of budget must exist in the list of budgets and the name of the expense must be less than 30 characters.<br>
 If no date is listed, it is treated as today.<br>
-However if you would like to input a date, the date must be before today.
+However if you would like to input a date, the date must be before today and date of the year must be above 1000.
 
 Command: `expense add /c (category name) /n (name) /a (amount) [optional] /d DD-MM-YYYY`
 ```
@@ -288,7 +288,7 @@ _______________
 You can list down the expenses that you've added, which will show the previous expenses and current expenses for this month:<br>
 Alternatively, you may also list down by a specific category, or date range.<br>
 If either from or to date is entered, it will show the expenses that are from/until that date.<br>
-Take note that for *from date*, you can only input a month & year which is before today, and the year must be between 1000 to current year.
+Take note that the year of any date input must be above 1000.
 
 Command: `expense list [optional] /c (category name) /f DD-MM-YYYY /t DD-MM-YYYY`
 ```
@@ -319,7 +319,7 @@ _______________
 You can delete multiple expenses at once.<br>
 Alternatively if you want to delete specific expenses, you can delete by the category name, or a date range.<br>
 If either from or to date is entered, it will show the expenses that are from/until that date.<br>
-Take note that for *from date*, you can only input a month & year which is before today, and the year must be between 1000 to current year.
+Take note that the year of any date input must be above 1000.
 
 **WARNING: Entering `expense clear` will delete all expenses permanently. This action is irreversible!**
 
@@ -340,7 +340,7 @@ _______________
 Finally, after adding all your budgets, deposits and expenses, you can display your entire budget progress for the current month.<br>
 Alternatively, you may display your progress on a certain month/year.<br>
 If you wish to view all your deposits, expenses or both, you can also input the verbose option.<br>
-Take note that you can only input a month & year which is before today, and the year must be between 1000 to current year.
+Take note that you can only input a month & year which is before today, and the year must be above 1000.
 
 The message of the overall budget is determined by:<br>
 total expenses / total budget limit + total deposits
