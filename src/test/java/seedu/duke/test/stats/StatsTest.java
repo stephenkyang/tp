@@ -4,6 +4,7 @@ import seedu.duke.Data;
 import seedu.duke.action.BudgetAction;
 import seedu.duke.action.ExpenseAction;
 import seedu.duke.action.StatsAction;
+import seedu.duke.command.StatsCommand;
 import seedu.duke.exception.BBException;
 import seedu.duke.exception.StatsInvalidOptionsException;
 import seedu.duke.model.Budget;
@@ -17,6 +18,7 @@ import seedu.duke.action.DepositAction;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.fail;
 
 //@@author SaiChaitanya13
@@ -65,6 +67,19 @@ public class StatsTest {
             fail();
         }
     }
+
+    @Test
+    public void execute_noError(){
+        StatsCommand statsCommand = new StatsCommand();
+        Data data = new Data();
+        Ui ui = new Ui();
+
+        assertDoesNotThrow(
+                () -> statsCommand.execute(data, ui)
+        );
+
+    }
+
 
 
 }
