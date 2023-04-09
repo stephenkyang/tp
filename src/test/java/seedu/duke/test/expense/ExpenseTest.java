@@ -37,10 +37,12 @@ public class ExpenseTest {
         System.setOut(originalOut);
     }
 
+
+    //@@author tzixi
     @Test
     void addAndDeleteExpense() {
         String budgetName = "food";
-        Double budgetLimit = 10.0;
+        double budgetLimit = 10.0;
         budgetAction.addBudget(budgetName, budgetLimit);
 
         String expenseName = "quesadilla";
@@ -66,10 +68,11 @@ public class ExpenseTest {
         assertEquals(0, expenseList.size());
     }
 
+    //@@author tzixi
     @Test
     void findExpense() {
         String expenseCat = "Food";
-        Double budgetLimit = 100.0;
+        double budgetLimit = 100.0;
         budgetAction.addBudget(expenseCat, budgetLimit);
 
         String[] expenseNames = {"apple", "pear", "orange", "pineapple"};
@@ -95,6 +98,10 @@ public class ExpenseTest {
         assert expenseList.size() != 4 : "clear failed";
         assertEquals(3, expenseList.size());
 
+
+
+
+
         setUpStreams();
         expenseAction.findExpenses("pear");
         String outContentInString = outContent.toString();
@@ -111,6 +118,66 @@ public class ExpenseTest {
             }
         }
         restoreStreams();
+    }
+
+    //@@author tzixi
+    @Test
+    void expenseFromToClear() {
+        String expenseCat = "Food";
+        double budgetLimit = 100.0;
+        budgetAction.addBudget(expenseCat, budgetLimit);
+
+        String[] expenseNames = {"apple", "pear", "pineapple"};
+        double expenseAmount = 20.00;
+        LocalDate[] expenseDate = {LocalDate.of(2002, 1,1),
+                LocalDate.of(2023, 4,9),
+                LocalDate.now(), LocalDate.now()};
+        try {
+            for (int i = 0; i < expenseNames.length; i++) {
+                expenseAction.addExpense(expenseCat, expenseNames[i], expenseAmount, expenseDate[i], budgetList);
+            }
+        } catch (BBException e) {
+            fail();
+        }
+
+        assert expenseList.size() != 0 : "add failed";
+        assertEquals(3, expenseList.size());
+        try {
+            expenseAction.clearExpenses(expenseDate[1], expenseDate[2], expenseCat);
+        } catch (GlobalDateFromAfterToException e) {
+            fail();
+        }
+        assert expenseList.size() != 2 : "clear failed";
+        assertEquals(1, expenseList.size());
+    }
+
+    //@@author tzixi
+    @Test
+    void expenseClear() {
+        String expenseCat = "Food";
+        double budgetLimit = 100.0;
+        budgetAction.addBudget(expenseCat, budgetLimit);
+
+        String[] expenseNames = {"apple", "pear"};
+        double expenseAmount = 20.00;
+        LocalDate expenseDate = LocalDate.now();
+        try {
+            for (String name : expenseNames) {
+                expenseAction.addExpense(expenseCat, name, expenseAmount, expenseDate, budgetList);
+            }
+        } catch (BBException e) {
+            fail();
+        }
+
+        assert expenseList.size() != 0 : "add failed";
+        assertEquals(2, expenseList.size());
+        try {
+            expenseAction.clearExpenses(expenseDate, expenseDate, expenseCat);
+        } catch (GlobalDateFromAfterToException e) {
+            fail();
+        }
+        assert expenseList.size() != 2 : "clear failed";
+        assertEquals(0, expenseList.size());
     }
 
     //@@author pinyoko573
