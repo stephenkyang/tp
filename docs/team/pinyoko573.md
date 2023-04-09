@@ -47,7 +47,9 @@ to my tP Code Dashboard
    
 2. Documented Main, Command components and non-functional requirements.
 
-3. Rectified user stories that are unclear. 
+3. Rectified user stories that are unclear.
+
+4. Wrote instructions for manual testing.
 
 
 #### Contributions to team-based tasks

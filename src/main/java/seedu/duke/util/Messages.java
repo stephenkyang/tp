@@ -13,12 +13,12 @@ public enum Messages {
         + "Budget Buddy is split into 4 main classifications:" + System.lineSeparator()
         + "1. Budget" + System.lineSeparator()
         + "   - Choose how much money you want to allocate to a budget of your specified name" + System.lineSeparator()
-        + "2. Expense" + System.lineSeparator()
-        + "   - track how much money you have spent, and link it to a certain budget of yours" + System.lineSeparator()
-        + "3. Deposit " + System.lineSeparator()
-        + "   - track how much money you have earned or received" + System.lineSeparator()
+        + "2. Deposit" + System.lineSeparator()
+        + "   - Track how much additional earnings you have made" + System.lineSeparator()
+        + "3. Expense " + System.lineSeparator()
+        + "   - Track how much money you have spent, and link it to a certain budget of yours" + System.lineSeparator()
         + "4. Stats " + System.lineSeparator()
-        + "   - shows the progress on spending so far as well as the total number of deposits" + System.lineSeparator()
+        + "   - shows the progress on your overall budget, deposit and expenses" + System.lineSeparator()
         + "To learn the specific commands for each category, input \"(category) help\""),
 
     BUDGET_BUDGET("%3d. %s ($%.2f/%.2f)"),
