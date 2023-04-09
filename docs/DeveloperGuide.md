@@ -104,13 +104,24 @@ Once a string `input` from the user has been deemed as a `Budget` command as exp
 
 ![BudgetCommandSequence.png](images/BudgetCommandSequence.png)
 
-1. The `BudgetCommand` object retrieves the existing `Budget` and `Exepnse` data stored in the `Data` class. This is retrieved using the getBudgets() and getExpenses() methods, which return the existing budgets and expenses as an array list.
+1. The `BudgetCommand` object retrieves the existing `Budget` and `Exepnse` data stored in the `Data` class. This is
+   retrieved using the getBudgets() and getExpenses() methods, which return the existing budgets and expenses as an
+   array list.
 2. The `BudgetAction` object is then created, which then creates a `BudgetUIResponse` object.
-3. Depending on the action of the `BudgetCommand`, different methods will be called to carry out the related task. The possible actions are add, set, del (delete), list and help.
-4. If the action is `add`, the `BudgetCommand` object will self invoke its own executeAddBudget() method, which calls the addBudget() method in the `BudgetAction` object. This then calls the printBudgetAddSuccessful() in the `BudgetUIResponse` object, which prints out a message on the command line interface for the user. The sequence will be similar for other `BudgetCommand` actions.
+3. Depending on the action of the `BudgetCommand`, different methods will be called to carry out the related task. The
+   possible actions are add, set, del (delete), list and help.
+4. If the action is `add`, the `BudgetCommand` object will self invoke its own executeAddBudget() method, which calls
+   the
+   addBudget() method in the `BudgetAction` object. This then calls the printBudgetAddSuccessful() in
+   the `BudgetUIResponse` object,
+   which prints out a message on the command line interface for the user.
+   The sequence will be similar for other `BudgetCommand` actions.
 5. Following this, the `BudgetAction` and `BudgetUiResponse` will reach the end of its lifeline.
-6. After calling the related methods based on the action, the `BudgetCommand` object will call the exportData() method in the `Data` object, to update the existing data.
-7. The `BudgetCommand` object then reaches the end of its lifeline, and returns to the `CommandParser` object that called it.
+6. After calling the related methods based on the action, the `BudgetCommand` object will call the exportData() method
+   in the `Data` object,
+   to update the existing data.
+7. The `BudgetCommand` object then reaches the end of its lifeline, and returns to the `CommandParser` object that
+   called it.
 
 ### Deposit Component
 
