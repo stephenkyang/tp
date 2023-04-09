@@ -94,6 +94,8 @@ The main 4 classes of BudgetBuddy are the `budget` , `deposit`, `expense` and `s
 
 ![Item.png](images/Item.png)
 
+**There are some variables and methods that are not shown in the class diagram for easier readability.**
+
 ### Budget Component
 
 #### BudgetCommand Class
@@ -147,6 +149,8 @@ and the abstract
 
 ![DepositCommand.png](images/DepositCommand.png)
 
+**There are some variables and methods that are not shown in the class diagram for easier readability.**
+
 ### DepositCommand Sequence
 
 ![img.png](images/DepositCommandSequence.png)
@@ -160,21 +164,6 @@ Flow of the DepositCommand:
    on the action to the user
 6. After DepositList is sucessfully manipulated (if necessary) and a text reponse is given, 
    DepositCommand exits.
-
-### Design & Implementation of the Deposit Feature
-
-Like all other functionalities of BudgetBuddy, the deposit feature is heavily modularized and designed with an OOP lens.
-Because of this,
-the parsing of user input, the parsers for each feature, and each feature's actions are all in separate classes.
-
-On a high level, the deposit feature starts with `CommandParser` taking in the input and choosing which `Command` class
-to execute from.
-This happens with all user input in BudgetBuddy. Then if the first word is "deposit," the `execute` function of
-the `DepositCommand` class
-will run, creating a new `DepositAction` class. The `execute` function will run a method corresponding to what the user
-inputs. The design
-of this three class system is meant to modularize the different aspects of the internal logic so future problems would
-be encapsulated in a specific location.
 
 ### Expense Component
 
@@ -197,6 +186,8 @@ and the abstract
 
 ![ExpenseCommand.png](images/ExpenseCommand.png)
 
+**There are some variables and methods that are not shown in the class diagram for easier readability.**
+
 ### ExpenseCommand Sequence
 
 Once a string `input` from the user has been deemed as an `Expense` command, the `input` will be passed into the
@@ -215,22 +206,6 @@ depending on the action.
 6. After ExpenseList is successfully manipulated (if necessary) and a text response is given,
    ExpenseCommand exits.
 
-### Design & Implementation of the Expense Feature
-
-The expense feature is similarly modularized and designed with an OOP lens. As such, its functionalities have been
-separated into different
-classes such as the parsing of user input, and the parsing and execution of each of its features.
-
-On a high level, the expense feature starts with `CommandParser` taking in the input and choosing which `Command` class
-to execute from.
-This happens with all user input in BudgetBuddy. Then, if the first word is "expense", the `execute` function of
-the `ExpenseCommand` class
-will run, creating a new `ExpenseAction` class. The `execute` function will run a method corresponding to what the user
-inputs. The design
-of this three class system is meant to modularize the different aspects of the internal logic so future problems would
-be encapsulated in
-a specific location.
-
 ### Stats Component
 
 ### StatsCommand Class
@@ -243,11 +218,9 @@ their current progress and if their expenses have exceeded their budget.
 
 ![StatsCommand.png](images/StatsCommand.png)
 
-### Design & Implementation of the Stats Feature
+**There are some variables and methods that are not shown in the class diagram for easier readability.**
 
-The stats feature, just like all other features, also is designed and implemented to incorporate good OOP. Therefore,
-there are
-separate classes for each part of the Stats Feature, which includes StatsAction, StatsUIResponse and StatsCommand.
+
 
 ![img.png](images/StatsCommandSequence.png)
 
