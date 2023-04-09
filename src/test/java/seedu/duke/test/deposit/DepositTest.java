@@ -46,7 +46,7 @@ public class DepositTest {
             depositAction.addDeposit(depositName, depositAmount, depositDate);
             assert depositList.size() != 0 : "add failed";
             assertEquals(1, depositList.size());
-        
+
             depositAction.deleteDeposit(1);
         } catch (GlobalInvalidNumberException | GlobalDateAfterTodayException e) {
             fail();
@@ -140,12 +140,10 @@ public class DepositTest {
         depositAction.findDeposits("haha2");
 
 
-        assertEquals("""
-                _______________
-                Here are the deposits you searched:
-                Deposit No 2. haha2 ($300.00) on 09 Apr 2023
-                _______________
-                """, outContent.toString());
+        assertEquals("_______________\n" +
+                "Here are the deposits you searched:\n" +
+                "Deposit No 2. haha2 ($300.00) on 09 Apr 2023\n" +
+                "_______________\n", outContent.toString());
         restoreStreams();
     }
 
