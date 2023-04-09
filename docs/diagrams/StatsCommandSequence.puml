@@ -78,8 +78,9 @@ return
 
 deactivate "StatsCommand"
 end
+"StatsCommand" --> "StatsCommand"
 
-destroy "StatsCommand"
 deactivate "StatsCommand"
-
+<-- "StatsCommand"
+deactivate "StatsCommand"
 @enduml
