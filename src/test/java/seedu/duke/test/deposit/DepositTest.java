@@ -140,10 +140,12 @@ public class DepositTest {
         depositAction.findDeposits("haha2");
 
 
-        assertEquals("_______________\n" +
-                "Here are the deposits you searched:\n" +
-                "Deposit No 2. haha2 ($300.00) on 09 Apr 2023\n" +
-                "_______________\n", outContent.toString());
+        assertEquals("""
+                _______________
+                Here are the deposits you searched:
+                Deposit No 2. haha2 ($300.00) on 09 Apr 2023
+                _______________
+                """, outContent.toString());
         restoreStreams();
     }
 
