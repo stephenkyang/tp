@@ -19,7 +19,7 @@ Below is an architectural diagram that describes the overview of how BudgetBuddy
 ![ArchitectureDiagram.png](images/ArchitectureDiagram.png)
 
 When the user initialises Budget Buddy, the logic of Budget Buddy will check if there is any pre-existing stored data.
-This persistence is done by using the Gson plug-in. It reads stored JSON data into classes that will be used in
+This persistence is done by using Gson read stored data into classes that will be used in
 Budget Buddy. As the user interacts with the UI, the logic will change the data of Budget Buddy, which is then written
 in Json format to update the storage. This process continues until the user exits Budget Buddy.
 
@@ -27,14 +27,11 @@ in Json format to update the storage. This process continues until the user exit
 
 ![MainSequence.png](images/MainSequence.png)
 
-**This diagram only shows the main overview of the application. You can refer to other components for more
-information.**
+**This diagram only shows the main overview of the application. You can refer to other components for more information.**
 
-In the main class, the main method first calls startApplication() which initalizes the Log Manager for logging (disabled
-in production stage) and Ui object for printing output messages. After initialized, it will then attempt to
+In the main class, the main method first calls startApplication() which initalizes the Log Manager for logging (disabled in production stage) and Ui object for printing output messages. After initialized, it will then attempt to
 import the user's data from `data.json`. If there is no file, it will initalize a blank data. If importing fails, the
-application will print an error message and terminate. Once done, it will greet the user and display the budget
-progress (for returning users).
+application will print an error message and terminate. Once done, it will greet the user and display the budget progress (for returning users).
 
 The application then runs an infinite loop to take in and execute commands, until when the inputs `exit` to exit the
 application. After which, it will output a bye message and exits the application safely.
@@ -56,8 +53,7 @@ For every command that the user wants to execute, the input of the command must 
 
 An example of a command can be seen in the user guide.
 
-For each parameter, the type of value must either be: `integer`, `double`, `date`, or `string`, depending on the
-parameter's specification.
+For each parameter, the type of value must either be: `integer`, `double`, `date`, or `string`, depending on the parameter's specification.
 
 - integer: Input must be a valid integer.
 - double: Input must be a valid double that is positive, must not contain alphabet and at most 2 decimal places.
@@ -68,48 +64,38 @@ Note that the value must not contain any slash (`/`), as it interferes with the 
 
 #### CommandEnum
 
-The Enum class CommandEnum contains all the commands that are available in the application, as shown in the diagram in
-Command Component. These are the commands that can only be input in the command line.
+The Enum class CommandEnum contains all the commands that are available in the application, as shown in the diagram in Command Component. These are the commands that can only be input in the command line.
 
 #### Command
 
-The abstract class Command extends to several command classes (e.g. `BudgetCommand`, `DepositCommand`, `ExpenseCommand`)
-and contains abstract (execute() and isExit()) and normal methods.
+The abstract class Command extends to several command classes (e.g. `BudgetCommand`, `DepositCommand`, `ExpenseCommand`) and contains abstract (execute() and isExit()) and normal methods.
 
-Each child (extended) class has a list of actions for its command and the list of required & optional parameters for
-each action. These list of actions and parameters are to be used in the CommandParser class, where it validates the
-input given by the user. For commands such as Help and Exit, no actions and parameters are required.
+Each child (extended) class has a list of actions for its command and the list of required & optional parameters for each action. These list of actions and parameters are to be used in the CommandParser class, where it validates the input given by the user. For commands such as Help and Exit, no actions and parameters are required.
 
-In the execute() method, the method is executed from main, where it will go to the action class (eg `BudgetAction`) and
-run the requested action such as `add` along with the required & optional parameters.
+In the execute() method, the method is executed from main, where it will go to the action class (eg `BudgetAction`) and run the requested action such as `add` along with the required & optional parameters.
 After execute() is done, isExit() controls the termination of the application by returning a boolean.
 
 #### CommandParser
 
 ![CommandParserSequence.png](images/CommandParserSequence.png)
 
-The `CommandParser` class is responsible for validating the input given by the user, which in return will pass a Command
-object (containing the user's requested action) that can be executed.
+The `CommandParser` class is responsible for validating the input given by the user, which in return will pass a Command object (containing the user's requested action) that can be executed.
 
 Flow of the Command Parser:
 
 1. From the main function, it calls CommandParser.parse() with the input from user.
 2. Command name from the input is retrieved, returning a CommandEnum
 3. Object command is created and initialized by constructor, based on the CommandEnum
-4. List of available actions for that command is retrieved. **Commands such as Help and Exit do not have any actions or
-   parameters, which the command will be returned immediately.**
-5. Action from the input is checked from the list of actions to see if it valid. Then, it will set the action in command
-   object.
-6. Based on the action, it will retrieve the required and optional parameters from input. Then, it will set the
-   parameters in the command object.
+4. List of available actions for that command is retrieved. **Commands such as Help and Exit do not have any actions or parameters, which the command will be returned immediately.**
+5. Action from the input is checked from the list of actions to see if it valid. Then, it will set the action in command object.
+6. Based on the action, it will retrieve the required and optional parameters from input. Then, it will set the parameters in the command object.
 7. Object command is returned to the main, which it will be executed.
 
 ## Product scope
 
 ### Item Component
 
-The main 4 classes of BudgetBuddy are the `budget` , `deposit`, `expense` and `stats` class. Users are able to add,
-store and visualise the date relate to each of these classes. Each of these classes are modelled as an `Item`.
+The main 4 classes of BudgetBuddy are the `budget` , `deposit`, `expense` and `stats` class. Users are able to add, store and visualise the date relate to each of these classes. Each of these classes are modelled as an `Item`.
 
 ![Item.png](images/Item.png)
 
@@ -136,30 +122,6 @@ the `input` will be passed into the `BudgetCommand` class. This class determines
 update the `data` stored in the `Budget` and `Expense` array lists, as shown in the sequence diagram below.
 
 ![BudgetCommandSequence.png](images/BudgetCommandSequence.png)
-
-1. The `BudgetCommand` object retrieves the existing `Budget` and `Exepnse` data stored in the `Data` class. This is
-   retrieved using the getBudgets() and getExpenses() methods, which return the existing budgets and expenses as an
-   array list.
-2. The `BudgetAction` object is then created, which then creates a `BudgetUIResponse` object.
-
-3. Depending on the action of the `BudgetCommand`, different methods will be called to carry out the related task. The
-   possible actions are add, set, del (delete), list and help.
-
-4. If the action is `add`, the `BudgetCommand` object will self invoke its own executeAddBudget() method, which calls
-   the
-   addBudget() method in the `BudgetAction` object. This then calls the printBudgetAddSuccessful() in
-   the `BudgetUIResponse` object,
-   which prints out a message on the command line interface for the user.
-   The sequence will be similar for other `BudgetCommand` actions.
-
-5. Following this, the `BudgetAction` and `BudgetUiResponse` will reach the end of its lifeline.
-
-6. After calling the related methods based on the action, the `BudgetCommand` object will call the exportData() method
-   in the `Data` object,
-   to update the existing data.
-
-7. The `BudgetCommand` object then reaches the end of its lifeline, and returns to the `CommandParser` object that
-   called it.
 
 ### Deposit Component
 
@@ -270,15 +232,11 @@ separate classes for each part of the Stats Feature, which includes StatsAction,
 
 #### Exception Component
 
-For invalid commands and application errors (such as file), BudgetBuddy will display an error message which requires the
-user to rectify his/her input or do something, including restarting the application.
+For invalid commands and application errors (such as file), BudgetBuddy will display an error message which requires the user to rectify his/her input or do something, including restarting the application.
 
 #### File IO Component
 
-The input and output of a file is handled using Gson, a third-party plugin that can help to read/write .json file in the
-Json format. The data file `data.json` (default) is created under the directory that the user is running at after an
-action is executed in the application. If the application finds the file to be blank, or the format of json is
-corrupted, it prompts the user to manually delete the file before starting the application.
+The input and output of a file is handled using Gson, a third-party plugin that can help to read/write .json file in the Json format. The data file `data.json` (default) is created under the directory that the user is running at after an action is executed in the application. If the application finds the file to be blank, or the format of json is corrupted, it prompts the user to manually delete the file before starting the application.
 **Therefore, It is not recommended for users to edit the file manually.**
 
 ## Appendix A: User Stories
@@ -337,8 +295,7 @@ corrupted, it prompts the user to manually delete the file before starting the a
 
 Before starting, ensure that you have Java 11 installed on your operating system.
 
-1. Download the latest [file](https://github.com/AY2223S2-CS2113-W15-3/tp/releases) and place in your preferred
-   directory.
+1. Download the latest [file](https://github.com/AY2223S2-CS2113-W15-3/tp/releases) and place in your preferred directory.
 2. Launch a command prompt or terminal and navigate to the directory where the file is located.
 3. Run the command `java -jar budgetbuddy.jar`
 4. Expected Outcome:
@@ -346,19 +303,15 @@ Before starting, ensure that you have Java 11 installed on your operating system
     - For first time users, it will display a warning message showing that the data file is empty.
     - For existing users with valid data file, it will show the progress for all budgets.
 
-If you encounter the greeting message displaying as "????", please change your command line/terminal's character
-encoding to UTF-8.
+If you encounter the greeting message displaying as "????", please change your command line/terminal's character encoding to UTF-8.
 
 - For Windows, if you are using command prompt or powershell, change the code page by typing `chcp 65001` in the prompt.
 - For Mac, change the Text encoding to `UTF-8` under international section in your Terminal Settings.
-- For others, please find a setting that can change the encoding to `UTF-8`. Else if it doesn't work, please test it on
-  another computer.
+- For others, please find a setting that can change the encoding to `UTF-8`. Else if it doesn't work, please test it on another computer.
 
 ### Test Cases
 
-Note that for the test cases listed for Budget, Deposit, Expense and Stats Commands, any wrong input is similiar (not
-the same) to what it has been listed in General Commands. **Each test case is independent from each other and should be
-start as a first-time user (delete the data file after each case!)**
+Note that for the test cases listed for Budget, Deposit, Expense and Stats Commands, any wrong input is similiar (not the same) to what it has been listed in General Commands. **Each test case is independent from each other and should be start as a first-time user (delete the data file after each case!)**
 
 #### General Commands
 
@@ -382,25 +335,19 @@ start as a first-time user (delete the data file after each case!)**
 4. Valid command and action with invalid required parameters
 
 - Type `budget add /c transport /a asd`
-- Expected output: An error
-  message `Parameter /a: Input must be a valid positive number, with at most 2 decimal places. Invalid parameters. Example: budget add /c transport /a 3000.00`
-  is shown.
+- Expected output: An error message `Parameter /a: Input must be a valid positive number, with at most 2 decimal places. Invalid parameters. Example: budget add /c transport /a 3000.00` is shown.
 - Note that the message of the invalid parameter depends on the type of parameter set by the application.
 
 5. Valid command and action with invalid optional parameters
 
 - Type `deposit list /f a`
-- Expected output: An error
-  message `Parameter /f: Input must be in a valid date in this format "DD-MM-YYYY". Invalid parameters. Example: deposit list [/f] 01-01-2023 [/t] 01-03-2023`
-  is shown.
+- Expected output: An error message `Parameter /f: Input must be in a valid date in this format "DD-MM-YYYY". Invalid parameters. Example: deposit list [/f] 01-01-2023 [/t] 01-03-2023` is shown.
 - Note that the message of the invalid parameter depends on the type of parameter set by the application.
 
 6. Valid command and action with valid required parameters but invalid optional parameters
 
 - Type `deposit add /n lottery /a 3000.00 /d a`
-- Expected output: An error
-  message `Parameter /d: Input must be in a valid date in this format "DD-MM-YYYY". Invalid parameters. Example: deposit add /n lottery /a 3000.00 [/d] 23-03-2023`
-  is shown.
+- Expected output: An error message `Parameter /d: Input must be in a valid date in this format "DD-MM-YYYY". Invalid parameters. Example: deposit add /n lottery /a 3000.00 [/d] 23-03-2023` is shown.
 - Note that the message of the invalid parameter depends on the type of parameter set by the application.
 
 #### Budget Commands
@@ -410,8 +357,7 @@ start as a first-time user (delete the data file after each case!)**
 1. New Budget (Case 1)
 
 - Type `budget add /c transport /a 1000.00`
-- Expected output: A message saying that it has been successfully added with name of budget category and amount shown.
-  Number of budget categories that you have is also shown.
+- Expected output: A message saying that it has been successfully added with name of budget category and amount shown. Number of budget categories that you have is also shown.
 
 2. Existing Budget (Case 2)
 
@@ -425,16 +371,14 @@ start as a first-time user (delete the data file after each case!)**
 
 - Type `budget add /c transport /a 1.00`
 - Type `budget del /c transport`
-- Expected output: A message saying that the budget is deleted with the name shown and 0 related expenses. No. of budget
-  categories remaining is also shown.
+- Expected output: A message saying that the budget is deleted with the name shown and 0 related expenses. No. of budget categories remaining is also shown.
 
 2. Delete Budget with 1 expense (Case 2)
 
 - Type `budget add /c transport /a 1.00`
 - Type `expense add /c transport /n mrt /a 1.00`
 - Type `budget del /c transport`
-- Expected output: A message saying that the budget is deleted with the name shown and 1 related expenses. No. of budget
-  categories remaining is also shown.
+- Expected output: A message saying that the budget is deleted with the name shown and 1 related expenses. No. of budget categories remaining is also shown.
 
 3. Delete non-existing Budget (case 3)
 
@@ -447,29 +391,25 @@ start as a first-time user (delete the data file after each case!)**
 
 - Type `budget add /c transport /a 1.00`
 - Type `budget list`
-- Expected output: A message that shows the current month, year and budget progress, consisting the name, progress bar,
-  total expenses and budget amount.
+- Expected output: A message that shows the current month, year and budget progress, consisting the name, progress bar, total expenses and budget amount.
 
 2. List with only month (before today's month) (Case 2)
 
 - Type `budget add /c transport /a 1.00`
 - Type `budget list /m 1`
-- Expected output: A message that shows the month (January) in current year and budget progress, consisting the name,
-  progress bar, total expenses and budget amount.
+- Expected output: A message that shows the month (January) in current year and budget progress, consisting the name, progress bar, total expenses and budget amount.
 
 3. List with only year (Case 3)
 
 - Type `budget add /c transport /a 1.00`
 - Type `budget list /y 2023`
-- Expected output: A message that shows the current month, year 2023 and budget progress, consisting the name, progress
-  bar, total expenses and budget amount.
+- Expected output: A message that shows the current month, year 2023 and budget progress, consisting the name, progress bar, total expenses and budget amount.
 
 4. List with month and year (before today's month and year) (case 4)
 
 - Type `budget add /c transport /a 1.00`
 - Type `budget list /m 1 /y 2023`
-- Expected output: A message that shows the month (January), year 2023 and budget progress, consisting the name,
-  progress bar, total expenses and budget amount.
+- Expected output: A message that shows the month (January), year 2023 and budget progress, consisting the name, progress bar, total expenses and budget amount.
 
 #### Help Budget
 
@@ -485,14 +425,12 @@ start as a first-time user (delete the data file after each case!)**
 1. New Deposit (today's date) (Case 1)
 
 - Type `deposit add /n lottery /a 3000.00`
-- Expected output: A message saying that it has been successfully added with deposit no, name, amount and today's date
-  of deposit shown.
+- Expected output: A message saying that it has been successfully added with deposit no, name, amount and today's date of deposit shown.
 
 2. New Deposit (date before today) (Case 2)
 
 - Type `deposit add /n lottery /a 3000.00 /d 01-01-2023`
-- Expected output: A message saying that it has been successfully added with deposit no, name, amount and date of
-  deposit shown.
+- Expected output: A message saying that it has been successfully added with deposit no, name, amount and date of deposit shown.
 
 #### Delete Deposit
 
@@ -500,8 +438,7 @@ start as a first-time user (delete the data file after each case!)**
 
 - Type `deposit add /n lottery /a 3000.00`
 - Type `deposit del /n 1`
-- Expected output: A message saying that it has been successfully deleted with deposit no, name, amount and date of
-  deposit shown.
+- Expected output: A message saying that it has been successfully deleted with deposit no, name, amount and date of deposit shown.
 
 2. Delete non-existing Deposit (Case 2)
 
@@ -583,15 +520,13 @@ start as a first-time user (delete the data file after each case!)**
 
 - Type `budget add /c transport /a 3000.00`
 - Type `expense add /c transport /n mrt 1.00`
-- Expected output: A message saying that it has been successfully added with expense no, category of the budget, name,
-  amount and today's date of expense shown.
+- Expected output: A message saying that it has been successfully added with expense no, category of the budget, name, amount and today's date of expense shown.
 
 2. New Expense (date before today) (Case 2)
 
 - Type `budget add /c transport /a 3000.00`
 - Type `expense add /c transport /n mrt 1.00 /d 01-01-2023`
-- Expected output: A message saying that it has been successfully added with expense no, category of the budget, name,
-  amount and date of expense shown.
+- Expected output: A message saying that it has been successfully added with expense no, category of the budget, name, amount and date of expense shown.
 
 #### Delete Expense
 
@@ -600,8 +535,7 @@ start as a first-time user (delete the data file after each case!)**
 - Type `budget add /c transport /a 3000.00`
 - Type `expense add /c transport /n mrt 1.00`
 - Type `expense del /n 1`
-- Expected output: A message saying that it has been successfully deleted with expense no, category of the budget, name,
-  amount and date of expense shown.
+- Expected output: A message saying that it has been successfully deleted with expense no, category of the budget, name, amount and date of expense shown.
 
 2. Delete non-existing Expense (Case 2)
 
@@ -722,8 +656,7 @@ start as a first-time user (delete the data file after each case!)**
 - Type `deposit add /n lottery /a 3000.0`
 - Type `expense add /c transport /n mrt /a 1.00`
 - Type `stats show`
-- Expected output: A message that shows the budget progress, total amount of deposit and expense, and overall progress
-  for current month and year.
+- Expected output: A message that shows the budget progress, total amount of deposit and expense, and overall progress for current month and year.
 
 2. Show statistics with month (Case 2)
 
@@ -731,8 +664,7 @@ start as a first-time user (delete the data file after each case!)**
 - Type `deposit add /n lottery /a 3000.0`
 - Type `expense add /c transport /n mrt /a 1.00`
 - Type `stats show /m 1`
-- Expected output: A message that shows the budget progress, total amount of deposit and expense, and overall progress
-  for month January and current year.
+- Expected output: A message that shows the budget progress, total amount of deposit and expense, and overall progress for month January and current year.
 
 3. Show statistics with year (Case 3)
 
@@ -740,8 +672,7 @@ start as a first-time user (delete the data file after each case!)**
 - Type `deposit add /n lottery /a 3000.0`
 - Type `expense add /c transport /n mrt /a 1.00`
 - Type `stats show /y 2023`
-- Expected output: A message that shows the budget progress, total amount of deposit and expense, and overall progress
-  for current month and year 2023.
+- Expected output: A message that shows the budget progress, total amount of deposit and expense, and overall progress for current month and year 2023.
 
 4. Show statistics with month and year (Case 4)
 
@@ -749,8 +680,7 @@ start as a first-time user (delete the data file after each case!)**
 - Type `deposit add /n lottery /a 3000.0`
 - Type `expense add /c transport /n mrt /a 1.00`
 - Type `stats show /m 1 /y 2023`
-- Expected output: A message that shows the budget progress, total amount of deposit and expense, and overall progress
-  for month January and year 2023.
+- Expected output: A message that shows the budget progress, total amount of deposit and expense, and overall progress for month January and year 2023.
 
 5. Show statistics with all deposits (Case 5)
 
@@ -758,8 +688,7 @@ start as a first-time user (delete the data file after each case!)**
 - Type `deposit add /n lottery /a 3000.0`
 - Type `expense add /c transport /n mrt /a 1.00`
 - Type `stats show /v d`
-- Expected output: A message that shows the budget progress, list of deposits, total amount of deposit and expense, and
-  overall progress for current month and year.
+- Expected output: A message that shows the budget progress, list of deposits, total amount of deposit and expense, and overall progress for current month and year.
 
 6. Show statistics with all expenses (Case 6)
 
@@ -767,8 +696,7 @@ start as a first-time user (delete the data file after each case!)**
 - Type `deposit add /n lottery /a 3000.0`
 - Type `expense add /c transport /n mrt /a 1.00`
 - Type `stats show /v e`
-- Expected output: A message that shows the budget progress, list of expenses, total amount of deposit and expense, and
-  overall progress for current month and year.
+- Expected output: A message that shows the budget progress, list of expenses, total amount of deposit and expense, and overall progress for current month and year.
 
 7. Show statistics with all deposits and expenses (Case 7)
 
@@ -776,8 +704,7 @@ start as a first-time user (delete the data file after each case!)**
 - Type `deposit add /n lottery /a 3000.0`
 - Type `expense add /c transport /n mrt /a 1.00`
 - Type `stats show /v de`
-- Expected output: A message that shows the budget progress, list of deposits, list of expenses, total amount of deposit
-  and expense, and overall progress for current month and year.
+- Expected output: A message that shows the budget progress, list of deposits, list of expenses, total amount of deposit and expense, and overall progress for current month and year.
 
 #### Help Stats
 
@@ -802,12 +729,10 @@ start as a first-time user (delete the data file after each case!)**
 
 ### File Testing
 
-In the application, the data file will be updated/created (if it doesn't exist) whenever commands `budget`, `deposit`
-, `expense` are executed successfully.
+In the application, the data file will be updated/created (if it doesn't exist) whenever commands `budget`, `deposit`, `expense` are executed successfully.
 
 - Deleting the data file and relaunching the application will result in a new data.
-- If the data file is empty (still exists), or the contents of the data file could not be Json parsed, the application
-  will detect the file as corrupted, and the user will need to delete the file and relaunch the application.
+- If the data file is empty (still exists), or the contents of the data file could not be Json parsed, the application will detect the file as corrupted, and the user will need to delete the file and relaunch the application.
 
 ## Appendix E: Acknowledgements
 
