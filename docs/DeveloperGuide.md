@@ -149,12 +149,12 @@ and the abstract
 Flow of the DepositCommand:
 1. DepositCommand calls execute(), which tries and find which command will be parsed.
 2. getDeposits() is called to find the Deposit[] from the Data class.
-3. DepositCommand then calls the method in DepositAction that matches the command parsed
+3. DepositCommand then calls the method in DepositAction that matches the actions parsed
 4. Within DepositAction, the action is done manipulating the DepositList, if necessary
-5. Within Deposit Action, the class DepositUIResponse is called to show a success/error message
-   to the user
-6. After DepositList is sucessfully manipulated and a text reponse is given, DepositCommand
-   exits.
+5. Within Deposit Action, the class DepositUIResponse is called to show an output depending 
+   on the action to the user
+6. After DepositList is sucessfully manipulated (if necessary) and a text reponse is given, 
+   DepositCommand exits.
 
 ### Design & Implementation of the Deposit Feature
 
