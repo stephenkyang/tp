@@ -14,14 +14,26 @@ activate "DepositCommand"
 "DepositCommand" -> "DepositCommand": execute(data, ui)
 activate  "DepositCommand"
 "DepositCommand" -> "Data": getDeposits()
+ note left
+    getDeposits will get Deposit data
+    from the Data class and Deposit[]
+ end note
 activate "Data"
 return depositList: Deposit[]
 deactivate "Data"
 
 "DepositCommand" -> "DepositAction" ** : (depositList,ui)
+ note left
+    depositAction commands take in the
+    Deposit[] returned by getDeposits()
+ end note
 activate "DepositAction"
 
 "DepositAction" -> "DepositUIResponse" ** : (ui)
+note left
+    DepositAction calls DepositUIResponse
+    when initialization
+ end note
 activate "DepositUIResponse"
 "DepositUIResponse" --> "DepositAction"
 deactivate "DepositUIResponse"
@@ -31,11 +43,21 @@ deactivate "DepositAction"
 
 
 alt actions is add
-"DepositCommand" -> "DepositCommand": executeAddDeposit(depositAction, requiredParams, optionalParams)
+"DepositCommand" -> "DepositCommand": executeAddDeposit(depositAction, requiredParams)
+note left
+    if add then call
+    DepositAction.addDeposit()
+ end note
+
 activate "DepositCommand"
 "DepositCommand" -> "DepositAction" : addDeposit(depositName, depositAmount, depositDate)
 activate "DepositAction"
 "DepositAction" -> "DepositUIResponse" : printDepositAddSuccessful(deposit)
+note left
+    addDeposit() calls printDepositAddSuccessful
+    to show the user a success message
+ end note
+
 activate "DepositUIResponse"
 "DepositUIResponse" -> User
 return
@@ -45,10 +67,18 @@ deactivate "DepositCommand"
 
 else actions is del
 "DepositCommand" -> "DepositCommand": executeDelDeposit(depositAction, requiredParams)
+note left
+    if del then call
+    DepositAction.deleteDeposit()
+ end note
 activate "DepositCommand"
 "DepositCommand" -> "DepositAction" : deleteDeposit(depositId)
 activate "DepositAction"
 "DepositAction" -> "DepositUIResponse" : printDepositDelSuccessful(deletedDeposit)
+note left
+    deleteDeposit() calls printDepositDelSuccessful
+    to show the user a success message
+ end note
 activate "DepositUIResponse"
 "DepositUIResponse" -> User
 return
@@ -58,10 +88,21 @@ deactivate "DepositCommand"
 
 else actions is find
 "DepositCommand" -> "DepositCommand": executeFindDeposit(depositAction, requiredParams)
+note left
+    if find then call
+    DepositAction.findDeposit()
+ end note
 activate "DepositCommand"
 "DepositCommand" -> "DepositAction" : findDeposits(depositName)
+
 activate "DepositAction"
+
 "DepositAction" -> "DepositUIResponse" : printFindDeposits(filteredDeposits)
+note left
+    findDeposit() calls printFindDeposits
+    to show the user the list of deposits found
+    given the keyword
+ end note
 activate "DepositUIResponse"
 "DepositUIResponse" -> User
 return
@@ -71,10 +112,21 @@ deactivate "DepositCommand"
 
 else actions is clear
 "DepositCommand" -> "DepositCommand": executeClearDeposit(depositAction, optionalParams)
+note left
+    if clear then call
+    DepositAction.clearDeposit()
+ end note
 activate "DepositCommand"
 "DepositCommand" -> "DepositAction" : clearDeposits(from, to)
+
 activate "DepositAction"
+
 "DepositAction" -> "DepositUIResponse" : printClearDeposits(depositList)
+note left
+    clearDeposit() calls printClearDeposits
+    to show the user the list of deposits clear
+    given the date range
+end note
 activate "DepositUIResponse"
 "DepositUIResponse" -> User
 return
@@ -84,10 +136,20 @@ deactivate "DepositCommand"
 
 else actions is list
 "DepositCommand" -> "DepositCommand": executeListDeposit(depositAction, optionalParams)
+note left
+    if list then call
+    DepositAction.listDeposit()
+ end note
 activate "DepositCommand"
 "DepositCommand" -> "DepositAction" : listDeposits()
 activate "DepositAction"
 "DepositAction" -> "DepositUIResponse" : printListDeposits(previousDeposits, currentDeposits)
+note left
+    listDeposit() calls printListDeposits
+    to show the user the list of deposits listed
+    if a range was given, the deposits are between
+    the given date range
+end note
 activate "DepositUIResponse"
 "DepositUIResponse" -> User
 return
@@ -96,22 +158,35 @@ return
 deactivate "DepositCommand"
 
 else actions is help
+
 "DepositCommand" -> "DepositCommand": executeHelpDeposit(depositAction)
+note left
+    if help then call
+    DepositActione.excuteHelpDeposit()
+ end note
 activate "DepositCommand"
 "DepositCommand" -> "DepositAction" : depositHelp()
 activate "DepositAction"
 "DepositAction" -> "DepositUIResponse" : printDepositCommands()
+note left
+    depositHelp() calls printDepositCommands
+    to show the user the list of commands for
+    the Deposit class
+end note
 activate "DepositUIResponse"
 "DepositUIResponse" -> User
 return
 return
 
 deactivate "DepositCommand"
+
 end
 
 "DepositCommand" -> "Data": exportData()
+
 activate "Data"
 return
+
 deactivate "Data"
 
 destroy "DepositCommand"
