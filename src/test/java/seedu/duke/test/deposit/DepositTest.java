@@ -9,6 +9,8 @@ import seedu.duke.exception.GlobalDateFromAfterToException;
 import seedu.duke.exception.GlobalInvalidNumberException;
 import seedu.duke.model.Deposit;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -21,6 +23,19 @@ public class DepositTest {
     ArrayList<Deposit> depositList = new ArrayList<Deposit>();
     Ui ui = new Ui();
     DepositAction depositAction = new DepositAction(depositList, ui);
+    private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+    private final PrintStream originalOut = System.out;
+
+
+    public void setUpStreams() {
+        System.setOut(new PrintStream(outContent));
+    }
+
+
+    public void restoreStreams() {
+        System.setOut(originalOut);
+    }
+
 
     @Test
     void addAndDelete() {
@@ -39,7 +54,8 @@ public class DepositTest {
         assert depositList.size() != 1 : "delete failed";
         assertEquals(0, depositList.size());
     }
-    
+
+
     @Test
     void simpleClear() {
         String[] depositNames = {"haha", "haha2"};
@@ -63,6 +79,75 @@ public class DepositTest {
         assert depositList.size() != 2 : "clear failed";
         assertEquals(0, depositList.size());
     }
+
+
+    @Test
+    void complexClear() {
+        String[] depositNames = {"haha", "haha2", "haha3", "haha4"};
+        double depositAmount = 300.00;
+        LocalDate[] depositDate = {LocalDate.of(2002, 1,1), LocalDate.now(),
+                LocalDate.now(), LocalDate.now()};
+        try {
+            for (int i = 0; i < depositNames.length ; i++) {
+                depositAction.addDeposit(depositNames[i], depositAmount, depositDate[i]);
+            }
+        } catch (GlobalDateAfterTodayException e) {
+            fail();
+        }
+
+        assert depositList.size() != 0 : "add failed";
+        assertEquals(4, depositList.size());
+        try {
+            depositAction.clearDeposits(depositDate[0], depositDate[0]);
+        } catch (GlobalDateFromAfterToException e) {
+            fail();
+        }
+        assert depositList.size() != 4 : "clear failed";
+        assertEquals(3, depositList.size());
+    }
+
+
+    @Test
+    void simpleFind() {
+        String[] depositNames = {"haha", "haha2", "haha3", "haha4"};
+        double depositAmount = 300.00;
+        LocalDate[] depositDate = {LocalDate.of(2002, 1,1),
+                LocalDate.of(2023, 4,9),
+                LocalDate.now(), LocalDate.now()};
+        try {
+            for (int i = 0; i < depositNames.length ; i++) {
+                depositAction.addDeposit(depositNames[i], depositAmount, depositDate[i]);
+            }
+        } catch (GlobalDateAfterTodayException e) {
+            fail();
+        }
+
+        assert depositList.size() != 0 : "add failed";
+        assertEquals(4, depositList.size());
+        try {
+            depositAction.clearDeposits(depositDate[0], depositDate[0]);
+        } catch (GlobalDateFromAfterToException e) {
+            fail();
+        }
+        assert depositList.size() != 4 : "clear failed";
+        assertEquals(3, depositList.size());
+
+
+
+
+
+        setUpStreams();
+        depositAction.findDeposits("haha2");
+
+
+        assertEquals("_______________\n" +
+                "Here are the deposits you searched:\n" +
+                "Deposit No 2. haha2 ($300.00) on 09 Apr 2023\n" +
+                "_______________\n", outContent.toString());
+        restoreStreams();
+    }
+
+
 
     //@@author pinyoko573
     @Test
