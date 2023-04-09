@@ -146,6 +146,15 @@ and the abstract
 
 ![img.png](images/DepositCommandSequence.png)
 
+Flow of the DepositCommand:
+1. To instantiate the DepositCommand, getDeposits() mu 
+2. Command name from the input is retrieved, returning a CommandEnum
+3. Object command is created and initialized by constructor, based on the CommandEnum
+4. List of available actions for that command is retrieved. **Commands such as Help and Exit do not have any actions or parameters, which the command will be returned immediately.**
+5. Action from the input is checked from the list of actions to see if it valid. Then, it will set the action in command object.
+6. Based on the action, it will retrieve the required and optional parameters from input. Then, it will set the parameters in the command object.
+7. Object command is returned to the main, which it will be executed.
+
 ### Design & Implementation of the Deposit Feature
 
 Like all other functionalities of BudgetBuddy, the deposit feature is heavily modularized and designed with an OOP lens.

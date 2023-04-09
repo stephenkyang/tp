@@ -12,6 +12,10 @@ actor User
 
 activate "DepositCommand"
 "DepositCommand" -> "DepositCommand": execute(data, ui)
+note left
+    DepositCommand calls execute() to see which
+    command will be parsed in a case-switch block
+ end note
 activate  "DepositCommand"
 "DepositCommand" -> "Data": getDeposits()
  note left
