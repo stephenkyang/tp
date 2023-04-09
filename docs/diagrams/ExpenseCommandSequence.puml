@@ -2,126 +2,136 @@
 
 hide footbox
 
- -> ":ExpenseCommand":
+participant ExpenseCommand
+participant Data
+participant ExpenseAction
+participant ExpenseUIResponse
+actor User
 
-activate ":ExpenseCommand"
-":ExpenseCommand" -> ":ExpenseCommand": execute(data, ui)
-activate  ":ExpenseCommand"
-":ExpenseCommand" -> ":data": getExpenses()
-activate ":data"
-return expenses: ArrayList<Expense>
-deactivate ":data"
+ -> "ExpenseCommand":
 
-activate  ":ExpenseCommand"
-":ExpenseCommand" -> ":data": getExpenses()
-activate ":data"
-return expenses: ArrayList<Expense>
+activate "ExpenseCommand"
+"ExpenseCommand" -> "ExpenseCommand": execute(data, ui)
+activate  "ExpenseCommand"
+"ExpenseCommand" -> "Data": getExpenses()
+activate "Data"
+return expenses: Expense[]
+deactivate "Data"
+"ExpenseCommand" -> "Data": getBudgets()
+activate "Data"
+return budgets: Budget[]
+deactivate "Data"
+
+"ExpenseCommand" -> "ExpenseAction" ** : (expenses,ui)
+activate "ExpenseAction"
+
+"ExpenseAction" -> "ExpenseUIResponse" ** : (ui)
+activate "ExpenseUIResponse"
+"ExpenseUIResponse" --> "ExpenseAction"
+deactivate "ExpenseUIResponse"
+
+return ExpenseAction: ExpenseAction
+deactivate "ExpenseAction"
 
 
-
-":ExpenseCommand" -> ":ExpenseAction" : expenses, ui
-activate ":ExpenseAction"
-":ExpenseAction" -> ":ExpenseCommand" : expenseAction :ExpenseAction
-deactivate ":ExpenseAction"
-
-
-alt action is add
-activate  ":ExpenseCommand"
-":ExpenseCommand" -> ":ExpenseCommand": executeAddExpense(expenseAction, requiredParams, optionalParams, budgets);
-activate ":ExpenseCommand"
-
-":ExpenseCommand" -> ":ExpenseAction" : expenseCategory, expenseName, expenseAmount, expenseDate, budgets
-activate ":ExpenseAction"
-":ExpenseAction" -> ":ExpenseAction" : addExpense(expenseCategory, expenseName, expenseAmount, expenseDate, budgets)
-activate ":ExpenseAction"
+alt actions is add
+"ExpenseCommand" -> "ExpenseCommand": executeAddExpense(expenseAction, requiredParams, optionalParams, budgets)
+activate "ExpenseCommand"
+"ExpenseCommand" -> "ExpenseAction" : addExpense(expenseCategory, expenseName, expenseAmount, expenseDate, budgets)
+activate "ExpenseAction"
+"ExpenseAction" -> "ExpenseUIResponse" : printExpenseAddSuccessful(expense)
+activate "ExpenseUIResponse"
+"ExpenseUIResponse" -> User
 return
 return
 
+deactivate "ExpenseCommand"
 
-else action is find
-activate  ":ExpenseCommand"
-":ExpenseCommand" -> ":ExpenseCommand": executeSetExpense(expenseAction, requiredParams)
-activate ":ExpenseCommand"
-":ExpenseCommand" -> ":ExpenseAction" : expenseNo
-activate ":ExpenseAction"
-":ExpenseAction" -> ":ExpenseAction" : findExpense(expenseNo)
-activate ":ExpenseAction"
+else actions is del
+"ExpenseCommand" -> "ExpenseCommand": executeDelExpense(expenseAction, requiredParams)
+activate "ExpenseCommand"
+"ExpenseCommand" -> "ExpenseAction" : deleteExpense(expenseId)
+activate "ExpenseAction"
+"ExpenseAction" -> "ExpenseUIResponse" : printExpenseDelSuccessful(deletedExpense)
+activate "ExpenseUIResponse"
+"ExpenseUIResponse" -> User
 return
 return
 
+deactivate "ExpenseCommand"
 
-else action is del
-activate  ":ExpenseCommand"
-":ExpenseCommand" -> ":ExpenseCommand": executeDelExpense(expenseAction, requiredParams)
-activate ":ExpenseCommand"
-":ExpenseCommand" -> ":ExpenseAction" : expenseNo
-activate ":ExpenseAction"
-":ExpenseAction" -> ":ExpenseAction" : deleteExpense(expenseNo)
-activate ":ExpenseAction"
+else actions is find
+"ExpenseCommand" -> "ExpenseCommand": executeFindExpense(expenseAction, requiredParams)
+activate "ExpenseCommand"
+"ExpenseCommand" -> "ExpenseAction" : findExpenses(expenseName)
+activate "ExpenseAction"
+"ExpenseAction" -> "ExpenseUIResponse" : printFindExpenses(filteredExpenses)
+activate "ExpenseUIResponse"
+"ExpenseUIResponse" -> User
 return
 return
 
-else action is list
-activate  ":ExpenseCommand"
-":ExpenseCommand" -> ":ExpenseCommand": executeListExpense(expenseAction, optionalParams)
-activate ":ExpenseCommand"
+deactivate "ExpenseCommand"
 
-":ExpenseCommand" -> ":ExpenseAction" : expenseFrom, expenseTo, expenseCategory
-activate ":ExpenseAction"
-":ExpenseAction" -> ":ExpenseAction" : listExpensesRange(expenseFrom, expenseTo, expenseCategory)
-activate ":ExpenseAction"
+else actions is clear
+"ExpenseCommand" -> "ExpenseCommand": executeClearExpense(expenseAction, optionalParams)
+activate "ExpenseCommand"
+"ExpenseCommand" -> "ExpenseAction" : clearExpenses(expenseFrom, expenseTo, expenseCategory)
+activate "ExpenseAction"
+"ExpenseAction" -> "ExpenseUIResponse" : printClearExpenses(expenseList)
+activate "ExpenseUIResponse"
+"ExpenseUIResponse" -> User
 return
 return
 
+deactivate "ExpenseCommand"
 
-else action is clear
-activate  ":ExpenseCommand"
-":ExpenseCommand" -> ":ExpenseCommand": executeClearExpense(expenseAction, optionalParams)
-activate ":ExpenseCommand"
-":ExpenseCommand" -> ":ExpenseAction" : expenseFrom, expenseTo, expenseCategory
-activate ":ExpenseAction"
-":ExpenseAction" -> ":ExpenseAction" : clearExpenses(expenseFrom, expenseTo, expenseCategory)
-activate ":ExpenseAction"
+else actions is list
+"ExpenseCommand" -> "ExpenseCommand": executeListExpense(expenseAction, optionalParams)
+activate "ExpenseCommand"
+
+opt expenseFromString is null && expenseToString is null
+"ExpenseCommand" -> "ExpenseAction" : listExpenses(expenseCategory)
+activate "ExpenseAction"
+"ExpenseAction" -> "ExpenseUIResponse" : printListExpenses(previousExpenses, currentExpenses, category)
+activate "ExpenseUIResponse"
+"ExpenseUIResponse" -> User
 return
-return
-
-
-else action is help
-activate  ":ExpenseCommand"
-":ExpenseCommand" -> ":ExpenseCommand": executeExpenseHelp(expenseAction)
-activate ":ExpenseCommand"
-":ExpenseCommand" -> ":ExpenseAction"
-activate ":ExpenseAction"
-":ExpenseAction" -> ":ExpenseAction" : expenseHelp()
-activate ":ExpenseAction"
-return
-return
-
-
-deactivate ":ExpenseCommand"
-deactivate ":ExpenseCommand"
-deactivate ":ExpenseCommand"
-deactivate ":ExpenseCommand"
-deactivate ":ExpenseCommand"
-deactivate ":ExpenseCommand"
-deactivate ":ExpenseCommand"
-deactivate ":ExpenseCommand"
-deactivate ":ExpenseCommand"
-deactivate ":ExpenseCommand"
-deactivate ":ExpenseCommand"
-deactivate ":ExpenseCommand"
-
-
-":ExpenseCommand" -> ":data": exportData()
-activate ":data"
-return
-
-deactivate ":data"
-destroy ":data"
-
-
 end
 
 
+"ExpenseCommand" -> "ExpenseAction" : listExpensesRange(expenseFrom, expenseTo, expenseCategory)
+activate "ExpenseAction"
+"ExpenseAction" -> "ExpenseUIResponse" : printListExpenses(sortedExpenses, from, to, category)
+activate "ExpenseUIResponse"
+
+
+"ExpenseUIResponse" -> User
+return
+return
+
+deactivate "ExpenseCommand"
+
+else actions is help
+"ExpenseCommand" -> "ExpenseCommand": executeHelpExpense(expenseAction)
+activate "ExpenseCommand"
+"ExpenseCommand" -> "ExpenseAction" : expenseHelp()
+activate "ExpenseAction"
+"ExpenseAction" -> "ExpenseUIResponse" : printExpenseCommands()
+activate "ExpenseUIResponse"
+"ExpenseUIResponse" -> User
+return
+return
+
+deactivate "ExpenseCommand"
+end
+
+"ExpenseCommand" -> "Data": exportData()
+activate "Data"
+return
+deactivate "Data"
+
+destroy "ExpenseCommand"
+deactivate "ExpenseCommand"
 
 @enduml

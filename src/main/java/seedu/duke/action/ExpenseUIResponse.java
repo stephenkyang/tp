@@ -35,8 +35,14 @@ public class ExpenseUIResponse {
     }
 
     /**
+<<<<<<< HEAD
      * Function prints message when expense is added successfully
      * @param expense expense object that is being added
+=======
+     * Prints the added expense.
+     *
+     * @param expense expense that was just added
+>>>>>>> 0162208949162678485fac7105ee89988e253317
      */
     public void printExpenseAddSuccessful(Expense expense) {
         String msg = String.format(Messages.EXPENSE_EXPENSE.toString(), expense.getId(), expense.getCategory(),
@@ -44,6 +50,7 @@ public class ExpenseUIResponse {
         ui.printMessage(Messages.EXPENSE_ADD_SUCCESSFUL.toString(), msg);
     }
 
+<<<<<<< HEAD
 
     /**
      * Function returns Budget based on the name of the category
@@ -113,6 +120,13 @@ public class ExpenseUIResponse {
      * @param expense Expense being deleted
      */
 
+=======
+    /**
+     * Prints the deleted expense.
+     *
+     * @param expense expense that was just deleted
+     */
+>>>>>>> 0162208949162678485fac7105ee89988e253317
     public void printExpenseDelSuccessful(Expense expense) {
         String msg = String.format(Messages.EXPENSE_EXPENSE.toString(), expense.getId(), expense.getCategory(),
             expense.getName(), expense.getAmount(), expense.getDate().format(Constants.OUTPUT_DATE_FORMAT));
@@ -120,11 +134,19 @@ public class ExpenseUIResponse {
     }
 
     /**
+<<<<<<< HEAD
      * Function prints the list of expenses
      *
      * @param previousExpenses Arraylist containing previous expenses
      * @param currentExpenses Arraylist containing current expenses
      * @param category category of expenses
+=======
+     * Prints the expenses for this current month along with
+     * previous expenses.
+     * 
+     * @param previousExpenses list of previous expenses
+     * @param currentExpenses list of current expenses
+>>>>>>> 0162208949162678485fac7105ee89988e253317
      */
     public void printListExpenses(ArrayList<Expense> previousExpenses, ArrayList<Expense> currentExpenses,
         String category) {
@@ -157,6 +179,11 @@ public class ExpenseUIResponse {
      * @param expenses Arraylist containing all expenses
      */
     // @@author pinyoko573
+    /**
+     * Prints expenses that are filtered by the keyword.
+     * 
+     * @param expenses list of filtered expenses
+     */
     public void printFindExpenses(ArrayList<Expense> expenses) {
         if (expenses.size() == 0) {
             ui.printMessage(Messages.EXPENSE_FIND_NOTHING.toString());
@@ -179,6 +206,14 @@ public class ExpenseUIResponse {
      * @param category Category of expenses
      */
     // @@author pinyoko573
+    /**
+     * Prints expenses that are filtered by date and/or category
+     * 
+     * @param expenses list of filtered deposits
+     * @param from date displayed in output
+     * @param to date displayed in output
+     * @param category name of category displayed in output
+     */
     public void printListExpensesRange(ArrayList<Expense> expenses, LocalDate from, LocalDate to, String category) {
         if (expenses.size() == 0) {
             ui.printMessage(Messages.EXPENSE_LIST_NOTHING.toString());
@@ -212,6 +247,11 @@ public class ExpenseUIResponse {
      * @param expenses Arraylist containing all expenses
      */
     // @@author pinyoko573
+    /**
+     * Prints the expenses that are cleared.
+     * 
+     * @param expenses list of expenses
+     */
     public void printClearExpenses(ArrayList<Expense> expenses) {
         ArrayList<String> msgs = new ArrayList<String>();
 
@@ -222,9 +262,15 @@ public class ExpenseUIResponse {
     }
 
     /**
+<<<<<<< HEAD
      * Prints expenses
      * @param expenses Arraylist containing all expenses
      * @return Arraylist with messages to be printed
+=======
+     * Prints the expenses in the given format in messages
+     * 
+     * @param expenses list of expenses
+>>>>>>> 0162208949162678485fac7105ee89988e253317
      */
     public static ArrayList<String> printExpenses(ArrayList<Expense> expenses) {
         ArrayList<String> msgs = new ArrayList<String>();

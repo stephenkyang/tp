@@ -51,12 +51,13 @@ public class ExpenseCommand extends Command {
      */
     @Override
     public void execute(Data data, Ui ui) throws BBException {
-        ArrayList<Expense> expenses = data.getExpenses();
-        ExpenseAction expenseAction = new ExpenseAction(expenses, ui);
+        ArrayList<Expense> expenseList = data.getExpenses();
+        ExpenseAction expenseAction = new ExpenseAction(expenseList, ui);
+
+        ArrayList<Budget> budgets = data.getBudgets();
 
         switch (action) {
         case "add":
-            ArrayList<Budget> budgets = data.getBudgets();
             executeAddExpense(expenseAction, requiredParams, optionalParams, budgets);
             break;
         case "del":
@@ -91,7 +92,7 @@ public class ExpenseCommand extends Command {
      * which will be used to execute add expense in the action class.
      * If date is not specified, use today's date.
      *
-     * @param expenseAction  action selected will be execute through action class
+     * @param expenseAction  action selected will be executed through action class
      * @param requiredParams parameters containing the required attributes
      * @param optionalParams parameters containing the optional attributes
      * @throws BBException for any error thrown in the action class
@@ -116,20 +117,20 @@ public class ExpenseCommand extends Command {
      * Parses the required attributes such as expense no,
      * which will be used to execute del expense in the action class.
      *
-     * @param expenseAction  action selected will be execute through action class
+     * @param expenseAction  action selected will be executed through action class
      * @param requiredParams parameters containing the required attributes
      * @throws BBException for any error thrown in the action class
      */
     private void executeDelExpense(ExpenseAction expenseAction, String[] requiredParams) throws BBException {
-        int expenseNo = Integer.parseInt(requiredParams[0]);
-        expenseAction.deleteExpense(expenseNo);
+        int expenseId = Integer.parseInt(requiredParams[0]);
+        expenseAction.deleteExpense(expenseId);
     }
 
     /**
      * Parses the required attributes such as expense name
      * which will be used to execute find expense in the action class.
      *
-     * @param expenseAction  action selected will be execute through action class
+     * @param expenseAction  action selected will be executed through action class
      * @param requiredParams parameters containing the required attributes
      * @throws BBException for any error thrown in the action class
      */
@@ -142,7 +143,7 @@ public class ExpenseCommand extends Command {
      * Parses optional attributes such as category, from and to date,
      * which will be used to execute clear expense in the action class.
      *
-     * @param expenseAction  action selected will be execute through action class
+     * @param expenseAction  action selected will be executed through action class
      * @param optionalParams parameters containing the optional attributes
      * @throws BBException for any error thrown in the action class
      */
@@ -164,7 +165,7 @@ public class ExpenseCommand extends Command {
      * If neither dates are specified, list all the expenses.
      * If either or both dates are specified, filter expense by date.
      *
-     * @param expenseAction  action selected will be execute through action class
+     * @param expenseAction  action selected will be executed through action class
      * @param optionalParams parameters containing the optional attributes
      * @throws BBException for any error thrown in the action class
      */

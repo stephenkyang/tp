@@ -161,7 +161,7 @@ public class DepositCommand extends Command {
      * If neither dates are specified, list all the deposits.
      * If either or both dates are specified, filter deposits by date.
      * 
-     * @param depositAction action selected will be execute through action class
+     * @param depositAction action selected will be executed through action class
      * @param optionalParams parameters containing the optional attributes
      * @throws BBException for any error thrown in the action class
      */

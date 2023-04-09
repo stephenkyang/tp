@@ -28,6 +28,8 @@ public class Commons {
                 throw new GlobalInvalidMonthYearException();
             }
 
+            assert (year / 1000 >= 1 && year / 1000 < 10) : "Year is in 4 digits";
+
             // Set day to last day of month
             LocalDate testDate = LocalDate.of(year, month, 1);
             testDate = testDate.with(TemporalAdjusters.lastDayOfMonth());
@@ -56,7 +58,9 @@ public class Commons {
      */
     public static String convertMonthToString(int month) {
         String monthString = new DateFormatSymbols().getShortMonths()[month - 1];
-        
+
+        assert (month >= 1 && month <= 12) : "Month string must be valid month between 1 to 12";
+
         return monthString;
     }
 

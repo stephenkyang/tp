@@ -35,6 +35,7 @@ public class CommandParser {
      */
     public static Command parse(String input) throws BBException {
         CommandEnum commandName = getCommandName(input);
+        assert commandName != null : "CommandName must be from the enum";
 
         // Assign the command class based on the command input by the user.
         Command command = getCommand(commandName);
