@@ -40,11 +40,16 @@ application. After which, it will output a bye message and exits the application
 
 ![Command.png](images/Command.png)
 
+**There are some variables and methods that are not shown in the class diagram for easier readability.**
+
 The command consists of three components: Enum CommandEnum, Abstract class Command and Class CommandParser. Each of them
 plays a role in retrieving the commands input by the user and redirecting to the correct components.
 
 For every command that the user wants to execute, the input of the command must be in this format as follows:
 > `(command) (action) (parameters) [optional parameters]`
+
+**Command and action names are not case sensitive, but values are.**
+**Also, it is possible to rearrange the order of parameters.**
 
 An example of a command can be seen in the user guide.
 
@@ -69,25 +74,20 @@ Each child (extended) class has a list of actions for its command and the list o
 In the execute() method, the method is executed from main, where it will go to the action class (eg `BudgetAction`) and run the requested action such as `add` along with the required & optional parameters.
 After execute() is done, isExit() controls the termination of the application by returning a boolean.
 
-**There are some variables and methods that are not shown in the class diagram for easier readability.**
-
 #### CommandParser
 
 ![CommandParserSequence.png](images/CommandParserSequence.png)
 
 The `CommandParser` class is responsible for validating the input given by the user, which in return will pass a Command object (containing the user's requested action) that can be executed.
 
-The parse() function first checks the command name, which will return the list of actions that are available if the command is valid. Then, it will retrieve the action name and see if it matches in the list of actions.
-
-**(Note that commands such as Help and Exit do not have any action, which the command will be returned immediately.)**
-
-After verifying that the action exists, it will then verify all the parameters that are needed to execute.
-
-In required parameters, each parameter must have a value. Whereas for optional parameters, the user can choose to input values for none, some, or all of the optional parameters. When the value of the parameter does not match the parameter type, it will stop the parsing process and return an exception.
-
-**Command and action names are not case sensitive, but values are.**
-
-**Also, it is possible to rearrange the order of parameters.**
+Flow of the Command Parser:
+1. From the main function, it calls CommandParser.parse() with the input from user.
+2. Command name from the input is retrieved, returning a CommandEnum
+3. Object command is created and initialized by constructor, based on the CommandEnum
+4. List of available actions for that command is retrieved. **Commands such as Help and Exit do not have any actions or parameters, which the command will be returned immediately.**
+5. Action from the input is checked from the list of actions to see if it valid. Then, it will set the action in command object.
+6. Based on the action, it will retrieve the required and optional parameters from input. Then, it will set the parameters in the command object.
+7. Object command is returned to the main, which it will be executed.
 
 ## Product scope
 
@@ -231,7 +231,6 @@ For invalid commands and application errors (such as file), BudgetBuddy will dis
 #### File IO Component
 
 The input and output of a file is handled using Gson, a third-party plugin that can help to read/write .json file in the Json format. The data file `data.json` (default) is created under the directory that the user is running at after an action is executed in the application. If the application finds the file to be blank, or the format of json is corrupted, it prompts the user to manually delete the file before starting the application.
-
 **Therefore, It is not recommended for users to edit the file manually.**
 
 ## Appendix A: User Stories
@@ -286,8 +285,311 @@ The input and output of a file is handled using Gson, a third-party plugin that 
 
 ## Appendix D: Instructions for manual testing
 
-{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+### Launch
+
+Before starting, ensure that you have Java 11 installed on your operating system.
+
+1. Download the latest [file](https://github.com/AY2223S2-CS2113-W15-3/tp/releases) and place in your preferred directory.
+2. Launch a command prompt or terminal and navigate to the directory where the file is located.
+3. Run the command `java -jar budgetbuddy.jar`
+4. Expected Outcome:
+   - Budget Buddy will display a greeting message.
+   - For first time users, it will display a warning message showing that the data file is empty.
+   - For existing users with valid data file, it will show the progress for all budgets.
+
+If you encounter the greeting message displaying as "????", please change your command line/terminal's character encoding to UTF-8.
+- For Windows, if you are using command prompt or powershell, change the code page by typing `chcp 65001` in the prompt.
+- For Mac, change the Text encoding to `UTF-8` under international section in your Terminal Settings.
+- For others, please find a setting that can change the encoding to `UTF-8`. Else if it doesn't work, please test it on another computer.
+
+### Test Cases
+
+Note that for the test cases listed for Budget, Deposit, Expense and Stats Commands, any wrong input is similiar (not the same) to what it has been listed in General Commands. **Each test case is independent from each other and should be start as a first-time user (delete the data file after each case!)**
+
+#### General Commands
+
+1. Invalid command
+ - Type `asd`
+ - Expected output: An error message `Invalid command. Use help for the list of commands.` is shown.
+2. Valid command with invalid action
+ - Type `budget asd`
+ - Expected output: An error message `Invalid action for budget. Use these actions: add, set, del, list, help` is shown.
+ - Note that the actions listed depends on the valid command entered.
+3. Valid command and action with missing required parameters
+ - Type `budget add`
+ - Expected output: An error message `Invalid parameters. Example: budget add /c transport /a 3000.00` is shown.
+ - Note that the parameters listed depends on the valid command and action entered.
+4. Valid command and action with invalid required parameters
+ - Type `budget add /c transport /a asd`
+ - Expected output: An error message `Parameter /a: Input must be a valid positive number, with at most 2 decimal places. Invalid parameters. Example: budget add /c transport /a 3000.00` is shown.
+ - Note that the message of the invalid parameter depends on the type of parameter set by the application.
+5. Valid command and action with invalid optional parameters
+ - Type `deposit list /f a`
+ - Expected output: An error message `Parameter /f: Input must be in a valid date in this format "DD-MM-YYYY". Invalid parameters. Example: deposit list [/f] 01-01-2023 [/t] 01-03-2023` is shown.
+ - Note that the message of the invalid parameter depends on the type of parameter set by the application.
+6. Valid command and action with valid required parameters but invalid optional parameters
+ - Type `deposit add /n lottery /a 3000.00 /d a`
+ - Expected output: An error message `Parameter /d: Input must be in a valid date in this format "DD-MM-YYYY". Invalid parameters. Example: deposit add /n lottery /a 3000.00 [/d] 23-03-2023` is shown.
+ - Note that the message of the invalid parameter depends on the type of parameter set by the application.
+
+#### Budget Commands
+#### Add Budget
+1. New Budget (Case 1)
+- Type `budget add /c transport /a 1000.00`
+- Expected output: A message saying that it has been successfully added with name of budget category and amount shown. Number of budget categories that you have is also shown.
+2. Existing Budget (Case 2)
+- Type `budget add /c transport /a 1.00`
+- Type `budget add /c transport /a 2.00`
+- Expected output: A message saying that the budget name is already in use.
+#### Delete Budget
+1. Delete Budget with no expenses (Case 1)
+- Type `budget add /c transport /a 1.00`
+- Type `budget del /c transport`
+- Expected output: A message saying that the budget is deleted with the name shown and 0 related expenses. No. of budget categories remaining is also shown.
+2. Delete Budget with 1 expense (Case 2)
+- Type `budget add /c transport /a 1.00`
+- Type `expense add /c transport /n mrt /a 1.00`
+- Type `budget del /c transport`
+- Expected output: A message saying that the budget is deleted with the name shown and 1 related expenses. No. of budget categories remaining is also shown.
+3. Delete non-existing Budget (case 3)
+- Type `budget del /c transport`
+- Expected output: A message saying that the budget does not exist.
+#### List Budget
+1. List (Case 1)
+- Type `budget add /c transport /a 1.00`
+- Type `budget list`
+- Expected output: A message that shows the current month, year and budget progress, consisting the name, progress bar, total expenses and budget amount.
+2. List with only month (before today's month) (Case 2)
+- Type `budget add /c transport /a 1.00`
+- Type `budget list /m 1`
+- Expected output: A message that shows the month (January) in current year and budget progress, consisting the name, progress bar, total expenses and budget amount.
+3. List with only year (Case 3)
+- Type `budget add /c transport /a 1.00`
+- Type `budget list /y 2023`
+- Expected output: A message that shows the current month, year 2023 and budget progress, consisting the name, progress bar, total expenses and budget amount.
+4. List with month and year (before today's month and year) (case 4)
+- Type `budget add /c transport /a 1.00`
+- Type `budget list /m 1 /y 2023`
+- Expected output: A message that shows the month (January), year 2023 and budget progress, consisting the name, progress bar, total expenses and budget amount.
+#### Help Budget
+1. Help (Case 1)
+- Type `budget help`
+- Expected output: A message that shows all the available actions.
+#### Deposit Commands
+#### Add Deposit
+1. New Deposit (today's date) (Case 1)
+- Type `deposit add /n lottery /a 3000.00`
+- Expected output: A message saying that it has been successfully added with deposit no, name, amount and today's date of deposit shown.
+2. New Deposit (date before today) (Case 2)
+- Type `deposit add /n lottery /a 3000.00 /d 01-01-2023`
+- Expected output: A message saying that it has been successfully added with deposit no, name, amount and date of deposit shown.
+#### Delete Deposit
+1. Delete Deposit (Case 1)
+- Type `deposit add /n lottery /a 3000.00`
+- Type `deposit del /n 1`
+- Expected output: A message saying that it has been successfully deleted with deposit no, name, amount and date of deposit shown.
+2. Delete non-existing Deposit (Case 2)
+- Type `deposit del /n 1`
+- Expected output: A message saying that it the number is not valid.
+#### Find Deposit
+1. Find Deposit (Case 1)
+- Type `deposit add /n lottery /a 3000.00`
+- Type `deposit find /n lottery`
+- Expected output: A message that shows the list of deposits found based on the name.
+#### Clear Deposit
+1. Clear All Deposit (Case 1)
+- Type `deposit add /n lottery /a 3000.00`
+- Type `deposit clear`
+- Expected output: A message that shows all the deposits cleared.
+2. Clear All Deposit from a specified date (Case 2)
+- Type `deposit add /n lottery /a 3000.00`
+- Type `deposit clear /f <A date that is before today in DD-MM-YYYY>`
+- Expected output: A message that shows all the deposits cleared from that specified date.
+3. Clear All Deposit until a specified date (Case 3)
+- Type `deposit add /n lottery /a 3000.00`
+- Type `deposit clear /t <A date that is today in DD-MM-YYYY>`
+- Expected output: A message that shows all the deposits cleared until that specified date.
+4. Clear All Deposit on a date range (Case 4)
+- Type `deposit add /n lottery /a 3000.00`
+- Type `deposit clear /f <A date that is today in DD-MM-YYYY> /t <A date that is today in DD-MM-YYYY>`
+- Expected output: A message that shows all the deposits cleared on that date range.
+#### List Deposit
+1. List All Deposit (Case 1)
+- Type `deposit add /n lottery /a 3000.00`
+- Type `deposit list`
+- Expected output: A message that shows all the added deposits.
+2. List All Deposit from a specified date (Case 2)
+- Type `deposit add /n lottery /a 3000.00`
+- Type `deposit list /f <A date that is before today in DD-MM-YYYY>`
+- Expected output: A message that shows all the added deposits from that specified date.
+3. List All Deposit until a specified date (Case 3)
+- Type `deposit add /n lottery /a 3000.00`
+- Type `deposit list /t <A date that is today in DD-MM-YYYY>`
+- Expected output: A message that shows all the added deposits until that specified date.
+4. List All Deposit on a date range (Case 4)
+- Type `deposit add /n lottery /a 3000.00`
+- Type `deposit list /f <A date that is today in DD-MM-YYYY> /t <A date that is today in DD-MM-YYYY>`
+- Expected output: A message that shows all the added deposits on that date range.
+#### Help Deposit
+1. Help (Case 1)
+- Type `deposit help`
+- Expected output: A message that shows all the available actions.
+
+#### Expense Commmands
+#### Add Expense
+1. New Expense (today's date) (Case 1)
+- Type `budget add /c transport /a 3000.00`
+- Type `expense add /c transport /n mrt 1.00`
+- Expected output: A message saying that it has been successfully added with expense no, category of the budget, name, amount and today's date of expense shown.
+2. New Expense (date before today) (Case 2)
+- Type `budget add /c transport /a 3000.00`
+- Type `expense add /c transport /n mrt 1.00 /d 01-01-2023`
+- Expected output: A message saying that it has been successfully added with expense no, category of the budget, name, amount and date of expense shown.
+#### Delete Expense
+1. Delete Expense (Case 1)
+- Type `budget add /c transport /a 3000.00`
+- Type `expense add /c transport /n mrt 1.00`
+- Type `expense del /n 1`
+- Expected output: A message saying that it has been successfully deleted with expense no, category of the budget, name, amount and date of expense shown.
+2. Delete non-existing Expense (Case 2)
+- Type `expense del /n 1`
+- Expected output: A message saying that it the number is not valid.
+#### Find Expense
+1. Find Expense (Case 1)
+- Type `budget add /c transport /a 3000.00`
+- Type `expense add /c transport /n mrt 1.00`
+- Type `expense find /n mrt`
+- Expected output: A message that shows the list of expenses found based on the name.
+#### Clear Expense
+1. Clear All Expense (Case 1)
+- Type `budget add /c transport /a 3000.00`
+- Type `expense add /c transport /n mrt 1.00`
+- Type `expense clear`
+- Expected output: A message that shows all the expenses cleared.
+2. Clear All Expense on specified budget category name (Case 2)
+- Type `budget add /c transport /a 3000.00`
+- Type `expense add /c transport /n mrt 1.00`
+- Type `expense clear /c transport`
+- Expected output: A message that shows all the expenses cleared on the specified budget category name.
+3. Clear All Expense from a specified date (Case 3)
+- Type `budget add /c transport /a 3000.00`
+- Type `expense add /c transport /n mrt 1.00`
+- Type `expense clear /f <A date that is before today in DD-MM-YYYY>`
+- Expected output: A message that shows all the expenses cleared from that specified date.
+4. Clear All Expense until a specified date (Case 4)
+- Type `budget add /c transport /a 3000.00`
+- Type `expense add /c transport /n mrt 1.00`
+- Type `expense clear /t <A date that is today in DD-MM-YYYY>`
+- Expected output: A message that shows all the deposits cleared until that specified date.
+5. Clear All Expense on a date range (Case 5)
+- Type `budget add /c transport /a 3000.00`
+- Type `expense add /c transport /n mrt 1.00`
+- Type `expense clear /f <A date that is today in DD-MM-YYYY> /t <A date that is today in DD-MM-YYYY>`
+- Expected output: A message that shows all the expenses cleared on that date range.
+6. Clear All Expense on specified budget category name and a date range (Case 6)
+- Type `budget add /c transport /a 3000.00`
+- Type `expense add /c transport /n mrt 1.00`
+- Type `expense clear /c transport /f <A date that is today in DD-MM-YYYY> /t <A date that is today in DD-MM-YYYY>`
+- Expected output: A message that shows all the expenses cleared on the specified budget category name and date range.
+#### List Expense
+1. List All Expense (Case 1)
+- Type `budget add /c transport /a 3000.00`
+- Type `expense add /c transport /n mrt 1.00`
+- Type `expense list`
+- Expected output: A message that shows all the added expenses.
+2. List All Expense on specified budget category name (Case 2)
+- Type `budget add /c transport /a 3000.00`
+- Type `expense add /c transport /n mrt 1.00`
+- Type `expense list /c transport`
+- Expected output: A message that shows all the added expenses on the specified budget category name.
+3. List All Expense from a specified date (Case 3)
+- Type `budget add /c transport /a 3000.00`
+- Type `expense add /c transport /n mrt 1.00`
+- Type `expense list /f <A date that is before today in DD-MM-YYYY>`
+- Expected output: A message that shows all the added expenses from that specified date.
+4. List All Expense until a specified date (Case 4)
+- Type `budget add /c transport /a 3000.00`
+- Type `expense add /c transport /n mrt 1.00`
+- Type `expense list /t <A date that is today in DD-MM-YYYY>`
+- Expected output: A message that shows all the added expenses until that specified date.
+5. List All Expense on a date range (Case 5)
+- Type `budget add /c transport /a 3000.00`
+- Type `expense add /c transport /n mrt 1.00`
+- Type `expense list /f <A date that is today in DD-MM-YYYY> /t <A date that is today in DD-MM-YYYY>`
+- Expected output: A message that shows all the added expenses on that date range.
+6. List All Expense on specified budget category name and a date range (Case 6)
+- Type `budget add /c transport /a 3000.00`
+- Type `expense add /c transport /n mrt 1.00`
+- Type `expense list /c transport /f <A date that is today in DD-MM-YYYY> /t <A date that is today in DD-MM-YYYY>`
+- Expected output: A message that shows all the added expenses on the specified budget category name and date range.
+#### Help Expense
+1. Help (Case 1)
+- Type `expense help`
+- Expected output: A message that shows all the available actions.
+
+#### Stats Commands
+#### Show Stats
+1. Show statistics (Case 1)
+- Type `budget add /c transport /a 3000.0`
+- Type `deposit add /n lottery /a 3000.0`
+- Type `expense add /c transport /n mrt /a 1.00`
+- Type `stats show`
+- Expected output: A message that shows the budget progress, total amount of deposit and expense, and overall progress for current month and year.
+2. Show statistics with month (Case 2)
+- Type `budget add /c transport /a 3000.0`
+- Type `deposit add /n lottery /a 3000.0`
+- Type `expense add /c transport /n mrt /a 1.00`
+- Type `stats show /m 1`
+- Expected output: A message that shows the budget progress, total amount of deposit and expense, and overall progress for month January and current year.
+3. Show statistics with year (Case 3)
+- Type `budget add /c transport /a 3000.0`
+- Type `deposit add /n lottery /a 3000.0`
+- Type `expense add /c transport /n mrt /a 1.00`
+- Type `stats show /y 2023`
+- Expected output: A message that shows the budget progress, total amount of deposit and expense, and overall progress for current month and year 2023.
+4. Show statistics with month and year (Case 4)
+- Type `budget add /c transport /a 3000.0`
+- Type `deposit add /n lottery /a 3000.0`
+- Type `expense add /c transport /n mrt /a 1.00`
+- Type `stats show /m 1 /y 2023`
+- Expected output: A message that shows the budget progress, total amount of deposit and expense, and overall progress for month January and year 2023.
+5. Show statistics with all deposits (Case 5)
+- Type `budget add /c transport /a 3000.0`
+- Type `deposit add /n lottery /a 3000.0`
+- Type `expense add /c transport /n mrt /a 1.00`
+- Type `stats show /v d`
+- Expected output: A message that shows the budget progress, list of deposits, total amount of deposit and expense, and overall progress for current month and year.
+6. Show statistics with all expenses (Case 6)
+- Type `budget add /c transport /a 3000.0`
+- Type `deposit add /n lottery /a 3000.0`
+- Type `expense add /c transport /n mrt /a 1.00`
+- Type `stats show /v e`
+- Expected output: A message that shows the budget progress, list of expenses, total amount of deposit and expense, and overall progress for current month and year.
+7. Show statistics with all deposits and expenses (Case 7)
+- Type `budget add /c transport /a 3000.0`
+- Type `deposit add /n lottery /a 3000.0`
+- Type `expense add /c transport /n mrt /a 1.00`
+- Type `stats show /v de`
+- Expected output: A message that shows the budget progress, list of deposits, list of expenses, total amount of deposit and expense, and overall progress for current month and year.
+#### Help Stats
+1. Help (Case 1)
+- Type `stats help`
+- Expected output: A message that shows all the available actions.
+#### Help Command
+1. Help (Case 1)
+- Type `help`
+- Expected output: A message that shows all the available commands
+#### Exit Command
+1. Exit (Case 1)
+- Type `exit`
+- Expected output: Exits the application with a bye message.
+
+### File Testing
+
+In the application, the data file will be updated/created (if it doesn't exist) whenever commands `budget`, `deposit`, `expense` are executed successfully.
+- Deleting the data file and relaunching the application will result in a new data.
+- If the data file is empty (still exists), or the contents of the data file could not be Json parsed, the application will detect the file as corrupted, and the user will need to delete the file and relaunch the application.
 
 ## Appendix E: Acknowledgements
 
-[Gson](https://github.com/google/gson)
+[Gson: Java serialization/deserialization library](https://github.com/google/gson)
