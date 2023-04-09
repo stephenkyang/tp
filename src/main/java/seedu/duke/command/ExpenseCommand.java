@@ -51,12 +51,13 @@ public class ExpenseCommand extends Command {
      */
     @Override
     public void execute(Data data, Ui ui) throws BBException {
-        ArrayList<Expense> expenses = data.getExpenses();
-        ExpenseAction expenseAction = new ExpenseAction(expenses, ui);
+        ArrayList<Expense> expenseList = data.getExpenses();
+        ExpenseAction expenseAction = new ExpenseAction(expenseList, ui);
+
+        ArrayList<Budget> budgets = data.getBudgets();
 
         switch (action) {
         case "add":
-            ArrayList<Budget> budgets = data.getBudgets();
             executeAddExpense(expenseAction, requiredParams, optionalParams, budgets);
             break;
         case "del":
@@ -121,8 +122,8 @@ public class ExpenseCommand extends Command {
      * @throws BBException for any error thrown in the action class
      */
     private void executeDelExpense(ExpenseAction expenseAction, String[] requiredParams) throws BBException {
-        int expenseNo = Integer.parseInt(requiredParams[0]);
-        expenseAction.deleteExpense(expenseNo);
+        int expenseId = Integer.parseInt(requiredParams[0]);
+        expenseAction.deleteExpense(expenseId);
     }
 
     /**
