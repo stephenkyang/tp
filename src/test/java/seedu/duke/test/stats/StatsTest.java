@@ -73,6 +73,8 @@ public class StatsTest {
         StatsCommand statsCommand = new StatsCommand();
         Data data = new Data();
         Ui ui = new Ui();
+        statsCommand.setAction("show");
+        statsCommand.setParams(null, new String[] {null, null, null});
 
         assertDoesNotThrow(
                 () -> statsCommand.execute(data, ui)
