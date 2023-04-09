@@ -18,7 +18,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
 //@@author stephenkyang
-
 public class DepositTest {
     ArrayList<Deposit> depositList = new ArrayList<Deposit>();
     Ui ui = new Ui();
@@ -36,7 +35,7 @@ public class DepositTest {
         System.setOut(originalOut);
     }
 
-
+    //@@author stephenkyang
     @Test
     void addAndDelete() {
         String depositName = "haha";
@@ -55,7 +54,7 @@ public class DepositTest {
         assertEquals(0, depositList.size());
     }
 
-
+    //@@author stephenkyang
     @Test
     void simpleClear() {
         String[] depositNames = {"haha", "haha2"};
@@ -80,7 +79,7 @@ public class DepositTest {
         assertEquals(0, depositList.size());
     }
 
-
+    //@@author stephenkyang
     @Test
     void complexClear() {
         String[] depositNames = {"haha", "haha2", "haha3", "haha4"};
@@ -106,7 +105,7 @@ public class DepositTest {
         assertEquals(3, depositList.size());
     }
 
-
+    //@@author stephenkyang
     @Test
     void simpleFind() {
         String[] depositNames = {"haha", "haha2", "haha3", "haha4"};
