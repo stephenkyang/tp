@@ -6,28 +6,41 @@ BudgetBuddy is a one-stop Command Line Interface application that helps you to k
 You can keep track of your expenses better by creating and editing custom budgets, and also taking note of what deposits
 you have to have a better understanding of your overall spending and saving.
 
-## System requirements
+## Features
 
-BudgetBuddy is built using Java version 11 and only works on Windows, MAC and Linux OS. Ensure that you are running Java
-version 11 on your device.
+Here are some features that Budget Buddy offers:
+
+#### Track your expenses
+- You can keep track any items that you have just spent on BudgetBuddy!
+
+#### Categorize your budget into different names
+- Instead of keeping your expenses into a single list, split up into different categories (e.g. Transport, Food, Bills)!
+
+#### Keep a list of your deposits
+- Have extra earnings that you wish to keep track too? Fret not!
+
+#### Show your overall budget result
+- Summarize your overall budget and see what needs to be improved!
+
+#### Remind your spending
+- Always have a buddy to remind your spending!
+
+#### Sort and filter deposits and expenses
+- You can sort deposits and expenses by categories and date too!
+
+#### Persistent Data
+- Budget Buddy ensures that your data is always with us!
 
 ## Installation guide
 
+BudgetBuddy is built using Java version 11 and only works on **Windows, MAC and Linux OS**. Please ensure that you are running **Java version 11** on your device.
+
 1. Download the `budgetbuddy.jar` file under [Releases](https://github.com/AY2223S2-CS2113-W15-3/tp/releases)
-2. Copy the file into a folder of your choice. Ensure that you do not have `data.json` in the same directory.
+2. Copy the file into a folder of your choice. Ensure that you do not have `data.json` in the same directory, as this will be used to store the data of this application!
 3. Launch your command prompt/terminal and navigate to the folder where `budgetbuddy.jar` is located.
 4. Run the following command: `java -jar budgetbuddy.jar`
 
-**NOTE: It is not recommended to edit the data.json file unless you know what you are doing!**
-
-**Please change your command line interface's character encoding to UTF-8 if the application displays text such as
-????.**
-
-For Windows, if you are using command prompt or powershell, change the code page by typing `chcp 65001` in the prompt.
-For Mac, change the Text encoding to `UTF-8` under International section in your Terminal Settings.
-
-You will be then greeted by Budget Buddy as shown below:
-
+After launching the application for the first time, you will be greeted by the application as shown:
 ```
 Could not locate data.json file. A file will be automatically created after an action!
 _______________
@@ -40,67 +53,52 @@ _______________
 
 ```
 
-## Features
+**NOTE: It is not recommended to edit the data.json file unless you know what you are doing!**
 
-Here are some features that Budget Buddy offers:
-
-#### Track your expenses
-
-You can keep track any items that you have just spent on BudgetBuddy!
-
-#### Categorize your budget into different names
-
-Instead of keeping your expenses into a single list, split up into different categories (e.g. Transport, Food, Bills)!
-
-#### Keep a list of your deposits
-
-Have extra earnings that you wish to keep track too? Fret not!
-
-#### Show your overall budget result
-
-Summarize your overall budget and see what needs to be improved!
-
-#### Remind your spending
-
-Always have a buddy to remind your spending!
-
-#### Sort and filter deposits and expenses
-
-You can sort deposits and expenses by categories and date too!
-
-#### Persistent Data
-
-Budget Buddy ensures that your data is always with us!
+If you encounter the greeting message displaying as "????", please change your command line/terminal's character encoding to UTF-8.
+- For Windows, if you are using command prompt or powershell, change the code page by typing `chcp 65001` in the prompt.
+- For Mac, change the Text encoding to `UTF-8` under international section in your Terminal Settings.
+- For others, please find a setting that can change the encoding to `UTF-8`. Else if it doesn't work, please test it on another computer.
 
 ## Commands
 
-###### Commands that have the keyword [optional] means it is not required to key in after!
+For every command that you want to execute, the input of the command must be strictly in this format as follows:
+> `(command) (action) (parameters) [optional parameters]`
 
-###### Please input the parameters in correct format to prevent abnormal behavior.
+The following points apply to the rest of the commands below.
+- Command, action and parameter(s) must be keyed in in the input.
+- Some commands have optional parameters `[optional]`, which it is not required to key in.
+- The command and action names are not case sensitive, but the parameters and value of parameters are.
+- It is possible to rearrange the order of parameters.
+- For values that accept double (or decimal), the application will only take the first 2 decimal places.
+- Value of the parameter must not contain any slash (`/`).
+- Please input the parameters in the correct format so as to prevent abnormal behavior.
 
 ### 1. Help
 
-To know what commands are available, simply type in `help`!
+To know what commands are available, simply type in `help`.
 
+Command: `help`
 ```
 help
 _______________
 Budget Buddy helps you to manage your finances better.
-Budget Buddy has 4 main categories:
+Budget Buddy is split into 4 main classifications:
 1. Budget
    - Choose how much money you want to allocate to a budget of your specified name
 2. Deposit 
-   - track how much money you have earned or received
+   - Track how much additional earnings you have made
 3. Expense
-   - track how much money you have spent, and link it to a certain budget of yours
+   - Track how much money you have spent, and link it to a certain budget of yours
 4. Stats 
-   - shows the progress on spending so far as well as the total number of deposits
+   - shows the progress on your overall budget, deposit and expenses
 To learn the specific commands for each category, input "(category) help"
 _______________
 ```
 
-You can also know what are the actions for a specific category (e.g. budget)!
+You can also know what are the actions for a specific category (e.g. budget).
 
+Command: `budget help`
 ```
 budget help
 _______________
@@ -117,11 +115,12 @@ _______________
 
 ### 2. Budgets
 
-To add a budget, type the name of the budget you want followed by the spending limit:
+#### Add Budget
+To add a budget, type the name of the budget you want followed by the spending limit: <br>
+You are not allowed to add duplicate budgets, and the name of the budget must be less than 30 characters.<br>
+The maximum number of budgets you can add is 99.
 
-The category name must be less than 30 characters.
-
-budget add /c (category name) /a (spending limit)
+Command: `budget add /c (category name) /a (spending limit)`
 
 ```
 budget add /c food /a 600.00
@@ -131,9 +130,10 @@ There are 2 budget categories.
 _______________
 ```
 
+#### Set Budget
 You can also set and modify that was wrongly inserted:
 
-budget set /c (category) /a spending limit
+Command: `budget set /c (category) /a (spending limit)`
 
 ```
 budget set /c food /a 500.00
@@ -143,30 +143,33 @@ There are 2 budget categories.
 _______________
 ```
 
-If you want to remove a certain budget,
+#### Delete Budget
+You can delete a budget that you no longer need.<br>
+Take note that **expenses that are linked to that budget will be deleted too.**
 
-budget del /c (category)
+Command: `budget del /c (category)`
 
 ```
 budget del /c transport
 _______________
-Successfully deleted transport.
+Successfully deleted budget transport with 2 related expenses.
 There are 1 budget categories.
 _______________
 ```
 
-Finally, list down the budgets that show each progress.
+#### List Budget
+You can list down the budgets that you've have added, which will also show each budget's progress for the current month.<br>
+Alternatively, you may also show the progress for a certain month & year.<br>
+Take note that you can only input a month & year which is before today, and the year must be between 1000 to current year.
 
-Note that you can only input year from 1000 to current year.
-
-budget list [optional] /m month (1-12) /y year (in YYYY)
+Command: `budget list [optional] /m month (1-12) /y year (in YYYY)`
 
 ```
 budget list
 _______________
-Your budget list for Mar 2023:
-1. food      ░░░░░░░░░░░░░░░░░░░░ ($0.00/500.00)
-2. transport ░░░░░░░░░░░░░░░░░░░░ ($0.00/500.00)
+Your budget list for Apr 2023:
+  1. food      ██████████░░░░░░░░░░ ($250.00/500.00)
+  2. transport ░░░░░░░░░░░░░░░░░░░░ ($0.00/500.00)
 _______________
 ```
 
@@ -239,119 +242,129 @@ _______________
 
 ### 4. Expenses
 
-To add an expense, type the category of the expense followed by the name, amount
-and date. (If no date is listed, it is treated as today)
+#### Add Expense
+To add an expense, type the category of the budget followed by the name, amount and date (optional).<br>
+The category of budget must exist in the list of budgets and the name of the expense must be less than 30 characters.<br>
+If no date is listed, it is treated as today.<br>
+However if you would like to input a date, the date must be before today.
 
-The budget linked to this new expense must already exist, in order to link your new expense to a pre-existing budget.
-
-The expense name must be less than 30 characters, and the date can only be input before today.
-
-expense add /c (category name) /n (name) /a (amount) [optional] /d DD-MM-YYYY
-
+Command: `expense add /c (category name) /n (name) /a (amount) [optional] /d DD-MM-YYYY`
 ```
 expense add /c transport /n mrt /a 2.50 /d 01-03-2023
 _______________
 The following expense has been added:
-1. [transport] mrt ($2.50) on 01 Mar 2023
+Expense No 2. [transport] mrt ($2.50) on 01 Mar 2023
 _______________
 ```
 
-If you want to remove a specific expense:
+#### Delete Expense
+If you want to remove a specific expense, you can remove by its expense number.
 
-expense del /n (expense number)
-
+Command: `expense del /n (expense number)`
 ```
 expense del /n 2
 _______________
 The following expense has been removed:
-1. [transport] bus ($0.50) on 31 Mar 2023
-_______________
-```
-You can list out the expenses of the month:
-
-expense list
-
-```
-expense list
-_______________
-Here are your expenses for this month for all:
-1. [food] salmon don ($7.00) on 01 Apr 2023
-2. [transport] mrt ($1.00) on 03 Apr 2023
+Expense No 2. [transport] mrt ($2.50) on 01 Mar 2023
 _______________
 ```
 
-You can also list the expenses made within a specific start and end date, with an
-optional modifier for the category of the expenses in that timeframe:
+#### List Expense
+You can list down the expenses that you've added, which will show the previous expenses and current expenses for this month:<br>
+Alternatively, you may also list down by a specific category, or date range.<br>
+If either from or to date is not entered, it will show the expenses that are from/until that date.<br>
+Take note that you can only input a month & year which is before today, and the year must be between 1000 to current year.
 
-expense list [optional] /c (category name) /f DD-MM-YYYY /t DD-MM-YYYY
-
+Command: `expense list [optional] /c (category name) /f DD-MM-YYYY /t DD-MM-YYYY`
 ```
-expense list /f 01-02-2023 /t 28-02-2023
+expense list /c food
 _______________
-Here are your expenses from 01 Feb 2023 to 28 Feb 2023 for all:
-3. [food] kfc ($30.00) on 01 Feb 2023
+Here are your expenses for this month for food:
+Expense No 1. [food] kfc ($250.00) on 09 Apr 2023
+Expense No 2. [food] salmon don ($7.00) on 09 Apr 2023
 _______________
 ```
 
-If you want to find a specific expense:
+#### Find Expense
+You can find expenses by the expense name.<br>
+If you want to find expenses by category, use `expense list`.
 
-expense find /n (keyword)
-
+Command: `expense find /n (keyword)`
 ```
-expense find /n mrt
+expense find /n kfc
 _______________
 Here are the expenses you searched:
-1. [transport] mrt ($2.50) on 01 Mar 2023
+Expense No 1. [food] kfc ($250.00) on 09 Apr 2023
+Expense No 3. [food] kfc chicken ($10.00) on 01 Apr 2023
 _______________
  
 ```
 
-If you want to delete expenses in a certain timeframe, with an optional modifier
-for the category of expenses:
+#### Clear Expenses
+You can delete multiple expenses at once.<br>
+Alternatively if you want to delete specific expenses, you can delete by the category name, or a date range.<br>
+If either from or to date is not entered, it will show the expenses that are from/until that date.<br>
+Take note that you can only input a month & year which is before today, and the year must be between 1000 to current year.
 
-expense clear [optional] /c (category name) /f DD-MM-YYYY /t DD-MM-YYYY
+**WARNING: Entering `expense clear` will delete all expenses permanently. This action is irreversible!**
 
+Command: `expense clear [optional] /c (category name) /f DD-MM-YYYY /t DD-MM-YYYY`
 ```
 expense clear /c food
 _______________
 These are the expenses cleared:
-3. [food] kfc ($30.00) on 01 Feb 2023
+Expense No 1. [food] kfc ($250.00) on 09 Apr 2023
+Expense No 2. [food] salmon don ($7.00) on 09 Apr 2023
+Expense No 3. [food] kfc chicken ($10.00) on 01 Apr 2023
 _______________
 ```
 
 ### 5. Stats
 
-You can find out the stats for the month or year. The format is:
+#### Show Stats
+Finally, after adding all your budgets, deposits and expenses, you can display your entire budget progress for the current month.<br>
+Alternatively, you may display your progress on a certain month/year.<br>
+If you wish to view all your deposits, expenses or both, you can also input the verbose option.<br>
+Take note that you can only input a month & year which is before today, and the year must be between 1000 to current year.
 
-stats show [optional] /m month /y year /v verbose (d for deposit, e for expense)
+The message of the overall budget is determined by:<br>
+total expenses / total budget limit + total deposits
 
-Note that you can only input year from 1000 to current year.
+If total expenses is more than total budget limit+deposits, the following message will be displayed:
+> Oh no! You seem to be spending too much!
+<br>Else, the message will display:
+> Good job! You are on the right track!
 
+Command: `stats show [optional] /m month (1-12) /y year (in YYYY) /v (d for deposit, e for expense, de for both)`
 ```
-stats show /m 03 /y 2023 /v de
+stats show /m 04 /y 2023 /v de
 _______________
-Your current progress for Mar 2023:
-1. food      ████████░░░░░░░░░░░░ ($200.00/500.00)
-2. transport ████████████████░░░░ ($402.50/500.00)
- 
+Your current progress for Apr 2023:
+  1. food      ████████████████████ ($1550.00/500.00)
+  2. transport █████░░░░░░░░░░░░░░░ ($122.50/500.00)
+
 Deposits
-Total deposits: $0.00
- 
+Deposit No 1. lottery ($50.00) on 09 Apr 2023
+Deposit No 2. money from ground ($10.00) on 09 Apr 2023
+Total deposits: $60.00
+
 Expenses
-1. [transport] mrt ($2.50) on 01 Mar 2023
-2. [food] mac ($200.00) on 31 Mar 2023
-3. [transport] taxi ($400.00) on 31 Mar 2023
-Total expenses: $602.50
- 
-Total budget progress: $602.50/1000.00 (+0.00)
-Good job! You are on the right track!
+Expense No 1. [transport] mrt ($2.50) on 08 Apr 2023
+Expense No 2. [transport] taxi ($120.00) on 09 Apr 2023
+Expense No 3. [food] kfc ($250.00) on 09 Apr 2023
+Expense No 4. [food] mcdonalds ($200.00) on 03 Apr 2023
+Expense No 5. [food] burger king ($100.00) on 04 Apr 2023
+Expense No 6. [food] longjohnsilver ($1000.00) on 09 Apr 2023
+Total expenses: $1672.50
+
+Total budget progress: $1672.50/1000.00 (+60.00)
+Oh no! You seem to be spending too much!
 _______________
 ```
 
-### 6. Exiting BudgetBuddy
+### 6. Exit
 
-You can exit the application using the `exit` command.
-
+You can exit the application using the `exit` command.<br>
 Upon exiting BudgetBuddy, BudgetBuddy will save the current data in the list to a local text file in your device.
 The saved data will be imported into BudgetBuddy when it is subsequently launched in the future,
 ensuring that you do not lose track of it.
