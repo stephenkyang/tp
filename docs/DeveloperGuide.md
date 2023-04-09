@@ -146,6 +146,16 @@ and the abstract
 
 ![img.png](images/DepositCommandSequence.png)
 
+Flow of the DepositCommand:
+1. DepositCommand calls execute(), which tries and find which command will be parsed.
+2. getDeposits() is called to find the Deposit[] from the Data class.
+3. DepositCommand then calls the method in DepositAction that matches the actions parsed
+4. Within DepositAction, the action is done manipulating the DepositList, if necessary
+5. Within Deposit Action, the class DepositUIResponse is called to show an output depending 
+   on the action to the user
+6. After DepositList is sucessfully manipulated (if necessary) and a text reponse is given, 
+   DepositCommand exits.
+
 ### Design & Implementation of the Deposit Feature
 
 Like all other functionalities of BudgetBuddy, the deposit feature is heavily modularized and designed with an OOP lens.
