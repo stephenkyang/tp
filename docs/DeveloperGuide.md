@@ -128,6 +128,15 @@ The class diagram below shows how the `BudgetCommand` parent class is implemente
 
 ![BudgetCommand.png](images/BudgetCommand.png)
 
+#### BudgetCommand Sequence
+
+Once a string `input` from the user has been deemed as a `Budget` command as explained in the `CommandParser` sequence
+diagram above,
+the `input` will be passed into the `BudgetCommand` class. This class determines what budget commands to carry out to
+update the `data` stored in the `Budget` and `Expense` array lists, as shown in the sequence diagram below.
+
+![BudgetCommandSequence.png](images/BudgetCommandSequence.png)
+
 1. The `BudgetCommand` object retrieves the existing `Budget` and `Exepnse` data stored in the `Data` class. This is
    retrieved using the getBudgets() and getExpenses() methods, which return the existing budgets and expenses as an
    array list.
@@ -151,15 +160,6 @@ The class diagram below shows how the `BudgetCommand` parent class is implemente
 
 7. The `BudgetCommand` object then reaches the end of its lifeline, and returns to the `CommandParser` object that
    called it.
-
-#### BudgetCommand Sequence
-
-Once a string `input` from the user has been deemed as a `Budget` command as explained in the `CommandParser` sequence
-diagram above,
-the `input` will be passed into the `BudgetCommand` class. This class determines what budget commands to carry out to
-update the `data` stored in the `Budget` and `Expense` array lists, as shown in the sequence diagram below.
-
-![BudgetCommandSequence.png](images/BudgetCommandSequence.png)
 
 ### Deposit Component
 
