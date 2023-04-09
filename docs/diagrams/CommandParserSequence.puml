@@ -64,6 +64,6 @@ return optionalParams
 activate "Command"
 return
 
-<-- ":CommandParser" !! : command
+<-- ":CommandParser" : command
 
 @enduml
