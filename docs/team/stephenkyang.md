@@ -25,6 +25,11 @@ to my tP Code Dashboard
 
 4. Testing of deposit commands and fixing bugs relating to the deposit class.
 
+
+5. Brainstorming with the team on the design and functionality of new features
+
+
+
 #### Contributions to the User Guide
 
 1. I added the instructions for the `Deposit` class commands, showing its related classes and how commands such as
@@ -54,3 +59,4 @@ to my tP Code Dashboard
 1. I took initiative in assigning myself issues that did not pertain to my specific portion of the project to
    finish the project by deadline.
 2. I created issues in the Github repo for problems that I saw.
+3. Added notes for the flow of certain diagrams like BudgetSequenceDiagram and DepositSequence Diagram
